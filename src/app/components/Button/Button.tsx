@@ -1,15 +1,17 @@
 'use client';
 
 interface ButtonProps {
-  name?: string;
+  name: string;
   disabled?: boolean;
-  variant?: 'default' | 'white' | 'gray' | 'grayOutline';
+  variant: 'default' | 'white' | 'gray' | 'grayOutline';
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const Button = ({
   name = '생성하기',
   disabled = false,
   variant = 'default',
+  type = 'button',
 }: ButtonProps) => {
   const variantClasses = {
     default: 'bg-var-orange-600 text-var-white hover:bg-var-orange-700',
@@ -22,6 +24,7 @@ const Button = ({
 
   return (
     <button
+      type={type}
       disabled={disabled}
       className={`flex w-full items-center justify-center rounded-xl py-[10px] font-pretendard text-[14px] font-semibold md:text-[16px] ${
         variantClasses[variant]
