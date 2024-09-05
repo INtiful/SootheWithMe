@@ -1,7 +1,8 @@
 'use client';
 import { forwardRef } from 'react';
 
-const InputStyles = {
+// @todo: 추후 파일 분리예정
+export const InputStyles = {
   base: 'w-full items-center gap-4 rounded-lg px-16 py-8 hover:ring-2 hover:ring-var-orange-300 focus:ring-2 focus:ring-var-orange-600',
   error: 'ring-var-red ring-2', // form 사용시 에러메시지용 레이아웃
 };
