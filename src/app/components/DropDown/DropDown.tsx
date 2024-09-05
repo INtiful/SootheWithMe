@@ -67,7 +67,7 @@ const DropDown = ({
     >
       <input
         type='text'
-        className='w-full rounded-xl px-12 py-12 text-var-black focus:outline-none md:px-16'
+        className='w-full rounded-xl px-12 py-12 text-var-black ring-2 ring-var-gray-400 focus:outline-none md:px-16'
         placeholder={placeholder}
         value={inputText}
         onChange={handleInputChange}
@@ -75,7 +75,7 @@ const DropDown = ({
       />
 
       {isOpen && filteredOptions.length > 0 && (
-        <ul className='absolute max-h-240 w-full overflow-y-auto rounded-xl border bg-var-white'>
+        <ul className='absolute max-h-240 w-full overflow-y-auto rounded-xl bg-var-white ring-2 ring-var-gray-400'>
           {filteredOptions.map((option, index) => (
             <li
               key={index}
@@ -89,7 +89,7 @@ const DropDown = ({
       )}
 
       {isOpen && filteredOptions.length === 0 && (
-        <div className='absolute w-full rounded-xl bg-var-white px-12 py-12 text-var-black md:px-16'>
+        <div className='absolute w-full rounded-xl bg-var-white px-12 py-12 text-var-black ring-2 ring-var-gray-400 md:px-16'>
           일치하는 결과가 없습니다.
         </div>
       )}
