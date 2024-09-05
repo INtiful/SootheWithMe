@@ -75,7 +75,7 @@ const DropDown = ({
       />
 
       {isOpen && filteredOptions.length > 0 && (
-        <ul className='absolute max-h-240 w-full overflow-y-auto rounded-xl bg-var-white ring-2 ring-var-gray-400'>
+        <ul className='absolute max-h-240 w-full overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400'>
           {filteredOptions.map((option, index) => (
             <li
               key={index}
