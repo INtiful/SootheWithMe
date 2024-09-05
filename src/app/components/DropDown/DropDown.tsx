@@ -20,30 +20,17 @@ interface DropDownProps {
 
 const DropDown = ({
   options = OPTIONS,
-  placeholder = '위치를 입력하세요.',
+  placeholder = '위치를 선택하세요.',
 }: DropDownProps) => {
-  const [inputText, setInputText] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const dropDownRef = useRef<HTMLDivElement>(null);
 
-  const filteredOptions =
-    inputText === ''
-      ? options
-      : options.filter((option) =>
-          option.toLowerCase().includes(inputText.toLowerCase()),
-        );
-
   const handleSelect = (option: string) => {
+    setSelectedOption(option);
     setIsOpen(false);
-    setInputText(option);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsOpen(true);
-    setInputText(e.target.value);
-  };
-
-  // close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -65,18 +52,16 @@ const DropDown = ({
       className='relative w-full font-pretendard text-[14px] font-medium md:text-[16px]'
       ref={dropDownRef}
     >
-      <input
-        type='text'
-        className='w-full rounded-xl px-12 py-12 text-var-black ring-2 ring-var-gray-400 focus:outline-none md:px-16'
-        placeholder={placeholder}
-        value={inputText}
-        onChange={handleInputChange}
-        onFocus={() => setIsOpen(true)}
-      />
+      <div
+        className='w-full cursor-pointer rounded-xl px-12 py-12 text-var-black ring-2 ring-var-gray-400 focus:outline-none md:px-16'
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {selectedOption || placeholder}
+      </div>
 
-      {isOpen && filteredOptions.length > 0 && (
+      {isOpen && options.length > 0 && (
         <ul className='absolute max-h-240 w-full overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400'>
-          {filteredOptions.map((option, index) => (
+          {options.map((option, index) => (
             <li
               key={index}
               className='cursor-pointer px-12 py-12 text-var-black hover:bg-var-orange-100 md:px-16'
@@ -88,7 +73,7 @@ const DropDown = ({
         </ul>
       )}
 
-      {isOpen && filteredOptions.length === 0 && (
+      {isOpen && options.length === 0 && (
         <div className='absolute w-full rounded-xl bg-var-white px-12 py-12 text-var-black ring-2 ring-var-gray-400 md:px-16'>
           일치하는 결과가 없습니다.
         </div>
