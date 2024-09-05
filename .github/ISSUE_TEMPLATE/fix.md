@@ -1,9 +1,9 @@
 ---
 name: ⚒️ Fix
 about: 버그 수정을 위한 이슈 생성
-title: "Fix: "
+title: 'Fix: '
 labels: Fix
-assignees: ""
+assignees: ''
 ---
 
 ## 📝 설명

@@ -1,9 +1,9 @@
 ---
 name: 🧩 Refactor
 about: 리팩토링을 위한 이슈 생성
-title: "Refactor: "
+title: 'Refactor: '
 labels: Refactor
-assignees: ""
+assignees: ''
 ---
 
 ## 📝 설명
