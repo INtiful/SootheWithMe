@@ -27,14 +27,14 @@ const Review = ({
   return (
     <div className='flex-col space-x-6 p-[10px] font-medium md:flex md:flex-row'>
       {image_source ? (
-        <div>
+        <div className='relative h-[252px] w-full md:h-auto md:w-[378px]'>
           <Image
-            className='mx-auto w-full rounded-[24px] p-[10px] md:p-0'
+            className='rounded-[20px] object-cover'
             src={image_source}
             alt='review image'
-            width={378}
-            height={200}
+            fill
             quality={85}
+            sizes='(max-width: 768px) 100vw, 378px'
           />
         </div>
       ) : null}
