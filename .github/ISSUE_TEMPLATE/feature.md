@@ -1,9 +1,9 @@
 ---
 name: ✨ Feat
 about: 새로운 기능 추가 위한 이슈 생성
-title: "Feat: "
+title: 'Feat: '
 labels: Feat
-assignees: ""
+assignees: ''
 ---
 
 ## 📝 설명
