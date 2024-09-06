@@ -22,7 +22,7 @@ const InputText = ({ value, placeholder = '', onChange }: InputTextProps) => {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      spellcheck='false'
+      spellCheck={false}
     />
   );
 };
