@@ -35,7 +35,7 @@ const Gnb = () => {
             {navList.map((nav, index) => (
               <li key={index}>
                 <Link
-                  className={`text-16 font-semibold ${pathname.includes(nav.link) ? 'text-black' : 'text-white'}`}
+                  className={`text-14 md:text-16 font-semibold ${pathname.includes(nav.link) ? 'text-black' : 'text-white'}`}
                   href={nav.link}
                 >
                   {nav.name}
