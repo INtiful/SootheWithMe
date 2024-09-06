@@ -2,7 +2,7 @@
 
 import { InputStyles } from './Input';
 
-interface Props {
+interface InputTextProps {
   value: string;
   placeholder?: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -15,10 +15,14 @@ interface Props {
  * @param {string} [props.placeholder] - 텍스트 영역의 플레이스홀더 텍스트
  * @param {function} props.onChange - 텍스트 영역 값이 변경될 때 호출되는 함수
  */
-export default function InputText({ value, placeholder, onChange }: Props) {
+export default function InputText({
+  value,
+  placeholder,
+  onChange,
+}: InputTextProps) {
   return (
     <textarea
-      className={`${InputStyles.base} h-full resize-none overflow-auto outline-none`}
+      className={`${InputStyles.base} h-full resize-none overflow-auto`}
       value={value}
       placeholder={placeholder}
       onChange={onChange}

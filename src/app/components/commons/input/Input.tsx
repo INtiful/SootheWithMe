@@ -14,7 +14,7 @@ export const InputStyles = {
  * @property {boolean} [hasError=false] - 에러 상태를 나타내는 선택적 prop
  * @property {string} [className=''] - 추가적인 사용자 정의 클래스 이름
  */
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
   className?: string;
 }
@@ -25,7 +25,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
  * @param {InputProps} props - Input 컴포넌트에 전달되는 props
  * @param {Ref<HTMLInputElement>} ref - forwardRef를 사용하여 전달받은 ref
  */
-const Input = forwardRef<HTMLInputElement, Props>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ hasError = false, className = '', ...rest }, ref) => {
     return (
       <input
