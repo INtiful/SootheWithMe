@@ -13,6 +13,8 @@ interface ReviewProps {
   date: string;
 }
 
+const TOTAL_RATING = 5;
+
 const Review = ({
   image_source,
   rating,
@@ -39,8 +41,13 @@ const Review = ({
 
       <div>
         <div className='mt-[10px] flex md:mt-0'>
-          {Array.from({ length: rating }).map((_, index) => (
-            <IconHeart key={index} className='h-24 w-24 text-var-orange-600' />
+          {Array.from({ length: TOTAL_RATING }).map((_, index) => (
+            <IconHeart
+              key={index}
+              className={`h-24 w-24 ${
+                index < rating ? 'text-var-orange-600' : 'text-gray-200'
+              }`}
+            />
           ))}
         </div>
 
