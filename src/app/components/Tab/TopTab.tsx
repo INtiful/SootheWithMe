@@ -1,6 +1,8 @@
+import { ReactNode } from 'react';
+
 interface TopTabProps {
   isActive?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const TopTab = ({ isActive, children }: TopTabProps) => {
