@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 /**
  * BoxSelect component
@@ -16,7 +16,7 @@ interface BoxSelectProps {
 const BoxSelect = ({ title = '', subTitle = '' }: BoxSelectProps) => {
   const [selectStatus, setSelectStatus] = useState<boolean>(false);
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectStatus(event.target.checked);
   };
 
