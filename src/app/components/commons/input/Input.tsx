@@ -1,5 +1,5 @@
 'use client';
-import { forwardRef } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 
 // @todo: 추후 파일 분리예정
 export const InputStyles = {
@@ -9,7 +9,7 @@ export const InputStyles = {
   error: 'ring-var-red ring-2', // form 사용시 에러메시지용 레이아웃
 };
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
   className?: string;
 }
@@ -22,8 +22,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
  *
  * @param {boolean} [hasError=false] - 에러 상태를 나타내는 선택적 prop
  * @param {string} [className=''] - 추가적인 사용자 정의 클래스 이름
- * @param {React.InputHTMLAttributes<HTMLInputElement>} rest - Input 요소의 모든 속성을 Props로 받아 사용할 수 있습니다.
- * @param {React.Ref<HTMLInputElement>} ref - forwardRef를 사용하여 전달받은 ref
+ * @param {InputHTMLAttributes<HTMLInputElement>} rest - Input 요소의 모든 속성을 Props로 받아 사용할 수 있습니다.
+ * @param {Ref<HTMLInputElement>} ref - forwardRef를 사용하여 전달받은 ref
  */
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ hasError = false, className = '', ...rest }, ref) => {

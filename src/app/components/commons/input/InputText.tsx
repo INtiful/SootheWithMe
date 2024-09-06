@@ -1,11 +1,11 @@
 'use client';
-
+import { ChangeEvent } from 'react';
 import { InputStyles } from './Input';
 
 interface InputTextProps {
   value: string;
   placeholder?: string;
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 /**
