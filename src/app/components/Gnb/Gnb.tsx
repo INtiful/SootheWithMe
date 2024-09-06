@@ -25,7 +25,7 @@ const Gnb = () => {
 
   return (
     <header className='gap-0 bg-var-orange-600 py-16'>
-      <div className='mx-16 flex max-w-[1200px] items-center justify-between lg:mx-auto lg:px-24'>
+      <div className='mx-16 flex max-w-[1200px] items-center justify-between md:mx-24 lg:mx-auto'>
         <nav className='flex items-center'>
           <Link href='/'>
             <Logo className='mr-20 h-40 w-72' />
