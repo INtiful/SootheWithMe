@@ -12,14 +12,12 @@ const sizeClasses = {
 
 const Tag = ({ size = 'large', children }: TagProps) => {
   return (
-    <>
-      <div
-        className={`absolute right-0 top-0 flex items-center gap-4 rounded-bl-[12px] bg-orange-600 py-4 pl-8 text-12 font-medium text-white ${sizeClasses[size]}`}
-      >
-        <IconAlarm width='24' height='24' />
-        <span className='shrink-0'>{children}</span>
-      </div>
-    </>
+    <div
+      className={`absolute right-0 top-0 flex items-center gap-4 rounded-bl-[12px] bg-orange-600 py-4 pl-8 text-12 font-medium text-white ${sizeClasses[size]}`}
+    >
+      <IconAlarm width='24' height='24' />
+      <span className='shrink-0'>{children}</span>
+    </div>
   );
 };
 
