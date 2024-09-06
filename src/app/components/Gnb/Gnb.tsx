@@ -2,19 +2,20 @@
 import { Logo } from '@/public/images';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import UserStatus from './UserStatus';
 
 //@todo pathname 정해질 시 추가 예정
 const navList = [
   {
-    text: '모임 찾기',
+    name: '모임 찾기',
     link: '#',
   },
   {
-    text: '찜한 모임',
+    name: '찜한 모임',
     link: '#',
   },
   {
-    text: '모든 리뷰',
+    name: '모든 리뷰',
     link: '#',
   },
 ];
@@ -36,17 +37,14 @@ const Gnb = () => {
                   className={`text-[16px] font-semibold ${pathname.includes(nav.link) ? 'text-black' : 'text-white'}`}
                   href={nav.link}
                 >
-                  {nav.text}
+                  {nav.name}
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
       </div>
-      {/* @todo 임시 경로입니다. */}
-      <Link href='/signin'>
-        <div className='text-[16px] font-semibold text-white'>로그인</div>
-      </Link>
+      <UserStatus />
     </header>
   );
 };
