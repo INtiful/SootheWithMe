@@ -18,7 +18,7 @@ interface InputTextProps {
 const InputText = ({ value, placeholder = '', onChange }: InputTextProps) => {
   return (
     <textarea
-      className={`${InputStyles.base} h-full resize-none overflow-auto`}
+      className={`${InputStyles.base} h-full resize-none overflow-auto focus:outline-var-orange-300`}
       value={value}
       placeholder={placeholder}
       onChange={onChange}
