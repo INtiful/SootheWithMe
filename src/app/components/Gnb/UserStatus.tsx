@@ -36,7 +36,7 @@ const UserStatus = () => {
       {user ? (
         <div className='relative' ref={dropDownRef}>
           <Profile
-            className='size-40'
+            className='size-40 cursor-pointer'
             onClick={() => setIsOpen((prev) => !prev)}
           />
           {isOpen && (
