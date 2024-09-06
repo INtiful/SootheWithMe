@@ -1,4 +1,5 @@
 'use client';
+
 import { Logo } from '@/public/images';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -24,7 +25,7 @@ const Gnb = () => {
   const pathname = usePathname();
 
   return (
-    <header className='gap-0 bg-var-orange-600 py-16'>
+    <header className='bg-var-orange-600 py-16'>
       <div className='mx-16 flex max-w-[1200px] items-center justify-between md:mx-24 lg:mx-auto'>
         <nav className='flex items-center'>
           <Link href='/'>
@@ -34,7 +35,7 @@ const Gnb = () => {
             {navList.map((nav, index) => (
               <li key={index}>
                 <Link
-                  className={`text-[16px] font-semibold ${pathname.includes(nav.link) ? 'text-black' : 'text-white'}`}
+                  className={`text-16 font-semibold ${pathname.includes(nav.link) ? 'text-black' : 'text-white'}`}
                   href={nav.link}
                 >
                   {nav.name}
