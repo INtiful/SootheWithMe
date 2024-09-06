@@ -22,7 +22,7 @@ const BoxSelect = ({ title = '', subTitle = '' }: BoxSelectProps) => {
 
   return (
     <label
-      className={`h-70 flex w-full items-start gap-8 rounded-lg ${selectStatus ? 'bg-var-gray-900 text-var-white' : 'bg-var-gray-50 text-var-black'} px-8 py-[6px] transition-colors duration-200 ease-in-out md:px-16 md:py-12 lg:px-16 lg:py-12`}
+      className={`flex h-76 w-full items-start gap-8 rounded-lg ${selectStatus ? 'bg-var-gray-900 text-var-white' : 'bg-var-gray-50 text-var-black'} md:h-70 lg:h-70 px-8 py-[6px] transition-colors duration-200 ease-in-out md:px-16 md:py-12 lg:px-16 lg:py-12`}
     >
       <input
         id='checkbox'
