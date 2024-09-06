@@ -24,12 +24,12 @@ const Gnb = () => {
   const pathname = usePathname();
 
   return (
-    <header className='flex items-center justify-between gap-0 bg-var-orange-600 py-16'>
-      <div className='flex items-center'>
-        <Link href='/'>
-          <Logo className='mr-20 h-40 w-72' />
-        </Link>
-        <nav className='flex'>
+    <header className='gap-0 bg-var-orange-600 py-16'>
+      <div className='mx-16 flex max-w-[1200px] items-center justify-between lg:mx-auto lg:px-24'>
+        <nav className='flex items-center'>
+          <Link href='/'>
+            <Logo className='mr-20 h-40 w-72' />
+          </Link>
           <ul className='flex gap-24'>
             {navList.map((nav, index) => (
               <li key={index}>
@@ -43,8 +43,8 @@ const Gnb = () => {
             ))}
           </ul>
         </nav>
+        <UserStatus />
       </div>
-      <UserStatus />
     </header>
   );
 };
