@@ -15,11 +15,7 @@ interface InputTextProps {
  * @param {string} [props.placeholder] - 텍스트 영역의 플레이스홀더 텍스트
  * @param {function} props.onChange - 텍스트 영역 값이 변경될 때 호출되는 함수
  */
-export default function InputText({
-  value,
-  placeholder,
-  onChange,
-}: InputTextProps) {
+const InputText = ({ value, placeholder = '', onChange }: InputTextProps) => {
   return (
     <textarea
       className={`${InputStyles.base} h-full resize-none overflow-auto`}
@@ -28,4 +24,6 @@ export default function InputText({
       onChange={onChange}
     />
   );
-}
+};
+
+export default InputText;
