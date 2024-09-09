@@ -3,7 +3,6 @@ import IconArrow from './arrow.svg';
 import IconBye from './bye.svg';
 import IconCaret from './caret.svg';
 import IconCheck from './check.svg';
-import IconCheckCircle from './check-circle.svg';
 import IconCheckBoxDefault from './checkbox-default.svg';
 import IconCheckBoxActive from './checkbox-active.svg';
 import IconCheckCircle from './check-circle.svg';
@@ -26,7 +25,6 @@ export {
   IconBye,
   IconCaret,
   IconCheck,
-  IconCheckCircle,
   IconCheckBoxDefault,
   IconCheckBoxActive,
   IconCheckCircle,
