@@ -30,7 +30,6 @@ const CardList = ({ data }: CardProps) => {
   // 모임의 날짜와 현재 날짜를 비교하여 마감 여부 표시
   const isChallengeEnded = new Date(data.dateTime) <= new Date();
 
-  //
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const handleToggleSave = () => {
