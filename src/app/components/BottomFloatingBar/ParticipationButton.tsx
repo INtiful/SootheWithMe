@@ -1,3 +1,5 @@
+'use client';
+
 import Button from '../Button/Button';
 //@todo 함수 기능 구현
 import { onCancel, onShare, onJoin, onWithdraw } from './Mock';
@@ -10,8 +12,8 @@ interface Participant {
 
 // @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
+  isHost: boolean;
   user: { name: string; id: number };
-  createdBy: number;
   participantCount: number;
   capacity: number;
   registrationEnd: Date;
@@ -21,14 +23,13 @@ interface ParticipationButtonProps {
 
 const ParticipationButton = ({
   user,
-  createdBy,
+  isHost,
   participantCount,
   capacity,
   registrationEnd,
   canceledAt,
   participantsData,
 }: ParticipationButtonProps) => {
-  const isHost = createdBy === user.id; //주최자인지 검사
   const isFull = participantCount === capacity; //참여인원이 가득찼는지 검사
   const isRegistrationEnded = new Date() > new Date(registrationEnd); // 마감일이 지났는지 검사
   const hasParticipated = participantsData.some(
@@ -43,7 +44,7 @@ const ParticipationButton = ({
     onClick?: () => void,
     disabled = false,
   ) => (
-    <div className='h-44 w-[115px]'>
+    <div className={`h-44 w-[115px] ${isHost && 'w-full md:w-[115px]'}`}>
       <Button
         name={name}
         type='button'
@@ -56,23 +57,23 @@ const ParticipationButton = ({
 
   // 주최자일 경우
   if (isHost) {
+    const disabled = isRegistrationEnded || isCancelled; // 마감일이 지났거나 취소되었을 경우 button 비활성화
     return (
-      <div className='flex gap-[10px]'>
-        {renderButton('취소하기', 'white', onCancel)}
-        {renderButton('공유하기', 'default', onShare)}
+      <div className='flex w-[330px] gap-[10px]'>
+        {renderButton('취소하기', 'white', onCancel, disabled)}
+        {renderButton('공유하기', 'default', onShare, disabled)}
       </div>
     );
   }
 
-  // 참여 불가능한 조건 (정원이 찼거나, 마감일이 지났거나, 취소된 모임)
-  if (isFull || isRegistrationEnded || isCancelled) {
-    return renderButton('참여하기', 'gray', undefined, true);
-  }
+  const isParticipationDisabled = isFull || isRegistrationEnded || isCancelled; // 참여 가능 여부 검사
 
-  // 참여 상태에 따른 버튼 표시
-  return hasParticipated
-    ? renderButton('참여 취소하기', 'white', onWithdraw)
-    : renderButton('참여하기', 'default', onJoin);
+  return renderButton(
+    hasParticipated ? '참여 취소하기' : '참여하기', // 이미 참여했는지 검사
+    hasParticipated ? 'white' : 'default', // button 종류 결정
+    hasParticipated ? onWithdraw : onJoin, // 함수 결정
+    isParticipationDisabled, // disable 여부
+  );
 };
 
 export default ParticipationButton;
