@@ -7,10 +7,10 @@ export const userData = {
 /* 모임 상세 조회 mock data */
 export const groupData = {
   id: 0,
-  registrationEnd: new Date('2024-09-02T23:59:59Z'),
+  registrationEnd: '2024-09-22T23:59:59Z',
   participantCount: 5,
   capacity: 10,
-  createdBy: 1224,
+  createdBy: 1232,
   canceledAt: null,
 };
 

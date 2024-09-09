@@ -9,13 +9,13 @@ interface Participant {
   };
 }
 
-interface ParticipationButtonProps {
+interface BottomFloatingBarProps {
   user: { name: string; id: number };
   createdBy: number;
   participantCount: number;
   capacity: number;
-  registrationEnd: Date;
-  canceledAt: null | Date;
+  registrationEnd: string;
+  canceledAt: null | string;
   participantsData: Participant[];
 }
 
@@ -27,7 +27,7 @@ const BottomFloatingBar = ({
   registrationEnd,
   canceledAt,
   participantsData,
-}: ParticipationButtonProps) => {
+}: BottomFloatingBarProps) => {
   const isHost = createdBy === userData.id; //주최자인지 검사
 
   return (
