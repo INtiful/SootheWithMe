@@ -16,8 +16,8 @@ interface ParticipationButtonProps {
   user: { name: string; id: number };
   participantCount: number;
   capacity: number;
-  registrationEnd: Date;
-  canceledAt: null | Date;
+  registrationEnd: string;
+  canceledAt: null | string;
   participantsData: Participant[];
 }
 
@@ -36,6 +36,16 @@ const ParticipationButton = ({
     (participant) => participant.User.id === user.id,
   ); //이미 참여했는지 검사
   const isCancelled = Boolean(canceledAt); //취소되었는지 검사
+
+  const isParticipationDisabled = isFull || isRegistrationEnded || isCancelled; // 참여 가능 여부 검사
+
+  const buttonName = hasParticipated ? '참여 취소하기' : '참여하기'; //버튼 이름
+  const buttonVariant = hasParticipated // 버튼 Variant
+    ? 'white'
+    : isParticipationDisabled
+      ? 'gray'
+      : 'default';
+  const buttonAction = hasParticipated ? onWithdraw : onJoin; // 함수 결정
 
   /* 버튼 렌더링 함수 */
   const renderButton = (
@@ -66,12 +76,10 @@ const ParticipationButton = ({
     );
   }
 
-  const isParticipationDisabled = isFull || isRegistrationEnded || isCancelled; // 참여 가능 여부 검사
-
   return renderButton(
-    hasParticipated ? '참여 취소하기' : '참여하기', // 이미 참여했는지 검사
-    hasParticipated ? 'white' : isParticipationDisabled ? 'gray' : 'default', // button 종류 결정
-    hasParticipated ? onWithdraw : onJoin, // 함수 결정
+    buttonName,
+    buttonVariant,
+    buttonAction,
     isParticipationDisabled, // disable 여부
   );
 };
