@@ -70,7 +70,7 @@ const ParticipationButton = ({
 
   return renderButton(
     hasParticipated ? '참여 취소하기' : '참여하기', // 이미 참여했는지 검사
-    hasParticipated ? 'white' : 'default', // button 종류 결정
+    hasParticipated ? 'white' : isParticipationDisabled ? 'gray' : 'default', // button 종류 결정
     hasParticipated ? onWithdraw : onJoin, // 함수 결정
     isParticipationDisabled, // disable 여부
   );
