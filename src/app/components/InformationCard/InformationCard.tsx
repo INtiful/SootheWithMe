@@ -11,6 +11,9 @@ import Avatar from './Avatar';
 import InfoChip from '../Chip/InfoChip';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
+// min number of people to confirm opening
+const MIN_PARTICIPANTS = 5;
+
 interface InformationCardProps {
   title: string;
   address: string;
@@ -18,7 +21,6 @@ interface InformationCardProps {
   time: string;
   participants: { id: number; name: string; image: string }[];
   maxParticipants: number;
-  minParticipants: number;
 }
 
 const InformationCard = ({
@@ -28,7 +30,6 @@ const InformationCard = ({
   time,
   participants,
   maxParticipants,
-  minParticipants,
 }: InformationCardProps) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
@@ -120,7 +121,7 @@ const InformationCard = ({
             <div className='ml-12 flex -space-x-6'>{renderAvatars()}</div>
           </div>
           <div className='flex items-center'>
-            {participants.length >= minParticipants ? (
+            {participants.length >= MIN_PARTICIPANTS ? (
               <>
                 <IconCheckCircle />
                 <div className='text-14 font-medium text-var-orange-500'>
@@ -141,7 +142,7 @@ const InformationCard = ({
         />
 
         <div className='mt-8 flex justify-between text-12 font-semibold'>
-          <div>최소인원 {minParticipants}명</div>
+          <div>최소인원 {MIN_PARTICIPANTS}명</div>
           <div className='text-var-orange-500'>
             최대인원 {maxParticipants}명
           </div>
