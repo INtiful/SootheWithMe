@@ -37,7 +37,7 @@ const ProgressBar = ({
               className={`text-14 flex items-center gap-[2px] font-medium ${isClosedGathering ? 'text-var-orange-400' : 'text-var-black'}`}
             >
               <IconPerson className='h-16 w-16' />
-              {`${participantNumber} / 20`}
+              {`${participantNumber} / ${capacity}`}
             </div>
           )}
           {/* 개설확정 렌더링 선택 */}
