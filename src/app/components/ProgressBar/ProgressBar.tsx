@@ -24,7 +24,7 @@ const ProgressBar = ({
           {/* 참가 인원 렌더링 선택 */}
           {hasParticipantNumber && (
             <div
-              className={`flex items-center gap-[2px] text-[14px] font-medium ${isClosedGathering ? 'text-var-orange-400' : 'text-var-black'}`}
+              className={`text-14 flex items-center gap-[2px] font-medium ${isClosedGathering ? 'text-var-orange-400' : 'text-var-black'}`}
             >
               <IconPerson className='h-16 w-16' />
               {`${participantNumber} / 20`}
@@ -32,9 +32,8 @@ const ProgressBar = ({
           )}
           {/* 개설확정 렌더링 선택 */}
           {isOpeningConfirmed && !isClosedGathering && (
-            <div className='flex items-center gap-4 text-[14px] text-var-orange-400'>
-              {/* TODO: 칩으로 교체 */}
-              <IconCheckCircle />
+            <div className='text-14 flex items-center gap-4 text-var-orange-400'>
+              <IconCheckCircle className='h-24 w-24' />
               개설확정
             </div>
           )}
@@ -49,11 +48,11 @@ const ProgressBar = ({
       </div>
       {/* user action */}
       {isClosedGathering ? (
-        <div className='flex w-full items-center text-[16px] font-semibold text-var-orange-400'>
+        <div className='text-16 flex w-full items-center font-semibold text-var-orange-400'>
           Closed
         </div>
       ) : (
-        <div className='flex w-full items-center gap-8 text-[16px] font-semibold text-var-orange-600'>
+        <div className='text-16 flex w-full items-center gap-8 font-semibold text-var-orange-600'>
           join now
           <IconArrow className='h-[18px] w-[18px]' />
         </div>
