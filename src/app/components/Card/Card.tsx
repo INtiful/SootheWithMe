@@ -4,30 +4,13 @@ import {
   IconSaveDiscardBtn,
 } from '@/public/icons';
 import Image from 'next/image';
-import Button from '../Button/Button';
-import StateChip from '../Chip/StateChip';
+import Button from '@/app/components/Button/Button';
+import StateChip from '@/app/components/Chip/StateChip';
 import { formatDate, formatTime } from '@/utils/formatDate';
-
-interface GatheringsData {
-  teamId: number;
-  id: number;
-  type: string;
-  name: string;
-  dateTime: string;
-  registrationEnd: string;
-  location: string;
-  participantCount: number;
-  capacity: number;
-  image: string;
-  createdBy: number;
-  canceledAt?: string;
-  joinedAt: string;
-  isCompleted: boolean;
-  isReviewed: boolean;
-}
+import { UserJoinedGatheringsData } from '@/types/data.type';
 
 interface CardProps {
-  data: GatheringsData;
+  data: UserJoinedGatheringsData;
   hasButton?: boolean;
   hasChips?: boolean;
   handleCancelGatherings?: () => void; // 예약 취소 버튼 클릭 핸들러
