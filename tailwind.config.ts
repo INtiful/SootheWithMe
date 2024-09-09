@@ -18,6 +18,10 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      md: { min: '768px' },
+      lg: { min: '1024px' },
+    },
     extend: {
       spacing: PX_ENTRIES,
       fontFamily: {
@@ -54,6 +58,15 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      fontSize: {
+        12: ['1.2rem', '1.6rem'],
+        14: ['1.4rem', '2rem'],
+        16: ['1.6rem', '2.4rem'],
+        18: ['1.8rem', '2.8rem'],
+        20: ['2.0rem', '2.8rem'],
+        24: ['2.4rem', '3.2rem'],
+        30: ['3rem', '3.6rem'],
       },
     },
   },

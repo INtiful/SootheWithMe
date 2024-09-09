@@ -13,6 +13,8 @@ interface ReviewProps {
   date: string;
 }
 
+const TOTAL_RATING = 5;
+
 const Review = ({
   image_source,
   rating,
@@ -25,22 +27,27 @@ const Review = ({
   return (
     <div className='flex-col space-x-6 p-[10px] font-medium md:flex md:flex-row'>
       {image_source ? (
-        <div>
+        <div className='relative h-[252px] w-full md:h-auto md:w-[378px]'>
           <Image
-            className='mx-auto w-full rounded-[24px] p-[10px] md:p-0'
+            className='rounded-[20px] object-cover'
             src={image_source}
             alt='review image'
-            width={378}
-            height={200}
+            fill
             quality={85}
+            sizes='(max-width: 768px) 100vw, 378px'
           />
         </div>
       ) : null}
 
       <div>
         <div className='mt-[10px] flex md:mt-0'>
-          {Array.from({ length: rating }).map((_, index) => (
-            <IconHeart key={index} className='h-24 w-24 text-var-orange-600' />
+          {Array.from({ length: TOTAL_RATING }).map((_, index) => (
+            <IconHeart
+              key={index}
+              className={`h-24 w-24 ${
+                index < rating ? 'text-var-orange-600' : 'text-gray-200'
+              }`}
+            />
           ))}
         </div>
 
