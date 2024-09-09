@@ -35,8 +35,7 @@ const CardList = ({ data }: CardProps) => {
 
   const handleToggleSave = () => {
     setIsSaved((prev) => !prev);
-    // TODO
-    // storage 변경 코드
+    // TODO : storage 변경 코드
   };
 
   return (
@@ -72,7 +71,7 @@ const CardList = ({ data }: CardProps) => {
           </div>
           {isSaved ? (
             <IconSaveActive
-              className='animate-heartPulse h-48 w-48 cursor-pointer'
+              className='h-48 w-48 animate-heartPulse cursor-pointer'
               onClick={handleToggleSave}
             />
           ) : (
