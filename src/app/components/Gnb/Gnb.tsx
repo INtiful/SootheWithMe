@@ -4,6 +4,7 @@ import { Logo } from '@/public/images';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import UserStatus from './UserStatus';
+import TopTab from '../Tab/TopTab';
 
 //@todo pathname 정해질 시 추가 예정
 const navList = [
@@ -34,11 +35,10 @@ const Gnb = () => {
           <ul className='flex gap-24'>
             {navList.map((nav, index) => (
               <li key={index}>
-                <Link
-                  className={`text-14 md:text-16 font-semibold ${pathname.includes(nav.link) ? 'text-black' : 'text-white'}`}
-                  href={nav.link}
-                >
-                  {nav.name}
+                <Link href={nav.link}>
+                  <TopTab isActive={pathname.includes(nav.link)}>
+                    {nav.name}
+                  </TopTab>
                 </Link>
               </li>
             ))}
