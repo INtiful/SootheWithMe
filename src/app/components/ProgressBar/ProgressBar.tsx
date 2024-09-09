@@ -12,17 +12,19 @@ import { IconArrow, IconCheckCircle, IconPerson } from '@/public/icons';
 
 interface ProgressBarProps {
   participantNumber: number;
+  capacity: number;
   hasParticipantNumber: boolean;
   hasOpeningConfirmed: boolean;
 }
 
 const ProgressBar = ({
   participantNumber,
+  capacity,
   hasParticipantNumber,
   hasOpeningConfirmed,
 }: ProgressBarProps) => {
   const isOpeningConfirmed = participantNumber >= 5; // 개설 확정 여부 (boolean)
-  const isClosedGathering = participantNumber === 20; // 참여 인원이 20명인 경우 (boolean)
+  const isClosedGathering = participantNumber === capacity; // 참여 인원이 다 찬 경우 (boolean)
 
   return (
     <div className='flex gap-24'>
@@ -50,7 +52,7 @@ const ProgressBar = ({
         <div className='flex h-4 w-full rounded-md bg-var-orange-100'>
           <div
             className={`h-full ${isClosedGathering ? 'bg-var-orange-400' : 'bg-var-orange-600'} transition-all ease-in-out`}
-            style={{ width: `${(participantNumber / 20) * 100}%` }}
+            style={{ width: `${(participantNumber / capacity) * 100}%` }}
           ></div>
         </div>
       </div>
