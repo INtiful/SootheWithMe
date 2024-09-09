@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main className='flex h-dvh w-dvw items-center justify-center bg-white'>
       <div className='w-500'>
-        <ProgressBar progress={15} />
+        <ProgressBar participantNumber={5} hasParticipantNumber={true} />
       </div>
     </main>
   );
