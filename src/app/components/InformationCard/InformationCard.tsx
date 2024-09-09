@@ -39,36 +39,21 @@ const InformationCard = ({
 
   // function of setting Avatars with remaining
   const renderAvatars = () => {
-    const avatars = [];
     const maxVisible = 4;
+    const visibleAvatars = participants
+      .slice(0, maxVisible)
+      .map(({ id, name, image }) => (
+        <Avatar
+          key={id}
+          id={id}
+          name={name}
+          image={image}
+          className='h-28 w-28'
+        />
+      ));
 
-    if (participants.length <= maxVisible) {
-      for (let i = 0; i < participants.length; i++) {
-        const { id, name, image } = participants[i];
-        avatars.push(
-          <Avatar
-            key={id}
-            id={id}
-            name={name}
-            image={image}
-            className='h-28 w-28'
-          />,
-        );
-      }
-    } else {
-      for (let i = 0; i < maxVisible; i++) {
-        const { id, name, image } = participants[i];
-        avatars.push(
-          <Avatar
-            key={id}
-            id={id}
-            name={name}
-            image={image}
-            className='h-28 w-28'
-          />,
-        );
-      }
-      avatars.push(
+    if (participants.length > maxVisible) {
+      visibleAvatars.push(
         <div
           key='remaining'
           className='z-10 flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
@@ -78,7 +63,7 @@ const InformationCard = ({
       );
     }
 
-    return avatars;
+    return visibleAvatars;
   };
 
   return (
@@ -93,7 +78,7 @@ const InformationCard = ({
           {/* 찜 */}
           {isSaved ? (
             <IconSaveActive
-              className='animate-heartPulse h-48 w-48 cursor-pointer'
+              className='h-48 w-48 animate-heartPulse cursor-pointer'
               onClick={handleToggleSave}
             />
           ) : (
