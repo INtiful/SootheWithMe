@@ -7,15 +7,16 @@ import {
   IconSaveActive,
   IconSaveInactive,
 } from '@/public/icons';
-import { Profile } from '@/public/images';
+import Avatar from './Avatar';
 import InfoChip from '../Chip/InfoChip';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 interface InformationCardProps {
   title: string;
   address: string;
   date: string;
   time: string;
-  capacity: number;
+  participants: { id: number; name: string; image: string }[];
   maxParticipants: number;
   minParticipants: number;
 }
@@ -25,7 +26,7 @@ const InformationCard = ({
   address,
   date,
   time,
-  capacity,
+  participants,
   maxParticipants,
   minParticipants,
 }: InformationCardProps) => {
@@ -35,30 +36,48 @@ const InformationCard = ({
     setIsSaved((prev) => !prev);
   };
 
-  // function of setting Profiles with remaining
-  const renderProfiles = () => {
-    const profiles = [];
+  // function of setting Avatars with remaining
+  const renderAvatars = () => {
+    const avatars = [];
     const maxVisible = 4;
 
-    if (capacity <= maxVisible) {
-      for (let i = 0; i < capacity; i++) {
-        profiles.push(<Profile key={i} className='h-28 w-28' />);
+    if (participants.length <= maxVisible) {
+      for (let i = 0; i < participants.length; i++) {
+        const { id, name, image } = participants[i];
+        avatars.push(
+          <Avatar
+            key={id}
+            id={id}
+            name={name}
+            image={image}
+            className='h-28 w-28'
+          />,
+        );
       }
     } else {
       for (let i = 0; i < maxVisible; i++) {
-        profiles.push(<Profile key={i} className='h-28 w-28' />);
+        const { id, name, image } = participants[i];
+        avatars.push(
+          <Avatar
+            key={id}
+            id={id}
+            name={name}
+            image={image}
+            className='h-28 w-28'
+          />,
+        );
       }
-      profiles.push(
+      avatars.push(
         <div
           key='remaining'
-          className='flex h-28 w-28 items-center justify-center rounded-full bg-gray-100 text-14 font-semibold'
+          className='z-10 flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
         >
-          +{capacity - maxVisible}
+          +{participants.length - maxVisible}
         </div>,
       );
     }
 
-    return profiles;
+    return avatars;
   };
 
   return (
@@ -69,6 +88,8 @@ const InformationCard = ({
             <div className='text-[18px] font-semibold'>{title}</div>
             <div className='text-[14px] font-medium'>{address}</div>
           </div>
+
+          {/* 찜 */}
           {isSaved ? (
             <IconSaveActive
               className='animate-heartPulse h-48 w-48 cursor-pointer'
@@ -82,20 +103,24 @@ const InformationCard = ({
           )}
         </div>
 
+        {/* 날짜, 시간 chip */}
         <div className='mt-12 space-x-8'>
           <InfoChip type='date'>{date}</InfoChip>
           <InfoChip type='time'>{time}</InfoChip>
         </div>
       </div>
 
+      {/* 모집 정원 */}
       <div className='pt-6'>
         <div className='flex justify-between'>
           <div className='flex items-center'>
-            <div className='text-14 font-semibold'>모집 정원 {capacity}명</div>
-            <div className='ml-12 flex -space-x-6'>{renderProfiles()}</div>
+            <div className='text-14 font-semibold'>
+              모집 정원 {participants.length}명
+            </div>
+            <div className='ml-12 flex -space-x-6'>{renderAvatars()}</div>
           </div>
           <div className='flex items-center'>
-            {capacity >= minParticipants ? (
+            {participants.length >= minParticipants ? (
               <>
                 <IconCheckCircle />
                 <div className='text-14 font-medium text-var-orange-500'>
@@ -106,9 +131,16 @@ const InformationCard = ({
           </div>
         </div>
 
-        <div>{/* progress bar */}</div>
+        {/* progress bar */}
+        <ProgressBar
+          participantNumber={participants.length}
+          hasParticipantNumber={false}
+          hasOpeningConfirmed={false}
+          capacity={maxParticipants}
+          hasText={false}
+        />
 
-        <div className='flex justify-between text-12 font-semibold'>
+        <div className='mt-8 flex justify-between text-12 font-semibold'>
           <div>최소인원 {minParticipants}명</div>
           <div className='text-var-orange-500'>
             최대인원 {maxParticipants}명
