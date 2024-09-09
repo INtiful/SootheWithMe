@@ -7,17 +7,18 @@ export const userData = {
 /* 모임 상세 조회 mock data */
 export const groupData = {
   id: 0,
-  registrationEnd: '2024-09-15T23:59:59Z',
+  registrationEnd: new Date('2024-09-02T23:59:59Z'),
   participantCount: 5,
   capacity: 10,
-  createdBy: 1234,
+  createdBy: 1224,
   canceledAt: null,
 };
 
+/* 참가자 mock data */
 export const participantsData = [
   {
     User: {
-      id: 1234,
+      id: 1232,
     },
   },
   {
@@ -41,3 +42,9 @@ export const participantsData = [
     },
   },
 ];
+
+/* 예비로 추가한 이벤트핸들링함수 */
+export const onCancel = () => console.log('모임이 취소되었습니다.');
+export const onShare = () => console.log('모임을 공유했습니다.');
+export const onJoin = () => console.log('모임에 참여했습니다.');
+export const onWithdraw = () => console.log('참여를 취소했습니다.');

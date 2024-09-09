@@ -3,8 +3,32 @@
 import ParticipationButton from './ParticipationButton';
 import { userData, groupData, participantsData } from './Mock';
 
-const BottomFloatingBar = () => {
-  const isHost = groupData.createdBy === userData.id; //주최자인지 검사
+interface Participant {
+  User: {
+    id: number;
+  };
+}
+
+interface ParticipationButtonProps {
+  user: { name: string; id: number };
+  createdBy: number;
+  participantCount: number;
+  capacity: number;
+  registrationEnd: Date;
+  canceledAt: null | Date;
+  participantsData: Participant[];
+}
+
+const BottomFloatingBar = ({
+  user,
+  createdBy,
+  participantCount,
+  capacity,
+  registrationEnd,
+  canceledAt,
+  participantsData,
+}: ParticipationButtonProps) => {
+  const isHost = createdBy === userData.id; //주최자인지 검사
 
   return (
     <section className='fixed bottom-0 w-full border-t-2 border-var-black bg-var-white px-16 py-20 md:px-24'>
@@ -22,11 +46,11 @@ const BottomFloatingBar = () => {
         </div>
         <ParticipationButton
           isHost={isHost}
-          user={userData}
-          participantCount={groupData.participantCount}
-          capacity={groupData.capacity}
-          registrationEnd={groupData.registrationEnd}
-          canceledAt={groupData.canceledAt}
+          user={user}
+          participantCount={participantCount}
+          capacity={capacity}
+          registrationEnd={registrationEnd}
+          canceledAt={canceledAt}
           participantsData={participantsData}
         />
       </div>
