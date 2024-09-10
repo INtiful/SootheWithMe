@@ -1,7 +1,7 @@
 'use client';
 
 import { IconHeart, IconX } from '@/public/icons';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Button from '../Button/Button';
 import InputText from '../Input/InputText';
 
@@ -28,6 +28,13 @@ const ReviewModal = ({
   onChangeReviewComment,
   onSubmit,
 }: ReviewModalProps) => {
+  // TODO: 하트 클릭 기능 고도화
+  const [isClickHeart, setIsClickHeart] = useState<boolean>(false);
+
+  const handleClickHeart = () => {
+    setIsClickHeart((prev) => !prev);
+  };
+
   return (
     <div className='flex max-h-408 w-344 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'>
       <div className='flex items-center justify-between'>
