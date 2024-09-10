@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import { IconCaret } from '@/public/icons';
 import DropDown from '../DropDown/DropDown';
@@ -25,6 +25,8 @@ const FilterList = ({
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [currentState, setCurrentState] = useState<'default' | 'active'>(state);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
@@ -35,10 +37,27 @@ const FilterList = ({
     setIsOpen((prev) => !prev);
   };
 
+  // 외부 클릭 시 드롭다운 닫힘
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className='relative'>
+    <div className='relative' ref={containerRef}>
       <div
-        className={`flex h-36 w-[110px] items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[currentState]}`}
+        className={`flex h-36 w-[110px] cursor-pointer items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[currentState]}`}
         onClick={toggleDropDown}
       >
         {selectedOption || children}
