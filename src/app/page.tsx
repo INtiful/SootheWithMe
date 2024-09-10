@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useState } from 'react';
 import Popup from './components/Popup/Popup';
+import CalendarModal from './components/Modal/CalendarModal';
 
 export default function Home() {
   const [reviewComment, setReviewComment] = useState('');
@@ -17,7 +18,7 @@ export default function Home() {
         reviewComment={reviewComment}
         onChangeReviewComment={onChange}
       /> */}
-      <Popup
+      {/* <Popup
         type='exit'
         hasCancelButton={true}
         onClickClosePopup={() => console.log('')}
@@ -36,7 +37,8 @@ export default function Home() {
         type='signUpCompleted'
         hasCancelButton={false}
         onClickClosePopup={() => console.log('')}
-      />
+      /> */}
+      <CalendarModal />
     </main>
   );
 }
