@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, useState } from 'react';
-import ReviewModal from './components/Modal/ReviewModal';
+import ExitPopup from './components/Popup/ExitPopup';
 
 export default function Home() {
   const [reviewComment, setReviewComment] = useState('');
@@ -11,11 +11,19 @@ export default function Home() {
   };
 
   return (
-    <main className='flex h-dvh w-dvw items-center justify-center'>
+    <main className='flex h-dvh w-dvw items-center justify-center gap-20'>
       {/* <ProfileEditModal /> */}
-      <ReviewModal
+      {/* <ReviewModal
         reviewComment={reviewComment}
         onChangeReviewComment={onChange}
+      /> */}
+      <ExitPopup
+        hasCancelButton={true}
+        onClickClosePopup={() => console.log('')}
+      />
+      <ExitPopup
+        hasCancelButton={false}
+        onClickClosePopup={() => console.log('')}
       />
     </main>
   );
