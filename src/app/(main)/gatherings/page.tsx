@@ -31,6 +31,16 @@ const mockData = {
   canceledAt: registrationEnd.toISOString(),
 };
 
+const OPTIONS = [
+  '건대입구',
+  '을지로 3가',
+  '신림',
+  '홍대입구',
+  '시청',
+  '신대방',
+  '서울대입구',
+];
+
 const GatheringsPage = () => {
   const [activeTab, setActiveTab] = useState<'workation' | 'dalaemfit'>(
     'dalaemfit',
@@ -89,7 +99,9 @@ const GatheringsPage = () => {
           {/* 드롭다운 */}
           <div className='flex justify-between pt-16'>
             <div className='flex space-x-8'>
-              <FilterList state='default'>지역 전체</FilterList>
+              <FilterList state='default' options={OPTIONS}>
+                지역 전체
+              </FilterList>
               <FilterList state='default'>날짜 전체</FilterList>
             </div>
             <div>

@@ -1,8 +1,12 @@
+import { useState } from 'react';
+
 import { IconCaret } from '@/public/icons';
+import DropDown from '../DropDown/DropDown';
 
 interface FilterListProps {
   state?: 'default' | 'active';
   children: string;
+  options?: string[];
 }
 
 const stateClasses = {
@@ -10,13 +14,40 @@ const stateClasses = {
   active: 'text-var-gray-50 bg-var-gray-900',
 };
 
-const FilterList = ({ state = 'default', children }: FilterListProps) => {
+const FilterList = ({
+  state = 'default',
+  children,
+  options = [],
+}: FilterListProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const handleOptionSelect = (option: string) => {
+    setSelectedOption(option);
+    setIsOpen(false);
+  };
+
+  const toggleDropDown = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
-    <div
-      className={`flex h-36 w-[110px] items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[state]}`}
-    >
-      {children}
-      <IconCaret className='h-24 w-24' />
+    <div className='relative'>
+      <div
+        className={`flex h-36 w-[110px] items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[state]}`}
+        onClick={toggleDropDown}
+      >
+        {selectedOption || children}
+        <IconCaret className='h-24 w-24' />
+      </div>
+
+      {isOpen && (
+        <DropDown
+          options={options}
+          onSelect={handleOptionSelect}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
     </div>
   );
 };
