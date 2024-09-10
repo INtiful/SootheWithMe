@@ -21,10 +21,12 @@ const FilterList = ({
 }: FilterListProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [currentState, setCurrentState] = useState<'default' | 'active'>(state);
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
+    setCurrentState('active');
   };
 
   const toggleDropDown = () => {
@@ -34,7 +36,7 @@ const FilterList = ({
   return (
     <div className='relative'>
       <div
-        className={`flex h-36 w-[110px] items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[state]}`}
+        className={`flex h-36 w-[110px] items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[currentState]}`}
         onClick={toggleDropDown}
       >
         {selectedOption || children}
