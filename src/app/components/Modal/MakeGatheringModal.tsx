@@ -7,6 +7,7 @@ import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
 import DropDown from '../DropDown/DropDown';
 import { ChangeEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import TimeChip from '../Chip/TimeChip';
 
 interface MakeGatheringModalProps {
   onCloseClick: () => void;
@@ -20,6 +21,17 @@ const MOCK_DROPDOWN_OPTIONS = [
   '시청',
   '신대방',
   '서울대입구',
+];
+
+const MORNING_TIMES = ['09:00', '10:00', '11:00'];
+const AFTERNOON_TIMES = [
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
 ];
 
 const MakeGatheringModal = ({ onCloseClick }: MakeGatheringModalProps) => {
@@ -105,8 +117,23 @@ const MakeGatheringModal = ({ onCloseClick }: MakeGatheringModalProps) => {
         </div>
       </div>
       {/* 시간 */}
-      <div className='space-y-8 text-14 font-semibold'>오전</div>
-      <div className='space-y-8 text-14 font-semibold'>오후</div>
+      {/* TODO: 시간 버튼 상태 로직 추가 */}
+      <div className='space-y-8 text-14 font-semibold'>
+        <h2>오전</h2>
+        <div className='flex gap-8'>
+          {MORNING_TIMES.map((time) => (
+            <TimeChip key={time}>{time}</TimeChip>
+          ))}
+        </div>
+      </div>
+      <div className='space-y-8 text-14 font-semibold'>
+        <h2>오후</h2>
+        <div className='flex gap-8'>
+          {AFTERNOON_TIMES.map((time) => (
+            <TimeChip key={time}>{time}</TimeChip>
+          ))}
+        </div>
+      </div>
       {/* 모집 정원 */}
       <div className='space-y-12 text-16 font-semibold'>
         <h2>모집정원</h2>
