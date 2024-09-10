@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, useState } from 'react';
-import ExitPopup from './components/Popup/ExitPopup';
+import Popup from './components/Popup/Popup';
 
 export default function Home() {
   const [reviewComment, setReviewComment] = useState('');
@@ -17,11 +17,23 @@ export default function Home() {
         reviewComment={reviewComment}
         onChangeReviewComment={onChange}
       /> */}
-      <ExitPopup
+      <Popup
+        type='exit'
         hasCancelButton={true}
         onClickClosePopup={() => console.log('')}
       />
-      <ExitPopup
+      <Popup
+        type='exit'
+        hasCancelButton={false}
+        onClickClosePopup={() => console.log('')}
+      />
+      <Popup
+        type='signUpCompleted'
+        hasCancelButton={true}
+        onClickClosePopup={() => console.log('')}
+      />
+      <Popup
+        type='signUpCompleted'
         hasCancelButton={false}
         onClickClosePopup={() => console.log('')}
       />
