@@ -32,7 +32,7 @@ export const FORM_OPTIONS = {
   },
   /* 회사명 유효성 검사 */
   companyName: {
-    name: 'companyName' as const,
+    name: 'company' as const,
     placeholder: '회사명을 입력해 주세요.',
     rules: {
       required: '회사명을 입력해 주세요.',
@@ -56,9 +56,12 @@ export const FORM_OPTIONS = {
     placeholder: '비밀번호를 다시 한 번 입력해주세요.',
     rules: {
       required: '비밀번호를 입력해 주세요.',
+      validate: (value: string, formValues: { password: string }) =>
+        value === formValues.password || '비밀번호가 일치하지 않습니다.',
     },
     validateMsg: '비밀번호가 일치하지 않습니다.',
   },
+
   /* 오류 메시지 스타일링 */
   errorMessageStyle: 'text-var-red text-14 mt-4',
 };
