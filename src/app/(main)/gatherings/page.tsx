@@ -41,6 +41,8 @@ const OPTIONS = [
   '서울대입구',
 ];
 
+const SORT_OPTIONS = ['마감 임박', '을지로 3가', '참여 인원 순'];
+
 const GatheringsPage = () => {
   const [activeTab, setActiveTab] = useState<'workation' | 'dalaemfit'>(
     'dalaemfit',
@@ -105,7 +107,9 @@ const GatheringsPage = () => {
               <FilterList state='default'>날짜 전체</FilterList>
             </div>
             <div>
-              <FilterSort state='default'>마감임박</FilterSort>
+              <FilterSort state='default' options={SORT_OPTIONS}>
+                마감임박
+              </FilterSort>
             </div>
           </div>
         </div>
