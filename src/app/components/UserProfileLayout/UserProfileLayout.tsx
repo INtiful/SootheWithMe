@@ -9,7 +9,7 @@ const handleEditProfile = () => {};
 
 const UserProfileLayout = () => {
   return (
-    <div className='relative w-full rounded-[24px] border-2 border-var-white'>
+    <div className='relative w-full rounded-[24px] border-2 border-var-gray-200'>
       <div className='flex items-center justify-between rounded-t-[24px] bg-var-orange-400 p-4 px-24 pb-16 pt-[14px]'>
         <div className='text-18 font-semibold text-var-gray-900'>내 프로필</div>
         <ImageProfile className='mx-auto mb-[-26px] h-40 w-156 md:mr-156' />
