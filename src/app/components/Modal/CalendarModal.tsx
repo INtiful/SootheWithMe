@@ -1,3 +1,4 @@
+// 커스텀 원하시면 styles/style.css 코드를 참고하시면 됩니다.
 'use client';
 
 import { useRef, useState } from 'react';
@@ -9,28 +10,40 @@ interface CalendarModalProps {}
 
 const CalendarModal = () => {
   const datepickerRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   return (
     <div className='flex h-328 w-336 flex-col items-center justify-center gap-12 rounded-xl bg-var-white px-44 py-24'>
+      {/* 캘린더 */}
       <DatePicker
         id='datepicker'
         locale='ko'
         ref={datepickerRef}
         shouldCloseOnSelect
-        dateFormat='yyyy-MM-dd'
+        dateFormat='yyyy-MM-dd' // 데이터 형식
         selected={selectedDate} // 선택된 날짜를 ReactDatePicker에 전달
         onChange={(date) => setSelectedDate(date as Date)}
         minDate={new Date()} // 오늘 이전의 날짜 선택 불가능하게 설정
-        inline
+        inline // 달력이 바로 보여지도록 설정
       />
-      {/* TODO: 날짜 선택을 하면 버튼 상태 변경 */}
+      {/* 버튼 그룹 */}
       <div className='flex gap-[6px]'>
         <div className='w-124'>
-          <Button name='초기화' variant='grayOutline' />
+          <Button
+            name='초기화'
+            variant={`${selectedDate !== null ? 'white' : 'grayOutline'}`}
+            onClick={() => setSelectedDate(null)}
+          />
         </div>
         <div className='w-124'>
-          <Button name='적용' variant='gray' />
+          <Button
+            name='적용'
+            variant={`${selectedDate !== null ? 'default' : 'gray'}`}
+            // TODO: '적용' 버튼 함수 추가
+            onClick={() => {
+              console.log(selectedDate);
+            }}
+          />
         </div>
       </div>
     </div>

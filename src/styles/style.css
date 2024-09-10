@@ -64,5 +64,5 @@
 }
 
 .react-datepicker__day--keyboard-selected {
-  @apply !bg-var-orange-200 !text-var-white;
+  @apply !bg-transparent;
 }
