@@ -4,7 +4,6 @@ import { BtnEdit, ImageProfile, Profile } from '@/public/images';
 import { User } from './Mock';
 import Image from 'next/image';
 
-const labelStyle = 'text-14 font-medium text-var-gray-800';
 // @todo 프로필 변경 모달 함수작성
 const handleEditProfile = () => {};
 
@@ -33,13 +32,15 @@ const UserProfileLayout = () => {
         <div className='text-16 font-semibold text-var-gray-800'>
           {User.name}
         </div>
-        {/* 회사명 */}
-        <div className={labelStyle}>
-          company.<span className='pl-[6px] font-normal'>{User.company}</span>
-        </div>
-        {/* 이메일 */}
-        <div className={labelStyle}>
-          E-mail. <span className='pl-24 font-normal'>{User.email}</span>
+        <div className='text-14 font-medium text-var-gray-800'>
+          {/* 회사명 */}
+          <div>
+            company.<span className='pl-[6px] font-normal'>{User.company}</span>
+          </div>
+          {/* 이메일 */}
+          <div>
+            E-mail. <span className='pl-24 font-normal'>{User.email}</span>
+          </div>
         </div>
       </div>
     </div>
