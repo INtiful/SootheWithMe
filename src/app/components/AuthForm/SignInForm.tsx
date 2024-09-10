@@ -81,8 +81,8 @@ const SignInForm = () => {
         <Button
           type='submit'
           name='로그인'
-          variant='default'
-          disabled={false}
+          variant={isValid ? 'default' : 'gray'}
+          disabled={!isValid}
         />
       </div>
     </form>

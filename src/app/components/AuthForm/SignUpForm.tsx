@@ -144,7 +144,12 @@ const SignUpForm = () => {
             </div>
           )}
         </div>
-        <Button type='submit' name='확인' variant='default' disabled={false} />
+        <Button
+          type='submit'
+          name='확인'
+          variant={isValid ? 'default' : 'gray'}
+          disabled={!isValid}
+        />
       </div>
     </form>
   );
