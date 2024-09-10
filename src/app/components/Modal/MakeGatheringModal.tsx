@@ -6,6 +6,7 @@ import Input from '../Input/Input';
 import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
 import DropDown from '../DropDown/DropDown';
 import { ChangeEvent, useRef, useState } from 'react';
+import DatePicker from 'react-datepicker';
 
 interface MakeGatheringModalProps {
   onCloseClick: () => void;
@@ -24,6 +25,9 @@ const MOCK_DROPDOWN_OPTIONS = [
 const MakeGatheringModal = ({ onCloseClick }: MakeGatheringModalProps) => {
   const [fileName, setFileName] = useState<null | string>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const datepickerRef = useRef(null);
 
   const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -84,7 +88,21 @@ const MakeGatheringModal = ({ onCloseClick }: MakeGatheringModalProps) => {
       {/* 날짜 */}
       <div className='space-y-12 text-16 font-semibold'>
         <h2>날짜</h2>
-        <div></div>
+        <div className='flex w-full items-center justify-center rounded-xl border border-var-gray-200 py-16'>
+          <div className='w-252'>
+            {/* TODO: 날짜 컴포넌트 공통화 */}
+            <DatePicker
+              id='datepicker'
+              locale='ko'
+              ref={datepickerRef}
+              dateFormat='yyyy-MM-dd'
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date as Date)}
+              minDate={new Date()}
+              inline
+            />
+          </div>
+        </div>
       </div>
       {/* 시간 */}
       <div className='space-y-8 text-14 font-semibold'>오전</div>

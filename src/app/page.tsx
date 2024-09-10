@@ -3,6 +3,7 @@
 import { ChangeEvent, useState } from 'react';
 import Popup from './components/Popup/Popup';
 import CalendarModal from './components/Modal/CalendarModal';
+import MakeGatheringModal from './components/Modal/MakeGatheringModal';
 
 export default function Home() {
   const [reviewComment, setReviewComment] = useState('');
@@ -39,6 +40,7 @@ export default function Home() {
         onClickClosePopup={() => console.log('')}
       /> */}
       <CalendarModal />
+      <MakeGatheringModal onCloseClick={() => console.log('')} />
     </main>
   );
 }

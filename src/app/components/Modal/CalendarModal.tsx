@@ -2,9 +2,9 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../Button/Button';
-import DatePicker from 'react-datepicker';
 
 interface CalendarModalProps {}
 
