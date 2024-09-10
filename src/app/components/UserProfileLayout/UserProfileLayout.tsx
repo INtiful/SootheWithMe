@@ -2,6 +2,7 @@
 
 import { BtnEdit, ImageProfile, Profile } from '@/public/images';
 import { User } from './Mock';
+import Image from 'next/image';
 
 const labelStyle = 'text-14 font-medium text-var-gray-800';
 // @todo 프로필 변경 모달 함수작성
@@ -21,11 +22,13 @@ const UserProfileLayout = () => {
       <div className='h-8 w-full border-t-2 border-var-orange-600 bg-var-orange-400'></div>
       <div className='rounded-b-[24px] bg-var-white px-92 py-16'>
         {/* 프로필 이미지 */}
-        {User.image ? (
-          <div className='size-56'>{User.image}</div>
-        ) : (
-          <Profile className='absolute left-24 top-56 size-56' />
-        )}
+        <div className='absolute left-24 top-56 size-56'>
+          {User.image ? (
+            <img src={User.image} alt='Profile' className='rounded-full' />
+          ) : (
+            <Profile />
+          )}
+        </div>
         {/* 이름 */}
         <div className='text-16 font-semibold text-var-gray-800'>
           {User.name}
