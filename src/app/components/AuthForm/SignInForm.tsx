@@ -5,12 +5,12 @@ import Button from '../Button/Button';
 import Input from '../Input/Input';
 import Link from 'next/link';
 
-interface LoginData {
+interface SigninnData {
   email: string;
   password: string;
 }
 
-const LoginForm = () => {
+const SignInForm = () => {
   return (
     <form className='rounded-[24px] bg-var-white'>
       <div className='flex w-full flex-col gap-24'>
@@ -28,7 +28,7 @@ const LoginForm = () => {
         </div>
         <Button
           type='submit'
-          name='로그인 하기'
+          name='로그인'
           variant='default'
           disabled={false}
         />
@@ -37,4 +37,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignInForm;
