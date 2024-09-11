@@ -1,10 +1,10 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import Button from '../Button/Button';
+import Button from '../../../components/Button/Button';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signupSchema } from './FormOptions';
-import FormField from './FormField';
+import { signupSchema } from '../../_component/FormOptions';
+import FormField from '../../_component/FormField';
 
 interface SignUpData {
   name: string;

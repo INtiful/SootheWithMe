@@ -1,5 +1,5 @@
 import { ImageLogin } from '@/public/images';
-import Footer from '../components/AuthForm/Footer';
+import Footer from './_component/Footer';
 import { ReactNode } from 'react';
 
 const Layout = ({

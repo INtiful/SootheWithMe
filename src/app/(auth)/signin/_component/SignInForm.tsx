@@ -1,10 +1,10 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import Button from '../Button/Button';
-import { signinSchema } from './FormOptions';
+import Button from '../../../components/Button/Button';
+import { signinSchema } from '../../_component/FormOptions';
 import { zodResolver } from '@hookform/resolvers/zod';
-import FormField from './FormField';
+import FormField from '../../_component/FormField';
 
 interface SignInData {
   email: string;
