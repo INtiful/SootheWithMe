@@ -34,20 +34,20 @@ const AverageRating = () => {
         <span className='mr-2 text-var-gray-900'>{rating}</span>/ 5
       </p>
       <div className='relative flex gap-[2px] text-var-gray-200'>
-        <IconHeart className='size-24 shrink-0' />
-        <IconHeart className='size-24 shrink-0' />
-        <IconHeart className='size-24 shrink-0' />
-        <IconHeart className='size-24 shrink-0' />
-        <IconHeart className='size-24 shrink-0' />
+        {Array(5)
+          .fill(null)
+          .map((_, index) => (
+            <IconHeart key={index} className='size-24 shrink-0' />
+          ))}
         <div
           className='absolute left-0 top-0 flex gap-[2px] overflow-hidden text-var-orange-600'
           style={{ width: `${width}%` }}
         >
-          <IconHeart className='size-24 shrink-0' />
-          <IconHeart className='size-24 shrink-0' />
-          <IconHeart className='size-24 shrink-0' />
-          <IconHeart className='size-24 shrink-0' />
-          <IconHeart className='size-24 shrink-0' />
+          {Array(5)
+            .fill(null)
+            .map((_, index) => (
+              <IconHeart key={index} className='size-24 shrink-0' />
+            ))}
         </div>
       </div>
     </div>

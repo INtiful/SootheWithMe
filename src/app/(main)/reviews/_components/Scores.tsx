@@ -2,11 +2,13 @@ import { RATING_DATA as data } from '../mockData';
 import ScoreBar from './ScoreBar';
 
 const Scores = () => {
+  // TODO : useCallback 사용 (dependencies로 data를 받음)
   const calculateBarWidth = (rating: number) => {
     const total = Object.values(data).reduce((sum, count) => sum + count, 0); // 전체 별점 개수 합산
     const percentage = (rating / total) * 100; // 퍼센티지 계산
     return `${percentage}%`;
   };
+
   return (
     <div className='flex h-116 grow flex-col gap-4 md:w-300'>
       <ScoreBar
