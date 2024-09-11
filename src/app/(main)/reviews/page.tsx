@@ -1,12 +1,13 @@
 'use client';
+
 import { HeadReview } from '@/public/images';
 import { useState } from 'react';
-import { OPTIONS, RATING_DATA, SORT_OPTIONS, tempData } from './mockData';
+import { OPTIONS, SORT_OPTIONS, tempData } from './mockData';
 import Scores from './_components/Scores';
+import AverageRating from './_components/AverageRating';
 import Tab from '@/app/components/Tab/Tab';
 import Chip from '@/app/components/Chip/Chip';
 import Review from '@/app/components/Review/Review';
-import AverageRating from './_components/AverageRating';
 import FilterList from '@/app/components/Filter/FilterList';
 import FilterSort from '@/app/components/Filter/FilterSort';
 

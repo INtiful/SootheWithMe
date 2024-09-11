@@ -11,6 +11,7 @@ const Scores = () => {
 
   return (
     <div className='flex h-116 grow flex-col gap-4 md:w-300'>
+      {/* TODO : map 메소드 사용*/}
       <ScoreBar
         rating={5}
         barWidth={calculateBarWidth(data.fiveStars)}
