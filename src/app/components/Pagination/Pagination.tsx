@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 
 import { IconChevronLeft, IconChevronRight } from '@/public/icons';
 
+const MAX_PAGES_TO_SHOW_TABLET = 4; // 태블릿에서 표시할 최대 페이지 수
+const MAX_PAGES_TO_SHOW_DESKTOP = 6; // 데스크톱에서 표시할 최대 페이지 수
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -41,11 +44,10 @@ const Pagination = ({
   // 페이지네이션 범위 설정 함수
   const getPaginationRange = () => {
     const range: (number | string)[] = [];
-    const maxPagesToShowTablet = 4; // 태블릿에서 표시할 최대 페이지 수
-    const maxPagesToShowDesktop = 6; // 데스크톱에서 표시할 최대 페이지 수
+
     const maxPagesToShow = isTablet
-      ? maxPagesToShowTablet
-      : maxPagesToShowDesktop;
+      ? MAX_PAGES_TO_SHOW_TABLET
+      : MAX_PAGES_TO_SHOW_DESKTOP;
 
     // 총 페이지 수가 maxPages 보다 작은 경우
     if (totalPages <= maxPagesToShow) {

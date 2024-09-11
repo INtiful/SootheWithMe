@@ -22,19 +22,21 @@ import {
   PARTICIPANTS,
 } from '../mockData/mockData';
 
+const REVIEWS_PER_PAGE = 4;
+
 const GatheringsDetailPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const reviewsPerPage = 4;
-  const totalPages = Math.ceil(MOCK_REVIEWS.length / reviewsPerPage);
+  const REVIEWS_PER_PAGE = 4;
+  const totalPages = Math.ceil(MOCK_REVIEWS.length / REVIEWS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const startIndex = (currentPage - 1) * reviewsPerPage;
+  const startIndex = (currentPage - 1) * REVIEWS_PER_PAGE;
   const currentReviews = MOCK_REVIEWS.slice(
     startIndex,
-    startIndex + reviewsPerPage,
+    startIndex + REVIEWS_PER_PAGE,
   );
 
   return (
