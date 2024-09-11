@@ -4,4 +4,5 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   }, // Jest가 TypeScript 파일을 처리할 때 사용할 변환기를 지정
+  testMatch: ['<rootDir>/src/**/*.(spec|test).[jt]s?(x)'], // 테스트 파일의 위치와 이름 패턴을 지정
 };
