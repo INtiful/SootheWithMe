@@ -93,7 +93,7 @@ const SavedPage = () => {
 
           <div className='w-full border-y border-var-gray-200' />
           {/* filter */}
-          <div className='flex items-center justify-between lg:hidden'>
+          <div className='flex items-center justify-between'>
             <div className='flex gap-8'>
               <FilterList state='default' options={OPTIONS}>
                 지역 선택
