@@ -32,4 +32,4 @@ export const signupSchema = z
   });
 
 /* 오류 메시지 스타일링 */
-export const errorMessageStyle = 'text-var-red text-14 mt-4';
+export const errorMessageStyle = 'animate-bounce text-var-red text-14 mt-4';
