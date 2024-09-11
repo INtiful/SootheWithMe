@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .react-datepicker {
-  @apply !flex h-full w-full items-center justify-center !border-none !text-14;
+  @apply !flex h-full w-full !items-center !justify-center !border-none !text-14;
 }
 
 .react-datepicker__month-container {
@@ -19,7 +19,7 @@
 }
 
 .react-datepicker__current-month {
-  @apply !h-32 !py-8 !text-14 !font-medium;
+  @apply !flex !h-32 !items-center !justify-center !py-8 !text-14 !font-medium;
 }
 
 .react-datepicker__week {
@@ -35,12 +35,15 @@
 }
 
 .react-datepicker__navigation {
+  @apply hidden;
 }
 
 .react-datepicker__navigation--previous {
+  @apply hidden;
 }
 
 .react-datepicker__navigation--next {
+  @apply hidden;
 }
 
 .react-datepicker__day {
@@ -64,5 +67,5 @@
 }
 
 .react-datepicker__day--keyboard-selected {
-  @apply !bg-transparent;
+  @apply !text-var-orange-600;
 }
