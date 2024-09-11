@@ -21,12 +21,12 @@ const calculateAverageRating = () => {
   // 총합을 별점 개수로 나눠 평균 계산
   const average = totalCount === 0 ? 0 : totalScore / totalCount;
 
-  return average.toFixed(1); // 소수점 둘째 자리까지 표시
+  return average.toFixed(1); // 소수점 첫째 자리까지 표시
 };
 
 const AverageRating = () => {
-  const rating = calculateAverageRating();
-  const width = parseFloat(rating) * 20;
+  const rating = calculateAverageRating(); // 평균 점수
+  const width = parseFloat(rating) * 20; // 평균값으로 width 계산
 
   return (
     <div>
