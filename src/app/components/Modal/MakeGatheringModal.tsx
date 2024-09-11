@@ -8,20 +8,11 @@ import DropDown from '../DropDown/DropDown';
 import { ChangeEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import TimeChip from '../Chip/TimeChip';
+import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
 
 interface MakeGatheringModalProps {
   onCloseClick: () => void;
 }
-
-const MOCK_DROPDOWN_OPTIONS = [
-  '건대입구',
-  '을지로 3가',
-  '신림',
-  '홍대입구',
-  '시청',
-  '신대방',
-  '서울대입구',
-];
 
 const MORNING_TIMES = ['09:00', '10:00', '11:00'];
 const AFTERNOON_TIMES = [
