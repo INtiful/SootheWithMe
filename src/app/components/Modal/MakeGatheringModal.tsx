@@ -4,14 +4,14 @@ import { IconX } from '@/public/icons';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
-import DropDown from '../DropDown/DropDown';
 import { ChangeEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import TimeChip from '../Chip/TimeChip';
 import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
+import FilterList from '../Filter/FilterList';
 
 interface MakeGatheringModalProps {
-  onCloseClick: () => void;
+  onCloseClick?: () => void;
 }
 
 const MORNING_TIMES = ['09:00', '10:00', '11:00'];
@@ -51,11 +51,10 @@ const MakeGatheringModal = ({ onCloseClick }: MakeGatheringModalProps) => {
       {/* 장소 */}
       <div className='space-y-12 text-16 font-semibold'>
         <h2>장소</h2>
-        {/* TODO: 미완성 드롭다운 스타일링 */}
-        <DropDown
-          options={MOCK_DROPDOWN_OPTIONS}
-          placeholder='장소를 선택해주세요'
-        />
+        {/* TODO: 드롭다운 대신에 필터리스트 */}
+        <FilterList state='default' options={MOCK_DROPDOWN_OPTIONS}>
+          선택
+        </FilterList>
       </div>
       {/* 이미지 */}
       <div className='space-y-12 text-16 font-semibold'>
