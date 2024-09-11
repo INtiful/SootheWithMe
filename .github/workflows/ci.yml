@@ -25,7 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Test Code
+      - name: Install Jest
+        run: npm install --save-dev jest
+
+      - name: Run tests
         run: npm test
 
       - name: Install dependencies
