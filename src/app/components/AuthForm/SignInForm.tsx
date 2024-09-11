@@ -2,9 +2,9 @@
 
 import { useForm } from 'react-hook-form';
 import Button from '../Button/Button';
-import Input from '../Input/Input';
-import { errorMessageStyle, signinSchema } from './FormOptions';
+import { signinSchema } from './FormOptions';
 import { zodResolver } from '@hookform/resolvers/zod';
+import FormField from './FormField';
 
 interface SignInData {
   email: string;
@@ -37,31 +37,21 @@ const SignInForm = () => {
     >
       <div className='flex flex-col gap-24'>
         <h1 className='pb-8 text-center text-24 font-semibold'>로그인</h1>
-        <div className='flex flex-col gap-4'>
-          <label className='text-14 font-semibold'>아이디</label>
-
-          <Input
-            placeholder='이메일을 입려해주세요.'
-            className='h-44'
-            hasError={!!errors.email}
-            {...register('email')}
-          />
-          {errors.email && (
-            <div className={errorMessageStyle}>{errors.email.message}</div>
-          )}
-        </div>
-        <div className='flex flex-col gap-4'>
-          <label className='text-14 font-semibold'>비밀번호</label>
-          <Input
-            placeholder='비밀번호를 입력해주세요.'
-            className='h-44'
-            hasError={!!errors.password}
-            {...register('password')}
-          />
-          {errors.password && (
-            <div className={errorMessageStyle}>{errors.password.message}</div>
-          )}
-        </div>
+        <FormField
+          label='아이디'
+          name='email'
+          placeholder='이메일을 입력해주세요.'
+          register={register}
+          error={errors.email?.message}
+        />
+        <FormField
+          label='비밀번호'
+          name='password'
+          placeholder='비밀번호를 입력해주세요.'
+          register={register}
+          error={errors.password?.message}
+          type='password'
+        />
         <Button
           type='submit'
           name='로그인'
