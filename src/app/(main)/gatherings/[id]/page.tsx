@@ -26,7 +26,6 @@ const REVIEWS_PER_PAGE = 4;
 
 const GatheringsDetailPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const REVIEWS_PER_PAGE = 4;
   const totalPages = Math.ceil(MOCK_REVIEWS.length / REVIEWS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
