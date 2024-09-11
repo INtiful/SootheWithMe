@@ -1,82 +1,13 @@
 'use client';
 
-import { HeadSaved } from '@/public/images';
-import Tab from '../components/Tab/Tab';
 import { useState } from 'react';
-import Chip from '../components/Chip/Chip';
-import FilterList from '../components/Filter/FilterList';
-import FilterSort from '../components/Filter/FilterSort';
-import CardList from '../components/CardList/CardList';
-import { GatheringsListData } from '@/types/data.type';
-import DropDown from '../components/DropDown/DropDown';
-
-const tempData = [
-  {
-    teamId: 0,
-    id: 0,
-    type: 'dalaemfit',
-    name: '달램핏 오피스 스트레칭',
-    dateTime: '2024-09-11T01:33:50.892Z',
-    registrationEnd: '2024-09-11T01:33:50.892Z',
-    location: '을지로 3가',
-    participantCount: 0,
-    capacity: 0,
-    image: '/images/mock-image.png',
-    createdBy: 0,
-  },
-  {
-    teamId: 0,
-    id: 1,
-    type: 'dalaemfit',
-    name: '달램핏 오피스 스트레칭',
-    dateTime: '2024-09-11T01:33:50.892Z',
-    registrationEnd: '2024-09-11T01:33:50.892Z',
-    location: '을지로 3가',
-    participantCount: 0,
-    capacity: 0,
-    image: '/images/mock-image.png',
-    createdBy: 0,
-  },
-  {
-    teamId: 0,
-    id: 2,
-    type: 'dalaemfit',
-    name: '달램핏 오피스 스트레칭',
-    dateTime: '2024-09-11T01:33:50.892Z',
-    registrationEnd: '2024-09-11T01:33:50.892Z',
-    location: '을지로 3가',
-    participantCount: 0,
-    capacity: 0,
-    image: '/images/mock-image.png',
-    createdBy: 0,
-  },
-  {
-    teamId: 0,
-    id: 3,
-    type: 'dalaemfit',
-    name: '달램핏 오피스 스트레칭',
-    dateTime: '2024-09-11T01:33:50.892Z',
-    registrationEnd: '2024-09-11T01:33:50.892Z',
-    location: '을지로 3가',
-    participantCount: 0,
-    capacity: 0,
-    image: '/images/mock-image.png',
-    createdBy: 0,
-  },
-];
-
-const emptyArr: GatheringsListData[] = [];
-
-// mock data
-const OPTIONS = [
-  '건대입구',
-  '을지로 3가',
-  '신림',
-  '홍대입구',
-  '시청',
-  '신대방',
-  '서울대입구',
-];
+import { HeadSaved } from '@/public/images';
+import Tab from '@/app/components/Tab/Tab';
+import Chip from '@/app/components/Chip/Chip';
+import FilterList from '@/app/components/Filter/FilterList';
+import FilterSort from '@/app/components/Filter/FilterSort';
+import CardList from '@/app/components/CardList/CardList';
+import { DATA_LIST, OPTIONS, SORT_OPTIONS } from './mockData';
 
 const SavedPage = () => {
   const [activeTab, setActiveTab] = useState<'dalaemfit' | 'workation'>(
@@ -104,7 +35,7 @@ const SavedPage = () => {
     <main className='mx-auto flex h-full max-w-1200 flex-col bg-var-gray-50 px-16 pb-48 pt-24 md:px-24 md:pt-40 lg:px-100'>
       {/* head */}
       <div className='flex items-center gap-16'>
-        <HeadSaved className='h-72 w-72' />
+        <HeadSaved className='size-72' />
         <div>
           <h2 className='mb-8 text-18 font-semibold text-var-gray-900'>
             찜한 모임
@@ -129,10 +60,11 @@ const SavedPage = () => {
             onClick={() => handleClickTab('workation')}
           />
         </div>
-        {/* filter */}
+
         <div className='flex flex-col gap-16'>
+          {/* 버튼 칩 */}
           <div
-            className={`flex items-center gap-8 ${activeTab === 'workation' ? 'hidden' : ''}`}
+            className={`flex items-center gap-8 ${activeTab === 'workation' && 'hidden'}`}
           >
             <button type='button' onClick={() => handleClickChips('all')}>
               <Chip state={activeChip === 'all' ? 'active' : 'default'}>
@@ -158,19 +90,27 @@ const SavedPage = () => {
               </Chip>
             </button>
           </div>
+
           <div className='w-full border-y border-var-gray-200' />
+          {/* filter */}
           <div className='flex items-center justify-between lg:hidden'>
             <div className='flex gap-8'>
-              <FilterList>지역 선택</FilterList>
-              <FilterList>날짜 선택</FilterList>
+              <FilterList state='default' options={OPTIONS}>
+                지역 선택
+              </FilterList>
+              <FilterList state='default' options={OPTIONS}>
+                날짜 선택
+              </FilterList>
             </div>
-            <FilterSort>마감 임박</FilterSort>
+            <FilterSort state='default' options={SORT_OPTIONS}>
+              마감 임박
+            </FilterSort>
           </div>
         </div>
         {/* data list */}
         <div className='mt-24 flex grow flex-col gap-24'>
-          {tempData.length > 0 ? (
-            tempData.map((item) => <CardList key={item.id} data={item} />)
+          {DATA_LIST.length > 0 ? (
+            DATA_LIST.map((item) => <CardList key={item.id} data={item} />)
           ) : (
             <div className='flex size-full grow items-center justify-center text-14 font-medium text-var-gray-500'>
               아직 아직 찜한 모임이 없어요.
