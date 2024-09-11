@@ -1,4 +1,8 @@
-// TODO: api 연동 후 주최자인 경우 확인
+/**
+ * TODO:
+ *  - 주최자인 경우 Bottom Floating 버튼 수정
+ *  - 비로그인인 경우 로그인이 필요하다는 모달
+ */
 
 'use client';
 
