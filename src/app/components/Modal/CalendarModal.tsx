@@ -6,8 +6,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../Button/Button';
 
-interface CalendarModalProps {}
-
 const CalendarModal = () => {
   const datepickerRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
