@@ -40,9 +40,11 @@ const ProfileEditModal = ({
           <IconX className='h-24 w-24' />
         </button>
       </div>
+      {/* 프로필 이미지 변경 버튼 */}
       <button onClick={onUploadProfileImage} className='h-56 w-56'>
         <BtnEditProfile className='h-full w-full' />
       </button>
+      {/* 프로필 이름 변경 */}
       <div className='flex flex-col gap-12'>
         <h2 className='text-16 font-semibold'>회사</h2>
         <Input
@@ -51,6 +53,7 @@ const ProfileEditModal = ({
           onChange={onChangeProfileInput}
         />
       </div>
+      {/* 버튼 그룹 */}
       <div className='flex items-center gap-16'>
         <Button name='취소' variant='white' />
         {/* TODO: 인풋의 값이 이전과 같거나 비어있으면 gray, 아니라면 default */}
