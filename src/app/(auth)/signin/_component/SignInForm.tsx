@@ -5,11 +5,7 @@ import Button from '../../../components/Button/Button';
 import { signinSchema } from '../../_component/FormOptions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormField from '../../_component/FormField';
-
-interface SignInData {
-  email: string;
-  password: string;
-}
+import { SignInData } from '@/types/client.type';
 
 const SignInForm = () => {
   const {

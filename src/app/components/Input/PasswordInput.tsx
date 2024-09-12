@@ -27,7 +27,13 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
 
     return (
       <div className='relative'>
-        <Input hasError={hasError} type={type} maxLength={16} {...rest} />
+        <Input
+          hasError={hasError}
+          ref={ref}
+          type={type}
+          maxLength={16}
+          {...rest}
+        />
         <button
           type='button'
           onClick={() => {

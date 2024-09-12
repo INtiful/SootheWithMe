@@ -5,14 +5,7 @@ import Button from '../../../components/Button/Button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signupSchema } from '../../_component/FormOptions';
 import FormField from '../../_component/FormField';
-
-interface SignUpData {
-  name: string;
-  email: string;
-  company: string;
-  password: string;
-  passwordCheck: string;
-}
+import { SignUpData } from '@/types/client.type';
 
 const SignUpForm = () => {
   const {
