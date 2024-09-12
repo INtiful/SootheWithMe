@@ -1,10 +1,14 @@
 'use client';
 
-import { IconVisivilityOff, IconVisivilityOn } from '@/public/icons';
+import {
+  IconVisivilityOff,
+  IconVisivilityOn,
+} from './../../../../public/icons';
 import Input from './Input';
 import { forwardRef, useState, InputHTMLAttributes } from 'react';
 
 interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  type?: 'text' | 'password';
   hasError?: boolean;
 }
 
@@ -22,8 +26,8 @@ type PasswordType = 'password' | 'text';
  * @param {Ref<HTMLInputElement>} ref - forwardRef를 사용하여 전달받은 ref
  */
 const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ hasError = false, ...rest }, ref) => {
-    const [type, setType] = useState<PasswordType>('password');
+  ({ hasError = false, type = 'password', ...rest }, ref) => {
+    const [inputype, setInputType] = useState<PasswordType>('password');
 
     return (
       <div className='relative'>
@@ -37,7 +41,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         <button
           type='button'
           onClick={() => {
-            setType((prevType) =>
+            setInputType((prevType) =>
               prevType === 'password' ? 'text' : 'password',
             );
           }}
