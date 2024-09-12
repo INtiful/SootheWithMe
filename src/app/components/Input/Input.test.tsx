@@ -17,7 +17,7 @@ describe('Input Component', () => {
   });
 
   it('입력 값이 올바르게 설정된다', () => {
-    render(<Input value='test@example.com' />);
+    render(<Input value='test@example.com' onChange={() => {}} />);
     const inputElement = screen.getByDisplayValue('test@example.com');
     expect(inputElement).toBeInTheDocument();
   });
@@ -35,8 +35,8 @@ describe('Input Component', () => {
   });
 
   it('className prop이 적용된다', () => {
-    render(<Input className='custom-class' />);
+    render(<Input className='h-[200px]' />);
     const inputElement = screen.getByRole('textbox');
-    expect(inputElement).toHaveClass('custom-class');
+    expect(inputElement).toHaveClass('h-[200px]');
   });
 });
