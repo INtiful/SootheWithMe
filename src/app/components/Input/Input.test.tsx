@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import Input from './Input';
+import '@testing-library/jest-dom';
 
 describe('Input Component', () => {
   it('기본 렌더링', () => {

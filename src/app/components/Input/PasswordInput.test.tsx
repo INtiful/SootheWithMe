@@ -1,6 +1,7 @@
 // PasswordInput.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
 import PasswordInput from './PasswordInput';
+import '@testing-library/jest-dom';
 
 // 아이콘 모킹
 jest.mock('./../../../../public/icons', () => ({
