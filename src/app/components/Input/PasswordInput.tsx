@@ -8,7 +8,7 @@ interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
 }
 
-type passwordType = 'password' | 'text';
+type PasswordType = 'password' | 'text';
 
 /**
  * Input 컴포넌트 정의
@@ -23,17 +23,11 @@ type passwordType = 'password' | 'text';
  */
 const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ hasError = false, ...rest }, ref) => {
-    const [type, setType] = useState<passwordType>('password');
+    const [type, setType] = useState<PasswordType>('password');
 
     return (
       <div className='relative'>
-        <Input
-          hasError={hasError}
-          type={type}
-          ref={ref}
-          maxLength={16}
-          {...rest}
-        />
+        <Input hasError={hasError} type={type} maxLength={16} {...rest} />
         <button
           type='button'
           onClick={() => {
@@ -43,7 +37,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           }}
           tabIndex={-1}
         >
-          <div className='absolute right-16 top-1/2 size-24 -translate-y-1/2 transform'>
+          <div className='absolute right-16 top-1/2 size-24 -translate-y-1/2'>
             {type === 'password' ? <IconVisivilityOff /> : <IconVisivilityOn />}
           </div>
         </button>

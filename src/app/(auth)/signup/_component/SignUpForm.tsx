@@ -31,6 +31,7 @@ const SignUpForm = () => {
     },
   });
 
+  //@todo 제출 함수 작성
   const submit = (data: SignUpData) => {
     console.log(data);
   };
