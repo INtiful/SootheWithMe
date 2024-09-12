@@ -27,14 +27,14 @@ type PasswordType = 'password' | 'text';
  */
 const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ hasError = false, type = 'password', ...rest }, ref) => {
-    const [inputype, setInputType] = useState<PasswordType>('password');
+    const [inpuType, setInputType] = useState<PasswordType>('password');
 
     return (
       <div className='relative'>
         <Input
           hasError={hasError}
           ref={ref}
-          type={type}
+          type={inpuType}
           maxLength={16}
           {...rest}
         />
@@ -48,7 +48,11 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           tabIndex={-1}
         >
           <div className='absolute right-16 top-1/2 size-24 -translate-y-1/2'>
-            {type === 'password' ? <IconVisivilityOff /> : <IconVisivilityOn />}
+            {inpuType === 'password' ? (
+              <IconVisivilityOff />
+            ) : (
+              <IconVisivilityOn />
+            )}
           </div>
         </button>
       </div>
