@@ -1,4 +1,3 @@
-// 개설 확정은 참여 인원수가 최소 인원 수(5명)을 충족한 경우 자동 확정 처리됩니다.
 'use client';
 
 import { IconArrow, IconCheckCircle, IconPerson } from '@/public/icons';
@@ -28,6 +27,8 @@ const ProgressBar = ({
 }: ProgressBarProps) => {
   const isOpeningConfirmed = participantNumber >= 5; // 개설 확정 여부 (boolean)
   const isClosedGathering = participantNumber === capacity; // 참여 인원이 다 찬 경우 (boolean)
+
+  if (participantNumber < 0 || capacity < 0) return null;
 
   return (
     <div className='flex gap-24' data-testid='progress-bar'>

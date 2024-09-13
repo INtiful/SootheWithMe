@@ -2,6 +2,7 @@ import ProgressBar from './ProgressBar';
 
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import exp from 'constants';
 
 // Arrange Mock Data
 const MOCK_DATA_BASE = {
@@ -86,6 +87,40 @@ describe('ProgressBar Component', () => {
     const participantNumber = screen.queryByTestId('number-of-participant');
 
     expect(participantNumber).not.toBeInTheDocument();
+  });
+
+  // participantNumber가 음수이면 프로그레스바 렌더링 안 되는지 확인
+  it('should render the participant number when it is negative', () => {
+    render(
+      <ProgressBar
+        participantNumber={-1}
+        capacity={MOCK_DATA_BASE.capacity}
+        hasParticipantNumber={MOCK_DATA_BASE.hasParticipantNumber}
+        hasOpeningConfirmed={MOCK_DATA_BASE.hasOpeningConfirmed}
+        hasText={MOCK_DATA_BASE.hasText}
+      />,
+    );
+
+    const progressBar = screen.queryByTestId('progress-bar');
+
+    expect(progressBar).not.toBeInTheDocument();
+  });
+
+  // capacity가 음수이면 프로그레스바 렌더링 안 되는지 확인
+  it('should render the participant number when it is negative', () => {
+    render(
+      <ProgressBar
+        participantNumber={MOCK_DATA_BASE.participantNumber}
+        capacity={-1}
+        hasParticipantNumber={MOCK_DATA_BASE.hasParticipantNumber}
+        hasOpeningConfirmed={MOCK_DATA_BASE.hasOpeningConfirmed}
+        hasText={MOCK_DATA_BASE.hasText}
+      />,
+    );
+
+    const progressBar = screen.queryByTestId('progress-bar');
+
+    expect(progressBar).not.toBeInTheDocument();
   });
 
   // isOpeningConfirmed가 true (개설확정 인원 충족)일 때 개설확정 배지 렌더링 확인
