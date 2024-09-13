@@ -74,7 +74,9 @@ const Pagination = ({
       else {
         range.push(1, '···');
         for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          range.push(i);
+          if (i > 1 && i < totalPages) {
+            range.push(i);
+          }
         }
         range.push('···', totalPages);
       }
@@ -101,6 +103,7 @@ const Pagination = ({
         typeof item === 'number' ? (
           <button
             key={item}
+            data-testid={`page-button-${item}`}
             className={`rounded-lg border p-[10px] ${
               currentPage === item
                 ? 'text-16 font-semibold text-var-black'
