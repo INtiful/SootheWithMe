@@ -47,13 +47,13 @@ describe('Button component', () => {
   const types = ['button', 'submit', 'reset'] as const;
 
   types.forEach((type) => {
-    it(`should apply the correct type attribute for "${type}"`, () => {
+    test(`should apply the correct type attribute for "${type}"`, () => {
       render(
         <Button name={`${type} Test Button`} variant='default' type={type} />,
       );
 
       const button = screen.getByRole('button', {
-        name: new RegExp(`${type} Test Button`, 'i'),
+        name: `${type} Test Button`,
       });
 
       expect(button).toHaveAttribute('type', type);
