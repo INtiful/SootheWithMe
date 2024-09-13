@@ -56,11 +56,11 @@ describe('DropDown 컴포넌트', () => {
     expect(handleClose).toHaveBeenCalled();
   });
 
-  // 주어진 클래스 이름이 적용되는지 확인합니다.
+  // 주어진 클래스 이름이 적용되는지 확인합니다. container 를 이용하여 확인합니다.
   it('should apply custom classnames', () => {
     const options = ['Option 1'];
 
-    render(
+    const { container } = render(
       <DropDown
         options={options}
         onSelect={() => {}}
@@ -69,7 +69,8 @@ describe('DropDown 컴포넌트', () => {
       />,
     );
 
-    const dropdown = screen.getByRole('list').parentElement;
+    const dropdown = container.querySelector('div');
+
     expect(dropdown).toHaveClass('custom-class');
   });
 
