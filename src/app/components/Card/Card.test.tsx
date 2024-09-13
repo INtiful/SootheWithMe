@@ -128,18 +128,26 @@ describe('Getherings with chips', () => {
     expect(stateChipElement2).toBeInTheDocument();
   });
 
-  test('When `participantCount` is more than 5, chip state is `scheduled` and `confirmed`', () => {
-    const MOCK_DATA = {
-      ...MOCK_DATA_BASE,
-      isCompleted: false,
-      participantCount: 10,
-    };
+  const testCases = [
+    { participantCount: 5 },
+    { participantCount: 10 },
+    { participantCount: 20 },
+  ];
 
-    render(<Card data={MOCK_DATA} hasChips={true} />);
-    const stateChipElement1 = screen.getByText('이용 예정');
-    const stateChipElement2 = screen.getByText('개설 확정');
-    expect(stateChipElement1).toBeInTheDocument();
-    expect(stateChipElement2).toBeInTheDocument();
+  testCases.forEach(({ participantCount }) => {
+    test('When `participantCount` is more than 5, chip state is `scheduled` and `confirmed`', () => {
+      const MOCK_DATA = {
+        ...MOCK_DATA_BASE,
+        isCompleted: false,
+        participantCount,
+      };
+
+      render(<Card data={MOCK_DATA} hasChips={true} />);
+      const stateChipElement1 = screen.getByText('이용 예정');
+      const stateChipElement2 = screen.getByText('개설 확정');
+      expect(stateChipElement1).toBeInTheDocument();
+      expect(stateChipElement2).toBeInTheDocument();
+    });
   });
 });
 
