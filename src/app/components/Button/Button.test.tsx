@@ -18,7 +18,7 @@ describe('Button component', () => {
   const variants = ['default', 'white', 'gray', 'grayOutline'] as const;
 
   variants.forEach((variant) => {
-    test(`should apply correct classes for ${variant} variant`, () => {
+    it(`should apply correct classes for ${variant} variant`, () => {
       render(<Button name='Test Button' variant={variant} />);
 
       const buttonElement = screen.getByRole('button', { name: 'Test Button' });
@@ -47,7 +47,7 @@ describe('Button component', () => {
   const types = ['button', 'submit', 'reset'] as const;
 
   types.forEach((type) => {
-    test(`should apply the correct type attribute for "${type}"`, () => {
+    it(`should apply the correct type attribute for "${type}"`, () => {
       render(
         <Button name={`${type} Test Button`} variant='default' type={type} />,
       );
@@ -71,7 +71,7 @@ describe('Button component', () => {
   });
 
   // 버튼이 비활성화된 상태로 렌더링 되는지 확인합니다.
-  test('should render as a disabled button', () => {
+  it('should render as a disabled button', () => {
     render(<Button name='Disabled Button' disabled variant='default' />);
 
     const buttonElement = screen.getByRole('button', {
@@ -83,7 +83,7 @@ describe('Button component', () => {
   });
 
   // onClick 핸들러 없이 버튼 클릭 시 오류 없이 동작하는지 확인합니다.
-  test('should work without an onClick handler when clicked', () => {
+  it('should work without an onClick handler when clicked', () => {
     render(<Button name='Button without Click' variant='default' />);
 
     const buttonElement = screen.getByRole('button', {
@@ -96,7 +96,7 @@ describe('Button component', () => {
   });
 
   // 잘못된 variant prop을 전달했을 때 기본 동작을 확인합니다.
-  test('should default to the correct behavior with an invalid variant prop', () => {
+  it('should default to the correct behavior with an invalid variant prop', () => {
     render(<Button name='Invalid Variant' variant={'invalid' as any} />);
 
     const buttonElement = screen.getByRole('button', {
