@@ -92,7 +92,7 @@ describe('Tag Component Render', () => {
 
   it('should NOT render Tag component when registrationEnd is NOT same as today date', () => {
     render(<CardList data={MOCK_DATA_BASE} />);
-    const tagElement = screen.queryByText(/시 마감/); //getBy -> queryBy queryBy는 없으면 null을 반환
+    const tagElement = screen.queryByText(/시 마감/);
     expect(tagElement).not.toBeInTheDocument();
   });
 });
@@ -128,14 +128,14 @@ describe('Saved button Test', () => {
     inactiveButton = screen.getByTestId('IconSaveInactive');
     activeButton = screen.queryByTestId('IconSaveActive');
 
-    // 초기 상태 확인
+    // 초기 상태 - (inactive 아이콘 확인)
     expect(inactiveButton).toBeInTheDocument();
     expect(activeButton).not.toBeInTheDocument();
 
     // 버튼 클릭하여 상태 변경
     fireEvent.click(inactiveButton);
 
-    // 아이콘이 변경되었는지 확인
+    // 아이콘이 변경되었는지 확인 (actove 아이콘 확인)
     inactiveButton = screen.queryByTestId('IconSaveInactive');
     activeButton = screen.getByTestId('IconSaveActive');
 
@@ -148,7 +148,7 @@ describe('Saved button Test', () => {
     inactiveButton = screen.getByTestId('IconSaveInactive');
     activeButton = screen.queryByTestId('IconSaveActive');
 
-    // 초기 상태 확인
+    // 초기와 같은 상태 (inactive 아이콘 확인)
     expect(inactiveButton).toBeInTheDocument();
     expect(activeButton).not.toBeInTheDocument();
   });
