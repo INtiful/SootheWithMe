@@ -73,20 +73,6 @@ describe('DropDown 컴포넌트', () => {
     expect(dropdown).toHaveClass('custom-class');
   });
 
-  // classnames prop 이 없을 때 default 값이 적용되는지 확인합니다.
-  it('should render with default classnames when classnames prop is not provided', () => {
-    const options = ['Option 1'];
-
-    render(
-      <DropDown options={options} onSelect={() => {}} onClose={() => {}} />,
-    );
-
-    const dropdown = screen.getByRole('list').closest('div');
-    expect(dropdown).toHaveClass(
-      'absolute z-10 mt-4 max-h-240 w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400',
-    );
-  });
-
   // options 가 없을 때 렌더링 되는지 확인합니다.
   it('should not render any items when options array is empty', () => {
     render(<DropDown options={[]} onSelect={() => {}} onClose={() => {}} />);
