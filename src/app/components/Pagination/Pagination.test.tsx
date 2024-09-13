@@ -5,8 +5,12 @@ import '@testing-library/jest-dom';
 
 // icon mocking
 jest.mock('@/public/icons', () => ({
-  IconChevronLeft: () => <div data-testid='IconChevronLeft' />,
-  IconChevronRight: () => <div data-testid='IconChevronRight' />,
+  IconChevronLeft: ({ onClick }: { onClick?: () => void }) => (
+    <div data-testid='IconChevronLeft' onClick={onClick} />
+  ),
+  IconChevronRight: ({ onClick }: { onClick?: () => void }) => (
+    <div data-testid='IconChevronRight' onClick={onClick} />
+  ),
 }));
 
 describe('Pagination Component', () => {
@@ -60,12 +64,9 @@ describe('Pagination Component', () => {
       <Pagination currentPage={3} totalPages={5} onPageChange={onPageChange} />,
     );
 
-    const prevButton = screen.getByTestId('IconChevronLeft').parentElement;
+    const prevButton = screen.getByTestId('IconChevronLeft');
 
-    if (prevButton) {
-      fireEvent.click(prevButton);
-    }
-
+    fireEvent.click(prevButton);
     expect(onPageChange).toHaveBeenCalledWith(2);
   });
 
@@ -76,12 +77,9 @@ describe('Pagination Component', () => {
       <Pagination currentPage={3} totalPages={5} onPageChange={onPageChange} />,
     );
 
-    const nextButton = screen.getByTestId('IconChevronRight').parentElement;
+    const nextButton = screen.getByTestId('IconChevronRight');
 
-    if (nextButton) {
-      fireEvent.click(nextButton);
-    }
-
+    fireEvent.click(nextButton);
     expect(onPageChange).toHaveBeenCalledWith(4);
   });
 
