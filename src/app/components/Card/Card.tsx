@@ -59,7 +59,8 @@ const Card = ({
     }
 
     // 참가 인원이 5명 이상인 경우 개설 확정
-    const isConfirmed = data.participantCount >= 5;
+    const MIN_PARTICIPANTS = 5;
+    const isConfirmed = data.participantCount >= MIN_PARTICIPANTS;
     return (
       <>
         {/* 이용 예정 */}
