@@ -60,24 +60,14 @@ const Card = ({
 
     // 참가 인원이 5명 이상인 경우 개설 확정
     const isConfirmed = data.participantCount >= 5;
-
-    // 이용 예정, 개설 확정
-    if (!data.isCompleted && isConfirmed) {
-      return (
-        <>
-          <StateChip state='scheduled' />
-          <StateChip state='confirmed' />
-        </>
-      );
-    }
-    if (!data.isCompleted && !isConfirmed) {
-      return (
-        <>
-          <StateChip state='scheduled' />
-          <StateChip state='pending' />
-        </>
-      );
-    }
+    return (
+      <>
+        {/* 이용 예정 */}
+        <StateChip state='scheduled' />
+        {/* 개설 확정 || 개설 대기 */}
+        <StateChip state={isConfirmed ? 'confirmed' : 'pending'} />
+      </>
+    );
   };
 
   return (
