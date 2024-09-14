@@ -134,8 +134,9 @@ describe('Getherings with chips', () => {
     { participantCount: 20 },
   ];
 
-  testCases.forEach(({ participantCount }) => {
-    test('When `participantCount` is more than 5, chip state is `scheduled` and `confirmed`', () => {
+  test.each(testCases)(
+    'When `participantCount` is %i, chip state is `scheduled` and `confirmed`',
+    ({ participantCount }) => {
       const MOCK_DATA = {
         ...MOCK_DATA_BASE,
         isCompleted: false,
@@ -147,8 +148,8 @@ describe('Getherings with chips', () => {
       const stateChipElement2 = screen.getByText('개설 확정');
       expect(stateChipElement1).toBeInTheDocument();
       expect(stateChipElement2).toBeInTheDocument();
-    });
-  });
+    },
+  );
 });
 
 // 취소된 모임의 경우
