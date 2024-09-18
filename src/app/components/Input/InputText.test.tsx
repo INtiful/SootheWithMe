@@ -41,4 +41,16 @@ describe('InputText 컴포넌트', () => {
     fireEvent.change(textareaElement, { target: { value: 'new value' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
+
+  it('spellCheck 속성이 true로 설정된다', () => {
+    render(<InputText value='' spellCheck={true} onChange={() => {}} />);
+    const textareaElement = screen.getByRole('textbox');
+    expect(textareaElement).toHaveAttribute('spellcheck', 'true');
+  });
+
+  it('spellCheck 속성이 false로 설정된다', () => {
+    render(<InputText value='' spellCheck={false} onChange={() => {}} />);
+    const textareaElement = screen.getByRole('textbox');
+    expect(textareaElement).toHaveAttribute('spellcheck', 'false');
+  });
 });

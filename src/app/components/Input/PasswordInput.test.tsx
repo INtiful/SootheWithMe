@@ -4,7 +4,7 @@ import PasswordInput from './PasswordInput';
 import '@testing-library/jest-dom';
 
 // 아이콘 모킹
-jest.mock('./../../../../public/icons', () => ({
+jest.mock('@/public/icons', () => ({
   IconVisivilityOff: () => <div data-testid='icon-visibility-off' />,
   IconVisivilityOn: () => <div data-testid='icon-visibility-on' />,
 }));
