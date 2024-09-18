@@ -10,7 +10,8 @@ jest.mock('@/public/icons', () => ({
 }));
 
 describe('PasswordInput', () => {
-  it('기본 렌더링', () => {
+  /* 기본 렌더링 */
+  it('renders correctly', () => {
     render(<PasswordInput aria-label='PasswordInput' />);
 
     // 입력창이 렌더링 되었는지 확인
@@ -26,7 +27,8 @@ describe('PasswordInput', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  it('버튼 클릭 시 입력 타입이 변경되는지 확인', () => {
+  /* 버튼 클릭 시 입력 타입이 변경되는지 확인 */
+  it('changes input type on button click', () => {
     render(<PasswordInput aria-label='PasswordInput' />);
 
     // 초기 입력 타입이 'password'인지 확인
