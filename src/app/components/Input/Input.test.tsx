@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Input from './Input';
 import '@testing-library/jest-dom';
+import { createRef } from 'react';
 
 describe('Input Component', () => {
   it('기본 렌더링', () => {
@@ -38,5 +39,20 @@ describe('Input Component', () => {
     render(<Input className='h-[200px]' />);
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).toHaveClass('h-[200px]');
+  });
+
+  it('className과 hasError prop이 동시에 적용될 때 className 스타일과 에러 스타일이 모두 적용된다.', () => {
+    render(<Input className='h-[200px]' hasError />);
+    const inputElement = screen.getByRole('textbox');
+    expect(inputElement).toHaveClass('h-[200px]');
+    expect(inputElement).toHaveClass('ring-var-red ring-2');
+  });
+
+  it('ref가 제대로 설정된다', () => {
+    const ref = createRef<HTMLInputElement>();
+    render(<Input ref={ref} />);
+
+    expect(ref.current).toBeInstanceOf(HTMLInputElement);
+    expect(ref.current).toBeInTheDocument();
   });
 });
