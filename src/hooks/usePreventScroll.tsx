@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react';
 
-const usePreventScroll = (isModalOpen: boolean) => {
+const usePreventScroll = (condition: boolean) => {
   useEffect(() => {
-    if (isModalOpen) {
+    if (condition) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -13,7 +13,7 @@ const usePreventScroll = (isModalOpen: boolean) => {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isModalOpen]);
+  }, [condition]);
 
   return;
 };
