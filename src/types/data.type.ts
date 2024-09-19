@@ -42,6 +42,8 @@ export interface myGatheringData extends GatheringsListData {
   isCompleted: boolean;
   isReviewed: boolean;
 }
+// GET : mockdata
+// 무한스크롤 구현을 위한 mock data의 인터페이스입니다. 수정 및 삭제될 수 있음
 export interface FetchGatheringsResponse {
   data: myGatheringData[];
   hasNextPage: boolean;
