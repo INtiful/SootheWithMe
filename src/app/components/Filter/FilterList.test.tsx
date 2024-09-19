@@ -44,6 +44,7 @@ describe('FilterList Component', () => {
       fireEvent.click(optionElement);
 
       expect(filterElement).toHaveTextContent(option);
+      expect(filterElement).toHaveClass('text-var-gray-50 bg-var-gray-900');
     },
   );
 
@@ -60,5 +61,6 @@ describe('FilterList Component', () => {
     fireEvent.click(defaultOptionElement);
 
     expect(filterElement).toHaveTextContent('Filter');
+    expect(filterElement).toHaveClass('bg-var-gray-50 text-var-gray-800');
   });
 });
