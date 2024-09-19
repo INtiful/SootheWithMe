@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { HeadClass } from '@/public/images';
 import Tab from '@/app/components/Tab/Tab';
@@ -12,6 +12,7 @@ import CardList from '@/app/components/CardList/CardList';
 
 import { mockData, OPTIONS, SORT_OPTIONS } from './mockData/mockData';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
+import usePreventScroll from '@/hooks/usePreventScroll';
 
 const GatheringsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +23,8 @@ const GatheringsPage = () => {
   const handleTabClick = (type: 'workation' | 'dalaemfit') => {
     setActiveTab(type);
   };
+
+  usePreventScroll(isModalOpen);
 
   return (
     <>
