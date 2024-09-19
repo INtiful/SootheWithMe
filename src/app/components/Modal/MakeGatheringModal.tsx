@@ -136,6 +136,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           <h2>모집정원</h2>
           {/* TODO: 숫자만 입력되게 변경 */}
           <Input
+            type='number'
             className='bg-var-gray-50 px-16 py-[10px]'
             placeholder='최소 5인 이상 입력해주세요.'
           />
