@@ -33,6 +33,8 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const datepickerRef = useRef(null);
 
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
   const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     if (files) {
@@ -118,15 +120,27 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           <h2>오전</h2>
           <div className='flex gap-8'>
             {MORNING_TIMES.map((time) => (
-              <TimeChip key={time}>{time}</TimeChip>
+              <TimeChip
+                key={time}
+                state={selectedTime === time ? 'active' : 'default'}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </TimeChip>
             ))}
           </div>
         </div>
         <div className='space-y-8 text-14 font-semibold'>
           <h2>오후</h2>
-          <div className='flex flex-wrap gap-8'>
+          <div className='flex flex-wrap gap-8 md:flex-nowrap'>
             {AFTERNOON_TIMES.map((time) => (
-              <TimeChip key={time}>{time}</TimeChip>
+              <TimeChip
+                key={time}
+                state={selectedTime === time ? 'active' : 'default'}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </TimeChip>
             ))}
           </div>
         </div>
