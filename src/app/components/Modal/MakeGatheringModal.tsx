@@ -45,7 +45,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     <ModalFrame onClose={onClose}>
       <div
         onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
-        className='flex h-full w-full flex-col gap-24 overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:w-520 md:rounded-xl'
+        className='flex h-full w-full flex-col gap-24 overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:w-532 md:rounded-xl'
       >
         <div className='flex items-center justify-between'>
           <h1 className='text-18 font-semibold text-var-gray-900'>
