@@ -10,6 +10,7 @@ import TimeChip from '../Chip/TimeChip';
 import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
 import FilterList from '../Filter/FilterList';
 import ModalFrame from './ModalFrame';
+import ModalPlaceDropdown from '@/app/(main)/gatherings/_component/ModalPlaceDropdown';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -58,10 +59,9 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         {/* 장소 */}
         <div className='space-y-12 text-16 font-semibold'>
           <h2>장소</h2>
-          {/* TODO: 드롭다운 대신에 필터리스트 */}
-          <FilterList state='default' options={MOCK_DROPDOWN_OPTIONS}>
-            선택
-          </FilterList>
+          <ModalPlaceDropdown options={MOCK_DROPDOWN_OPTIONS}>
+            장소를 선택해주세요
+          </ModalPlaceDropdown>
         </div>
         {/* 이미지 */}
         <div className='space-y-12 text-16 font-semibold'>
