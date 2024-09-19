@@ -1,16 +1,15 @@
 'use client';
 
+import ModalPlaceDropdown from '@/app/(main)/gatherings/_component/ModalPlaceDropdown';
 import { IconX } from '@/public/icons';
-import Button from '../Button/Button';
-import Input from '../Input/Input';
-import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
 import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
-import TimeChip from '../Chip/TimeChip';
 import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
-import FilterList from '../Filter/FilterList';
+import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
+import Button from '../Button/Button';
+import TimeChip from '../Chip/TimeChip';
+import Input from '../Input/Input';
 import ModalFrame from './ModalFrame';
-import ModalPlaceDropdown from '@/app/(main)/gatherings/_component/ModalPlaceDropdown';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -46,7 +45,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     <ModalFrame onClose={onClose}>
       <div
         onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
-        className='flex w-520 flex-col gap-24 rounded-xl bg-var-white p-24'
+        className='flex h-full w-full flex-col gap-24 overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:w-520 md:rounded-xl'
       >
         <div className='flex items-center justify-between'>
           <h1 className='text-18 font-semibold text-var-gray-900'>
@@ -125,7 +124,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         </div>
         <div className='space-y-8 text-14 font-semibold'>
           <h2>오후</h2>
-          <div className='flex gap-8'>
+          <div className='flex flex-wrap gap-8'>
             {AFTERNOON_TIMES.map((time) => (
               <TimeChip key={time}>{time}</TimeChip>
             ))}
@@ -134,7 +133,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         {/* 모집 정원 */}
         <div className='space-y-12 text-16 font-semibold'>
           <h2>모집정원</h2>
-          {/* TODO: 숫자만 입력되게 변경 */}
           <Input
             type='number'
             className='bg-var-gray-50 px-16 py-[10px]'

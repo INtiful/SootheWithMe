@@ -11,7 +11,7 @@ const ModalFrame = ({ children, onClose }: ModalFrameProps) => {
     <ModalPortal>
       <div
         onClick={onClose}
-        className='z-20 fixed left-0 top-0 flex h-screen w-full items-center justify-center bg-var-black/50'
+        className='z-20 fixed left-0 top-0 flex h-full w-full items-center justify-center bg-var-black/50 md:h-screen'
       >
         {children}
       </div>
