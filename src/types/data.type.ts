@@ -34,3 +34,14 @@ export interface GatheringsListData {
   createdBy: number;
   canceledAt?: string;
 }
+
+export interface myGatheringData extends GatheringsListData {
+  joinedAt: string;
+  isCompleted: boolean;
+  isReviewed: boolean;
+}
+export interface FetchGatheringsResponse {
+  data: myGatheringData[];
+  hasNextPage: boolean;
+  page: number; // 현재 페이지 번호
+}

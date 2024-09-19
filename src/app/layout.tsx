@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import '@/styles/reset.css';
 import '@/styles/style.css';
-
 import Gnb from './components/Gnb/Gnb';
+import Providers from './react-query-providers';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +19,9 @@ export default function RootLayout({
     <html lang='ko'>
       <body className='min-h-dvh bg-var-gray-100 font-pretendard'>
         <Gnb />
-        <div className='pt-60'>{children}</div>
+        <Providers>
+          <div className='pt-60'>{children}</div>
+        </Providers>
       </body>
     </html>
   );
