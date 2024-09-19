@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { HeadClass } from '@/public/images';
 import Tab from '@/app/components/Tab/Tab';

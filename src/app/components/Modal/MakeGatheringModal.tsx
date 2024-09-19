@@ -4,7 +4,7 @@ import { IconX } from '@/public/icons';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import TimeChip from '../Chip/TimeChip';
 import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
@@ -43,7 +43,10 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
 
   return (
     <ModalFrame onClose={onClose}>
-      <div className='flex w-520 flex-col gap-24 rounded-xl bg-var-white p-24'>
+      <div
+        onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+        className='flex w-520 flex-col gap-24 rounded-xl bg-var-white p-24'
+      >
         <div className='flex items-center justify-between'>
           <h1 className='text-18 font-semibold text-var-gray-900'>
             모임 만들기
