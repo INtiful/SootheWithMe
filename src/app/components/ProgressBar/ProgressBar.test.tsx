@@ -2,7 +2,6 @@ import ProgressBar from './ProgressBar';
 
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import exp from 'constants';
 
 // Arrange Mock Data
 const MOCK_DATA_BASE = {
