@@ -47,6 +47,39 @@ describe('Popup', () => {
     expect(onClickClose).toHaveBeenCalled();
   });
 
-  // TODO: 취소 버튼 클릭하면 취소 함수 실행되는지 확인
-  // TODO: 확인 버튼 클릭하면 확인 함수 실행되는지 확인
+  // 취소 버튼 클릭하면 취소 함수 실행되는지 확인
+  it('should execute the cancel function when the cancel button is clicked', () => {
+    const onClickConfirm = jest.fn();
+    const onClickClose = jest.fn();
+
+    render(
+      <Popup
+        type='exit'
+        hasCancelButton={true}
+        onClickConfirm={onClickConfirm}
+        onClickClose={onClickClose}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('취소'));
+    expect(onClickClose).toHaveBeenCalled();
+  });
+
+  // 확인 버튼 클릭하면 확인 함수 실행되는지 확인
+  it('should execute the confirm function when the confirm button is clicked', () => {
+    const onClickConfirm = jest.fn();
+    const onClickClose = jest.fn();
+
+    render(
+      <Popup
+        type='exit'
+        hasCancelButton={true}
+        onClickConfirm={onClickConfirm}
+        onClickClose={onClickClose}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('확인'));
+    expect(onClickConfirm).toHaveBeenCalled();
+  });
 });

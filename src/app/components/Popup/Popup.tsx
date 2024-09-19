@@ -51,12 +51,7 @@ const Popup = ({
       >
         {hasCancelButton && (
           <div className='w-120'>
-            <Button
-              name='취소'
-              variant='white'
-              onClick={onClickClose}
-              data-testId='cancel-button'
-            />
+            <Button name='취소' variant='white' onClick={onClickClose} />
           </div>
         )}
         <div className='w-120'>
