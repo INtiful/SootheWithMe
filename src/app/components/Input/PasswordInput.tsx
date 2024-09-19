@@ -1,9 +1,6 @@
 'use client';
 
-import {
-  IconVisivilityOff,
-  IconVisivilityOn,
-} from './../../../../public/icons';
+import { IconVisivilityOff, IconVisivilityOn } from '@/public/icons';
 import Input from './Input';
 import { forwardRef, useState, InputHTMLAttributes } from 'react';
 
