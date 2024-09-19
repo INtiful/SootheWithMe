@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang='ko'>
       <body className='min-h-dvh bg-var-gray-100 font-pretendard'>
         <Gnb />
-        <div className='pt-60'>{children}</div>
+        <div className='h-full pt-60'>{children}</div>
       </body>
     </html>
   );
