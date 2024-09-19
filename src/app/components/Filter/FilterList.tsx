@@ -65,6 +65,7 @@ const FilterList = ({
       <div
         className={`flex h-36 w-[110px] cursor-pointer items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[currentState]}`}
         onClick={toggleDropDown}
+        data-testid='filterList'
       >
         {selectedOption || children}
         <IconCaret className='h-24 w-24' />
