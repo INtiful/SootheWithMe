@@ -43,15 +43,23 @@ const Page = () => {
           setFilterType={setFilterType}
         />
         {/* cards */}
-        {filteredData.map((data) => (
-          <Card
-            key={data.id}
-            data={data}
-            hasButton={true}
-            hasChips={true}
-            handleWriteReview={() => setIsModalOpen(true)}
-          />
-        ))}
+        {filteredData.length === 0 ? (
+          <div className='flex h-full items-center justify-center'>
+            <p className='text-center text-14 font-medium text-var-gray-500'>
+              리뷰할 모임이 없습니다.
+            </p>
+          </div>
+        ) : (
+          filteredData.map((data) => (
+            <Card
+              key={data.id}
+              data={data}
+              hasButton
+              hasChips
+              handleWriteReview={() => setIsModalOpen(true)}
+            />
+          ))
+        )}
       </div>
       {isModalOpen && (
         <ReviewModal
