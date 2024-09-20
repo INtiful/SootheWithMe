@@ -39,9 +39,6 @@ const fetchGatherings = async (
 
     const data: GatheringsListData[] = await res.json();
 
-    revalidatePath('/');
-    revalidatePath('/gatherings');
-
     console.log(data);
 
     return data;
