@@ -38,13 +38,28 @@ const MyGatheringList = () => {
         {data?.pages.map((page) =>
           page.data.map((item: myGatheringData, index: number) => (
             <li key={index}>
-              <Card
+              {/* <Card
                 data={item}
                 hasButton={true}
                 hasChips={true}
                 handleCancelGatherings={() => console.log('Cancel gathering')}
                 handleWriteReview={() => console.log('Write review')}
-              />
+              /> */}
+
+              <Card
+                handleSaveDiscard={() => console.log('Save Discard')}
+                data={item}
+              >
+                <Card.Chips />
+                <Card.Info />
+                <Card.Button
+                  handleButtonClick={() => {
+                    item.isCompleted
+                      ? console.log('Write review')
+                      : console.log('Cancel gathering');
+                  }}
+                />
+              </Card>
             </li>
           )),
         )}
