@@ -53,7 +53,7 @@ export const DATA_LIST: UserJoinedGatheringsData[] = [
     createdBy: 0,
     joinedAt: registrationEnd.toISOString(),
     isCompleted: true,
-    isReviewed: false,
+    isReviewed: true,
   },
   {
     teamId: 0,
