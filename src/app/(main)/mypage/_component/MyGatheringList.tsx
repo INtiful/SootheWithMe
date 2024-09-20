@@ -12,7 +12,6 @@ const MyGatheringList = () => {
       emptyText='아직 참여한 모임이 없습니다.'
       renderItem={(item, index) => (
         <Card
-          key={index}
           data={item}
           hasButton={true}
           hasChips={true}
