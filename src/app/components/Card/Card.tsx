@@ -109,9 +109,7 @@ const Card = ({
           </div>
 
           {/* 버튼이 있는 경우 */}
-          {hasButton && (
-            <div className='mt-12 w-120 md:mt-auto'>{button()}</div>
-          )}
+          {hasButton && <div className='mt-12 w-120'>{button()}</div>}
         </div>
 
         {/* 취소된 모임의 경우 */}
