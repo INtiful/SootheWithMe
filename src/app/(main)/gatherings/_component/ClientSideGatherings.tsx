@@ -31,6 +31,16 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     setFilteredData(newData);
   };
 
+  const handleChipClick = async (
+    label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
+  ) => {
+    const type = label === 'ALL' ? activeTab : label;
+
+    const newData = await fetchGatherings({ type });
+
+    setFilteredData(newData || []);
+  };
+
   usePreventScroll(isModalOpen);
 
   return (
@@ -41,7 +51,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
             <Tabs activeTab={activeTab} onTabClick={handleTabClick} />
             <CreateGatheringButton onClick={() => setIsModalOpen(true)} />
           </div>
-          <Chips />
+          <Chips activeTab={activeTab} onChipClick={handleChipClick} />
         </div>
         <Filters />
       </div>

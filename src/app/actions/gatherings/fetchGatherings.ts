@@ -1,13 +1,11 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-
 import { GatheringsListData } from '@/types/data.type';
 
 interface FetchGatheringsParams {
   limit?: number;
   offset?: number;
-  type?: 'DALLAEMFIT' | 'WORKATION';
+  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
   location?: string;
   date?: string;
   createdBy?: string;
