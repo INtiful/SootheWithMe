@@ -7,7 +7,7 @@ import InfiniteScroll from '@/app/components/InfiniteScroll/InfiniteScroll';
 const MyGatheringList = () => {
   return (
     <InfiniteScroll
-      queryKey={['gatherings']}
+      queryKey={['myGatherings']}
       queryFn={fetchGatherings}
       emptyText='아직 참여한 모임이 없습니다.'
       renderItem={(item, index) => (
