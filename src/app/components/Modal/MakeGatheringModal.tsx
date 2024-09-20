@@ -26,6 +26,7 @@ const AFTERNOON_TIMES = [
   '18:00',
 ];
 
+// TODO: 여러 컴포넌트로 쪼개기 (리팩토링 단계)
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [fileName, setFileName] = useState<null | string>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
