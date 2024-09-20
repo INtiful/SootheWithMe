@@ -44,6 +44,14 @@ const InfiniteScroll = <T,>({
     }
   }, [inView]);
 
+  // 데이터가 없거나 비어있을 때 emptyText를 표시
+  if (!data || data.pages.length === 0) {
+    return (
+      <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500'>
+        {emptyText}
+      </div>
+    );
+  }
   /* @todo 임시 에러 처리 */
   if (isError)
     return (
@@ -55,17 +63,12 @@ const InfiniteScroll = <T,>({
   return (
     <>
       <ul className='flex h-full flex-col'>
-        {data ? (
+        {data &&
           data.pages.map((page) =>
             page.data.map((item, index: number) => (
               <li key={index}>{renderItem(item, index)}</li> // 사용자 정의 컴포넌트를 렌더링
             )),
-          )
-        ) : (
-          <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500'>
-            {emptyText}
-          </div>
-        )}
+          )}
       </ul>
       {/* //@todo 로딩시 스핀 애니메이션 추가 */}
       {isFetching && (
