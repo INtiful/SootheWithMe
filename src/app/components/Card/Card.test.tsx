@@ -36,7 +36,7 @@ describe('Basic Card Component Render Test', () => {
   beforeEach(() => {
     render(
       <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA_BASE}>
-        <Card.Info data={MOCK_DATA_BASE} />
+        <Card.Info />
       </Card>,
     );
   });
@@ -78,10 +78,14 @@ describe('Basic Card Component Render Test', () => {
 describe('Card Component with Chips and Info Render Test', () => {
   // isCompleted 가 true 일 때 이용 완료 chip 이 렌더링 되는지 확인
   it('Chip state=`done` render Test', () => {
+    const MOCK_DATA = {
+      ...MOCK_DATA_BASE,
+      isCompleted: true,
+    };
     render(
-      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA_BASE}>
-        <Card.Chips isCompleted={true} participantCount={10} />
-        <Card.Info data={MOCK_DATA_BASE} />
+      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
+        <Card.Chips />
+        <Card.Info />
       </Card>,
     );
 
@@ -93,10 +97,14 @@ describe('Card Component with Chips and Info Render Test', () => {
 
   // isCompleted 가 false 일 때 이용 예정 chip 이 렌더링 되는지 확인
   it('Chip state=`scheduled` render Test', () => {
+    const MOCK_DATA = {
+      ...MOCK_DATA_BASE,
+      isCompleted: false,
+    };
     render(
-      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA_BASE}>
-        <Card.Chips isCompleted={false} participantCount={10} />
-        <Card.Info data={MOCK_DATA_BASE} />
+      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
+        <Card.Chips />
+        <Card.Info />
       </Card>,
     );
 
@@ -111,10 +119,16 @@ describe('Card Component with Chips and Info Render Test', () => {
   it.each(testCases)(
     'Chip state=`scheduled` render Test with participantCount=%i',
     (participantCount) => {
+      const MOCK_DATA = {
+        ...MOCK_DATA_BASE,
+        isCompleted: false,
+        participantCount: participantCount,
+      };
+
       render(
-        <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA_BASE}>
-          <Card.Chips isCompleted={false} participantCount={participantCount} />
-          <Card.Info data={MOCK_DATA_BASE} />
+        <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
+          <Card.Chips />
+          <Card.Info />
         </Card>,
       );
 
@@ -141,11 +155,9 @@ describe('Card Component with Button Render Test', () => {
       isReviewed: false,
     };
     render(
-      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA_BASE}>
-        <Card.Info data={MOCK_DATA_BASE} />
+      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
+        <Card.Info />
         <Card.Button
-          isCompleted={MOCK_DATA.isCompleted}
-          isReviewed={MOCK_DATA.isReviewed}
           handleButtonClick={
             MOCK_DATA.isCompleted ? handleWriteReview : handleCancelGatherings
           }
@@ -166,11 +178,9 @@ describe('Card Component with Button Render Test', () => {
       isReviewed: false,
     };
     render(
-      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA_BASE}>
-        <Card.Info data={MOCK_DATA_BASE} />
+      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
+        <Card.Info />
         <Card.Button
-          isCompleted={MOCK_DATA.isCompleted}
-          isReviewed={MOCK_DATA.isReviewed}
           handleButtonClick={
             MOCK_DATA.isCompleted ? handleWriteReview : handleCancelGatherings
           }
@@ -192,11 +202,9 @@ describe('Card Component with Button Render Test', () => {
       isReviewed: true,
     };
     render(
-      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA_BASE}>
-        <Card.Info data={MOCK_DATA_BASE} />
+      <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
+        <Card.Info />
         <Card.Button
-          isCompleted={MOCK_DATA.isCompleted}
-          isReviewed={MOCK_DATA.isReviewed}
           handleButtonClick={
             MOCK_DATA.isCompleted ? handleWriteReview : handleCancelGatherings
           }
@@ -219,7 +227,7 @@ describe('Card Component with Canceled Gathering Render Test', () => {
   it('Canceled overlay Render Test', () => {
     render(
       <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
-        <Card.Info data={MOCK_DATA} />
+        <Card.Info />
       </Card>,
     );
 
@@ -231,7 +239,7 @@ describe('Card Component with Canceled Gathering Render Test', () => {
   it('Canceled overlay Button Click Test', () => {
     render(
       <Card handleSaveDiscard={handleSaveDiscard} data={MOCK_DATA}>
-        <Card.Info data={MOCK_DATA} />
+        <Card.Info />
       </Card>,
     );
 

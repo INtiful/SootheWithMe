@@ -8,12 +8,16 @@ import Button from '@/app/components/Button/Button';
 import StateChip from '@/app/components/Chip/StateChip';
 import { formatDate, formatTime } from '@/utils/formatDate';
 import { UserJoinedGatheringsData } from '@/types/data.type';
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 interface CardProps {
   data: UserJoinedGatheringsData;
   handleSaveDiscard: () => void;
 }
+
+const CardContext = createContext<UserJoinedGatheringsData | undefined>(
+  undefined,
+);
 
 // Card Wapper
 const Card = ({
@@ -37,7 +41,9 @@ const Card = ({
         </div>
 
         {/* content - chip, info, button */}
-        <div className='flex flex-col gap-[6px] p-2'>{children}</div>
+        <CardContext.Provider value={data}>
+          <div className='flex flex-col gap-[6px] p-2'>{children}</div>
+        </CardContext.Provider>
 
         {data.canceledAt && (
           <CardOverlay handleButtonClick={handleSaveDiscard} />
@@ -48,13 +54,13 @@ const Card = ({
 };
 
 // Ooption Components - Chips
-const CardChips = ({
-  isCompleted,
-  participantCount,
-}: Pick<
-  UserJoinedGatheringsData,
-  'isCompleted' | 'participantCount'
->): JSX.Element => {
+const CardChips = (): JSX.Element => {
+  const data = useContext(CardContext);
+  if (!data) {
+    throw new Error('Card.Chips must be used within a Card');
+  }
+  const { isCompleted, participantCount } = data;
+
   if (isCompleted) {
     return (
       <div className='mb-[6px] flex gap-8'>
@@ -77,12 +83,16 @@ const CardChips = ({
 
 // Ooption Components - Button
 const CardButton = ({
-  isCompleted,
-  isReviewed,
   handleButtonClick,
-}: Pick<UserJoinedGatheringsData, 'isCompleted' | 'isReviewed'> & {
+}: {
   handleButtonClick: () => void;
 }): JSX.Element => {
+  const data = useContext(CardContext);
+  if (!data) {
+    throw new Error('Card.Button must be used within a Card');
+  }
+  const { isCompleted, isReviewed } = data;
+
   // 데이터에 따라 버튼의 이름과 스타일을 변경
   const getButtonProps = () => {
     if (!isCompleted)
@@ -111,25 +121,26 @@ const CardButton = ({
 };
 
 // Ooption Components - Info
-const CardInfo = ({
-  data,
-}: {
-  data: UserJoinedGatheringsData;
-}): JSX.Element => {
+const CardInfo = (): JSX.Element => {
+  const data = useContext(CardContext);
+  if (!data) {
+    throw new Error('Card.Button must be used within a Card');
+  }
+  const { name, location, dateTime, participantCount, capacity } = data;
+
   return (
     <>
       <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
-        <p>{data.name}</p>
-        <span>|</span>
-        <p className='text-14 font-medium text-var-gray-700'>{data.location}</p>
+        <p>{name}</p>,<span>|</span>
+        <p className='text-14 font-medium text-var-gray-700'>{location}</p>
       </div>
       <div className='flex items-center gap-4 text-14 font-medium text-var-gray-700'>
-        <p>{formatDate(data.dateTime)}</p>
+        <p>{formatDate(dateTime)}</p>
         <span>·</span>
-        <p>{formatTime(data.dateTime)}</p>
+        <p>{formatTime(dateTime)}</p>
         <IconPerson className='ml-8 h-16 w-16' />
         <p>
-          {data.participantCount}/{data.capacity}
+          {participantCount}/{capacity}
         </p>
       </div>
     </>
