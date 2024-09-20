@@ -12,6 +12,17 @@ const Page = () => {
   const [reviewComment, setReviewComment] = useState<string>('');
   const [filterType, setFilterType] = useState<string>('');
 
+  const filteredData = DATA_LIST.filter((data) => {
+    switch (filterType) {
+      case '작성 가능한 리뷰':
+        return data.isCompleted && !data.isReviewed;
+      case '작성한 리뷰':
+        return data.isCompleted && data.isReviewed;
+      default:
+        return true;
+    }
+  });
+
   const handleChangeReviewComment = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setReviewComment(e.target.value);
   };
@@ -32,7 +43,7 @@ const Page = () => {
           setFilterType={setFilterType}
         />
         {/* cards */}
-        {DATA_LIST.map((data) => (
+        {filteredData.map((data) => (
           <Card
             key={data.id}
             data={data}
