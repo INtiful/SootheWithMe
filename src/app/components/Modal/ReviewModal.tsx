@@ -20,19 +20,29 @@ interface ReviewModalProps {
   onSubmit?: () => void;
 }
 
-const TOTAL_RATING = 5;
-
 const ReviewModal = ({
   onCloseClick,
   reviewComment,
   onChangeReviewComment,
   onSubmit,
 }: ReviewModalProps) => {
-  // TODO: 하트 클릭 기능 고도화
-  const [isClickHeart, setIsClickHeart] = useState<boolean>(false);
+  // TODO: 나중에 별점 컴포넌트로 분리
+  const [starScore, setStarScore] = useState<number>(0);
 
-  const handleClickHeart = () => {
-    setIsClickHeart((prev) => !prev);
+  const ratingStarHandler = (): JSX.Element[] => {
+    let result: JSX.Element[] = [];
+    for (let i: number = 0; i < 5; i++) {
+      result.push(
+        <span key={i + 1} onClick={() => setStarScore(i + 1)}>
+          {i + 1 <= starScore ? (
+            <IconHeart className='h-24 w-24 cursor-pointer text-var-orange-600 transition-all duration-100 ease-in-out' />
+          ) : (
+            <IconHeart className='h-24 w-24 cursor-pointer text-gray-200 transition-all duration-100 ease-in-out' />
+          )}
+        </span>,
+      );
+    }
+    return result;
   };
 
   return (
@@ -46,11 +56,7 @@ const ReviewModal = ({
       {/* 하트 리뷰 */}
       <div className='flex flex-col gap-12'>
         <h2 className='text-16 font-semibold'>만족스러운 경험이었나요?</h2>
-        <div className='flex gap-[2px]'>
-          {Array.from({ length: TOTAL_RATING }).map((_, index) => (
-            <IconHeart key={index} className={`h-24 w-24 text-gray-200`} />
-          ))}
-        </div>
+        <div className='flex gap-2'>{ratingStarHandler()}</div>
       </div>
       {/* 리뷰 코멘트 */}
       <div className='flex flex-col gap-12'>
@@ -65,7 +71,7 @@ const ReviewModal = ({
       {/* 버튼 그룹 */}
       <div className='flex items-center gap-16'>
         <Button name='취소' variant='white' />
-        <Button name='리뷰 등록' variant='gray' />
+        <Button name='리뷰 등록' variant='gray' onClick={onSubmit} />
       </div>
     </div>
   );

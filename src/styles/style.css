@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 캘린더 라이브러리 스타일링 */
 .react-datepicker {
   @apply !flex h-full w-full !items-center !justify-center !border-none !text-14;
 }
@@ -68,4 +69,9 @@
 
 .react-datepicker__day--keyboard-selected {
   @apply !text-var-orange-600;
+}
+
+/* 별점 라이브러리 스타일링 */
+.style-module_emptyIcons__Bg-FZ {
+  @apply !flex gap-2;
 }
