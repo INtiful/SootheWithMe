@@ -1,8 +1,8 @@
 import Tab from '@/app/components/Tab/Tab';
 
 interface TabsProps {
-  activeTab: 'dalaemfit' | 'workation';
-  onTabClick: (type: 'dalaemfit' | 'workation') => void;
+  activeTab: 'DALLAEMFIT' | 'WORKATION';
+  onTabClick: (type: 'DALLAEMFIT' | 'WORKATION') => void;
 }
 
 const Tabs = ({ activeTab, onTabClick }: TabsProps) => {
@@ -10,13 +10,13 @@ const Tabs = ({ activeTab, onTabClick }: TabsProps) => {
     <div className='flex space-x-12'>
       <Tab
         type='dalaemfit'
-        isActive={activeTab === 'dalaemfit'}
-        onClick={() => onTabClick('dalaemfit')}
+        isActive={activeTab === 'DALLAEMFIT'}
+        onClick={() => onTabClick('DALLAEMFIT')}
       />
       <Tab
         type='workation'
-        isActive={activeTab === 'workation'}
-        onClick={() => onTabClick('workation')}
+        isActive={activeTab === 'WORKATION'}
+        onClick={() => onTabClick('WORKATION')}
       />
     </div>
   );

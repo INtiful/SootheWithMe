@@ -3,7 +3,7 @@ import ClientSideGatherings from './_component/ClientSideGatherings';
 import fetchGatherings from '@/app/actions/gatherings/fetchGatherings';
 
 const GatheringsPage = async () => {
-  const gatherings = await fetchGatherings();
+  const gatherings = await fetchGatherings({ type: 'DALLAEMFIT' });
 
   return (
     <div className='mx-auto max-w-[1200px]'>

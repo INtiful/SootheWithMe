@@ -10,19 +10,25 @@ import Chips from './Chips';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
+import fetchGatherings from '@/app/actions/gatherings/fetchGatherings';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
 }
 
 const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
-  const [activeTab, setActiveTab] = useState<'workation' | 'dalaemfit'>(
-    'dalaemfit',
+  const [activeTab, setActiveTab] = useState<'WORKATION' | 'DALLAEMFIT'>(
+    'DALLAEMFIT',
   );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [filteredData, setFilteredData] =
+    useState<GatheringsListData[]>(gatherings);
 
-  const handleTabClick = (type: 'workation' | 'dalaemfit') => {
+  const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
     setActiveTab(type);
+
+    const newData = await fetchGatherings({ type });
+    setFilteredData(newData);
   };
 
   usePreventScroll(isModalOpen);
@@ -39,7 +45,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
         </div>
         <Filters />
       </div>
-      <GatheringCardList gatherings={gatherings} />
+      <GatheringCardList gatherings={filteredData} />
 
       {isModalOpen && (
         <MakeGatheringModal onClose={() => setIsModalOpen(false)} />
