@@ -2,10 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
-const fetchGatherings = async () => {
+import { GatheringsListData } from '@/types/data.type';
+
+const fetchGatherings = async (): Promise<GatheringsListData[]> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings?limit=1&offset=0`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings?limit=10&offset=0`,
       {
         method: 'GET',
         headers: {
@@ -14,12 +16,12 @@ const fetchGatherings = async () => {
       },
     );
 
-    const data = await res.json();
+    const data: GatheringsListData[] = await res.json();
 
     revalidatePath('/');
     revalidatePath('/gatherings');
 
-    console.log(data);
+    return data;
   } catch (error) {
     throw new Error('모임을 불러오지 못했습니다.');
   }

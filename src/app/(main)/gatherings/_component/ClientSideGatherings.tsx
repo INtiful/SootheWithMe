@@ -9,8 +9,13 @@ import CreateGatheringButton from './CreateGatheringButton';
 import Chips from './Chips';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
+import { GatheringsListData } from '@/types/data.type';
 
-const ClientSideGatherings = () => {
+interface ClientSideGatheringsProps {
+  gatherings: GatheringsListData[];
+}
+
+const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   const [activeTab, setActiveTab] = useState<'workation' | 'dalaemfit'>(
     'dalaemfit',
   );
@@ -34,7 +39,7 @@ const ClientSideGatherings = () => {
         </div>
         <Filters />
       </div>
-      <GatheringCardList />
+      <GatheringCardList gatherings={gatherings} />
 
       {isModalOpen && (
         <MakeGatheringModal onClose={() => setIsModalOpen(false)} />
