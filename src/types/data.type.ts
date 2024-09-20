@@ -47,5 +47,5 @@ export interface myGatheringData extends GatheringsListData {
 export interface FetchGatheringsResponse {
   data: myGatheringData[];
   hasNextPage: boolean;
-  page: number; // 현재 페이지 번호
+  offset: number; // 현재 페이지 번호
 }

@@ -1,9 +1,9 @@
 import { FetchGatheringsResponse } from '@/types/data.type';
 
 const fetchGatherings = async (
-  page: number,
+  offset?: number,
 ): Promise<FetchGatheringsResponse> => {
-  const response = await fetch(`/api/mock?page=${page}`);
+  const response = await fetch(`/api/mock?offset=${offset || 0}`);
 
   if (!response.ok) {
     throw new Error('Network response was not ok');
