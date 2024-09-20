@@ -15,7 +15,7 @@ import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 
 const GatheringsPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<'workation' | 'dalaemfit'>(
     'dalaemfit',
   );
