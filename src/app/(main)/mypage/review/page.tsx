@@ -68,7 +68,7 @@ const Page = () => {
           ))
         )}
         {/* 작성한 리뷰 */}
-        <div className='my-24 flex h-full flex-col gap-24'>
+        <div className='my-24 flex flex-col gap-24'>
           {MYPAGE_REVIEW_MOCK_DATA.length === 0 ? (
             <div className='flex h-full items-center justify-center'>
               <p className='text-center text-14 font-medium text-var-gray-500'>
