@@ -18,9 +18,9 @@ const Page = () => {
   const filteredData = DATA_LIST.filter((data) => {
     switch (filterType) {
       case MYPAGE_REVIEW_TABS.WRITABLE: // 작성 가능한 리뷰
-        return data.isCompleted && !data.isReviewed;
+        return data?.isCompleted && !data?.isReviewed;
       case MYPAGE_REVIEW_TABS.WRITTEN: // 작성한 리뷰
-        return data.isCompleted && data.isReviewed;
+        return data?.isCompleted && data?.isReviewed;
       default:
         return true;
     }
@@ -59,7 +59,7 @@ const Page = () => {
           ) &&
           filteredData.map((data) => (
             <Card
-              key={data.id}
+              key={data?.id}
               data={data}
               hasButton
               hasChips
@@ -68,18 +68,26 @@ const Page = () => {
           ))
         )}
         {/* 작성한 리뷰 */}
-        <div className='my-24 flex flex-col gap-24'>
-          {filterType === MYPAGE_REVIEW_TABS.WRITTEN &&
+        <div className='my-24 flex h-full flex-col gap-24'>
+          {MYPAGE_REVIEW_MOCK_DATA.length === 0 ? (
+            <div className='flex h-full items-center justify-center'>
+              <p className='text-center text-14 font-medium text-var-gray-500'>
+                아직 작성한 리뷰가 없어요
+              </p>
+            </div>
+          ) : (
+            filterType === MYPAGE_REVIEW_TABS.WRITTEN &&
             MYPAGE_REVIEW_MOCK_DATA.map((review) => (
               <Review
-                key={review.id}
-                rating={review.score}
-                image_source={review.Gathering.image}
-                description={review.comment}
-                user_name={review.User.name}
-                date={review.createdAt}
+                key={review?.id}
+                rating={review?.score}
+                image_source={review?.Gathering.image}
+                description={review?.comment}
+                user_name={review?.User.name}
+                date={review?.createdAt}
               />
-            ))}
+            ))
+          )}
         </div>
       </div>
       {isModalOpen && (
