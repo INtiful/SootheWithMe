@@ -16,19 +16,25 @@ const MyGatheringList = () => {
 
   return (
     <>
-      <ul>
-        {data?.pages.map((page) =>
-          page.data.map((item: myGatheringData, index: number) => (
-            <li key={index}>
-              <Card
-                data={item}
-                hasButton={true}
-                hasChips={true}
-                handleCancelGatherings={() => console.log('Cancel gathering')}
-                handleWriteReview={() => console.log('Write review')}
-              />
-            </li>
-          )),
+      <ul className='flex h-full flex-col'>
+        {data ? (
+          data.pages.map((page) =>
+            page.data.map((item: myGatheringData, index: number) => (
+              <li key={index}>
+                <Card
+                  data={item}
+                  hasButton={true}
+                  hasChips={true}
+                  handleCancelGatherings={() => console.log('Cancel gathering')}
+                  handleWriteReview={() => console.log('Write review')}
+                />
+              </li>
+            )),
+          )
+        ) : (
+          <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500'>
+            아직 참여한 모임가 없어요
+          </div>
         )}
       </ul>
       <div ref={ref} />
