@@ -16,6 +16,11 @@ const Page = () => {
     setReviewComment(e.target.value);
   };
 
+  const handleCloseModal = () => {
+    setReviewComment('');
+    setIsModalOpen(false);
+  };
+
   usePreventScroll(isModalOpen);
 
   return (
@@ -41,7 +46,7 @@ const Page = () => {
         <ReviewModal
           reviewComment={reviewComment}
           onChangeReviewComment={handleChangeReviewComment}
-          onClose={() => setIsModalOpen(false)}
+          onClose={handleCloseModal}
         />
       )}
     </>

@@ -1,7 +1,7 @@
 'use client';
 
 import { IconHeart, IconX } from '@/public/icons';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import Button from '../Button/Button';
 import InputText from '../Input/InputText';
 import ModalFrame from './ModalFrame';
@@ -48,7 +48,10 @@ const ReviewModal = ({
 
   return (
     <ModalFrame onClose={onClose}>
-      <div className='flex max-h-408 w-344 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'>
+      <div
+        onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+        className='flex max-h-408 w-344 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'
+      >
         <div className='flex items-center justify-between'>
           <h1 className='text-18 font-semibold text-var-gray-900'>리뷰 쓰기</h1>
           <button onClick={onClose}>
@@ -72,8 +75,14 @@ const ReviewModal = ({
         </div>
         {/* 버튼 그룹 */}
         <div className='flex items-center gap-16'>
-          <Button name='취소' variant='white' />
-          <Button name='리뷰 등록' variant='gray' onClick={onSubmit} />
+          <Button name='취소' variant='white' onClick={onClose} />
+          <Button
+            name='리뷰 등록'
+            variant={
+              starScore !== 0 && reviewComment !== '' ? 'default' : 'gray'
+            }
+            onClick={onSubmit}
+          />
         </div>
       </div>
     </ModalFrame>
