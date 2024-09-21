@@ -64,7 +64,7 @@ describe('FilterDate Component Test', () => {
   });
 
   // 외부 영역 클릭 시 모달이 닫히는지 확인
-  it('toggles dropdown on click', () => {
+  it('closes dropdown when clicked outside', () => {
     const filterElement = screen.getByTestId('filterDate');
 
     fireEvent.click(filterElement);
