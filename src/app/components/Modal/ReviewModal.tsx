@@ -78,9 +78,7 @@ const ReviewModal = ({
           <Button name='취소' variant='white' onClick={onClose} />
           <Button
             name='리뷰 등록'
-            variant={
-              starScore !== 0 && reviewComment !== '' ? 'default' : 'gray'
-            }
+            variant={starScore !== 0 && reviewComment ? 'default' : 'gray'}
             onClick={onSubmit}
           />
         </div>
