@@ -37,8 +37,6 @@ const fetchGatherings = async (
 
     const data: GatheringsListData[] = await res.json();
 
-    console.log(data);
-
     return data;
   } catch (error) {
     throw new Error('모임을 불러오지 못했습니다.');
