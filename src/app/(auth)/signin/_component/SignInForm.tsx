@@ -1,6 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import Button from '../../../components/Button/Button';
 import { signinSchema } from '../../_component/FormOptions';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,11 +10,13 @@ import { SignInData } from '@/types/client.type';
 import { submitSignInData } from '@/actions/auth/submitSignInData';
 
 const SignInForm = () => {
+  const router = useRouter();
   const {
     control,
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setError,
   } = useForm<SignInData>({
     mode: 'onBlur',
     resolver: zodResolver(signinSchema),
@@ -25,11 +28,24 @@ const SignInForm = () => {
 
   const submit = async (data: SignInData) => {
     try {
-      const message = await submitSignInData(data);
-      /* 테스트 성공로직 추가 */
-      console.log(message);
-    } catch (error: any) {
-      console.error('Error:', error.message); // 오류 처리
+      await submitSignInData(data);
+      router.push('/');
+    } catch (error) {
+      if (error instanceof Error) {
+        // 로그인 오류 처리
+        if (error.message.includes('잘못된 이메일 또는 비밀번호입니다')) {
+          setError('email', {
+            type: 'manual',
+            message: '잘못된 이메일 또는 비밀번호입니다',
+          });
+          setError('password', {
+            type: 'manual',
+            message: '잘못된 이메일 또는 비밀번호입니다',
+          });
+        } else {
+          console.error('Error:', error.message);
+        }
+      }
     }
   };
 

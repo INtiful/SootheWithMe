@@ -17,12 +17,12 @@ export const submitSignUpData = async ({
     },
   );
 
-  if (response.ok) {
-    const { token } = await response.json();
-    document.cookie = `token=${token}; path=/;`; // 쿠키에 토큰 저장
-    console.log('로그인 성공');
-  } else {
+  if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.message); // 오류 처리
   }
+
+  const result = await response.json();
+
+  return result;
 };

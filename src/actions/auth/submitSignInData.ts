@@ -1,4 +1,3 @@
-// actions/auth.ts
 import { SignInData } from '@/types/client.type';
 
 export const submitSignInData = async (data: SignInData) => {
@@ -14,13 +13,14 @@ export const submitSignInData = async (data: SignInData) => {
   );
 
   if (!response.ok) {
-    throw new Error('로그인에 실패했습니다.');
+    const errorData = await response.json();
+    throw new Error(errorData.message);
   }
 
   const result = await response.json();
 
   // 쿠키에 토큰 저장
-  document.cookie = `token=${result.token}; path=/;`;
+  document.cookie = `token=${result.token}; path=/; HttpOnly;`;
 
   return result; // 메시지 반환
 };

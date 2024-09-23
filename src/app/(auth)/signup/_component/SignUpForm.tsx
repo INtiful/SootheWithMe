@@ -33,7 +33,7 @@ const SignUpForm = () => {
 
   const submit = async (data: SignUpData) => {
     try {
-      const message = await submitSignUpData(data);
+      await submitSignUpData(data);
       setIsPopupOpen(true);
     } catch (error) {
       if (error instanceof Error) {
