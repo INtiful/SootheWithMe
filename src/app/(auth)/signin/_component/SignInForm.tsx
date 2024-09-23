@@ -6,6 +6,7 @@ import { signinSchema } from '../../_component/FormOptions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormField from '../../_component/FormField';
 import { SignInData } from '@/types/client.type';
+import { submitSignInData } from '@/actions/auth/submitSignInData';
 
 const SignInForm = () => {
   const {
@@ -22,10 +23,16 @@ const SignInForm = () => {
     },
   });
 
-  //@todo 제출 함수 작성
-  const submit = (data: SignInData) => {
-    console.log(data);
+  const submit = async (data: SignInData) => {
+    try {
+      const message = await submitSignInData(data);
+      /* 테스트 성공로직 추가 */
+      console.log(message);
+    } catch (error: any) {
+      console.error('Error:', error.message); // 오류 처리
+    }
   };
+
   return (
     <form
       className='rounded-[24px] bg-var-white'

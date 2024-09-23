@@ -1,4 +1,3 @@
-// actions/auth.ts
 import { SignUpData } from '@/types/client.type';
 
 export const submitSignUpData = async ({
@@ -13,15 +12,15 @@ export const submitSignUpData = async ({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
       },
       body: JSON.stringify({ name, email, password, companyName }),
     },
   );
 
   if (response.ok) {
-    const result = await response.json();
-    return result.message; // 성공 메시지 반환
+    const { token } = await response.json();
+    document.cookie = `token=${token}; path=/;`; // 쿠키에 토큰 저장
+    console.log('로그인 성공');
   } else {
     const errorData = await response.json();
     throw new Error(errorData.message); // 오류 처리
