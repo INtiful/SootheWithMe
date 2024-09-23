@@ -23,20 +23,40 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [filteredData, setFilteredData] =
     useState<GatheringsListData[]>(gatherings);
+  const [selectedLocation, setSelectedLocation] = useState<string | undefined>(
+    undefined,
+  );
+  const [selectedChip, setSelectedChip] = useState<
+    'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | null
+  >(null);
 
   const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
     setActiveTab(type);
+    setSelectedChip(null);
 
-    const newData = await fetchGatherings({ type });
+    const newData = await fetchGatherings({ type, location: selectedLocation });
     setFilteredData(newData);
   };
 
   const handleChipClick = async (
     label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
   ) => {
-    const type = label === 'ALL' ? activeTab : label;
+    setSelectedChip(label);
+    const type = label === 'ALL' ? 'DALLAEMFIT' : label;
 
-    const newData = await fetchGatherings({ type });
+    const newData = await fetchGatherings({ type, location: selectedLocation });
+    setFilteredData(newData || []);
+  };
+
+  const handleLocationChange = async (location: string | undefined) => {
+    setSelectedLocation(location);
+
+    const type =
+      selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
+    const newData = await fetchGatherings({
+      type,
+      location,
+    });
     setFilteredData(newData || []);
   };
 
@@ -52,7 +72,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
           </div>
           <Chips activeTab={activeTab} onChipClick={handleChipClick} />
         </div>
-        <Filters />
+        <Filters onLocationChange={handleLocationChange} />
       </div>
       <GatheringCardList gatherings={filteredData} />
 

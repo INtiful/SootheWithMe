@@ -17,7 +17,7 @@ const fetchGatherings = async (
   params: FetchGatheringsParams = {},
 ): Promise<GatheringsListData[]> => {
   try {
-    const { limit = 10, offset = 0, ...rest } = params;
+    const { limit = 12, offset = 0, ...rest } = params;
 
     const queryString = new URLSearchParams({
       limit: String(limit),
