@@ -10,7 +10,7 @@ import CreateGatheringButton from './CreateGatheringButton';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
-import fetchGatherings from '@/app/actions/gatherings/fetchGatherings';
+import fetchGatherings from '@/app/api/actions/gatherings/fetchGatherings';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
