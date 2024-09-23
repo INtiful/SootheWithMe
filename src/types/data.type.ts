@@ -50,20 +50,18 @@ export interface GatheringInfoType {
   canceledAt?: string;
 }
 
-export interface User {
-  id: number;
-  email: string;
-  name: string;
-  companyName: string;
-  image: string | null;
-}
-
 export interface GatheringParticipantsType {
   teamId: number;
   userId: number;
   gatheringId: number;
   joinedAt: string;
-  User: User;
+  User: {
+    id: number;
+    email: string;
+    name: string;
+    companyName: string;
+    image: string | null;
+  };
 }
 
 // GET : /{teamId}/gatherings/joined
@@ -79,4 +77,27 @@ export interface FetchGatheringsResponse {
   data: myGatheringData[];
   hasNextPage: boolean;
   offset: number; // 현재 페이지 번호
+}
+
+export interface ReviewsType {
+  teamId: number;
+  id: number;
+  score: number;
+  comment: string;
+  createdAt: string;
+  Gathering: {
+    teamId: number;
+    id: number;
+    type: string;
+    name: string;
+    dateTime: string;
+    location: string;
+    image: string;
+  };
+  User: {
+    teamId: number;
+    id: number;
+    name: string;
+    image: string;
+  };
 }

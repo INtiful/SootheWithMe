@@ -6,24 +6,23 @@ import BottomFloatingBar from '@/app/components/BottomFloatingBar/BottomFloating
 import GatheringImage from './GatheringImage';
 import GatheringInfo from './GatheringInfo';
 import GatheringReviews from './GatheringReviews';
-import {
-  MOCK_PARTICIPANTS,
-  MOCK_REVIEWS,
-  MOCKUSER,
-} from '../../mockData/mockData';
+import { MOCK_PARTICIPANTS, MOCKUSER } from '../../mockData/mockData';
 import {
   GatheringInfoType,
   GatheringParticipantsType,
+  ReviewsType,
 } from '@/types/data.type';
 
 interface GatheringDetailProps {
   gatheringInfo: GatheringInfoType;
   gatheringParticipants: GatheringParticipantsType[];
+  reviews: ReviewsType[];
 }
 
 const GatheringDetail = ({
   gatheringInfo,
   gatheringParticipants,
+  reviews,
 }: GatheringDetailProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -50,7 +49,7 @@ const GatheringDetail = ({
 
           {/* 리뷰 */}
           <GatheringReviews
-            reviews={MOCK_REVIEWS}
+            reviews={reviews}
             currentPage={currentPage}
             handlePageChange={handlePageChange}
           />
