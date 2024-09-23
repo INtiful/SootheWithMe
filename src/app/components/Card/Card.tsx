@@ -29,11 +29,11 @@ const Card = ({
 }: PropsWithChildren<CardProps>): JSX.Element => {
   return (
     <div className='w-full border-b-2 border-dashed border-var-gray-200 py-24'>
-      <div className='relative flex w-full flex-col gap-16 overflow-hidden rounded-[12px] md:flex-row md:rounded-[24px]'>
-        {/* Image */}
-        <div className='md: relative flex h-156 w-full flex-col gap-16 md:w-280'>
+      <div className='relative flex w-full flex-col gap-16 overflow-hidden rounded-xl md:flex-row md:rounded-3xl'>
+        {/* 이미지 */}
+        <div className='relative flex h-156 w-full flex-col gap-16 md:w-280'>
           <Image
-            className='rounded-[24px] object-cover'
+            className='rounded-3xl object-cover'
             src={data.image}
             alt='모임 이미지'
             fill
@@ -155,7 +155,7 @@ const CardOverlay = ({
   handleButtonClick: () => void;
 }): JSX.Element => {
   return (
-    <div className='absolute left-0 top-0 z-base flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
+    <div className='z-base absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
       <p className='text-14 font-medium text-white'>
         모집 취소된 모임이에요.
         <br />

@@ -1,7 +1,6 @@
 'use client';
 
 import Card from '@/app/components/Card/Card';
-import Tab from '../_component/Tab';
 import { DATA_LIST } from './mockData';
 
 const CreatedPage = () => {
