@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
+interface ItemWithId {
+  id: number;
+}
 
-interface InfiniteQueryResponse<T> {
+interface InfiniteQueryResponse<T extends ItemWithId> {
   hasNextPage: boolean;
   offset: number;
   data: T[];
 }
 
-interface InfiniteScroll<T> {
+interface InfiniteScrollProps<T extends ItemWithId> {
   queryKey: string[];
   queryFn: (offset?: number) => Promise<InfiniteQueryResponse<T>>;
   limit?: number;
@@ -16,13 +19,13 @@ interface InfiniteScroll<T> {
   renderItem: (item: T, index: number) => JSX.Element;
 }
 
-const InfiniteScroll = <T,>({
+const InfiniteScroll = <T extends ItemWithId>({
   queryKey,
   queryFn,
   limit = 5,
   emptyText,
   renderItem,
-}: InfiniteScroll<T>) => {
+}: InfiniteScrollProps<T>) => {
   const { ref, inView } = useInView({
     triggerOnce: false,
     threshold: 1.0,
@@ -66,7 +69,7 @@ const InfiniteScroll = <T,>({
         {data &&
           data.pages.map((page) =>
             page.data.map((item, index: number) => (
-              <li key={index}>{renderItem(item, index)}</li> // 사용자 정의 컴포넌트를 렌더링
+              <li key={item.id}>{renderItem(item, index)}</li> // 사용자 정의 컴포넌트를 렌더링
             )),
           )}
       </ul>
