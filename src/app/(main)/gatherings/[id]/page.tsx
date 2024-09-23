@@ -6,7 +6,11 @@
 
 import fetchGatheringInfo from '@/app/api/actions/gatherings/fetchGatheringInfo';
 import GatheringDetail from './_component/GatheringDetail';
-import { GatheringInfoType } from '@/types/data.type';
+import fetchGatheringParticipants from '@/app/api/actions/gatherings/fetchGatheringParticipants';
+import {
+  GatheringInfoType,
+  GatheringParticipantsType,
+} from '@/types/data.type';
 
 const GatheringsDetailPage = async ({
   params,
@@ -16,8 +20,15 @@ const GatheringsDetailPage = async ({
   };
 }) => {
   const gatheringInfo: GatheringInfoType = await fetchGatheringInfo(params.id);
+  const gatheringParticipants: GatheringParticipantsType[] =
+    await fetchGatheringParticipants(params.id);
 
-  return <GatheringDetail gatheringInfo={gatheringInfo} />;
+  return (
+    <GatheringDetail
+      gatheringInfo={gatheringInfo}
+      gatheringParticipants={gatheringParticipants}
+    />
+  );
 };
 
 export default GatheringsDetailPage;

@@ -50,6 +50,22 @@ export interface GatheringInfoType {
   canceledAt?: string;
 }
 
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  companyName: string;
+  image: string | null;
+}
+
+export interface GatheringParticipantsType {
+  teamId: number;
+  userId: number;
+  gatheringId: number;
+  joinedAt: string;
+  User: User;
+}
+
 // GET : /{teamId}/gatherings/joined
 // 참석한 모임 목록 조회 시 Response Data
 export interface myGatheringData extends GatheringsListData {

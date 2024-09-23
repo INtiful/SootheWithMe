@@ -10,6 +10,7 @@ import {
 import Avatar from './Avatar';
 import InfoChip from '../Chip/InfoChip';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { GatheringParticipantsType } from '@/types/data.type';
 
 // min number of people to confirm opening
 const MIN_PARTICIPANTS = 5;
@@ -19,7 +20,8 @@ interface InformationCardProps {
   address: string;
   date: string;
   time: string;
-  participants: { id: number; name: string; image: string }[];
+  participants: GatheringParticipantsType[];
+  participantCount: number;
   maxParticipants: number;
 }
 
@@ -29,6 +31,7 @@ const InformationCard = ({
   date,
   time,
   participants,
+  participantCount,
   maxParticipants,
 }: InformationCardProps) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
@@ -42,23 +45,23 @@ const InformationCard = ({
     const maxVisible = 4;
     const visibleAvatars = participants
       .slice(0, maxVisible)
-      .map(({ id, name, image }) => (
+      .map(({ User }) => (
         <Avatar
-          key={id}
-          id={id}
-          name={name}
-          image={image}
+          key={User.id}
+          id={User.id}
+          name={User.name}
+          image={User.image}
           className='h-28 w-28'
         />
       ));
 
-    if (participants.length > maxVisible) {
+    if (participantCount > maxVisible) {
       visibleAvatars.push(
         <div
           key='remaining'
           className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
         >
-          +{participants.length - maxVisible}
+          +{participantCount - maxVisible}
         </div>,
       );
     }
@@ -101,12 +104,12 @@ const InformationCard = ({
         <div className='flex justify-between'>
           <div className='flex items-center'>
             <div className='text-14 font-semibold'>
-              모집 정원 {participants.length}명
+              모집 정원 {participantCount}명
             </div>
             <div className='ml-12 flex -space-x-6'>{renderAvatars()}</div>
           </div>
           <div className='flex items-center'>
-            {participants.length >= MIN_PARTICIPANTS ? (
+            {participantCount >= MIN_PARTICIPANTS ? (
               <>
                 <IconCheckCircle />
                 <div className='text-14 font-medium text-var-orange-500'>
@@ -119,7 +122,7 @@ const InformationCard = ({
 
         {/* progress bar */}
         <ProgressBar
-          participantNumber={participants.length}
+          participantNumber={participantCount}
           hasParticipantNumber={false}
           hasOpeningConfirmed={false}
           capacity={maxParticipants}

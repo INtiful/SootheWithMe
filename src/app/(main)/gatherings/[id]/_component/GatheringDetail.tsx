@@ -11,21 +11,25 @@ import {
   MOCK_REVIEWS,
   MOCKUSER,
 } from '../../mockData/mockData';
-import { GatheringInfoType } from '@/types/data.type';
+import {
+  GatheringInfoType,
+  GatheringParticipantsType,
+} from '@/types/data.type';
 
 interface GatheringDetailProps {
   gatheringInfo: GatheringInfoType;
+  gatheringParticipants: GatheringParticipantsType[];
 }
 
-const GatheringDetail = ({ gatheringInfo }: GatheringDetailProps) => {
+const GatheringDetail = ({
+  gatheringInfo,
+  gatheringParticipants,
+}: GatheringDetailProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
-  console.log('here');
-  console.log(gatheringInfo);
 
   return (
     <>
@@ -40,6 +44,7 @@ const GatheringDetail = ({ gatheringInfo }: GatheringDetailProps) => {
               dateTime={gatheringInfo.dateTime}
               participantCount={gatheringInfo.participantCount}
               capacity={gatheringInfo.capacity}
+              participants={gatheringParticipants}
             />
           </div>
 

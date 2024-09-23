@@ -1,5 +1,5 @@
 import InformationCard from '@/app/components/InformationCard/InformationCard';
-import { PARTICIPANTS } from '../../mockData/mockData';
+import { GatheringParticipantsType } from '@/types/data.type';
 
 interface GatheringInfoProps {
   name: string;
@@ -7,6 +7,7 @@ interface GatheringInfoProps {
   dateTime: string;
   participantCount: number;
   capacity: number;
+  participants: GatheringParticipantsType[];
 }
 
 const GatheringInfo = ({
@@ -15,6 +16,7 @@ const GatheringInfo = ({
   dateTime,
   participantCount,
   capacity,
+  participants,
 }: GatheringInfoProps) => {
   return (
     <div className='h-[270px] w-[calc(100vw-32px)] md:w-[50vw] lg:w-full'>
@@ -23,7 +25,8 @@ const GatheringInfo = ({
         address={location}
         date={dateTime}
         time={dateTime}
-        participants={PARTICIPANTS}
+        participants={participants}
+        participantCount={participantCount}
         maxParticipants={capacity}
       />
     </div>
