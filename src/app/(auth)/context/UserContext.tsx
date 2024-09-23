@@ -28,6 +28,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const fetchUserData = async () => {
       const token = await getCookie('token');
+
+      if (!token) {
+        return;
+      }
+
       setLoading(true);
       setError(null);
       try {
@@ -42,7 +47,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
         );
         if (userResponse.ok) {
           const userData = await userResponse.json();
-          setUser(userData);
+          console.log(userData);
         } else {
           const errorData = await userResponse.json();
           throw new Error(errorData.message);
