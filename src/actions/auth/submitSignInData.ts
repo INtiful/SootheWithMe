@@ -1,4 +1,5 @@
 import { SignInData } from '@/types/client.type';
+import { setCookie } from './cookie/cookie';
 
 export const submitSignInData = async (data: SignInData) => {
   const response = await fetch(
@@ -12,15 +13,16 @@ export const submitSignInData = async (data: SignInData) => {
     },
   );
 
-  if (!response.ok) {
+  if (response.ok) {
+    const result = await response.json();
+
+    // 쿠키에 토큰 저장
+    const token = result.token;
+    setCookie('token', token);
+
+    return result; // 메시지 반환
+  } else {
     const errorData = await response.json();
     throw new Error(errorData.message);
   }
-
-  const result = await response.json();
-
-  // 쿠키에 토큰 저장
-  document.cookie = `token=${result.token}; path=/; HttpOnly;`;
-
-  return result; // 메시지 반환
 };

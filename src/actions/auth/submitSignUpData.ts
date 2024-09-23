@@ -17,12 +17,12 @@ export const submitSignUpData = async ({
     },
   );
 
-  if (!response.ok) {
+  if (response.ok) {
+    const result = await response.json();
+
+    return result;
+  } else {
     const errorData = await response.json();
     throw new Error(errorData.message); // 오류 처리
   }
-
-  const result = await response.json();
-
-  return result;
 };
