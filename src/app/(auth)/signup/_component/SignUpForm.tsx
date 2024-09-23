@@ -13,6 +13,7 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setError,
   } = useForm<SignUpData>({
     mode: 'onBlur',
     resolver: zodResolver(signupSchema),
@@ -30,8 +31,18 @@ const SignUpForm = () => {
       const message = await submitSignUpData(data);
       /* 테스트 성공로직 추가 */
       console.log(message);
-    } catch (error: any) {
-      console.error('Error:', error.message); // 오류 처리
+    } catch (error) {
+      if (error instanceof Error) {
+        // 이메일 관련 오류 처리
+        if (error.message.includes('이미 사용 중인 이메일입니다')) {
+          setError('email', {
+            type: 'manual',
+            message: '이미 사용 중인 이메일입니다.',
+          });
+        } else {
+          console.error('Error:', error.message);
+        }
+      }
     }
   };
 
