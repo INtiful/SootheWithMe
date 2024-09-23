@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signupSchema } from '../../_component/FormOptions';
 import FormField from '../../_component/FormField';
 import { SignUpData } from '@/types/client.type';
+import { submitSignUpData } from '@/actions/auth/submitSignUpData';
 
 const SignUpForm = () => {
   const {
@@ -18,16 +19,22 @@ const SignUpForm = () => {
     defaultValues: {
       name: '',
       email: '',
-      company: '',
+      companyName: '',
       password: '',
       passwordCheck: '',
     },
   });
 
-  //@todo 제출 함수 작성
-  const submit = (data: SignUpData) => {
-    console.log(data);
+  const submit = async (data: SignUpData) => {
+    try {
+      const message = await submitSignUpData(data);
+      /* 테스트 성공로직 추가 */
+      console.log(message);
+    } catch (error: any) {
+      console.error('Error:', error.message); // 오류 처리
+    }
   };
+
   return (
     <form
       className='rounded-[24px] bg-var-white'
@@ -51,10 +58,10 @@ const SignUpForm = () => {
         />
         <FormField
           label='회사명'
-          name='company'
+          name='companyName'
           placeholder='회사명을 입력해주세요.'
           register={register}
-          error={errors.company?.message}
+          error={errors.companyName?.message}
         />
         <FormField
           label='비밀번호'
