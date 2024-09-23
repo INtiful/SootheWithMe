@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 import Filters from './Filters';
 import GatheringCardList from './GatheringCardList';
-import Tabs from './Tabs';
+import Tabs from '@/app/components/Tabs/Tabs';
+import Chips from '@/app/components/Chips/Chips';
 import CreateGatheringButton from './CreateGatheringButton';
-import Chips from './Chips';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
@@ -37,7 +37,6 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     const type = label === 'ALL' ? activeTab : label;
 
     const newData = await fetchGatherings({ type });
-
     setFilteredData(newData || []);
   };
 
