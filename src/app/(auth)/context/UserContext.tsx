@@ -1,27 +1,24 @@
 import { getCookie } from '@/actions/auth/cookie/cookie';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { UserData } from '@/types/client.type';
+import React, {
+  FC,
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 interface UserContextType {
-  user: {
-    id: string;
-    email: 'string';
-    name: 'string';
-    companyName: 'string';
-    image: 'string';
-    createdAt: 'string';
-    updatedAt: 'string';
-  };
-
+  user: UserData | null;
   loading: boolean;
   error: string | null;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [user, setUser] = useState<any>(null);
+export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -47,7 +44,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
         );
         if (userResponse.ok) {
           const userData = await userResponse.json();
-          console.log(userData);
         } else {
           const errorData = await userResponse.json();
           throw new Error(errorData.message);

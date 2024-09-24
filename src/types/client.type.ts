@@ -7,3 +7,13 @@ export interface SignUpData {
 }
 
 export interface SignInData extends Pick<SignUpData, 'email' | 'password'> {}
+
+export interface UserData {
+  id: string;
+  email: string;
+  name: string;
+  companyName: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+}
