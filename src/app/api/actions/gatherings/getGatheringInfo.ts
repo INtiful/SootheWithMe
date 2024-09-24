@@ -2,7 +2,7 @@
 
 import { GatheringInfoType } from '@/types/data.type';
 
-const fetchGatheringInfo = async (
+const getGatheringInfo = async (
   gatheringId: number,
 ): Promise<GatheringInfoType> => {
   try {
@@ -24,4 +24,4 @@ const fetchGatheringInfo = async (
   }
 };
 
-export default fetchGatheringInfo;
+export default getGatheringInfo;

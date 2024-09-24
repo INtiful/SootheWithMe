@@ -2,7 +2,7 @@
 
 import { GatheringParticipantsType } from '@/types/data.type';
 
-const fetchGatheringParticipants = async (
+const getGatheringParticipants = async (
   gatheringId: number,
 ): Promise<GatheringParticipantsType[]> => {
   try {
@@ -24,4 +24,4 @@ const fetchGatheringParticipants = async (
   }
 };
 
-export default fetchGatheringParticipants;
+export default getGatheringParticipants;

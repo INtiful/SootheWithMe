@@ -4,15 +4,15 @@
  *  - 비로그인인 경우 로그인이 필요하다는 모달
  */
 
-import fetchGatheringInfo from '@/app/api/actions/gatherings/fetchGatheringInfo';
 import GatheringDetail from './_component/GatheringDetail';
-import fetchGatheringParticipants from '@/app/api/actions/gatherings/fetchGatheringParticipants';
 import {
   GatheringInfoType,
   GatheringParticipantsType,
   ReviewsType,
 } from '@/types/data.type';
 import fetchReviews from '@/app/api/actions/reviews/fetchReviews';
+import getGatheringParticipants from '@/app/api/actions/gatherings/getGatheringParticipants';
+import getGatheringInfo from '@/app/api/actions/gatherings/getGatheringInfo';
 
 const GatheringsDetailPage = async ({
   params,
@@ -21,9 +21,9 @@ const GatheringsDetailPage = async ({
     id: number;
   };
 }) => {
-  const gatheringInfo: GatheringInfoType = await fetchGatheringInfo(params.id);
+  const gatheringInfo: GatheringInfoType = await getGatheringInfo(params.id);
   const gatheringParticipants: GatheringParticipantsType[] =
-    await fetchGatheringParticipants(params.id);
+    await getGatheringParticipants(params.id);
   const reviews: ReviewsType[] = await fetchReviews({ gatheringId: params.id });
 
   return (
