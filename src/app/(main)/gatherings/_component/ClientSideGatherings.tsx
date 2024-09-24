@@ -9,8 +9,8 @@ import Chips from '@/app/components/Chips/Chips';
 import CreateGatheringButton from './CreateGatheringButton';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
+import getGatherings from '@/app/actions/gatherings/getGatherings';
 import { GatheringsListData } from '@/types/data.type';
-import fetchGatherings from '@/app/actions/gatherings/fetchGatherings';
 import { formatingDate } from '@/utils/formatDate';
 
 interface ClientSideGatheringsProps {
@@ -42,7 +42,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     setActiveTab(type);
     setSelectedChip(null);
 
-    const newData = await fetchGatherings({
+    const newData = await getGatherings({
       type,
       location: selectedLocation,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
@@ -58,7 +58,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
 
     const type = label === 'ALL' ? 'DALLAEMFIT' : label;
 
-    const newData = await fetchGatherings({
+    const newData = await getGatherings({
       type,
       location: selectedLocation,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
@@ -72,7 +72,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
 
     const type =
       selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
-    const newData = await fetchGatherings({
+    const newData = await getGatherings({
       type,
       location,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
@@ -86,7 +86,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
 
     const type =
       selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
-    const newData = await fetchGatherings({
+    const newData = await getGatherings({
       type,
       location: selectedLocation,
       date: date ? formatingDate(date) : undefined,
@@ -101,7 +101,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
 
     const type =
       selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
-    const newData = await fetchGatherings({
+    const newData = await getGatherings({
       type,
       location: selectedLocation,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
