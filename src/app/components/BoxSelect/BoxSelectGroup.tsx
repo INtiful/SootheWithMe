@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import BoxSelect from './BoxSelect';
 
 const BoxSelectGroup = () => {

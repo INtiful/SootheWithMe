@@ -7,6 +7,8 @@ import DropDown from '@/app/components/DropDown/DropDown';
 
 interface ModalPlaceDropdownProps {
   state?: 'default' | 'active';
+  selectedOption: string | null;
+  setSelectedOption: (option: string | null) => void;
   children: string;
   options?: string[];
 }
@@ -18,11 +20,12 @@ const stateClasses = {
 
 const ModalPlaceDropdown = ({
   state = 'default',
+  selectedOption,
+  setSelectedOption,
   children,
   options = [],
 }: ModalPlaceDropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [currentState, setCurrentState] = useState<'default' | 'active'>(state);
 
   const containerRef = useRef<HTMLDivElement>(null);

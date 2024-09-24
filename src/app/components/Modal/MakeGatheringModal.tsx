@@ -1,6 +1,7 @@
 'use client';
 
 import ModalPlaceDropdown from '@/app/(main)/gatherings/_component/ModalPlaceDropdown';
+import postGatherings from '@/app/api/gatherings/postGatherings';
 import { GATHERING_TIMES } from '@/constants/common';
 import { IconX } from '@/public/icons';
 import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
@@ -18,20 +19,40 @@ interface MakeGatheringModalProps {
 
 // TODO: 여러 컴포넌트로 쪼개기 (리팩토링 단계)
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
-  const [fileName, setFileName] = useState<null | string>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [location, setLocation] = useState<string | null>(null);
+  console.log(location);
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [image, setImage] = useState<null | string>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  console.log(image);
+
+  const [dateTime, setDateTime] = useState<Date | null>(null);
   const datepickerRef = useRef(null);
+  console.log(dateTime);
 
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  console.log(selectedTime);
+
+  const [capacity, setCapacity] = useState<number | null>(null);
+  console.log(capacity);
 
   const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     if (files) {
       const [file] = files;
-      setFileName(file.name);
+      setImage(file.name);
     }
+  };
+
+  const handleSubmit = () => {
+    postGatherings(
+      location as string,
+      'DALLAEMFIT',
+      dateTime?.toISOString() as string,
+      capacity as number,
+      image as string,
+      new Date().toISOString(),
+    );
   };
 
   return (
@@ -51,7 +72,11 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         {/* 장소 */}
         <div className='space-y-12 text-16 font-semibold'>
           <h2>장소</h2>
-          <ModalPlaceDropdown options={MOCK_DROPDOWN_OPTIONS}>
+          <ModalPlaceDropdown
+            options={MOCK_DROPDOWN_OPTIONS}
+            selectedOption={location}
+            setSelectedOption={setLocation}
+          >
             장소를 선택해주세요
           </ModalPlaceDropdown>
         </div>
@@ -60,14 +85,14 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           <h2>이미지</h2>
           <div>
             <input
-              ref={fileInputRef}
+              ref={imageInputRef}
               type='file'
               className='hidden'
               onChange={handleChangeFile}
             />
             <div className='flex gap-12'>
               <div className='flex w-full items-center rounded-xl bg-gray-50 px-16 py-[10px]'>
-                {fileName ?? (
+                {image ?? (
                   <p className='text-gray-400'>이미지를 첨부해 주세요</p>
                 )}
               </div>
@@ -75,7 +100,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
                 <Button
                   name='파일 찾기'
                   variant='white'
-                  onClick={() => fileInputRef.current?.click()}
+                  onClick={() => imageInputRef.current?.click()}
                 />
               </div>
             </div>
@@ -97,8 +122,8 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
                 locale='ko'
                 ref={datepickerRef}
                 dateFormat='yyyy-MM-dd'
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date as Date)}
+                selected={dateTime}
+                onChange={(date) => setDateTime(date as Date)}
                 minDate={new Date()}
                 inline
               />
@@ -142,10 +167,11 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
             type='number'
             className='bg-var-gray-50 px-16 py-[10px]'
             placeholder='최소 5인 이상 입력해주세요.'
+            onChange={(e) => setCapacity(Number(e.target.value))}
           />
         </div>
         {/* 버튼 */}
-        <Button name='확인' variant={'gray'} />
+        <Button name='확인' variant={'gray'} onClick={handleSubmit} />
       </div>
     </ModalFrame>
   );
