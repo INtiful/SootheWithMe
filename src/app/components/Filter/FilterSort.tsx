@@ -39,9 +39,7 @@ const FilterSort = ({
       setSelectedOption(option);
       setIsOpen(false);
       setCurrentState('active');
-      if (onSelect) {
-        onSelect(option);
-      }
+      onSelect?.(option);
     }
   };
 
