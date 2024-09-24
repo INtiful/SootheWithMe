@@ -12,15 +12,11 @@ import usePreventScroll from '@/hooks/usePreventScroll';
 import getGatherings from '@/app/actions/gatherings/getGatherings';
 import { GatheringsListData } from '@/types/data.type';
 import { formatingDate } from '@/utils/formatDate';
+import { sortOptionsMap } from '@/utils/sortOptions';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
 }
-
-const sortOptionsMap: { [key: string]: string } = {
-  '마감 임박': 'registrationEnd',
-  '참여 인원 순': 'participantCount',
-};
 
 const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   const [activeTab, setActiveTab] = useState<'WORKATION' | 'DALLAEMFIT'>(
@@ -48,6 +44,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       date: selectedDate ? formatingDate(selectedDate) : undefined,
       sortBy: sortOption,
     });
+
     setFilteredData(newData);
   };
 
@@ -64,6 +61,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       date: selectedDate ? formatingDate(selectedDate) : undefined,
       sortBy: sortOption,
     });
+
     setFilteredData(newData || []);
   };
 
@@ -78,6 +76,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       date: selectedDate ? formatingDate(selectedDate) : undefined,
       sortBy: sortOption,
     });
+
     setFilteredData(newData || []);
   };
 
@@ -92,6 +91,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       date: date ? formatingDate(date) : undefined,
       sortBy: sortOption,
     });
+
     setFilteredData(newData || []);
   };
 
