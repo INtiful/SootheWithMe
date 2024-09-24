@@ -49,3 +49,20 @@ export interface FetchGatheringsResponse {
   hasNextPage: boolean;
   offset: number; // 현재 페이지 번호
 }
+
+// GET : /{teamId}/gatherings/{gatheringId}
+// POST: /{teamId}/gatherings
+export interface GatheringInfoType {
+  teamId: number;
+  id: number;
+  type: string;
+  name: string | null;
+  dateTime: string;
+  registrationEnd: string;
+  location: string;
+  participantCount: number;
+  capacity: number;
+  image: string;
+  createdBy: number;
+  canceledAt?: string;
+}
