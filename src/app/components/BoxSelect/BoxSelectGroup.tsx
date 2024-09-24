@@ -4,21 +4,17 @@ import { useState } from 'react';
 import BoxSelect from './BoxSelect';
 
 const BoxSelectGroup = () => {
-  const [isSelected, setIsSelected] = useState<boolean[]>([
-    false,
-    false,
-    false,
-  ]);
+  const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
+    OFFICE_STRETCHING: false,
+    MINDFULLNESS: false,
+    WORKATION: false,
+  });
 
-  // 다중 선택이 안 되고 1개만 선택 가능하다
-  const handleCheckboxChange = (index: number) => {
-    // 한 번 더 클릭하면 선택 해제
-    if (isSelected[index]) {
-      setIsSelected([false, false, false]);
-      return;
-    }
-    const newSelected = isSelected.map((_, i) => i === index);
-    setIsSelected(newSelected);
+  const handleCheckboxChange = (type: string) => {
+    setGatheringType((prevType) => ({
+      ...prevType,
+      [type]: !prevType[type],
+    }));
   };
 
   return (
@@ -26,19 +22,19 @@ const BoxSelectGroup = () => {
       <BoxSelect
         title='달램핏'
         subTitle='오피스 트레이닝'
-        isSelected={isSelected[0]}
-        handleCheckboxChange={() => handleCheckboxChange(0)}
+        isSelected={gatheringType.OFFICE_STRETCHING}
+        onChange={() => handleCheckboxChange('OFFICE_STRETCHING')}
       />
       <BoxSelect
         title='달램핏'
         subTitle='마인드풀니스'
-        isSelected={isSelected[1]}
-        handleCheckboxChange={() => handleCheckboxChange(1)}
+        isSelected={gatheringType.MINDFULLNESS}
+        onChange={() => handleCheckboxChange('MINDFULLNESS')}
       />
       <BoxSelect
         title='워케이션'
-        isSelected={isSelected[2]}
-        handleCheckboxChange={() => handleCheckboxChange(2)}
+        isSelected={gatheringType.WORKATION}
+        onChange={() => handleCheckboxChange('WORKATION')}
       />
     </div>
   );
