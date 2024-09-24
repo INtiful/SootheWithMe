@@ -2,6 +2,7 @@ import FilterList from '@/app/components/Filter/FilterList';
 import FilterSort from '@/app/components/Filter/FilterSort';
 
 import { OPTIONS, SORT_OPTIONS } from '../mockData/mockData';
+import FilterDate from '@/app/components/Filter/FilterDate';
 
 interface FiltersProps {
   onLocationChange: (location: string | undefined) => void;
@@ -23,7 +24,7 @@ const Filters = ({ onLocationChange }: FiltersProps) => {
           지역 전체
         </FilterList>
         {/* TODO: 클릭 시 date picker 추가 */}
-        <FilterList state='default'>날짜 전체</FilterList>
+        <FilterDate state='default'>날짜 전체</FilterDate>
       </div>
       <div>
         <FilterSort state='default' options={SORT_OPTIONS}>
