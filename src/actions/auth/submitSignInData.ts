@@ -18,7 +18,7 @@ export const submitSignInData = async (data: SignInData) => {
 
     // 쿠키에 토큰 저장
     const token = result.token;
-    setCookie('token', token);
+    await setCookie('token', token);
 
     return result; // 메시지 반환
   } else {
