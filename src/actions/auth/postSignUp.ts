@@ -1,3 +1,5 @@
+'use server';
+
 import { SignUpData } from '@/types/client.type';
 
 export const submitSignUpData = async ({

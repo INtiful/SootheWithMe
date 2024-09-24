@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signupSchema } from '../../_component/FormOptions';
 import FormField from '../../_component/FormField';
 import { SignUpData } from '@/types/client.type';
-import { submitSignUpData } from '@/actions/auth/submitSignUpData';
+import { submitSignUpData } from '@/actions/auth/postSignUp';
 import Popup from '@/app/components/Popup/Popup';
 import { useState } from 'react';
 

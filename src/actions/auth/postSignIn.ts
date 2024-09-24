@@ -1,3 +1,5 @@
+'use server';
+
 import { SignInData } from '@/types/client.type';
 import { setCookie } from './cookie/cookie';
 
