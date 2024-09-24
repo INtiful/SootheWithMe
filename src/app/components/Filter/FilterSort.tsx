@@ -9,7 +9,7 @@ interface FilterSortProps {
   state?: 'default' | 'active';
   options: string[];
   children: string;
-  onSelect: (option: string) => void;
+  onSelect?: (option: string) => void;
 }
 
 const stateClasses = {
@@ -39,7 +39,9 @@ const FilterSort = ({
       setSelectedOption(option);
       setIsOpen(false);
       setCurrentState('active');
-      onSelect(option);
+      if (onSelect) {
+        onSelect(option);
+      }
     }
   };
 
