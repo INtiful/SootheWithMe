@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+/* 회원가입시 사용할 route.ts입니다. */
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();

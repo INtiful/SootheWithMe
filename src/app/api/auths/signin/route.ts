@@ -5,6 +5,7 @@ export interface LoginResponse {
   token: string;
 }
 
+/* 로그인시 사용할 route.ts입니다. */
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
