@@ -7,7 +7,7 @@ import { signinSchema } from '../../_component/FormOptions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormField from '../../_component/FormField';
 import { SignInData } from '@/types/client.type';
-import { submitSignInData } from '@/actions/auth/postSignIn';
+import { submitSignInData } from '@/app/api/auths/service/postSignIn';
 
 const SignInForm = () => {
   const router = useRouter();
