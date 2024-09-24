@@ -55,6 +55,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
   ) => {
     setSelectedChip(label);
+
     const type = label === 'ALL' ? 'DALLAEMFIT' : label;
 
     const newData = await fetchGatherings({
