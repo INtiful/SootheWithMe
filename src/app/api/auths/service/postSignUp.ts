@@ -1,4 +1,4 @@
-'use server';
+'use client';
 
 import { SignUpData } from '@/types/client.type';
 
@@ -8,16 +8,13 @@ export const submitSignUpData = async ({
   password,
   companyName,
 }: SignUpData) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/auths/signup`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, email, password, companyName }),
+  const response = await fetch('api/auths/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
-  );
+    body: JSON.stringify({ name, email, password, companyName }),
+  });
 
   if (response.ok) {
     const result = await response.json();
