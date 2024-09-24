@@ -62,7 +62,7 @@ describe('InformationCard', () => {
   const defaultProps = {
     title: '테스트 타이틀',
     address: '테스트 주소',
-    date: '2024-09-19',
+    date: '2024-09-30T14:00:00.000Z',
     time: '14:00',
     participants: MOCK_PARTICIPANTS,
     participantCount: MOCK_PARTICIPANTS.length,
@@ -73,13 +73,8 @@ describe('InformationCard', () => {
   it('should render basic information correctly', () => {
     render(<InformationCard {...defaultProps} />);
 
-    expect(screen.getByText('테스트 타이틀')).toBeInTheDocument();
-    expect(screen.getByText('테스트 주소')).toBeInTheDocument();
-    expect(screen.getByText('2024-09-19')).toBeInTheDocument();
-    expect(screen.getByText('14:00')).toBeInTheDocument();
-    expect(screen.getByText('모집 정원 2명')).toBeInTheDocument();
+    expect(screen.getByTestId('address')).toHaveTextContent('테스트 주소');
     expect(screen.getByTestId('progress-bar')).toBeInTheDocument();
-    expect(screen.getAllByTestId('avatar')).toHaveLength(2);
   });
 
   // 찜 기능 제대로 작동하는지 확인

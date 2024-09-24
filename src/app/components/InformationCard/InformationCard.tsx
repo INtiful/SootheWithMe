@@ -33,6 +33,8 @@ const InformationCard = ({
   participantCount,
   maxParticipants,
 }: InformationCardProps) => {
+  console.log(date);
+
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const handleToggleSave = () => {
@@ -73,8 +75,12 @@ const InformationCard = ({
       <div className='pb-44'>
         <div className='flex justify-between'>
           <div>
-            <div className='text-[18px] font-semibold'>{title}</div>
-            <div className='text-[14px] font-medium'>{address}</div>
+            <div className='text-[18px] font-semibold' data-testid='title'>
+              {title}
+            </div>
+            <div className='text-[14px] font-medium' data-testid='address'>
+              {address}
+            </div>
           </div>
 
           {/* 찜 */}
@@ -93,8 +99,12 @@ const InformationCard = ({
 
         {/* 날짜, 시간 chip */}
         <div className='mt-12 space-x-8'>
-          <InfoChip type='date'>{formatDate(date)}</InfoChip>
-          <InfoChip type='time'>{formatTimeColon(time)}</InfoChip>
+          <InfoChip type='date' data-testid='date'>
+            {formatDate(date)}
+          </InfoChip>
+          <InfoChip type='time' data-testid='time'>
+            {formatTimeColon(time)}
+          </InfoChip>
         </div>
       </div>
 
