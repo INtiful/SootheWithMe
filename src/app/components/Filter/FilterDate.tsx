@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { IconCaret } from '@/public/icons';
 import CalendarModal from '../Modal/CalendarModal';
-import { formatDate } from '@/utils/formatDate';
+import { formatDate, formatingDate } from '@/utils/formatDate';
 
 const stateClasses = {
   default: 'border border-var-gray-100 bg-var-gray-50 text-var-gray-800',
@@ -11,9 +11,14 @@ const stateClasses = {
 interface FilterDateProps {
   state?: 'default' | 'active';
   children: string;
+  onSelectDate?: (date: Date | null) => void;
 }
 
-const FilterDate = ({ state = 'default', children }: FilterDateProps) => {
+const FilterDate = ({
+  state = 'default',
+  children,
+  onSelectDate,
+}: FilterDateProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [currentState, setCurrentState] = useState<'default' | 'active'>(state);
@@ -46,6 +51,10 @@ const FilterDate = ({ state = 'default', children }: FilterDateProps) => {
     setSelectedDate(date || null);
     setCurrentState(date ? 'active' : 'default');
     setIsOpen(!date);
+
+    if (onSelectDate) {
+      onSelectDate(date ? date : null);
+    }
   };
 
   return (

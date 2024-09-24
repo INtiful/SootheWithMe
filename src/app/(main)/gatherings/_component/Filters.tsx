@@ -6,9 +6,10 @@ import FilterDate from '@/app/components/Filter/FilterDate';
 
 interface FiltersProps {
   onLocationChange: (location: string | undefined) => void;
+  onDateChange: (date: Date | null) => void;
 }
 
-const Filters = ({ onLocationChange }: FiltersProps) => {
+const Filters = ({ onLocationChange, onDateChange }: FiltersProps) => {
   const handleLocationSelect = (selectedOption: string | undefined) => {
     onLocationChange(selectedOption);
   };
@@ -23,8 +24,9 @@ const Filters = ({ onLocationChange }: FiltersProps) => {
         >
           지역 전체
         </FilterList>
-        {/* TODO: 클릭 시 date picker 추가 */}
-        <FilterDate state='default'>날짜 전체</FilterDate>
+        <FilterDate state='default' onSelectDate={onDateChange}>
+          날짜 전체
+        </FilterDate>
       </div>
       <div>
         <FilterSort state='default' options={SORT_OPTIONS}>

@@ -11,6 +11,7 @@ import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
 import fetchGatherings from '@/app/actions/gatherings/fetchGatherings';
+import { formatingDate } from '@/utils/formatDate';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -29,12 +30,17 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   const [selectedChip, setSelectedChip] = useState<
     'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | null
   >(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
     setActiveTab(type);
     setSelectedChip(null);
 
-    const newData = await fetchGatherings({ type, location: selectedLocation });
+    const newData = await fetchGatherings({
+      type,
+      location: selectedLocation,
+      date: selectedDate ? formatingDate(selectedDate) : undefined,
+    });
     setFilteredData(newData);
   };
 
@@ -44,7 +50,11 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     setSelectedChip(label);
     const type = label === 'ALL' ? 'DALLAEMFIT' : label;
 
-    const newData = await fetchGatherings({ type, location: selectedLocation });
+    const newData = await fetchGatherings({
+      type,
+      location: selectedLocation,
+      date: selectedDate ? formatingDate(selectedDate) : undefined,
+    });
     setFilteredData(newData || []);
   };
 
@@ -56,6 +66,20 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     const newData = await fetchGatherings({
       type,
       location,
+      date: selectedDate ? formatingDate(selectedDate) : undefined,
+    });
+    setFilteredData(newData || []);
+  };
+
+  const handleDateChange = async (date: Date | null) => {
+    setSelectedDate(date);
+
+    const type =
+      selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
+    const newData = await fetchGatherings({
+      type,
+      location: selectedLocation,
+      date: date ? formatingDate(date) : undefined,
     });
     setFilteredData(newData || []);
   };
@@ -72,7 +96,10 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
           </div>
           <Chips activeTab={activeTab} onChipClick={handleChipClick} />
         </div>
-        <Filters onLocationChange={handleLocationChange} />
+        <Filters
+          onLocationChange={handleLocationChange}
+          onDateChange={handleDateChange}
+        />
       </div>
       <GatheringCardList gatherings={filteredData} />
 
