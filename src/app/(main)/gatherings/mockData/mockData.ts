@@ -21,7 +21,7 @@ export const mockData = {
 
 export const OPTIONS = ['건대입구', '을지로3가', '신림', '홍대입구'];
 
-export const SORT_OPTIONS = ['마감 임박', '을지로3가', '참여 인원 순'];
+export const SORT_OPTIONS = ['마감 임박', '참여 인원 순'];
 
 export interface Participant {
   User: {

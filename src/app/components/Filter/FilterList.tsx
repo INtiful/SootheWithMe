@@ -9,7 +9,7 @@ interface FilterListProps {
   state?: 'default' | 'active';
   children: string;
   options?: string[];
-  onSelect?: (selectedOption: string | undefined) => void; // Add this prop
+  onSelect?: (selectedOption: string | undefined) => void;
 }
 
 const stateClasses = {

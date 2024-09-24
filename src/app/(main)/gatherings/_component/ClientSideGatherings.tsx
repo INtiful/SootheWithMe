@@ -17,6 +17,11 @@ interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
 }
 
+const sortOptionsMap: { [key: string]: string } = {
+  '마감 임박': 'registrationEnd',
+  '참여 인원 순': 'participantCount',
+};
+
 const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   const [activeTab, setActiveTab] = useState<'WORKATION' | 'DALLAEMFIT'>(
     'DALLAEMFIT',
@@ -31,6 +36,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | null
   >(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [sortOption, setSortOption] = useState<string | undefined>();
 
   const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
     setActiveTab(type);
@@ -40,6 +46,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       type,
       location: selectedLocation,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
+      sortBy: sortOption,
     });
     setFilteredData(newData);
   };
@@ -54,6 +61,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       type,
       location: selectedLocation,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
+      sortBy: sortOption,
     });
     setFilteredData(newData || []);
   };
@@ -67,6 +75,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       type,
       location,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
+      sortBy: sortOption,
     });
     setFilteredData(newData || []);
   };
@@ -80,7 +89,24 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       type,
       location: selectedLocation,
       date: date ? formatingDate(date) : undefined,
+      sortBy: sortOption,
     });
+    setFilteredData(newData || []);
+  };
+
+  const handleSortChange = async (option: string) => {
+    const sortBy = sortOptionsMap[option] || undefined;
+    setSortOption(sortBy);
+
+    const type =
+      selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
+    const newData = await fetchGatherings({
+      type,
+      location: selectedLocation,
+      date: selectedDate ? formatingDate(selectedDate) : undefined,
+      sortBy,
+    });
+
     setFilteredData(newData || []);
   };
 
@@ -99,6 +125,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
         <Filters
           onLocationChange={handleLocationChange}
           onDateChange={handleDateChange}
+          onSortChange={handleSortChange}
         />
       </div>
       <GatheringCardList gatherings={filteredData} />
