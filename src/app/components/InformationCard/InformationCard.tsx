@@ -12,6 +12,7 @@ import InfoChip from '../Chip/InfoChip';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { GatheringParticipantsType } from '@/types/data.type';
 import { MIN_PARTICIPANTS } from '@/constants/common';
+import { formatDate, formatTimeColon } from '@/utils/formatDate';
 
 interface InformationCardProps {
   title: string;
@@ -92,8 +93,8 @@ const InformationCard = ({
 
         {/* 날짜, 시간 chip */}
         <div className='mt-12 space-x-8'>
-          <InfoChip type='date'>{date}</InfoChip>
-          <InfoChip type='time'>{time}</InfoChip>
+          <InfoChip type='date'>{formatDate(date)}</InfoChip>
+          <InfoChip type='time'>{formatTimeColon(time)}</InfoChip>
         </div>
       </div>
 
