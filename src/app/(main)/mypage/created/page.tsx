@@ -1,26 +1,23 @@
-'use client';
-
-import Card from '@/app/components/Card/Card';
+import fetchGatherings from '@/app/api/actions/gatherings/fetchGatherings';
+import GatheringList from './_component/GatheringList';
 import { DATA_LIST } from './mockData';
 
-const CreatedPage = () => {
-  const handleSaveDiscard = () => {
-    // TODO : 스토리지 삭제 로직 추가
-    console.log('스토리지 삭제 버튼 클릭');
-  };
+const CreatedPage = async () => {
+  // TODO : User ID를 조회
+  const USER_ID = '716';
+  // User ID로 모임 리스트 조회
+  const gatherings = await fetchGatherings({ createdBy: USER_ID });
 
   return (
-    <div className='grow'>
-      {DATA_LIST.map((data) => (
-        <Card key={data.id} handleSaveDiscard={handleSaveDiscard} data={data}>
-          <Card.Info />
-        </Card>
-      ))}
-    </div>
-    // 내가 만든 모임이 없을 경우
-    // <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
-    //   아직 만든 모임이 없어요
-    // </div>
+    <>
+      {gatherings.length > 0 ? (
+        <GatheringList dataList={DATA_LIST} />
+      ) : (
+        <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
+          아직 만든 모임이 없어요
+        </div>
+      )}
+    </>
   );
 };
 
