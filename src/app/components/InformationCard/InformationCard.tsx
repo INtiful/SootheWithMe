@@ -11,9 +11,7 @@ import Avatar from './Avatar';
 import InfoChip from '../Chip/InfoChip';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { GatheringParticipantsType } from '@/types/data.type';
-
-// min number of people to confirm opening
-const MIN_PARTICIPANTS = 5;
+import { MIN_PARTICIPANTS } from '@/constants/common';
 
 interface InformationCardProps {
   title: string;

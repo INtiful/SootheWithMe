@@ -12,3 +12,5 @@ export const MYPAGE_REVIEW_TABS = {
 };
 
 export const REVIEWS_PER_PAGE = 4;
+
+export const MIN_PARTICIPANTS = 5;
