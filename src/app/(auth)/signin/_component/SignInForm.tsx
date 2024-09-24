@@ -18,7 +18,7 @@ const SignInForm = () => {
     formState: { errors, isValid },
     setError,
   } = useForm<SignInData>({
-    mode: 'onBlur',
+    mode: 'onSubmit',
     resolver: zodResolver(signinSchema),
     defaultValues: {
       email: '',

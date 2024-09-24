@@ -20,7 +20,7 @@ const SignUpForm = () => {
     formState: { errors, isValid },
     setError,
   } = useForm<SignUpData>({
-    mode: 'onBlur',
+    mode: 'onSubmit',
     resolver: zodResolver(signupSchema),
     defaultValues: {
       name: '',
