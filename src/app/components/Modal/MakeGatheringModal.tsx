@@ -1,17 +1,16 @@
 'use client';
 
 import postGatherings from '@/app/api/gatherings/postGatherings';
-import { GATHERING_TIMES } from '@/constants/common';
 import { IconX } from '@/public/icons';
 import { MouseEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
 import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
 import Button from '../Button/Button';
-import TimeChip from '../Chip/TimeChip';
 import Input from '../Input/Input';
 import ImageUploader from './MakeGatheringModal/ImageUploader';
 import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
+import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
 
 interface MakeGatheringModalProps {
@@ -95,7 +94,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           <h2>날짜</h2>
           <div className='flex w-full items-center justify-center rounded-xl border border-var-gray-200 py-16'>
             <div className='w-252'>
-              {/* TODO: 날짜 컴포넌트 공통화 */}
               <DatePicker
                 id='datepicker'
                 locale='ko'
@@ -110,35 +108,10 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           </div>
         </div>
         {/* 시간 */}
-        {/* TODO: 시간 버튼 상태 로직 추가 */}
-        <div className='space-y-8 text-14 font-semibold'>
-          <h2>오전</h2>
-          <div className='flex gap-8'>
-            {GATHERING_TIMES.MORNING.map((time) => (
-              <TimeChip
-                key={time}
-                state={selectedTime === time ? 'active' : 'default'}
-                onClick={() => setSelectedTime(time)}
-              >
-                {time}
-              </TimeChip>
-            ))}
-          </div>
-        </div>
-        <div className='space-y-8 text-14 font-semibold'>
-          <h2>오후</h2>
-          <div className='flex flex-wrap gap-8 md:flex-nowrap'>
-            {GATHERING_TIMES.AFTERNOON.map((time) => (
-              <TimeChip
-                key={time}
-                state={selectedTime === time ? 'active' : 'default'}
-                onClick={() => setSelectedTime(time)}
-              >
-                {time}
-              </TimeChip>
-            ))}
-          </div>
-        </div>
+        <SelectTimeChip
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
+        />
         {/* 모집 정원 */}
         <div className='space-y-12 text-16 font-semibold'>
           <h2>모집정원</h2>
