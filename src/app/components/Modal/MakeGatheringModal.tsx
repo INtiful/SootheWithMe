@@ -1,17 +1,17 @@
 'use client';
 
 import postGatherings from '@/app/api/gatherings/postGatherings';
-import { MouseEvent, useRef, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
 import Button from '../Button/Button';
+import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
+import Calendar from './MakeGatheringModal/Calendar';
+import Header from './MakeGatheringModal/Header';
 import ImageUploader from './MakeGatheringModal/ImageUploader';
 import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
+import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
-import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
-import Header from './MakeGatheringModal/Header';
-import Calendar from './MakeGatheringModal/Calendar';
-import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -19,21 +19,28 @@ interface MakeGatheringModalProps {
 
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [location, setLocation] = useState<string | null>(null);
-  const [image, setImage] = useState<null | string>(null);
+  const [image, setImage] = useState<string | null>(null);
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
     OFFICE_STRETCHING: false,
     MINDFULLNESS: false,
     WORKATION: false,
   });
+
   const [dateTime, setDateTime] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [capacity, setCapacity] = useState<number | null>(null);
+  const [capacity, setCapacity] = useState<number>(0);
 
+  // true인 key 값만 필터링
   const getSelectedGatheringType = () => {
     const selectedGatheringType = String(
       Object.keys(gatheringType).filter((key) => gatheringType[key]),
-    ); // true인 key 값만 필터링
+    );
     return selectedGatheringType;
+  };
+
+  // 모든 gatheringType이 false인지 확인
+  const isAllGatheringTypeFalse = () => {
+    return Object.values(gatheringType).every((value) => value === false);
   };
 
   const handleSubmit = () => {
@@ -83,7 +90,12 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <Button
           name='확인'
           variant={
-            location && image && dateTime && selectedTime && capacity
+            location &&
+            image &&
+            !isAllGatheringTypeFalse &&
+            dateTime &&
+            selectedTime &&
+            capacity >= 5
               ? 'default'
               : 'gray'
           }
