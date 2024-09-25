@@ -9,7 +9,10 @@ const user = {
   name: 'test name',
 };
 
-const options = [{ name: '마이페이지' }, { name: '로그아웃' }];
+const options = [
+  { name: '마이페이지', link: '/mypage' },
+  { name: '로그아웃', link: '/gatherings' },
+];
 
 const UserStatus = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -42,19 +45,17 @@ const UserStatus = () => {
           {isOpen && (
             <ul className='absolute right-0 mt-8 max-h-240 w-120 overflow-y-auto rounded-xl bg-var-gray-50 lg:left-0'>
               {options.map((option, index) => (
-                <li
-                  key={index}
-                  className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'
-                >
-                  {option.name}
-                </li>
+                <Link key={index} href={option.link}>
+                  <li className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'>
+                    {option.name}
+                  </li>
+                </Link>
               ))}
             </ul>
           )}
         </div>
       ) : (
         <Link href='/signin'>
-          {/* @todo 임시 경로입니다. */}
           <div className='text-[16px] font-semibold text-white'>로그인</div>
         </Link>
       )}
