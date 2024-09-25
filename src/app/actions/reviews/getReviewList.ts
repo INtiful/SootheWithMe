@@ -1,6 +1,6 @@
 'use server';
 
-import { ReviewData } from '@/types/data.type';
+import { ReviewsType } from '@/types/data.type';
 
 interface GetReviewListParams {
   limit?: number;
@@ -13,7 +13,7 @@ interface GetReviewListParams {
 
 const getReviewList = async (
   params: GetReviewListParams = {},
-): Promise<ReviewData[]> => {
+): Promise<ReviewsType[]> => {
   try {
     const { limit = 10, offset = 0, ...rest } = params;
 
@@ -33,7 +33,7 @@ const getReviewList = async (
       },
     );
 
-    const data: ReviewData[] = await res.json();
+    const data: ReviewsType[] = await res.json();
 
     return data;
   } catch (error) {

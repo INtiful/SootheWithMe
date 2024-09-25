@@ -1,10 +1,10 @@
 import { IconHeart } from '@/public/icons';
-import { ReviewScoreData } from '@/types/data.type';
+import { ReviewScoreType } from '@/types/data.type';
 
 interface AverageRatingProps {
-  ratingData: ReviewScoreData[];
+  ratingData: ReviewScoreType[];
 }
-const calculateAverageRating = (data: ReviewScoreData[]) => {
+const calculateAverageRating = (data: ReviewScoreType[]) => {
   if (data.length <= 0) {
     return '0';
   }

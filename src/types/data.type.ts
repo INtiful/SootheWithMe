@@ -10,7 +10,7 @@ export interface UserJoinedGatheringsData {
   location: string;
   participantCount: number;
   capacity: number;
-  image: string | null;
+  image: string;
   createdBy: number;
   canceledAt?: string | null;
   joinedAt: string;
@@ -30,7 +30,7 @@ export interface GatheringsListData {
   location: string;
   participantCount: number;
   capacity: number;
-  image: string | null;
+  image: string;
   createdBy: number;
   canceledAt?: string | null;
 }
@@ -45,7 +45,7 @@ export interface GatheringInfoType {
   location: string;
   participantCount: number;
   capacity: number;
-  image: string | null;
+  image: string;
   createdBy: number;
   canceledAt?: string | null;
 }
@@ -60,7 +60,7 @@ export interface GatheringParticipantsType {
     email: string;
     name: string;
     companyName: string;
-    image: string | null;
+    image: string;
   };
 }
 
@@ -92,13 +92,13 @@ export interface ReviewsType {
     name: string;
     dateTime: string;
     location: string;
-    image: string | null;
+    image: string;
   };
   User: {
     teamId: number | string;
     id: number;
     name: string;
-    image: string | null;
+    image: string;
   };
 }
 

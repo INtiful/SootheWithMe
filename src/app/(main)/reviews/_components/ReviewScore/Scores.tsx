@@ -1,8 +1,8 @@
-import { ReviewScoreData } from '@/types/data.type';
+import { ReviewScoreType } from '@/types/data.type';
 import ScoreBar from './ScoreBar';
 
 interface ScoresProps {
-  ratingData: ReviewScoreData[];
+  ratingData: ReviewScoreType[];
 }
 
 interface Ratings {
@@ -14,7 +14,7 @@ interface Ratings {
 }
 
 // 전체 별점 개수 합산
-const calculateTotalRatings = (ratingData: ReviewScoreData[]): Ratings => {
+const calculateTotalRatings = (ratingData: ReviewScoreType[]): Ratings => {
   return ratingData.reduce(
     (acc, data) => ({
       oneStar: acc.oneStar + data.oneStar,

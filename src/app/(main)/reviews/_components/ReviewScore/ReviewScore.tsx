@@ -1,9 +1,9 @@
-import { ReviewScoreData } from '@/types/data.type';
+import { ReviewScoreType } from '@/types/data.type';
 import AverageRating from './AverageRating';
 import Scores from './Scores';
 
 interface ReviewScoreProps {
-  initialScore: ReviewScoreData[];
+  initialScore: ReviewScoreType[];
 }
 const ReviewScore = ({ initialScore }: ReviewScoreProps) => {
   return (

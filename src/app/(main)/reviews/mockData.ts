@@ -1,6 +1,6 @@
-import { ReviewData, ReviewScoreData } from '@/types/data.type';
+import { ReviewsType, ReviewScoreType } from '@/types/data.type';
 
-export const REVIEW_SCORE_MOCK_DATA: ReviewScoreData[] = [
+export const REVIEW_SCORE_MOCK_DATA: ReviewScoreType[] = [
   {
     teamId: '3-4',
     gatheringId: 0,
@@ -55,7 +55,7 @@ export const REVIEW_SCORE_MOCK_DATA: ReviewScoreData[] = [
   },
 ];
 
-export const REVIEW_MOCK_DATA: ReviewData[] = [
+export const REVIEW_MOCK_DATA: ReviewsType[] = [
   {
     teamId: '3-4',
     id: 1,
@@ -76,7 +76,7 @@ export const REVIEW_MOCK_DATA: ReviewData[] = [
       teamId: '3-4',
       id: 100,
       name: '윤채현',
-      image: null,
+      image: '/images/mock-image.png',
     },
   },
   {
@@ -99,7 +99,7 @@ export const REVIEW_MOCK_DATA: ReviewData[] = [
       teamId: '3-4',
       id: 100,
       name: '윤채현',
-      image: null,
+      image: '/images/mock-image.png',
     },
   },
   {
@@ -122,7 +122,7 @@ export const REVIEW_MOCK_DATA: ReviewData[] = [
       teamId: '3-4',
       id: 100,
       name: '윤채현',
-      image: null,
+      image: '/images/mock-image.png',
     },
   },
   {
@@ -145,7 +145,7 @@ export const REVIEW_MOCK_DATA: ReviewData[] = [
       teamId: '3-4',
       id: 100,
       name: '윤채현',
-      image: null,
+      image: '/images/mock-image.png',
     },
   },
 ];

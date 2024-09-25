@@ -1,6 +1,6 @@
 'use server';
 
-import { ReviewScoreData } from '@/types/data.type';
+import { ReviewScoreType } from '@/types/data.type';
 
 interface GetReviewScoreParams {
   gatheringId?: number[];
@@ -9,7 +9,7 @@ interface GetReviewScoreParams {
 
 const getReviewScore = async (
   params: GetReviewScoreParams = {},
-): Promise<ReviewScoreData[]> => {
+): Promise<ReviewScoreType[]> => {
   try {
     const { gatheringId, type } = params;
 
@@ -33,7 +33,7 @@ const getReviewScore = async (
       },
     );
 
-    const data: ReviewScoreData[] = await res.json();
+    const data: ReviewScoreType[] = await res.json();
 
     return data;
   } catch (error) {
