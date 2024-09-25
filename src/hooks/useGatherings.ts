@@ -19,6 +19,7 @@ import { useState } from 'react';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { formatCalendarDate } from '@/utils/formatDate';
 import { GatheringsListData } from '@/types/data.type';
+import { LIMIT_PER_REQUEST } from '@/constants/common';
 
 // sorting 시 한글 옵션을 영어로 변환해주는 기능
 export const sortOptionsMap: { [key: string]: string } = {
@@ -41,18 +42,51 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
   >(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [sortOption, setSortOption] = useState<string | undefined>();
+  const [offset, setOffset] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+
+  const fetchFilteredGatherings = async (
+    overrides: Partial<{
+      type: 'WORKATION' | 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
+      location: string | undefined;
+      date: Date | null;
+      sortBy: string | undefined;
+      sortOrder: 'asc' | 'desc';
+      offset: number;
+    }> = {},
+  ) => {
+    const type =
+      overrides.type ||
+      (selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip);
+    const date = overrides.date
+      ? formatCalendarDate(overrides.date)
+      : selectedDate
+        ? formatCalendarDate(selectedDate)
+        : undefined;
+    const sortBy = overrides.sortBy || sortOption;
+    const sortOrder = sortBy === 'participantCount' ? 'desc' : undefined;
+
+    const newData = await getGatherings({
+      type,
+      location: overrides.location || selectedLocation,
+      date,
+      sortBy,
+      offset: overrides.offset || 0,
+      limit: LIMIT_PER_REQUEST,
+      ...(sortOrder && { sortOrder }),
+    });
+
+    return newData || [];
+  };
 
   const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
     setActiveTab(type);
     setSelectedChip(null);
+    setOffset(0);
+    setHasMore(true);
 
-    const newData = await getGatherings({
-      type,
-      location: selectedLocation,
-      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
-      sortBy: sortOption,
-    });
-
+    const newData = await fetchFilteredGatherings({ type, offset: 0 });
     setFilteredData(newData);
   };
 
@@ -60,47 +94,30 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
   ) => {
     setSelectedChip(label);
-
     const type = label === 'ALL' ? 'DALLAEMFIT' : label;
+    setOffset(0);
+    setHasMore(true);
 
-    const newData = await getGatherings({
-      type,
-      location: selectedLocation,
-      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
-      sortBy: sortOption,
-    });
-
-    setFilteredData(newData || []);
+    const newData = await fetchFilteredGatherings({ type, offset: 0 });
+    setFilteredData(newData);
   };
 
   const handleLocationChange = async (location: string | undefined) => {
     setSelectedLocation(location);
+    setOffset(0);
+    setHasMore(true);
 
-    const type =
-      selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
-    const newData = await getGatherings({
-      type,
-      location,
-      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
-      sortBy: sortOption,
-    });
-
-    setFilteredData(newData || []);
+    const newData = await fetchFilteredGatherings({ location, offset: 0 });
+    setFilteredData(newData);
   };
 
   const handleDateChange = async (date: Date | null) => {
     setSelectedDate(date);
+    setOffset(0);
+    setHasMore(true);
 
-    const type =
-      selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
-    const newData = await getGatherings({
-      type,
-      location: selectedLocation,
-      date: date ? formatCalendarDate(date) : undefined,
-      sortBy: sortOption,
-    });
-
-    setFilteredData(newData || []);
+    const newData = await fetchFilteredGatherings({ date, offset: 0 });
+    setFilteredData(newData);
   };
 
   const handleSortChange = async (option: string | undefined) => {
@@ -108,20 +125,34 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
       ? sortOptionsMap[option]
       : undefined;
     setSortOption(sortBy);
+    setOffset(0);
+    setHasMore(true);
 
-    const sortOrder = sortBy === 'participantCount' ? 'desc' : undefined;
+    const newData = await fetchFilteredGatherings({ sortBy, offset: 0 });
+    setFilteredData(newData);
+  };
 
-    const type =
-      selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
-    const newData = await getGatherings({
-      type,
-      location: selectedLocation,
-      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
-      sortBy,
-      ...(sortOrder && { sortOrder }), // sortOrder가 있을 때만 추가
-    });
+  const loadMore = async () => {
+    if (isLoading || !hasMore) return;
 
-    setFilteredData(newData || []);
+    setIsLoading(true);
+
+    const newOffset = offset + LIMIT_PER_REQUEST;
+
+    try {
+      const moreData = await fetchFilteredGatherings({ offset: newOffset });
+
+      if (moreData.length < LIMIT_PER_REQUEST) {
+        setHasMore(false);
+      }
+
+      setFilteredData((prevData) => [...prevData, ...moreData]);
+      setOffset(newOffset);
+    } catch (error) {
+      console.error('데이터를 불러오는 데 에러가 발생했습니다.', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
@@ -131,11 +162,14 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     selectedLocation,
     selectedDate,
     sortOption,
+    isLoading,
+    hasMore,
     handleTabClick,
     handleChipClick,
     handleLocationChange,
     handleDateChange,
     handleSortChange,
+    loadMore,
   };
 };
 
