@@ -66,7 +66,7 @@ const ModalPlaceDropdown = ({
   return (
     <div className='relative' ref={containerRef}>
       <div
-        className={`h- mb-8 flex w-full cursor-pointer items-center justify-between rounded-xl py-[6px] pl-12 pr-8 text-16 font-medium md:h-44 md:py-[10px] ${stateClasses[currentState]}`}
+        className={`h- mb-8 flex w-full cursor-pointer items-center justify-between rounded-xl py-[6px] pl-12 pr-8 text-16 font-semibold md:h-44 md:py-[10px] ${stateClasses[currentState]}`}
         onClick={toggleDropDown}
       >
         {selectedOption || children}

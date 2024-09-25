@@ -20,31 +20,31 @@ interface MakeGatheringModalProps {
 // TODO: 여러 컴포넌트로 쪼개기 (리팩토링 단계)
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [location, setLocation] = useState<string | null>(null);
-  console.log(location);
 
   const [image, setImage] = useState<null | string>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
-  console.log(image);
 
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
     OFFICE_STRETCHING: false,
     MINDFULLNESS: false,
     WORKATION: false,
   });
-  const getSelectedTypes = () => {
-    return Object.keys(gatheringType).filter((key) => gatheringType[key]);
+
+  const getSelectedGatheringType = () => {
+    const selectedGatheringType = String(
+      Object.keys(gatheringType).filter((key) => gatheringType[key]),
+    );
+    return selectedGatheringType;
   };
-  console.log(getSelectedTypes());
+  console.log(gatheringType);
+  console.log(getSelectedGatheringType());
 
   const [dateTime, setDateTime] = useState<Date | null>(null);
   const datepickerRef = useRef(null);
-  console.log(dateTime);
 
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  console.log(selectedTime);
 
   const [capacity, setCapacity] = useState<number | null>(null);
-  console.log(capacity);
 
   const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -57,12 +57,13 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const handleSubmit = () => {
     postGatherings(
       location as string,
-      'DALLAEMFIT',
+      getSelectedGatheringType() as string,
       dateTime?.toISOString() as string,
       capacity as number,
       image as string,
       new Date().toISOString(),
     );
+    onClose();
   };
 
   return (
@@ -184,7 +185,15 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           />
         </div>
         {/* 버튼 */}
-        <Button name='확인' variant={'gray'} onClick={handleSubmit} />
+        <Button
+          name='확인'
+          variant={
+            location && image && dateTime && selectedTime && capacity
+              ? 'default'
+              : 'gray'
+          }
+          onClick={handleSubmit}
+        />
       </div>
     </ModalFrame>
   );

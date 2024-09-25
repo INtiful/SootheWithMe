@@ -16,9 +16,10 @@ const BoxSelectGroup = ({
   setGatheringType,
 }: BoxSelectGroupProps) => {
   const handleCheckboxChange = (type: string) => {
-    setGatheringType((prevType: GatheringType) => ({
-      ...prevType,
-      [type]: !prevType[type],
+    setGatheringType(() => ({
+      OFFICE_STRETCHING: type === 'OFFICE_STRETCHING',
+      MINDFULLNESS: type === 'MINDFULLNESS',
+      WORKATION: type === 'WORKATION',
     }));
   };
 

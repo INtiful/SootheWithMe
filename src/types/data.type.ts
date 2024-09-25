@@ -35,6 +35,8 @@ export interface GatheringsListData {
   canceledAt?: string;
 }
 
+// GET : /{teamId}/gatherings/{gatheringId}
+// POST: /{teamId}/gatherings
 export interface GatheringInfoType {
   teamId: number;
   id: number;
@@ -49,7 +51,6 @@ export interface GatheringInfoType {
   createdBy: number;
   canceledAt?: string;
 }
-
 export interface GatheringParticipantsType {
   teamId: number;
   userId: number;
@@ -100,21 +101,4 @@ export interface ReviewsType {
     name: string;
     image: string;
   };
-}
-
-// GET : /{teamId}/gatherings/{gatheringId}
-// POST: /{teamId}/gatherings
-export interface GatheringInfoType {
-  teamId: number;
-  id: number;
-  type: string;
-  name: string | null;
-  dateTime: string;
-  registrationEnd: string;
-  location: string;
-  participantCount: number;
-  capacity: number;
-  image: string;
-  createdBy: number;
-  canceledAt?: string;
 }
