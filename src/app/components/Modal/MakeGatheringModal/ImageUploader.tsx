@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import Button from '../../Button/Button';
 
 interface ImageUploaderProps {
@@ -9,13 +9,18 @@ interface ImageUploaderProps {
 }
 
 const ImageUploader = ({ image, setImage }: ImageUploaderProps) => {
+  const [fileName, setFileName] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { files } = event.target;
-    if (files) {
-      const [file] = files;
-      setImage(file.name);
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      setFileName(file.name);
     }
   };
 
@@ -31,7 +36,9 @@ const ImageUploader = ({ image, setImage }: ImageUploaderProps) => {
         />
         <div className='flex gap-12'>
           <div className='flex w-full items-center rounded-xl bg-gray-50 px-16 py-[10px]'>
-            {image ?? <p className='text-gray-400'>이미지를 첨부해 주세요</p>}
+            {fileName ?? (
+              <p className='text-gray-400'>이미지를 첨부해 주세요</p>
+            )}
           </div>
           <div className='w-100'>
             <Button

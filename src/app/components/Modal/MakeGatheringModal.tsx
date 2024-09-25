@@ -25,7 +25,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     MINDFULLNESS: false,
     WORKATION: false,
   });
-
   const [dateTime, setDateTime] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [capacity, setCapacity] = useState<number>(0);
@@ -67,13 +66,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     onClose();
   };
 
-  console.log('location', location);
-  console.log('image', image);
-  console.log('gatheringType', gatheringType);
-  console.log('dateTime', dateTime);
-  console.log('selectedTime', selectedTime);
-  console.log('capacity', capacity);
-
   return (
     <ModalFrame onClose={onClose}>
       <div
@@ -90,6 +82,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         >
           장소를 선택해주세요
         </PlaceDropdown>
+        {/* 이미지 업로더 */}
         <ImageUploader image={image} setImage={setImage} />
         {/* 선택 서비스 */}
         <BoxSelectGroup
