@@ -16,11 +16,18 @@ const BoxSelectGroup = ({
   setGatheringType,
 }: BoxSelectGroupProps) => {
   const handleCheckboxChange = (type: string) => {
-    setGatheringType(() => ({
-      OFFICE_STRETCHING: type === 'OFFICE_STRETCHING',
-      MINDFULLNESS: type === 'MINDFULLNESS',
-      WORKATION: type === 'WORKATION',
-    }));
+    setGatheringType((prevType) => {
+      const isSelected = prevType[type];
+      if (isSelected) {
+        return { ...prevType, [type]: false };
+      } else {
+        const newType = Object.keys(prevType).reduce((acc, key) => {
+          acc[key] = false;
+          return acc;
+        }, {} as GatheringType);
+        return { ...newType, [type]: true };
+      }
+    });
   };
 
   return (

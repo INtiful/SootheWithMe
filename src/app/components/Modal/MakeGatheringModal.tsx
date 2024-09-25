@@ -67,6 +67,13 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     onClose();
   };
 
+  console.log('location', location);
+  console.log('image', image);
+  console.log('gatheringType', gatheringType);
+  console.log('dateTime', dateTime);
+  console.log('selectedTime', selectedTime);
+  console.log('capacity', capacity);
+
   return (
     <ModalFrame onClose={onClose}>
       <div
@@ -105,7 +112,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           variant={
             location &&
             image &&
-            !isAllGatheringTypeFalse &&
+            !isAllGatheringTypeFalse() &&
             dateTime &&
             selectedTime &&
             capacity >= 5
