@@ -19,7 +19,13 @@ import { useState } from 'react';
 import getGatherings from '@/app/actions/gatherings/getGatherings';
 import { formatingDate } from '@/utils/formatDate';
 import { GatheringsListData } from '@/types/data.type';
-import { sortOptionsMap } from '@/utils/sortOptions';
+
+// sorting 시 한글 옵션을 영어로 변환해주는 기능
+export const sortOptionsMap: { [key: string]: string } = {
+  최신순: 'dateTime',
+  '마감 임박': 'registrationEnd',
+  '참여 인원 순': 'participantCount',
+};
 
 const useGatherings = (initialGatherings: GatheringsListData[]) => {
   const [activeTab, setActiveTab] = useState<'WORKATION' | 'DALLAEMFIT'>(
@@ -97,9 +103,13 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     setFilteredData(newData || []);
   };
 
-  const handleSortChange = async (option: string) => {
-    const sortBy = sortOptionsMap[option] || undefined;
+  const handleSortChange = async (option: string | undefined) => {
+    const sortBy: string | undefined = option
+      ? sortOptionsMap[option]
+      : undefined;
     setSortOption(sortBy);
+
+    const sortOrder = sortBy === 'participantCount' ? 'desc' : undefined;
 
     const type =
       selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip;
@@ -108,6 +118,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
       location: selectedLocation,
       date: selectedDate ? formatingDate(selectedDate) : undefined,
       sortBy,
+      ...(sortOrder && { sortOrder }), // sortOrder가 있을 때만 추가
     });
 
     setFilteredData(newData || []);

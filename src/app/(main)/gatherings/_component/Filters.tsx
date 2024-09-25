@@ -1,13 +1,11 @@
-import FilterList from '@/app/components/Filter/FilterList';
-import FilterSort from '@/app/components/Filter/FilterSort';
+import Filter from '@/app/components/Filter/Filter';
 import FilterDate from '@/app/components/Filter/FilterDate';
-
-import { OPTIONS, SORT_OPTIONS } from '../mockData/mockData';
+import { LOCATION_OPTIONS, SORT_OPTIONS } from '@/constants/common';
 
 interface FiltersProps {
   onLocationChange: (location: string | undefined) => void;
   onDateChange: (date: Date | null) => void;
-  onSortChange: (sortOption: string) => void;
+  onSortChange: (sortOption: string | undefined) => void;
 }
 
 const Filters = ({
@@ -19,32 +17,34 @@ const Filters = ({
     onLocationChange(selectedOption);
   };
 
-  const handleSortSelect = (sortOption: string) => {
+  const handleSortSelect = (sortOption: string | undefined) => {
     onSortChange(sortOption);
   };
 
   return (
     <div className='flex justify-between pt-16'>
       <div className='flex space-x-8'>
-        <FilterList
+        <Filter
+          type='list'
           state='default'
-          options={OPTIONS}
+          options={LOCATION_OPTIONS}
           onSelect={handleLocationSelect}
         >
           지역 전체
-        </FilterList>
+        </Filter>
         <FilterDate state='default' onSelectDate={onDateChange}>
           날짜 전체
         </FilterDate>
       </div>
       <div>
-        <FilterSort
+        <Filter
+          type='sort'
           state='default'
           options={SORT_OPTIONS}
           onSelect={handleSortSelect}
         >
-          필터
-        </FilterSort>
+          정렬
+        </Filter>
       </div>
     </div>
   );
