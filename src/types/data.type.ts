@@ -49,3 +49,38 @@ export interface FetchGatheringsResponse {
   hasNextPage: boolean;
   offset: number; // 현재 페이지 번호
 }
+
+// 모든 리뷰 조회 반환 데이터
+export interface ReviewData {
+  teamId: string;
+  id: number;
+  score: number;
+  comment: string;
+  createdAt: string;
+  Gathering: {
+    teamId: string;
+    id: number;
+    type: string;
+    name: string;
+    dateTime: string;
+    location: string;
+    image: string;
+  };
+  User: {
+    teamId: string;
+    id: number;
+    name: string;
+    image: string | null;
+  };
+}
+
+export interface ReviewScoreData {
+  teamId: string;
+  gatheringId: number;
+  type: string;
+  oneStar: number;
+  twoStars: number;
+  threeStars: number;
+  fourStars: number;
+  fiveStars: number;
+}
