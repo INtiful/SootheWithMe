@@ -39,7 +39,7 @@ export const isSameDate = (dateTime: string): boolean => {
   );
 };
 
-export const formatingDate = (date: Date | null): string => {
+export const formatCalendarDate = (date: Date | null): string => {
   if (!date) return 'No date selected';
 
   const year = date.getFullYear();

@@ -17,7 +17,7 @@
 import { useState } from 'react';
 
 import getGatherings from '@/app/actions/gatherings/getGatherings';
-import { formatingDate } from '@/utils/formatDate';
+import { formatCalendarDate } from '@/utils/formatDate';
 import { GatheringsListData } from '@/types/data.type';
 
 // sorting 시 한글 옵션을 영어로 변환해주는 기능
@@ -49,7 +49,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     const newData = await getGatherings({
       type,
       location: selectedLocation,
-      date: selectedDate ? formatingDate(selectedDate) : undefined,
+      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
       sortBy: sortOption,
     });
 
@@ -66,7 +66,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     const newData = await getGatherings({
       type,
       location: selectedLocation,
-      date: selectedDate ? formatingDate(selectedDate) : undefined,
+      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
       sortBy: sortOption,
     });
 
@@ -81,7 +81,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     const newData = await getGatherings({
       type,
       location,
-      date: selectedDate ? formatingDate(selectedDate) : undefined,
+      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
       sortBy: sortOption,
     });
 
@@ -96,7 +96,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     const newData = await getGatherings({
       type,
       location: selectedLocation,
-      date: date ? formatingDate(date) : undefined,
+      date: date ? formatCalendarDate(date) : undefined,
       sortBy: sortOption,
     });
 
@@ -116,7 +116,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     const newData = await getGatherings({
       type,
       location: selectedLocation,
-      date: selectedDate ? formatingDate(selectedDate) : undefined,
+      date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
       sortBy,
       ...(sortOrder && { sortOrder }), // sortOrder가 있을 때만 추가
     });

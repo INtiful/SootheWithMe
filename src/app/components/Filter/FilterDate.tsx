@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { IconCaret } from '@/public/icons';
 import CalendarModal from '../Modal/CalendarModal';
-import { formatDate, formatingDate } from '@/utils/formatDate';
+import { formatDate } from '@/utils/formatDate';
 
 const stateClasses = {
   default: 'border border-var-gray-100 bg-var-gray-50 text-var-gray-800',
