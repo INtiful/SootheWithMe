@@ -2,7 +2,6 @@
 
 import Card from '@/app/components/Card/Card';
 import { GatheringsListData } from '@/types/data.type';
-import { DATA_LIST } from '../mockData';
 
 interface GatheringListProps {
   dataList: GatheringsListData[];
@@ -12,7 +11,7 @@ const GatheringList = ({ dataList }: GatheringListProps) => {
   const updateDataList = () => {
     return dataList.map((item) => ({
       ...item,
-      canceledAt: null, // 원하는 필드를 변경
+      canceledAt: null,
     }));
   };
 

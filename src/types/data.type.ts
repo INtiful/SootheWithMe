@@ -12,10 +12,10 @@ export interface UserJoinedGatheringsData {
   capacity: number;
   image: string;
   createdBy: number;
-  canceledAt?: string;
-  joinedAt: string;
-  isCompleted: boolean;
-  isReviewed: boolean;
+  canceledAt: string | null;
+  joinedAt?: string;
+  isCompleted?: boolean;
+  isReviewed?: boolean;
 }
 
 // GET : /{teamId}/gatherings
