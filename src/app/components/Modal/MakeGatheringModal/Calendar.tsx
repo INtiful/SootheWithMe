@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 interface CalendarProps {
   dateTime: Date | null;
