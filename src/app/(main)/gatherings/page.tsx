@@ -1,9 +1,9 @@
 import Header from './_component/Header';
 import ClientSideGatherings from './_component/ClientSideGatherings';
-import fetchGatherings from '@/app/actions/gatherings/fetchGatherings';
+import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 
 const GatheringsPage = async () => {
-  const gatherings = await fetchGatherings({ type: 'DALLAEMFIT' });
+  const gatherings = await getGatherings({ type: 'DALLAEMFIT' });
 
   return (
     <div className='mx-auto max-w-[1200px]'>
@@ -14,5 +14,7 @@ const GatheringsPage = async () => {
     </div>
   );
 };
+
+export const fetchCache = 'force-no-store';
 
 export default GatheringsPage;
