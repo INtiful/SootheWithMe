@@ -26,6 +26,16 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const imageInputRef = useRef<HTMLInputElement>(null);
   console.log(image);
 
+  const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
+    OFFICE_STRETCHING: false,
+    MINDFULLNESS: false,
+    WORKATION: false,
+  });
+  const getSelectedTypes = () => {
+    return Object.keys(gatheringType).filter((key) => gatheringType[key]);
+  };
+  console.log(getSelectedTypes());
+
   const [dateTime, setDateTime] = useState<Date | null>(null);
   const datepickerRef = useRef(null);
   console.log(dateTime);
@@ -109,7 +119,10 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         {/* 선택 서비스 */}
         <div className='space-y-12 text-16 font-semibold'>
           <h2>선택 서비스</h2>
-          <BoxSelectGroup />
+          <BoxSelectGroup
+            gatheringType={gatheringType}
+            setGatheringType={setGatheringType}
+          />
         </div>
         {/* 날짜 */}
         <div className='space-y-12 text-16 font-semibold'>

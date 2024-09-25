@@ -1,17 +1,22 @@
 'use client';
 
-import { useState } from 'react';
 import BoxSelect from './BoxSelect';
 
-const BoxSelectGroup = () => {
-  const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
-    OFFICE_STRETCHING: false,
-    MINDFULLNESS: false,
-    WORKATION: false,
-  });
+interface GatheringType {
+  [key: string]: boolean;
+}
 
+interface BoxSelectGroupProps {
+  gatheringType: GatheringType;
+  setGatheringType: (type: (prevType: GatheringType) => GatheringType) => void;
+}
+
+const BoxSelectGroup = ({
+  gatheringType,
+  setGatheringType,
+}: BoxSelectGroupProps) => {
   const handleCheckboxChange = (type: string) => {
-    setGatheringType((prevType) => ({
+    setGatheringType((prevType: GatheringType) => ({
       ...prevType,
       [type]: !prevType[type],
     }));
