@@ -17,3 +17,7 @@ export interface UserData {
   createdAt: string;
   updatedAt: string;
 }
+
+export type GatheringType = 'WORKATION' | 'DALLAEMFIT';
+
+export type DallaemfitType = 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
