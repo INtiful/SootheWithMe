@@ -10,11 +10,10 @@ import Badge from '../Badge/Badge';
 /* @todo 웹 스토리지에 저장된 찜한 모임의 length를 추출하는 방식으로 변경 예정 */
 const favoriteGroups = '12';
 
-//@todo pathname 정해질 시 추가 예정
 const navList = [
   {
     name: '모임 찾기',
-    link: '/gatherings',
+    link: '/gatherings', // @todo link 변경 시 수정
   },
   {
     name: '찜한 모임',
