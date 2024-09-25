@@ -11,6 +11,10 @@ export const MYPAGE_REVIEW_TABS = {
   WRITTEN: '작성한 리뷰',
 };
 
+export const REVIEWS_PER_PAGE = 4;
+
+export const MIN_PARTICIPANTS = 5;
+
 // 지역 필터링 옵션
 export const LOCATION_OPTIONS = ['건대입구', '을지로 3가', '신림', '홍대입구'];
 

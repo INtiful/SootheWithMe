@@ -1,7 +1,7 @@
 // GET : /{teamId}/gatherings/joined
 // 로그인된 사용자가 참석한 모임 목록 조회 시 Response Data
 export interface UserJoinedGatheringsData {
-  teamId: number;
+  teamId: number | string;
   id: number;
   type: string;
   name: string;
@@ -10,9 +10,9 @@ export interface UserJoinedGatheringsData {
   location: string;
   participantCount: number;
   capacity: number;
-  image: string;
+  image: string | null;
   createdBy: number;
-  canceledAt?: string;
+  canceledAt?: string | null;
   joinedAt: string;
   isCompleted: boolean;
   isReviewed: boolean;
@@ -21,7 +21,7 @@ export interface UserJoinedGatheringsData {
 // GET : /{teamId}/gatherings
 // 모임 목록 조회 시 Response Data
 export interface GatheringsListData {
-  teamId: number;
+  teamId: number | string;
   id: number;
   type: string;
   name: string;
@@ -30,9 +30,38 @@ export interface GatheringsListData {
   location: string;
   participantCount: number;
   capacity: number;
-  image: string;
+  image: string | null;
   createdBy: number;
-  canceledAt?: string;
+  canceledAt?: string | null;
+}
+
+export interface GatheringInfoType {
+  teamId: number | string;
+  id: number;
+  type: string;
+  name: string | null;
+  dateTime: string;
+  registrationEnd: string;
+  location: string;
+  participantCount: number;
+  capacity: number;
+  image: string | null;
+  createdBy: number;
+  canceledAt?: string | null;
+}
+
+export interface GatheringParticipantsType {
+  teamId: number | string;
+  userId: number;
+  gatheringId: number;
+  joinedAt: string;
+  User: {
+    id: number;
+    email: string;
+    name: string;
+    companyName: string;
+    image: string | null;
+  };
 }
 
 // GET : /{teamId}/gatherings/joined
@@ -50,32 +79,31 @@ export interface FetchGatheringsResponse {
   offset: number; // 현재 페이지 번호
 }
 
-// 모든 리뷰 조회 반환 데이터
-export interface ReviewData {
-  teamId: string;
+export interface ReviewsType {
+  teamId: number | string;
   id: number;
   score: number;
   comment: string;
   createdAt: string;
   Gathering: {
-    teamId: string;
+    teamId: number | string;
     id: number;
     type: string;
     name: string;
     dateTime: string;
     location: string;
-    image: string;
+    image: string | null;
   };
   User: {
-    teamId: string;
+    teamId: number | string;
     id: number;
     name: string;
     image: string | null;
   };
 }
 
-export interface ReviewScoreData {
-  teamId: string;
+export interface ReviewScoreType {
+  teamId: number | string;
   gatheringId: number;
   type: string;
   oneStar: number;
