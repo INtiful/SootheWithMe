@@ -16,7 +16,7 @@
 
 import { useState } from 'react';
 
-import getGatherings from '@/app/actions/gatherings/getGatherings';
+import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { formatCalendarDate } from '@/utils/formatDate';
 import { GatheringsListData } from '@/types/data.type';
 

@@ -1,6 +1,6 @@
 import Header from './_component/Header';
 import ClientSideGatherings from './_component/ClientSideGatherings';
-import getGatherings from '@/app/actions/gatherings/getGatherings';
+import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 
 const GatheringsPage = async () => {
   const gatherings = await getGatherings({ type: 'DALLAEMFIT' });
