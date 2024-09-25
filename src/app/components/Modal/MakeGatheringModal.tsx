@@ -1,8 +1,8 @@
 'use client';
 
 import postGatherings from '@/app/api/gatherings/postGatherings';
+import { LOCATION_OPTIONS } from '@/constants/common';
 import { MouseEvent, useState } from 'react';
-import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
 import Button from '../Button/Button';
 import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
 import Calendar from './MakeGatheringModal/Calendar';
@@ -76,7 +76,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <Header onClose={onClose} />
         {/* 장소 */}
         <PlaceDropdown
-          options={MOCK_DROPDOWN_OPTIONS}
+          options={LOCATION_OPTIONS}
           selectedOption={location}
           setSelectedOption={setLocation}
         >
