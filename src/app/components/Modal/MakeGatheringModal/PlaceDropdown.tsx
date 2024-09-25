@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react';
 import { IconCaret } from '@/public/icons';
 import DropDown from '@/app/components/DropDown/DropDown';
 
-interface ModalPlaceDropdownProps {
+interface PlaceDropdownProps {
   state?: 'default' | 'active';
   selectedOption: string | null;
   setSelectedOption: (option: string | null) => void;
@@ -18,13 +18,13 @@ const stateClasses = {
   active: 'text-var-gray-800 bg-var-gray-50',
 };
 
-const ModalPlaceDropdown = ({
+const PlaceDropdown = ({
   state = 'default',
   selectedOption,
   setSelectedOption,
   children,
   options = [],
-}: ModalPlaceDropdownProps) => {
+}: PlaceDropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentState, setCurrentState] = useState<'default' | 'active'>(state);
 
@@ -84,4 +84,4 @@ const ModalPlaceDropdown = ({
   );
 };
 
-export default ModalPlaceDropdown;
+export default PlaceDropdown;

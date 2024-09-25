@@ -1,16 +1,17 @@
 'use client';
 
-import ModalPlaceDropdown from '@/app/(main)/gatherings/_component/ModalPlaceDropdown';
 import postGatherings from '@/app/api/gatherings/postGatherings';
 import { GATHERING_TIMES } from '@/constants/common';
 import { IconX } from '@/public/icons';
-import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { MOCK_DROPDOWN_OPTIONS } from '../BottomFloatingBar/Mock';
 import BoxSelectGroup from '../BoxSelect/BoxSelectGroup';
 import Button from '../Button/Button';
 import TimeChip from '../Chip/TimeChip';
 import Input from '../Input/Input';
+import ImageUploader from './MakeGatheringModal/ImageUploader';
+import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
 import ModalFrame from './ModalFrame';
 
 interface MakeGatheringModalProps {
@@ -20,38 +21,23 @@ interface MakeGatheringModalProps {
 // TODO: 여러 컴포넌트로 쪼개기 (리팩토링 단계)
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [location, setLocation] = useState<string | null>(null);
-
   const [image, setImage] = useState<null | string>(null);
-  const imageInputRef = useRef<HTMLInputElement>(null);
-
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
     OFFICE_STRETCHING: false,
     MINDFULLNESS: false,
     WORKATION: false,
   });
+  const [dateTime, setDateTime] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [capacity, setCapacity] = useState<number | null>(null);
+
+  const datepickerRef = useRef(null);
 
   const getSelectedGatheringType = () => {
     const selectedGatheringType = String(
       Object.keys(gatheringType).filter((key) => gatheringType[key]),
-    );
+    ); // true인 key 값만 필터링
     return selectedGatheringType;
-  };
-  console.log(gatheringType);
-  console.log(getSelectedGatheringType());
-
-  const [dateTime, setDateTime] = useState<Date | null>(null);
-  const datepickerRef = useRef(null);
-
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-
-  const [capacity, setCapacity] = useState<number | null>(null);
-
-  const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
-    const { files } = event.target;
-    if (files) {
-      const [file] = files;
-      setImage(file.name);
-    }
   };
 
   const handleSubmit = () => {
@@ -83,39 +69,18 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         {/* 장소 */}
         <div className='space-y-12 text-16 font-semibold'>
           <h2>장소</h2>
-          <ModalPlaceDropdown
+          <PlaceDropdown
             options={MOCK_DROPDOWN_OPTIONS}
             selectedOption={location}
             setSelectedOption={setLocation}
           >
             장소를 선택해주세요
-          </ModalPlaceDropdown>
+          </PlaceDropdown>
         </div>
         {/* 이미지 */}
         <div className='space-y-12 text-16 font-semibold'>
           <h2>이미지</h2>
-          <div>
-            <input
-              ref={imageInputRef}
-              type='file'
-              className='hidden'
-              onChange={handleChangeFile}
-            />
-            <div className='flex gap-12'>
-              <div className='flex w-full items-center rounded-xl bg-gray-50 px-16 py-[10px]'>
-                {image ?? (
-                  <p className='text-gray-400'>이미지를 첨부해 주세요</p>
-                )}
-              </div>
-              <div className='w-100'>
-                <Button
-                  name='파일 찾기'
-                  variant='white'
-                  onClick={() => imageInputRef.current?.click()}
-                />
-              </div>
-            </div>
-          </div>
+          <ImageUploader image={image} setImage={setImage} />
         </div>
         {/* 선택 서비스 */}
         <div className='space-y-12 text-16 font-semibold'>
