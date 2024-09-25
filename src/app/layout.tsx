@@ -18,11 +18,11 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard'>
-        <Gnb />
         <Providers>
+          <Gnb />
           <div className='grow pt-60'>{children}</div>
+          <div id='modal-root'></div>
         </Providers>
-        <div id='modal-root'></div>
       </body>
     </html>
   );

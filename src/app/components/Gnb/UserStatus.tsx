@@ -12,7 +12,7 @@ const options = [
 ];
 
 const UserStatus = () => {
-  const { user, setUser, isLoading, errorMsg } = useUser();
+  const { user } = useUser();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLDivElement>(null);
 
