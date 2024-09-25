@@ -1,3 +1,5 @@
+/**TODO: 나중에 data mutation 있는 경우 cache: 'no-store' 옵션 삭제 */
+
 'use server';
 
 import { GatheringsListData } from '@/types/data.type';
@@ -32,6 +34,7 @@ const getGatherings = async (
         headers: {
           'Content-Type': 'application/json',
         },
+        cache: 'no-store',
       },
     );
 
