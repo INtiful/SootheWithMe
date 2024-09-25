@@ -10,3 +10,9 @@ export const MYPAGE_REVIEW_TABS = {
   WRITABLE: '작성 가능한 리뷰',
   WRITTEN: '작성한 리뷰',
 };
+
+// 지역 필터링 옵션
+export const LOCATION_OPTIONS = ['건대입구', '을지로 3가', '신림', '홍대입구'];
+
+// 정렬 필터링 옵션
+export const SORT_OPTIONS = ['최신순', '별점 높은 순', '참여 인원 순'];

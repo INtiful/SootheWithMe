@@ -1,5 +1,4 @@
 import { IconHeart } from '@/public/icons';
-import { RATING_DATA as data } from '../../mockData';
 import { ReviewScoreData } from '@/types/data.type';
 
 interface AverageRatingProps {
