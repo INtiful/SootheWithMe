@@ -6,7 +6,6 @@ import BottomFloatingBar from '@/app/components/BottomFloatingBar/BottomFloating
 import GatheringImage from './GatheringImage';
 import GatheringInfo from './GatheringInfo';
 import GatheringReviews from './GatheringReviews';
-import { MOCK_PARTICIPANTS, MOCKUSER } from '../../mockData/mockData';
 import {
   GatheringInfoType,
   GatheringParticipantsType,

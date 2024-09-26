@@ -1,7 +1,6 @@
 'use client';
 
 import ParticipationButton from './ParticipationButton';
-import { userData, groupData, participantsData } from './Mock';
 import { UserData } from '@/types/client.type';
 import { GatheringParticipantsType } from '@/types/data.type';
 
@@ -24,7 +23,7 @@ const BottomFloatingBar = ({
   canceledAt,
   participantsData,
 }: BottomFloatingBarProps) => {
-  const isHost = createdBy === userData.id; //주최자인지 검사
+  const isHost = createdBy === user?.id; //주최자인지 검사
 
   return (
     <section className='fixed bottom-0 w-full border-t-2 border-var-black bg-var-white px-16 py-20 md:px-24'>
