@@ -2,7 +2,7 @@
 
 import { ReviewsType } from '@/types/data.type';
 
-interface FetchReviewsParams {
+interface GetReviewsParams {
   limit?: number;
   offset?: number;
   gatheringId?: number;
@@ -14,8 +14,8 @@ interface FetchReviewsParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-const fetchReviews = async (
-  params: FetchReviewsParams = {},
+const getReviews = async (
+  params: GetReviewsParams = {},
 ): Promise<ReviewsType[]> => {
   try {
     const { limit = 12, offset = 0, ...rest } = params;
@@ -55,4 +55,4 @@ const fetchReviews = async (
   }
 };
 
-export default fetchReviews;
+export default getReviews;

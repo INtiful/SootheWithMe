@@ -51,6 +51,8 @@ export interface GatheringInfoType {
   createdBy: number;
   canceledAt?: string | null;
 }
+
+// GET : /{teamId}/gatherings/{id}/participants
 export interface GatheringParticipantsType {
   teamId: number | string;
   userId: number;
@@ -80,6 +82,7 @@ export interface FetchGatheringsResponse {
   offset: number; // 현재 페이지 번호
 }
 
+// GET : /{teamId}/reviews
 export interface ReviewsType {
   teamId: number | string;
   id: number;
@@ -103,6 +106,7 @@ export interface ReviewsType {
   };
 }
 
+// GET : /{teamId}/reviews/scores
 export interface ReviewScoreType {
   teamId: number | string;
   gatheringId: number;
