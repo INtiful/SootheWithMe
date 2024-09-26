@@ -3,32 +3,37 @@
 import { GatheringInfoType } from '@/types/data.type';
 import { getCookie } from '@/actions/auth/cookie/cookie';
 
+interface PostGatheringsParams {
+  location: string;
+  type: string;
+  dateTime: string;
+  capacity: number;
+  image: string;
+  registrationEnd?: string;
+}
+
 const postGatherings = async (
-  location: string,
-  type: string,
-  dateTime: string,
-  capacity: number,
-  image: string,
-  registrationEnd: string,
+  params: PostGatheringsParams,
 ): Promise<GatheringInfoType> => {
+  const { location, type, dateTime, capacity, image } = params;
   try {
     const token = await getCookie('token');
+
+    const formData = new FormData();
+    formData.append('location', location);
+    formData.append('type', type);
+    formData.append('dateTime', dateTime);
+    formData.append('capacity', capacity.toString());
+    formData.append('image', image);
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings`,
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          location,
-          type,
-          dateTime,
-          capacity,
-          image,
-          registrationEnd,
-        }),
+        body: formData,
       },
     );
 

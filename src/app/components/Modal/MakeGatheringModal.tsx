@@ -54,15 +54,19 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     return todayDate === selectedDate ? todayHour + 1 > selectedHour : false;
   };
 
-  const handleSubmit = () => {
-    postGatherings(
-      location as string,
-      getSelectedGatheringType() as string,
-      dateTime?.toISOString() as string,
-      capacity as number,
-      image as string,
-      new Date().toISOString(),
-    );
+  const handleSubmit = async () => {
+    if (!location || !dateTime || !image) {
+      // Handle the error appropriately, e.g., show a message to the user
+      return;
+    }
+
+    const res = await postGatherings({
+      location,
+      type: getSelectedGatheringType(),
+      dateTime: dateTime.toISOString(),
+      capacity,
+      image,
+    });
     onClose();
   };
 
