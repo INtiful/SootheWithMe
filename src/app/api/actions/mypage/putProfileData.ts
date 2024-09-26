@@ -1,3 +1,5 @@
+'use server';
+
 import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserData } from '@/types/client.type';
 
