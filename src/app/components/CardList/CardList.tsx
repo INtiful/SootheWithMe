@@ -17,13 +17,16 @@ import { GatheringsListData } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
-import { useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
+import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 
 interface CardProps {
   data: GatheringsListData;
 }
 
 const CardList = ({ data }: CardProps) => {
+  const { savedGatherings, updateGathering } = useSavedGatheringList();
+
   // 모임의 날짜와 현재 날짜를 비교하여 태그 렌더링
   const isRenderTag = isSameDate(data.registrationEnd);
 
@@ -32,10 +35,16 @@ const CardList = ({ data }: CardProps) => {
 
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
-  const handleToggleSave = () => {
-    setIsSaved((prev) => !prev);
-    // TODO : storage 변경 코드
+  const handleToggleSave = (e: MouseEvent) => {
+    e.preventDefault();
+    updateGathering(data.id);
   };
+
+  useEffect(() => {
+    if (savedGatherings.length > 0) {
+      setIsSaved(savedGatherings.includes(data.id));
+    }
+  }, [savedGatherings]);
 
   return (
     <div className='relative flex w-full flex-col overflow-hidden rounded-[24px] border-2 border-var-gray-100 bg-white transition-all duration-300 hover:drop-shadow-[0_10px_10px_rgba(0,0,0,0.04)] md:flex-row'>
@@ -94,7 +103,7 @@ const CardList = ({ data }: CardProps) => {
 
       {/* 종료된 챌린지의 경우 */}
       {isChallengeEnded && (
-        <div className='absolute left-0 top-0 z-base flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
+        <div className='z-base absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
           <p className='text-14 font-medium text-white'>
             마감된 챌린지예요.
             <br />
