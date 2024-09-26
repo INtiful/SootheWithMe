@@ -6,6 +6,9 @@ import Button from '../Button/Button';
 import { onCancel, onShare, onJoin, onWithdraw } from './Mock';
 import { GatheringParticipantsType } from '@/types/data.type';
 import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
+import { useParams, useRouter } from 'next/navigation';
+import updateGatheringToCancelled from '@/app/api/actions/gatherings/updateGatheringToCancelled';
+import useCancelGathering from '@/hooks/useCancelGathering';
 
 // @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
@@ -27,7 +30,10 @@ const ParticipationButton = ({
   canceledAt,
   participantsData,
 }: ParticipationButtonProps) => {
+  const params = useParams();
+
   const { copyUrlToClipboard } = useCopyUrlToClipboard();
+  const { cancelGathering } = useCancelGathering(Number(params.id));
 
   const isFull = participantCount === capacity; //참여인원이 가득찼는지 검사
   const isRegistrationEnded = new Date() > new Date(registrationEnd); // 마감일이 지났는지 검사
@@ -69,7 +75,7 @@ const ParticipationButton = ({
     const disabled = isRegistrationEnded || isCancelled; // 마감일이 지났거나 취소되었을 경우 button 비활성화
     return (
       <div className='flex w-[330px] gap-[10px]'>
-        {renderButton('취소하기', 'white', onCancel, disabled)}
+        {renderButton('취소하기', 'white', cancelGathering, disabled)}
         {renderButton('공유하기', 'default', copyUrlToClipboard, disabled)}
       </div>
     );
