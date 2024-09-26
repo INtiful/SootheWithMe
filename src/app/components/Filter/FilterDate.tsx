@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import { IconCaret } from '@/public/icons';
 import CalendarModal from '../Modal/CalendarModal';
@@ -11,9 +13,14 @@ const stateClasses = {
 interface FilterDateProps {
   state?: 'default' | 'active';
   children: string;
+  onSelectDate?: (date: Date | null) => void;
 }
 
-const FilterDate = ({ state = 'default', children }: FilterDateProps) => {
+const FilterDate = ({
+  state = 'default',
+  children,
+  onSelectDate,
+}: FilterDateProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [currentState, setCurrentState] = useState<'default' | 'active'>(state);
@@ -46,6 +53,10 @@ const FilterDate = ({ state = 'default', children }: FilterDateProps) => {
     setSelectedDate(date || null);
     setCurrentState(date ? 'active' : 'default');
     setIsOpen(!date);
+
+    if (onSelectDate) {
+      onSelectDate(date ? date : null);
+    }
   };
 
   return (
@@ -61,7 +72,7 @@ const FilterDate = ({ state = 'default', children }: FilterDateProps) => {
 
       {isOpen && (
         <div
-          className={`absolute z-10 mt-4 h-auto w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400`}
+          className={`absolute z-dropdown mt-4 h-auto w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400`}
         >
           <CalendarModal
             initialSelectedData={selectedDate}
