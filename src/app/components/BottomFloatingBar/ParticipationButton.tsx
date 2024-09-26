@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 //@todo 함수 기능 구현
 import { onCancel, onShare, onJoin, onWithdraw } from './Mock';
 import { GatheringParticipantsType } from '@/types/data.type';
+import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
 
 // @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
@@ -26,6 +27,8 @@ const ParticipationButton = ({
   canceledAt,
   participantsData,
 }: ParticipationButtonProps) => {
+  const { copyUrlToClipboard } = useCopyUrlToClipboard();
+
   const isFull = participantCount === capacity; //참여인원이 가득찼는지 검사
   const isRegistrationEnded = new Date() > new Date(registrationEnd); // 마감일이 지났는지 검사
   const hasParticipated = participantsData.some(
@@ -67,7 +70,7 @@ const ParticipationButton = ({
     return (
       <div className='flex w-[330px] gap-[10px]'>
         {renderButton('취소하기', 'white', onCancel, disabled)}
-        {renderButton('공유하기', 'default', onShare, disabled)}
+        {renderButton('공유하기', 'default', copyUrlToClipboard, disabled)}
       </div>
     );
   }
