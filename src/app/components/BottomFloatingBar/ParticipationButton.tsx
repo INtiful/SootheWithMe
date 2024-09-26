@@ -1,13 +1,13 @@
 'use client';
 
+import { useParams } from 'next/navigation';
+
 import { UserData } from '@/types/client.type';
 import Button from '../Button/Button';
 //@todo 함수 기능 구현
-import { onCancel, onShare, onJoin, onWithdraw } from './Mock';
+import { onJoin, onWithdraw } from './Mock';
 import { GatheringParticipantsType } from '@/types/data.type';
 import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
-import { useParams, useRouter } from 'next/navigation';
-import updateGatheringToCancelled from '@/app/api/actions/gatherings/updateGatheringToCancelled';
 import useCancelGathering from '@/hooks/useCancelGathering';
 
 // @todo api 연결 후 Props 수정
