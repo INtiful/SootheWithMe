@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { getCookie } from '@/actions/auth/cookie/cookie';
 import { GatheringInfoType } from '@/types/data.type';
 
@@ -25,6 +27,9 @@ const updateGatheringToCancelled = async (
     );
 
     const data: GatheringInfoType = await res.json();
+
+    revalidatePath('/');
+    revalidatePath('/(main)/gatherings/[id]', 'page');
 
     return data;
   } catch (error) {

@@ -1,19 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import { UserData } from '@/types/client.type';
 import Button from '../Button/Button';
-//@todo 함수 기능 구현
-import { onJoin, onWithdraw } from './Mock';
-import { GatheringParticipantsType } from '@/types/data.type';
 import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
 import useCancelGathering from '@/hooks/useCancelGathering';
 import postGatheringToJoin from '@/app/api/actions/gatherings/postGatheringToJoin';
 import deleteGatheringToWithdraw from '@/app/api/actions/gatherings/deleteGatheringToWithdraw';
+import { GatheringParticipantsType } from '@/types/data.type';
+import Popup from '../Popup/Popup';
 
-// @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
   isHost: boolean;
   user: UserData | null;
@@ -33,12 +31,14 @@ const ParticipationButton = ({
   canceledAt,
   participantsData,
 }: ParticipationButtonProps) => {
+  const router = useRouter();
   const params = useParams();
 
   const { copyUrlToClipboard } = useCopyUrlToClipboard();
   const { cancelGathering } = useCancelGathering(Number(params.id));
 
   const [hasParticipated, setHasParticipated] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   useEffect(() => {
     if (user) {
@@ -62,6 +62,12 @@ const ParticipationButton = ({
       : 'default';
 
   const handleJoinClick = async () => {
+    if (!user) {
+      // 유저가 없는 경우
+      setShowPopup(true); // 팝업 표시
+      return;
+    }
+
     if (!hasParticipated) {
       await postGatheringToJoin(Number(params.id));
       setHasParticipated(true);
@@ -104,11 +110,26 @@ const ParticipationButton = ({
     );
   }
 
-  return renderButton(
-    buttonName,
-    buttonVariant,
-    hasParticipated ? handleWithdrawClick : handleJoinClick,
-    isParticipationDisabled, // disable 여부
+  return (
+    <>
+      {renderButton(
+        buttonName,
+        buttonVariant,
+        hasParticipated ? handleWithdrawClick : handleJoinClick,
+        isParticipationDisabled, // disable 여부
+      )}
+      {showPopup && ( // 팝업 렌더링
+        <Popup
+          type='login'
+          hasCancelButton={true}
+          onClickClose={() => setShowPopup(false)}
+          onClickConfirm={() => {
+            setShowPopup(false);
+            router.push('/signin');
+          }}
+        />
+      )}
+    </>
   );
 };
 
