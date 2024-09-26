@@ -1,5 +1,6 @@
 'use client';
 
+import { UserData } from '@/types/client.type';
 import Button from '../Button/Button';
 //@todo 함수 기능 구현
 import { onCancel, onShare, onJoin, onWithdraw } from './Mock';
@@ -13,11 +14,11 @@ interface Participant {
 // @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
   isHost: boolean;
-  user: { name: string; id: number };
+  user: UserData | null;
   participantCount: number;
   capacity: number;
   registrationEnd: string;
-  canceledAt: null | string;
+  canceledAt: undefined | null | string;
   participantsData: Participant[];
 }
 

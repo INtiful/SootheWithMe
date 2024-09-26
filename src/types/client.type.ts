@@ -9,6 +9,7 @@ export interface SignUpData {
 export interface SignInData extends Pick<SignUpData, 'email' | 'password'> {}
 
 export interface UserData {
+  teamId?: string;
   id: string;
   email: string;
   name: string;

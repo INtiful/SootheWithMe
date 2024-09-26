@@ -2,20 +2,15 @@
 
 import ParticipationButton from './ParticipationButton';
 import { userData, groupData, participantsData } from './Mock';
-
-interface Participant {
-  User: {
-    id: number;
-  };
-}
+import { UserData } from '@/types/client.type';
 
 interface BottomFloatingBarProps {
-  user: { name: string; id: number };
+  user: UserData | null;
   createdBy: number;
   participantCount: number;
   capacity: number;
   registrationEnd: string;
-  canceledAt: null | string;
+  canceledAt: undefined | null | string;
   participantsData: Participant[];
 }
 
