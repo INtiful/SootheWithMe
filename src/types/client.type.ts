@@ -10,7 +10,7 @@ export interface SignInData extends Pick<SignUpData, 'email' | 'password'> {}
 
 export interface UserData {
   teamId?: string;
-  id: string;
+  id: string | number;
   email: string;
   name: string;
   companyName: string;

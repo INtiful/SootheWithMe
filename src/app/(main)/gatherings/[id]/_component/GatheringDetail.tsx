@@ -67,7 +67,7 @@ const GatheringDetail = ({
         capacity={gatheringInfo.capacity}
         registrationEnd={gatheringInfo.registrationEnd}
         canceledAt={gatheringInfo.canceledAt}
-        participantsData={MOCK_PARTICIPANTS}
+        participantsData={gatheringParticipants}
       />
     </>
   );

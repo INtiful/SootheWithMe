@@ -3,6 +3,7 @@
 import ParticipationButton from './ParticipationButton';
 import { userData, groupData, participantsData } from './Mock';
 import { UserData } from '@/types/client.type';
+import { GatheringParticipantsType } from '@/types/data.type';
 
 interface BottomFloatingBarProps {
   user: UserData | null;
@@ -11,7 +12,7 @@ interface BottomFloatingBarProps {
   capacity: number;
   registrationEnd: string;
   canceledAt: undefined | null | string;
-  participantsData: Participant[];
+  participantsData: GatheringParticipantsType[];
 }
 
 const BottomFloatingBar = ({

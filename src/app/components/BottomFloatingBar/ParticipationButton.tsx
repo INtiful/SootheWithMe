@@ -4,12 +4,7 @@ import { UserData } from '@/types/client.type';
 import Button from '../Button/Button';
 //@todo 함수 기능 구현
 import { onCancel, onShare, onJoin, onWithdraw } from './Mock';
-
-interface Participant {
-  User: {
-    id: number;
-  };
-}
+import { GatheringParticipantsType } from '@/types/data.type';
 
 // @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
@@ -19,7 +14,7 @@ interface ParticipationButtonProps {
   capacity: number;
   registrationEnd: string;
   canceledAt: undefined | null | string;
-  participantsData: Participant[];
+  participantsData: GatheringParticipantsType[];
 }
 
 const ParticipationButton = ({
@@ -34,7 +29,7 @@ const ParticipationButton = ({
   const isFull = participantCount === capacity; //참여인원이 가득찼는지 검사
   const isRegistrationEnded = new Date() > new Date(registrationEnd); // 마감일이 지났는지 검사
   const hasParticipated = participantsData.some(
-    (participant) => participant.User.id === user.id,
+    (participant) => participant.User.id === user?.id,
   ); //이미 참여했는지 검사
   const isCancelled = Boolean(canceledAt); //취소되었는지 검사
 
