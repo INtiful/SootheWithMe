@@ -10,7 +10,8 @@ import { onJoin, onWithdraw } from './Mock';
 import { GatheringParticipantsType } from '@/types/data.type';
 import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
 import useCancelGathering from '@/hooks/useCancelGathering';
-import useJoinGathering from '@/hooks/useJoinGathering';
+import postGatheringToJoin from '@/app/api/actions/gatherings/postGatheringToJoin';
+import deleteGatheringToWithdraw from '@/app/api/actions/gatherings/deleteGatheringToWithdraw';
 
 // @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
@@ -36,7 +37,6 @@ const ParticipationButton = ({
 
   const { copyUrlToClipboard } = useCopyUrlToClipboard();
   const { cancelGathering } = useCancelGathering(Number(params.id));
-  const { joinGathering } = useJoinGathering(Number(params.id));
 
   const [hasParticipated, setHasParticipated] = useState<boolean>(false);
 
@@ -63,8 +63,15 @@ const ParticipationButton = ({
 
   const handleJoinClick = async () => {
     if (!hasParticipated) {
-      await joinGathering();
+      await postGatheringToJoin(Number(params.id));
       setHasParticipated(true);
+    }
+  };
+
+  const handleWithdrawClick = async () => {
+    if (hasParticipated) {
+      await deleteGatheringToWithdraw(Number(params.id));
+      setHasParticipated(false);
     }
   };
 
@@ -100,7 +107,7 @@ const ParticipationButton = ({
   return renderButton(
     buttonName,
     buttonVariant,
-    hasParticipated ? onWithdraw : handleJoinClick,
+    hasParticipated ? handleWithdrawClick : handleJoinClick,
     isParticipationDisabled, // disable 여부
   );
 };

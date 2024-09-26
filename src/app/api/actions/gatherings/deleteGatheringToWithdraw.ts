@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { getCookie } from '@/actions/auth/cookie/cookie';
 
 const deleteGatheringToWithdraw = async (gatheringId: number) => {
@@ -22,6 +24,9 @@ const deleteGatheringToWithdraw = async (gatheringId: number) => {
     );
 
     const data = await res.json();
+
+    revalidatePath('/');
+    revalidatePath('/(main)/gatherings/[id]', 'page');
 
     return data;
   } catch (error) {

@@ -1,7 +1,8 @@
 'use server';
 
-import { getCookie } from '@/actions/auth/cookie/cookie';
 import { revalidatePath } from 'next/cache';
+
+import { getCookie } from '@/actions/auth/cookie/cookie';
 
 const postGatheringToJoin = async (gatheringId: number) => {
   try {
