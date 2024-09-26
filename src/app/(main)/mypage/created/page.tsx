@@ -22,12 +22,7 @@ const CreatedPage = () => {
 
         try {
           const gatherings = await getGatherings({ createdBy: user.id });
-          // setGatheringsList(gatherings);
-          if (gatherings.length < 1) {
-            setGatheringsList(DATA_LIST);
-          } else {
-            setGatheringsList(gatherings);
-          }
+          setGatheringsList(gatherings);
         } catch (error) {
           console.error('Error fetching data:', error);
         } finally {
