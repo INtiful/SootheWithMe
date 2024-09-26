@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 
 import { UserData } from '@/types/client.type';
@@ -9,6 +10,7 @@ import { onJoin, onWithdraw } from './Mock';
 import { GatheringParticipantsType } from '@/types/data.type';
 import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
 import useCancelGathering from '@/hooks/useCancelGathering';
+import useJoinGathering from '@/hooks/useJoinGathering';
 
 // @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
@@ -34,14 +36,22 @@ const ParticipationButton = ({
 
   const { copyUrlToClipboard } = useCopyUrlToClipboard();
   const { cancelGathering } = useCancelGathering(Number(params.id));
+  const { joinGathering } = useJoinGathering(Number(params.id));
+
+  const [hasParticipated, setHasParticipated] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (user) {
+      const isParticipated = participantsData.some(
+        (participant) => participant.User.id === user.id,
+      );
+      setHasParticipated(isParticipated);
+    }
+  }, [user, participantsData]);
 
   const isFull = participantCount === capacity; //참여인원이 가득찼는지 검사
   const isRegistrationEnded = new Date() > new Date(registrationEnd); // 마감일이 지났는지 검사
-  const hasParticipated = participantsData.some(
-    (participant) => participant.User.id === user?.id,
-  ); //이미 참여했는지 검사
   const isCancelled = Boolean(canceledAt); //취소되었는지 검사
-
   const isParticipationDisabled = isFull || isRegistrationEnded || isCancelled; // 참여 가능 여부 검사
 
   const buttonName = hasParticipated ? '참여 취소하기' : '참여하기'; //버튼 이름
@@ -50,7 +60,13 @@ const ParticipationButton = ({
     : isParticipationDisabled
       ? 'gray'
       : 'default';
-  const buttonAction = hasParticipated ? onWithdraw : onJoin; // 함수 결정
+
+  const handleJoinClick = async () => {
+    if (!hasParticipated) {
+      await joinGathering();
+      setHasParticipated(true);
+    }
+  };
 
   /* 버튼 렌더링 함수 */
   const renderButton = (
@@ -84,7 +100,7 @@ const ParticipationButton = ({
   return renderButton(
     buttonName,
     buttonVariant,
-    buttonAction,
+    hasParticipated ? onWithdraw : handleJoinClick,
     isParticipationDisabled, // disable 여부
   );
 };
