@@ -1,5 +1,7 @@
 'use client';
 
+import { useUser } from '@/app/(auth)/context/UserContext';
+import getReviews from '@/app/api/actions/reviews/getReviews';
 import Card from '@/app/components/Card/Card';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
 import Review from '@/app/components/Review/Review';
@@ -7,14 +9,27 @@ import { MYPAGE_REVIEW_TABS } from '@/constants/common';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { useState } from 'react';
 import ReviewFilterButtons from '../_component/ReviewFilterButtons';
-// TODO: 없애야 할 것들
 import { DATA_LIST } from '../created/mockData';
-import { MYPAGE_REVIEW_MOCK_DATA } from './mock';
+import { useQuery } from '@tanstack/react-query';
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [filterType, setFilterType] = useState<string>(MYPAGE_REVIEW_TABS.ALL);
   const [cardId, setCardId] = useState<number>(0);
+
+  const { user } = useUser();
+  const { data: reviewData } = useQuery({
+    queryKey: ['reviews'],
+    queryFn: () =>
+      getReviews({
+        userId: Number(user?.id), // user.id 가져와야 함
+        sortBy: 'createdAt',
+        sortOrder: 'desc',
+      }),
+  });
+
+  console.log(typeof user?.id);
+  console.log(reviewData);
 
   const filteredData = DATA_LIST.filter((data) => {
     switch (filterType) {
@@ -72,7 +87,7 @@ const Page = () => {
         )}
         {/* 작성한 리뷰 */}
         <div className='my-24 flex flex-col gap-24'>
-          {MYPAGE_REVIEW_MOCK_DATA.length === 0 ? (
+          {reviewData?.length === 0 ? (
             <div className='flex h-full items-center justify-center'>
               <p className='text-center text-14 font-medium text-var-gray-500'>
                 아직 작성한 리뷰가 없어요
@@ -80,7 +95,7 @@ const Page = () => {
             </div>
           ) : (
             filterType === MYPAGE_REVIEW_TABS.WRITTEN &&
-            MYPAGE_REVIEW_MOCK_DATA.map((review) => (
+            reviewData?.map((review) => (
               <Review
                 key={review?.id}
                 rating={review?.score}
