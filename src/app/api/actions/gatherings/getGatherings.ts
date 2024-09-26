@@ -14,7 +14,7 @@ interface GetGatheringsParams {
 }
 
 const getGatherings = async (
-  params: GetGatheringsParams = { type: 'DALLAEMFIT' },
+  params: GetGatheringsParams = {},
 ): Promise<GatheringsListData[]> => {
   try {
     const { limit = 10, offset = 0, ...rest } = params;

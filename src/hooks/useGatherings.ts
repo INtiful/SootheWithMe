@@ -80,56 +80,51 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     return newData || [];
   };
 
-  const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
-    setActiveTab(type);
-    setSelectedChip(null);
+  const resetFiltersAndFetchData = async (
+    filters: Partial<{
+      type: 'WORKATION' | 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
+      location: string | undefined;
+      date: Date | null;
+      sortBy: string | undefined;
+    }>,
+  ) => {
     setOffset(0);
     setHasMore(true);
 
-    const newData = await fetchFilteredGatherings({ type, offset: 0 });
+    const newData = await fetchFilteredGatherings({ ...filters, offset: 0 });
     setFilteredData(newData);
   };
 
-  const handleChipClick = async (
+  const handleTabClick = (type: 'WORKATION' | 'DALLAEMFIT') => {
+    setActiveTab(type);
+    setSelectedChip(null);
+    resetFiltersAndFetchData({ type });
+  };
+
+  const handleChipClick = (
     label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
   ) => {
     setSelectedChip(label);
     const type = label === 'ALL' ? 'DALLAEMFIT' : label;
-    setOffset(0);
-    setHasMore(true);
-
-    const newData = await fetchFilteredGatherings({ type, offset: 0 });
-    setFilteredData(newData);
+    resetFiltersAndFetchData({ type });
   };
 
-  const handleLocationChange = async (location: string | undefined) => {
+  const handleLocationChange = (location: string | undefined) => {
     setSelectedLocation(location);
-    setOffset(0);
-    setHasMore(true);
-
-    const newData = await fetchFilteredGatherings({ location, offset: 0 });
-    setFilteredData(newData);
+    resetFiltersAndFetchData({ location });
   };
 
-  const handleDateChange = async (date: Date | null) => {
+  const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
-    setOffset(0);
-    setHasMore(true);
-
-    const newData = await fetchFilteredGatherings({ date, offset: 0 });
-    setFilteredData(newData);
+    resetFiltersAndFetchData({ date });
   };
 
-  const handleSortChange = async (option: string | undefined) => {
+  const handleSortChange = (option: string | undefined) => {
     const sortBy: string | undefined = option
       ? sortOptionsMap[option]
       : undefined;
     setSortOption(sortBy);
-    setOffset(0);
-    setHasMore(true);
-
-    const newData = await fetchFilteredGatherings({ sortBy, offset: 0 });
-    setFilteredData(newData);
+    resetFiltersAndFetchData({ sortBy });
   };
 
   const loadMore = async () => {
