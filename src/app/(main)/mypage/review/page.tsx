@@ -5,15 +5,16 @@ import ReviewModal from '@/app/components/Modal/ReviewModal';
 import Review from '@/app/components/Review/Review';
 import { MYPAGE_REVIEW_TABS } from '@/constants/common';
 import usePreventScroll from '@/hooks/usePreventScroll';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import ReviewFilterButtons from '../_component/ReviewFilterButtons';
+// TODO: 없애야 할 것들
 import { DATA_LIST } from '../created/mockData';
 import { MYPAGE_REVIEW_MOCK_DATA } from './mock';
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [reviewComment, setReviewComment] = useState<string>('');
   const [filterType, setFilterType] = useState<string>(MYPAGE_REVIEW_TABS.ALL);
+  const [cardId, setCardId] = useState<number>(0);
 
   const filteredData = DATA_LIST.filter((data) => {
     switch (filterType) {
@@ -26,12 +27,12 @@ const Page = () => {
     }
   });
 
-  const handleChangeReviewComment = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setReviewComment(e.target.value);
+  const handleOpenModal = (id: number) => {
+    setCardId(id);
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setReviewComment('');
     setIsModalOpen(false);
   };
 
@@ -58,26 +59,12 @@ const Page = () => {
             filterType,
           ) &&
           filteredData.map((data) => (
-            // <Card
-            //   key={data?.id}
-            //   data={data}
-            //   hasButton
-            //   hasChips
-            //   handleWriteReview={() => setIsModalOpen(true)}
-            // />
-
-            <Card
-              key={data?.id}
-              handleSaveDiscard={() => console.log('Save Discard')}
-              data={data}
-            >
+            <Card key={data?.id} data={data}>
               <Card.Chips />
               <Card.Info />
               <Card.Button
                 handleButtonClick={() => {
-                  data.isCompleted
-                    ? setIsModalOpen(true)
-                    : console.log('Cancel gathering');
+                  data.isCompleted && handleOpenModal(data?.id);
                 }}
               />
             </Card>
@@ -107,11 +94,7 @@ const Page = () => {
         </div>
       </div>
       {isModalOpen && (
-        <ReviewModal
-          reviewComment={reviewComment}
-          onChangeReviewComment={handleChangeReviewComment}
-          onClose={handleCloseModal}
-        />
+        <ReviewModal gatheringId={cardId} onClose={handleCloseModal} />
       )}
     </>
   );
