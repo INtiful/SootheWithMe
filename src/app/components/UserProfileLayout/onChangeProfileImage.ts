@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 interface OnChangeProfileImageProps {
-  setProfileImage: React.Dispatch<React.SetStateAction<File | null>>;
+  setProfileImage: React.Dispatch<React.SetStateAction<File | string>>;
   setImagePreview: React.Dispatch<React.SetStateAction<string | null>>;
 }
 

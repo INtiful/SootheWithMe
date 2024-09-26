@@ -3,7 +3,7 @@ import { UserData } from '@/types/client.type';
 
 interface putProfileDataProps {
   companyName: string | null;
-  profileImage: File | null;
+  profileImage: File | string;
 }
 
 export const putProfileData = async ({
@@ -13,7 +13,8 @@ export const putProfileData = async ({
   const token = await getCookie('token');
 
   if (!profileImage || !companyName) {
-    return null; // 프로필 이미지와 회사이름이 없으면 null 반환
+    alert('프로필 이미지와 회사명을 입력해주세요.');
+    return null;
   }
 
   const formData = new FormData();
@@ -37,6 +38,7 @@ export const putProfileData = async ({
     }
 
     const result: UserData = await response.json();
+
     return result; // 업데이트된 사용자 데이터를 반환
   } catch (error) {
     console.error('프로필 업데이트 중 오류가 발생했습니다:', error);

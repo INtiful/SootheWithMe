@@ -34,9 +34,12 @@ const ProfileEditModal = ({
   setProfileInput,
 }: ProfileEditModalProps) => {
   const { user } = useUser();
+
   const onChangeProfileInput = (e: ChangeEvent<HTMLInputElement>) => {
     setProfileInput(e.target.value);
   };
+
+  const isValid = profileInput !== user?.companyName && profileInput !== '';
 
   return (
     <div className='w-342 flex max-h-328 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'>
@@ -84,9 +87,9 @@ const ProfileEditModal = ({
         <Button
           name='수정하기'
           onClick={onSubmit}
-          // variant='gray'
           type='button'
-          variant={`${profileInput === user?.companyName || profileInput === '' ? 'gray' : 'default'}`}
+          variant={`${isValid ? 'default' : 'gray'}`}
+          disabled={!isValid}
         />
       </div>
     </div>
