@@ -34,7 +34,7 @@ const UserStatus = () => {
     deleteCookie('token');
     setUser(null);
     setIsOpen(false);
-    router.push('/');
+    router.push('/gatherings');
   };
 
   return (

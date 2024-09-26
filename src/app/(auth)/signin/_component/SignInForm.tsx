@@ -37,7 +37,7 @@ const SignInForm = () => {
         setUser(result.user); // 유저 데이터 저장
       }
 
-      router.push('/');
+      router.push('/gatherings');
     } catch (error) {
       if (error instanceof Error) {
         // 로그인 오류 처리
