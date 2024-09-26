@@ -12,7 +12,7 @@ export interface UserJoinedGatheringsData {
   capacity: number;
   image: string;
   createdBy: number;
-  canceledAt: string | null;
+  canceledAt?: string | null;
   joinedAt?: string;
   isCompleted?: boolean;
   isReviewed?: boolean;
