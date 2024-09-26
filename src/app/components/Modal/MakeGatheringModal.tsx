@@ -1,6 +1,6 @@
 'use client';
 
-import postGatherings from '@/app/api/gatherings/postGatherings';
+import postGatherings from '@/app/api/actions/gatherings/postGatherings';
 import { LOCATION_OPTIONS } from '@/constants/common';
 import { MouseEvent, useState } from 'react';
 import Button from '../Button/Button';
