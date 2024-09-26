@@ -113,3 +113,14 @@ export interface ReviewScoreType {
   fourStars: number;
   fiveStars: number;
 }
+
+// POST: /{teamId}/reviews
+export interface ReviewPostType {
+  teamId: number;
+  id: number;
+  userId: number;
+  gatheringId: number;
+  score: number;
+  comment: string;
+  createdAt: string;
+}
