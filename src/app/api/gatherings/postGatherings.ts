@@ -19,6 +19,10 @@ const postGatherings = async (
   try {
     const token = await getCookie('token');
 
+    if (!token) {
+      throw new Error('토큰이 없습니다.');
+    }
+
     const formData = new FormData();
     formData.append('location', location);
     formData.append('type', type);
