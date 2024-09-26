@@ -32,9 +32,11 @@ const UserProfileLayout = () => {
       profileImage: profileImage,
     });
 
-    setUser((prevUser) =>
-      prevUser ? { ...prevUser, ...updatedUser } : prevUser,
-    );
+    if (updatedUser) {
+      setUser((prevUser) =>
+        prevUser ? { ...prevUser, ...updatedUser } : prevUser,
+      );
+    }
 
     setIsModalOpen(false);
   };
