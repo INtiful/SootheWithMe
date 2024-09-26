@@ -1,4 +1,3 @@
-import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserData } from '@/types/client.type';
 import React, {
   Dispatch,
@@ -7,6 +6,7 @@ import React, {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 
@@ -18,8 +18,20 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserData | null>(null);
+  const [user, setUser] = useState(() => {
+    // 로컬 스토리지에서 유저 데이터 불러오기
+    const savedUserData = localStorage.getItem('userData');
+    return savedUserData ? JSON.parse(savedUserData) : null;
+  });
 
+  useEffect(() => {
+    // 유저 데이터가 변경될 때마다 로컬 스토리지에 저장
+    if (user) {
+      localStorage.setItem('userData', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('userData'); // 로그아웃 시 로컬 스토리지에서 삭제
+    }
+  }, [user]);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
