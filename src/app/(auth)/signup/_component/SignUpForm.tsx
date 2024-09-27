@@ -97,6 +97,11 @@ const SignUpForm = () => {
             error={errors.password?.message}
             type='password'
           />
+          {!errors.password && (
+            <div className='text-12 text-gray-700'>
+              ※ 비밀번호는 영문과 숫자가 포함된 8자 이상이 되도록 해 주세요.
+            </div>
+          )}
           <FormField
             label='비밀번호 확인'
             name='passwordCheck'
@@ -114,7 +119,7 @@ const SignUpForm = () => {
         </div>
       </form>
       {isPopupOpen && (
-        <div className='z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+        <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
           <Popup
             type='signUpCompleted'
             hasCancelButton={false}
