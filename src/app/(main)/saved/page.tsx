@@ -11,6 +11,8 @@ import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
 import SavedList from './_component/SavedList';
 
+// TODO : 페이지 단의 코드를 계층화 하여 각 컴포넌트를 분리하기 위한 리팩토링
+
 const sortOptionsMap: Record<string, string> = {
   최신순: 'dateTime',
   '마감 임박': 'registrationEnd',
