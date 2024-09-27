@@ -1,5 +1,6 @@
 'use server';
 
+import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserJoinedGatheringsData } from '@/types/data.type';
 
 interface GetJoinedGatheringsParams {
@@ -7,7 +8,7 @@ interface GetJoinedGatheringsParams {
   reviewed?: boolean;
   limit?: number;
   offset?: number;
-  sortBy?: string;
+  sortBy?: 'dateTime' | 'registrationEnd' | 'joinedAt';
   sortOrder?: 'asc' | 'desc';
 }
 
@@ -33,12 +34,19 @@ const getJoinedGatherings = async (
       sortOrder,
     }).toString();
 
+    const token = await getCookie('token');
+
+    if (!token) {
+      throw new Error('토큰이 없습니다.');
+    }
+
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings?${queryString}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings/joined?${queryString}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
       },
     );
