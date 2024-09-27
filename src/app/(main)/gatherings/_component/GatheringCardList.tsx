@@ -21,11 +21,11 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         </div>
       ) : (
         gatherings.map((gathering) => (
-          <Link key={gathering.id} href={`/gatherings/${gathering.id}`}>
-            <div className='rounded-[24px] transition-all duration-300 hover:shadow-lg'>
+          <div key={gathering.id}>
+            <Link href={`/gatherings/${gathering.id}`}>
               <CardList data={gathering} />
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))
       )}
     </div>
