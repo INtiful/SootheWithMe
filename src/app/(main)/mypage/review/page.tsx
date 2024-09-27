@@ -2,7 +2,7 @@
 
 import { useUser } from '@/app/(auth)/context/UserContext';
 import getJoinedGatherings from '@/app/api/actions/gatherings/getJoinedGathering';
-import getReviews from '@/app/api/actions/reviews/getReviews';
+import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import Card from '@/app/components/Card/Card';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
 import Review from '@/app/components/Review/Review';
@@ -30,7 +30,7 @@ const Page = () => {
       {
         queryKey: ['myreviews'],
         queryFn: () =>
-          getReviews({
+          getReviewList({
             userId: Number(user?.id),
             sortBy: 'createdAt',
             sortOrder: 'desc',
