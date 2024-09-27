@@ -40,6 +40,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
   const handleSubmit = async () => {
     await postReviews({ gatheringId, score, comment });
     onClose();
+    alert('리뷰가 등록되었습니다.');
   };
 
   return (
