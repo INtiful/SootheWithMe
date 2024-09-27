@@ -7,7 +7,6 @@ import {
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import getGatheringParticipants from '@/app/api/actions/gatherings/getGatheringParticipants';
 import getGatheringInfo from '@/app/api/actions/gatherings/getGatheringInfo';
-import getReviews from '@/app/api/actions/reviews/getReviews';
 
 const GatheringsDetailPage = async ({
   params,
