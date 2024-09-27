@@ -18,7 +18,11 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserData | null>(null);
+  const [user, setUser] = useState(() => {
+    // 로컬 스토리지에서 유저 데이터 불러오기
+    const savedUserData = localStorage.getItem('userData');
+    return savedUserData ? JSON.parse(savedUserData) : null;
+  });
 
   useEffect(() => {
     // 클라이언트에서만 로컬 스토리지에 접근
