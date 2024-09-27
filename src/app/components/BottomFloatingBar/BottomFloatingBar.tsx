@@ -10,7 +10,7 @@ interface BottomFloatingBarProps {
   participantCount: number;
   capacity: number;
   registrationEnd: string;
-  canceledAt: undefined | null | string;
+  canceledAt?: string | null;
   participantsData: GatheringParticipantsType[];
 }
 
