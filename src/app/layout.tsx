@@ -19,13 +19,11 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard'>
-        <SavedGatheringProvider>
+        <Providers>
           <Gnb />
-          <Providers>
-            <div className='grow pt-60'>{children}</div>
-          </Providers>
+          <div className='grow pt-60'>{children}</div>
           <div id='modal-root'></div>
-        </SavedGatheringProvider>
+        </Providers>
       </body>
     </html>
   );
