@@ -1,8 +1,8 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 interface OnChangeProfileImageProps {
-  setProfileImage: React.Dispatch<React.SetStateAction<File | string>>;
-  setImagePreview: React.Dispatch<React.SetStateAction<string | null>>;
+  setProfileImage: Dispatch<SetStateAction<File | string>>;
+  setImagePreview: Dispatch<SetStateAction<string | null>>;
 }
 
 const onChangeProfileImage =

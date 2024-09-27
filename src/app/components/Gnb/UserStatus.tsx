@@ -50,7 +50,6 @@ const UserStatus = () => {
               <Profile onClick={() => setIsOpen((prev) => !prev)} />
             )}
           </div>
-
           {isOpen && (
             <ul className='absolute right-0 mt-8 max-h-240 w-120 overflow-y-auto rounded-xl bg-var-gray-50 lg:left-0'>
               <Link href='/mypage' onClick={() => setIsOpen(false)}>
