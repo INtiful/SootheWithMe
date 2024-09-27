@@ -1,8 +1,6 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
-import CardList from '@/app/components/CardList/CardList';
-import { DATA_LIST } from './mockData';
+import { useEffect, useState } from 'react';
 import Tabs from '@/app/components/Tabs/Tabs';
 import Chips from './_component/Chips';
 import Header from './_component/Header';
@@ -11,6 +9,7 @@ import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { GatheringsListData } from '@/types/data.type';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
+import SavedList from './_component/SavedList';
 
 const sortOptionsMap: Record<string, string> = {
   최신순: 'dateTime',
@@ -142,7 +141,7 @@ const SavedPage = () => {
         {/* data list */}
         <div className='mt-24 flex grow flex-col gap-24'>
           {filteredData.length > 0 ? (
-            filteredData.map((item) => <CardList key={item.id} data={item} />)
+            <SavedList dataList={filteredData} />
           ) : (
             <div className='flex size-full grow items-center justify-center text-14 font-medium text-var-gray-500'>
               아직 아직 찜한 모임이 없어요.

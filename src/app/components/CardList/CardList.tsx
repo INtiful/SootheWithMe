@@ -17,34 +17,30 @@ import { GatheringsListData } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
-import { MouseEvent, useEffect, useState } from 'react';
-import { useSavedGatheringList } from '@/context/SavedGatheringContext';
+import { MouseEvent, useState } from 'react';
 
 interface CardProps {
   data: GatheringsListData;
+  isSaved?: boolean;
+  handleButtonClick?: (id: number) => void;
 }
 
-const CardList = ({ data }: CardProps) => {
-  const { savedGatherings, updateGathering } = useSavedGatheringList();
-
+const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
   // 모임의 날짜와 현재 날짜를 비교하여 태그 렌더링
   const isRenderTag = isSameDate(data.registrationEnd);
 
   // 모임의 날짜와 현재 날짜를 비교하여 마감 여부 표시
   const isChallengeEnded = new Date(data.dateTime) <= new Date();
 
-  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isSavedActive, setSavedActive] = useState<boolean>(isSaved || false);
 
   const handleToggleSave = (e: MouseEvent) => {
     e.preventDefault();
-    updateGathering(data.id);
-  };
-
-  useEffect(() => {
-    if (savedGatherings.length > 0) {
-      setIsSaved(savedGatherings.includes(data.id));
+    setSavedActive(!isSavedActive);
+    if (handleButtonClick) {
+      handleButtonClick(data.id);
     }
-  }, [savedGatherings]);
+  };
 
   return (
     <div className='relative flex w-full flex-col overflow-hidden rounded-[24px] border-2 border-var-gray-100 bg-white transition-all duration-300 hover:drop-shadow-[0_10px_10px_rgba(0,0,0,0.04)] md:flex-row'>
@@ -79,7 +75,7 @@ const CardList = ({ data }: CardProps) => {
               <InfoChip type='time'>{formatTimeColon(data.dateTime)}</InfoChip>
             </div>
           </div>
-          {isSaved ? (
+          {isSavedActive ? (
             <IconSaveActive
               className='h-48 w-48 animate-heartPulse cursor-pointer'
               onClick={handleToggleSave}
@@ -112,7 +108,7 @@ const CardList = ({ data }: CardProps) => {
           <button
             type='button'
             className='right-24 mt-24 md:absolute md:top-24 md:mt-0'
-            // TODO : onClick={}
+            onClick={handleToggleSave}
           >
             <IconSaveDiscardBtn className='h-36 w-116 md:hidden' />
             <IconSaveDiscard className='hidden h-48 w-48 md:block' />
