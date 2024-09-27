@@ -4,6 +4,7 @@ import '@/styles/reset.css';
 import '@/styles/style.css';
 import Gnb from './components/Gnb/Gnb';
 import Providers from './providers';
+import { SavedGatheringProvider } from '@/context/SavedGatheringContext';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
