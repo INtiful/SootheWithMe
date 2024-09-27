@@ -18,6 +18,5 @@ export interface UserData {
   updatedAt: string;
 }
 
-export type GatheringType = 'WORKATION' | 'DALLAEMFIT';
-
-export type DallaemfitType = 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
+export type GatheringTabsType = 'WORKATION' | 'DALLAEMFIT';
+export type GatheringChipsType = 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS';

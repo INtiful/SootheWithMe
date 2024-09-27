@@ -3,7 +3,7 @@ import { useState } from 'react';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { formatCalendarDate } from '@/utils/formatDate';
 import { GatheringsListData, ReviewsType } from '@/types/data.type';
-import { DallaemfitType, GatheringType } from '@/types/client.type';
+import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
 import getReviewList from '@/app/actions/reviews/getReviewList';
 import fetchReviews from '@/app/api/actions/reviews/fetchReviews';
 
@@ -16,7 +16,7 @@ export const sortOptionsMap: { [key: string]: string } = {
 
 const useReviews = (initialReviewsData: ReviewsType[]) => {
   // 모임 종류에 따른 탭 상태
-  const [activeTab, setActiveTab] = useState<GatheringType>('DALLAEMFIT');
+  const [activeTab, setActiveTab] = useState<GatheringTabsType>('DALLAEMFIT');
 
   // 리뷰 데이터 리스트
   const [filteredData, setFilteredData] =
@@ -28,7 +28,7 @@ const useReviews = (initialReviewsData: ReviewsType[]) => {
   );
 
   // 달램핏의 하위 종류 탭 상태
-  const [selectedChip, setSelectedChip] = useState<DallaemfitType>('ALL');
+  const [selectedChip, setSelectedChip] = useState<GatheringChipsType>('ALL');
 
   // 날짜 선택 필터링
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -37,7 +37,7 @@ const useReviews = (initialReviewsData: ReviewsType[]) => {
   const [sortOption, setSortOption] = useState<string | undefined>();
 
   // 모임 종류 탭 클릭 이벤트 핸들러
-  const handleTabClick = async (type: GatheringType) => {
+  const handleTabClick = async (type: GatheringTabsType) => {
     setActiveTab(type);
     setSelectedChip('ALL'); // 탭 변경 시 하위 종류 탭 초기화
 
@@ -57,7 +57,7 @@ const useReviews = (initialReviewsData: ReviewsType[]) => {
   };
 
   // 달램핏 세부 종류 탭 클릭 이벤트 핸들러
-  const handleChipClick = async (label: DallaemfitType) => {
+  const handleChipClick = async (label: GatheringChipsType) => {
     setSelectedChip(label);
 
     if (label === 'ALL') {

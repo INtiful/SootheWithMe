@@ -13,9 +13,9 @@ export interface UserJoinedGatheringsData {
   image: string;
   createdBy: number;
   canceledAt?: string | null;
-  joinedAt: string;
-  isCompleted: boolean;
-  isReviewed: boolean;
+  joinedAt?: string;
+  isCompleted?: boolean;
+  isReviewed?: boolean;
 }
 
 // GET : /{teamId}/gatherings
@@ -35,6 +35,8 @@ export interface GatheringsListData {
   canceledAt?: string | null;
 }
 
+// GET : /{teamId}/gatherings/{gatheringId}
+// POST: /{teamId}/gatherings
 export interface GatheringInfoType {
   teamId: number | string;
   id: number;
@@ -49,7 +51,6 @@ export interface GatheringInfoType {
   createdBy: number;
   canceledAt?: string | null;
 }
-
 export interface GatheringParticipantsType {
   teamId: number | string;
   userId: number;
