@@ -19,6 +19,7 @@ import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
 import { MouseEvent, useState } from 'react';
 
+// TODO : optional props를 필수로 변경
 interface CardProps {
   data: GatheringsListData;
   isSaved?: boolean;
