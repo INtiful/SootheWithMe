@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { getCookie } from '@/actions/auth/cookie/cookie';
 import { GatheringInfoType } from '@/types/data.type';
 
-const updateGatheringToCancelled = async (
+const putGatheringToCancelled = async (
   gatheringId: number,
 ): Promise<GatheringInfoType> => {
   try {
@@ -37,4 +37,4 @@ const updateGatheringToCancelled = async (
   }
 };
 
-export default updateGatheringToCancelled;
+export default putGatheringToCancelled;

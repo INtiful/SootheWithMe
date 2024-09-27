@@ -1,12 +1,13 @@
-import updateGatheringToCancelled from '@/app/api/actions/gatherings/updateGatheringToCancelled';
 import { useRouter } from 'next/navigation';
+
+import putGatheringToCancelled from '@/app/api/actions/gatherings/putGatheringToCancelled';
 
 const useCancelGathering = (gatheringId: number) => {
   const router = useRouter();
 
   const cancelGathering = async () => {
     try {
-      await updateGatheringToCancelled(gatheringId);
+      await putGatheringToCancelled(gatheringId);
 
       alert('모임이 취소되었습니다!');
 
