@@ -20,7 +20,7 @@ interface ProfileEditModalProps {
   onCloseClick?: () => void;
   onUploadProfileImage?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
-  imagePreview?: string | null;
+  imagePreview?: string;
   profileInput: string;
   setProfileInput: React.Dispatch<React.SetStateAction<string>>;
 }

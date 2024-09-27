@@ -35,9 +35,20 @@ const UserProfileLayout = () => {
     formData.append('companyName', profileInput); // 프로필 이름 추가
     formData.append('image', profileImage); // 프로필 이미지 추가
 
+    const previousUserData = user;
+
     const updatedUser = await putProfileData(formData);
 
-    if (updatedUser) {
+    setUser((prevUser) =>
+      prevUser
+        ? { ...prevUser, companyName: profileInput, image: imagePreview }
+        : prevUser,
+    );
+
+    if (!updatedUser) {
+      alert('프로필 업데이트에 실패했습니다.');
+      setUser(previousUserData);
+    } else {
       setUser((prevUser) =>
         prevUser ? { ...prevUser, ...updatedUser } : prevUser,
       );
