@@ -91,15 +91,10 @@ const config: Config = {
           '96%': { transform: 'translateY(0px)' },
           '100%': { transform: 'translateY(0px)' },
         },
-        spin: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
       },
       animation: {
         heartPulse: 'heartPulse 0.4s ease-in-out',
         bounce: 'bounce 0.5s ease-out 0.25s',
-        spin: 'spin 1s linear infinite',
       },
     },
   },

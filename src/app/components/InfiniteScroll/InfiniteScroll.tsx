@@ -74,7 +74,6 @@ const InfiniteScroll = <T extends ItemWithId>({
             )),
           )}
       </ul>
-      {/* //@todo 로딩시 스핀 애니메이션 추가 */}
       {isFetching && (
         <div className='flex grow items-center justify-center'>
           <div className='h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-transparent'></div>
