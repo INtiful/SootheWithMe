@@ -39,6 +39,8 @@ const InformationCard = ({
     setIsSaved((prev) => !prev);
   };
 
+  console.log(participants);
+
   // function of setting Avatars with remaining
   const renderAvatars = () => {
     const maxVisible = 4;
@@ -56,11 +58,22 @@ const InformationCard = ({
 
     if (participantCount > maxVisible) {
       visibleAvatars.push(
-        <div
-          key='remaining'
-          className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
-        >
-          +{participantCount - maxVisible}
+        <div key='remaining' className='group relative'>
+          <div className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'>
+            +{participantCount - maxVisible}
+          </div>
+
+          <div className='absolute left-0 top-full ml-12 mt-2 hidden w-max -space-x-6 group-hover:flex'>
+            {participants.slice(maxVisible).map(({ User }) => (
+              <Avatar
+                key={User.id}
+                id={User.id}
+                name={User.name}
+                image={User.image}
+                className='h-28 w-28'
+              />
+            ))}
+          </div>
         </div>,
       );
     }
