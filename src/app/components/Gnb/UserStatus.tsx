@@ -58,8 +58,11 @@ const UserStatus = () => {
                   마이페이지
                 </li>
               </Link>
-              <li className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'>
-                <button onClick={handleLogout}>로그아웃</button>
+              <li
+                onClick={handleLogout}
+                className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'
+              >
+                로그아웃
               </li>
             </ul>
           )}
