@@ -8,9 +8,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import FormField from '../../_component/FormField';
 import { SignInData } from '@/types/client.type';
 import { submitSignInData } from '@/app/api/auths/service/postSignIn';
+import { useUser } from '../../context/UserContext';
 
 const SignInForm = () => {
   const router = useRouter();
+  const { user, setUser } = useUser();
+
   const {
     control,
     register,
@@ -28,7 +31,11 @@ const SignInForm = () => {
 
   const submit = async (data: SignInData) => {
     try {
-      await submitSignInData(data);
+      const result = await submitSignInData(data);
+      // 유저 데이터 저장
+      if (result.user) {
+        setUser(result.user); // 유저 데이터 저장
+      }
 
       router.push('/gatherings');
     } catch (error) {
@@ -49,7 +56,6 @@ const SignInForm = () => {
       }
     }
   };
-
   return (
     <form
       className='rounded-[24px] bg-var-white'
