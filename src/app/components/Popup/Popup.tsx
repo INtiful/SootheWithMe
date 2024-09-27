@@ -28,7 +28,7 @@ const Popup = ({
   onClickConfirm,
 }: PopupProps) => {
   return createPortal(
-    <div className='z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+    <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
       {/* 어두운 배경 추가 */}
       <div
         className={`flex ${type === 'exit' ? 'h-212 w-[450px]' : 'h-200 w-300'} flex-col items-center justify-between gap-24 rounded-lg bg-var-white p-24 shadow-lg`}
