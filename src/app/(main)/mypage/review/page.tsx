@@ -14,7 +14,9 @@ import ReviewFilterButtons from '../_component/ReviewFilterButtons';
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [filterType, setFilterType] = useState<string>(MYPAGE_REVIEW_TABS.ALL);
+  const [filterType, setFilterType] = useState<string>(
+    MYPAGE_REVIEW_TABS.WRITABLE,
+  );
   const [cardId, setCardId] = useState<number>(0);
 
   const { user } = useUser();
@@ -74,10 +76,7 @@ const Page = () => {
         />
         {/* cards */}
         {/* 전체 혹은 작성 가능한 리뷰 */}
-        {filteredData?.length ? (
-          [MYPAGE_REVIEW_TABS.ALL, MYPAGE_REVIEW_TABS.WRITABLE].includes(
-            filterType,
-          ) &&
+        {filterType === MYPAGE_REVIEW_TABS.WRITABLE && filteredData?.length ? (
           filteredData.map((data) => (
             <Card key={data.id} data={data}>
               <Card.Chips />
