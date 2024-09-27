@@ -25,12 +25,17 @@ const UserProfileLayout = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  /* 프로필 수정 제충 함수 */
+  /* 수정된 프로필 제출 함수 */
   const onSubmit = async () => {
-    const updatedUser = await putProfileData({
-      companyName: profileInput,
-      profileImage: profileImage,
-    });
+    if (!profileImage || !profileInput) {
+      alert('프로필 이미지와 회사명을 입력해주세요.');
+      return null;
+    }
+    const formData = new FormData();
+    formData.append('companyName', profileInput); // 프로필 이름 추가
+    formData.append('image', profileImage); // 프로필 이미지 추가
+
+    const updatedUser = await putProfileData(formData);
 
     if (updatedUser) {
       setUser((prevUser) =>
