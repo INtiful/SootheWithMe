@@ -8,10 +8,9 @@ import ReviewModal from '@/app/components/Modal/ReviewModal';
 import Review from '@/app/components/Review/Review';
 import { MYPAGE_REVIEW_TABS } from '@/constants/common';
 import usePreventScroll from '@/hooks/usePreventScroll';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { useState } from 'react';
 import ReviewFilterButtons from '../_component/ReviewFilterButtons';
-import { DATA_LIST } from '../created/mockData';
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -20,24 +19,26 @@ const Page = () => {
 
   const { user } = useUser();
 
-  const { data: writableReviewData } = useQuery({
-    queryKey: ['writableReviews'],
-    queryFn: () => getJoinedGatherings(),
+  const results = useQueries({
+    queries: [
+      {
+        queryKey: ['writableReviews'],
+        queryFn: () => getJoinedGatherings(),
+      },
+      {
+        queryKey: ['myreviews'],
+        queryFn: () =>
+          getReviews({
+            userId: Number(user?.id),
+            sortBy: 'createdAt',
+            sortOrder: 'desc',
+          }),
+      },
+    ],
   });
 
-  const { data: reviewData } = useQuery({
-    queryKey: ['myreviews'],
-    queryFn: () =>
-      getReviews({
-        userId: Number(user?.id), // user.id 가져와야 함
-        sortBy: 'createdAt',
-        sortOrder: 'desc',
-      }),
-  });
-
-  console.log(typeof user?.id);
-  console.log(writableReviewData);
-  console.log(reviewData);
+  const writableReviewData = results[0].data;
+  const reviewData = results[1].data;
 
   const filteredData = Array.isArray(writableReviewData)
     ? writableReviewData.filter((data) => {
@@ -73,51 +74,43 @@ const Page = () => {
         />
         {/* cards */}
         {/* 전체 혹은 작성 가능한 리뷰 */}
-        {filteredData && filteredData?.length !== 0 ? (
+        {filteredData?.length ? (
           [MYPAGE_REVIEW_TABS.ALL, MYPAGE_REVIEW_TABS.WRITABLE].includes(
             filterType,
           ) &&
-          filteredData?.map((data) => (
-            <Card key={data?.id} data={data}>
+          filteredData.map((data) => (
+            <Card key={data.id} data={data}>
               <Card.Chips />
               <Card.Info />
               <Card.Button
-                handleButtonClick={() => {
-                  data.isCompleted && handleOpenModal(data?.id);
-                }}
+                handleButtonClick={() =>
+                  data.isCompleted && handleOpenModal(data.id)
+                }
               />
             </Card>
           ))
         ) : (
-          <div className='flex h-full items-center justify-center'>
-            <p className='text-center text-14 font-medium text-var-gray-500'>
-              아직 작성 가능한 리뷰가 없어요
-            </p>
-          </div>
+          <EmptyPage />
         )}
         {/* 작성한 리뷰 */}
         <div className='my-24 flex flex-col gap-24'>
-          {reviewData?.length === 0 ? (
-            <div className='flex h-full items-center justify-center'>
-              <p className='text-center text-14 font-medium text-var-gray-500'>
-                아직 작성한 리뷰가 없어요
-              </p>
-            </div>
-          ) : (
-            filterType === MYPAGE_REVIEW_TABS.WRITTEN &&
-            reviewData?.map((review) => (
+          {filterType === MYPAGE_REVIEW_TABS.WRITTEN && reviewData?.length ? (
+            reviewData.map((review) => (
               <Review
-                key={review?.id}
-                rating={review?.score}
-                image_source={review?.Gathering.image}
-                description={review?.comment}
-                user_name={review?.User.name}
-                date={review?.createdAt}
+                key={review.id}
+                rating={review.score}
+                image_source={review.Gathering.image}
+                description={review.comment}
+                user_name={review.User.name}
+                date={review.createdAt}
               />
             ))
+          ) : (
+            <EmptyPage />
           )}
         </div>
       </div>
+
       {isModalOpen && (
         <ReviewModal gatheringId={cardId} onClose={handleCloseModal} />
       )}
@@ -126,3 +119,13 @@ const Page = () => {
 };
 
 export default Page;
+
+const EmptyPage = () => {
+  return (
+    <div className='flex h-full items-center justify-center'>
+      <p className='text-center text-14 font-medium text-var-gray-500'>
+        아직 작성한 리뷰가 없어요
+      </p>
+    </div>
+  );
+};
