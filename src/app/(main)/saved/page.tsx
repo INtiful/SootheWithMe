@@ -12,6 +12,8 @@ import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
 import SavedList from './_component/SavedList';
 
 // TODO : 페이지 단의 코드를 계층화 하여 각 컴포넌트를 분리하기 위한 리팩토링
+// TODO : 1. 필터링 상태에서 찜한 모임 삭제 시 필터링 상태 유지
+// TODO : 2. 날짜 필터링 기능 보완
 
 const sortOptionsMap: Record<string, string> = {
   최신순: 'dateTime',
