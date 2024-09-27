@@ -9,7 +9,8 @@ export interface SignUpData {
 export interface SignInData extends Pick<SignUpData, 'email' | 'password'> {}
 
 export interface UserData {
-  id: string;
+  teamId?: string;
+  id: string | number;
   email: string;
   name: string;
   companyName: string;
@@ -17,3 +18,6 @@ export interface UserData {
   createdAt: string;
   updatedAt: string;
 }
+
+export type GatheringTabsType = 'WORKATION' | 'DALLAEMFIT';
+export type GatheringChipsType = 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
