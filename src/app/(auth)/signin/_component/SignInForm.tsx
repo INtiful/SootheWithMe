@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import FormField from '../../_component/FormField';
 import { SignInData } from '@/types/client.type';
 import { submitSignInData } from '@/app/api/auths/service/postSignIn';
+import { revalidate } from '@/lib/revalidate';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const SignInForm = () => {
     try {
       const result = await submitSignInData(data);
 
+      revalidate('/auths/user');
       router.push('/gatherings');
     } catch (error) {
       if (error instanceof Error) {

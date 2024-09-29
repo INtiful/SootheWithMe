@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
+import { revalidate } from '@/lib/revalidate';
 
 interface UserStatusProps {
   user: UserData | null;
@@ -36,8 +37,8 @@ const UserStatus = ({ user }: UserStatusProps) => {
   const handleLogout = async () => {
     deleteCookie('token');
     setIsOpen(false);
-    alert('로그아웃 되었습니다.');
     router.push('/gatherings');
+    revalidate('/auths/user');
   };
 
   return (

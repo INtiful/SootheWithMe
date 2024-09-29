@@ -21,12 +21,12 @@ export const putProfileData = async (
       },
     );
 
-    revalidatePath('/');
     if (!response.ok) {
       throw new Error('프로필 업데이트에 실패했습니다.');
     }
 
     const result: UserData = await response.json();
+    revalidatePath('/');
 
     return result; // 업데이트된 사용자 데이터를 반환
   } catch (error) {

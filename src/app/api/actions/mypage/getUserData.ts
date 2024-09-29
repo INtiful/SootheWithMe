@@ -2,13 +2,11 @@
 
 import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserData } from '@/types/client.type';
-import { revalidatePath } from 'next/cache';
 
 export const getUserData = async () => {
   const token = await getCookie('token');
 
   if (!token) {
-    revalidatePath('/');
     return null;
   }
 
@@ -19,7 +17,6 @@ export const getUserData = async () => {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
-          cache: 'force-cache',
         },
       },
     );
