@@ -3,6 +3,7 @@
 import { ReviewsType } from '@/types/data.type';
 
 interface GetReviewListParams {
+  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
   limit?: number;
   offset?: number;
   location?: string; // 건대입구, 을지로3가, 신림, 홍대입구
@@ -18,12 +19,17 @@ const getReviewList = async (
   try {
     const { limit = 10, offset = 0, gatheringId, ...rest } = params;
 
-    const queryString = new URLSearchParams({
+    const queryParams = new URLSearchParams({
       limit: String(limit),
       offset: String(offset),
-      gatheringId: String(gatheringId),
       ...rest,
-    }).toString();
+    });
+
+    if (gatheringId) {
+      queryParams.append('gatheringId', String(gatheringId));
+    }
+
+    const queryString = queryParams.toString();
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews?${queryString}`,
@@ -31,6 +37,8 @@ const getReviewList = async (
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'cache-control': 'no-cache',
+          // TODO : cache 관련 처리 협의 필요
         },
       },
     );

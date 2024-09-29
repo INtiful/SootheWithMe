@@ -1,14 +1,10 @@
 import Header from './_components/Hearder';
-import getReviewList from '@/app/actions/reviews/getReviewList';
-import getReviewScore from '@/app/actions/reviews/getReviewScore';
 import ClientSideReviews from './_components/ClientSideReviews';
-import { REVIEW_MOCK_DATA } from './mockData';
+import getReviewList from '@/app/api/actions/reviews/getReviewList';
+import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
 
 const ReviewsPage = async () => {
-  // Server side data fetching 최초 10개
-  const reviewList = await getReviewList();
-
-  // 전체 리뷰 스코어
+  const reviewList = await getReviewList({ type: 'DALLAEMFIT' });
   const reviewScore = await getReviewScore({ type: 'DALLAEMFIT' });
 
   return (
@@ -16,7 +12,7 @@ const ReviewsPage = async () => {
       <Header />
 
       <ClientSideReviews
-        reviewListData={REVIEW_MOCK_DATA}
+        reviewListData={reviewList}
         reviewScoreData={reviewScore}
       />
     </main>

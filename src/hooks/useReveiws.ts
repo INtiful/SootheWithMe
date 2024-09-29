@@ -1,108 +1,177 @@
-import { useState } from 'react';
-
-import getGatherings from '@/app/api/actions/gatherings/getGatherings';
+import { useEffect, useState } from 'react';
 import { formatCalendarDate } from '@/utils/formatDate';
-import { GatheringsListData, ReviewsType } from '@/types/data.type';
+import { ReviewScoreType, ReviewsType } from '@/types/data.type';
 import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
-import getReviewList from '@/app/actions/reviews/getReviewList';
-import fetchReviews from '@/app/api/actions/reviews/fetchReviews';
+import getReviewList from '@/app/api/actions/reviews/getReviewList';
+import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
+import { LIMIT_PER_REQUEST } from '@/constants/common';
 
 // sorting 시 한글 옵션을 영어로 변환해주는 기능
 export const sortOptionsMap: { [key: string]: string } = {
-  최신순: 'dateTime',
-  '마감 임박': 'registrationEnd',
+  최신순: 'createdAt',
+  '평점 높은 순': 'score',
   '참여 인원 순': 'participantCount',
 };
 
-const useReviews = (initialReviewsData: ReviewsType[]) => {
-  // 모임 종류에 따른 탭 상태
-  const [activeTab, setActiveTab] = useState<GatheringTabsType>('DALLAEMFIT');
+interface GetReviewListParams {
+  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
+  limit?: number;
+  offset?: number;
+  location?: string; // 건대입구, 을지로3가, 신림, 홍대입구
+  date?: string; // (YYYY-MM-DD 형식)
+  sortBy?: string; //createdAt, score, participantCount
+  sortOrder?: 'asc' | 'desc';
+  gatheringId?: number;
+}
 
-  // 리뷰 데이터 리스트
+interface FilteringOptionsType {
+  location: string | undefined;
+  date: Date | null;
+  sortOption: string | undefined;
+}
+
+const useReviews = (
+  initialReviewsData: ReviewsType[],
+  reviewScoreData: ReviewScoreType[],
+) => {
   const [filteredData, setFilteredData] =
     useState<ReviewsType[]>(initialReviewsData);
 
-  // 지역 선택 필터링 상태
-  const [selectedLocation, setSelectedLocation] = useState<string | undefined>(
-    undefined,
-  );
+  const [filteredSortData, setFilteredSortData] =
+    useState<ReviewScoreType[]>(reviewScoreData);
 
-  // 달램핏의 하위 종류 탭 상태
+  const [activeTab, setActiveTab] = useState<GatheringTabsType>('DALLAEMFIT');
+
   const [selectedChip, setSelectedChip] = useState<GatheringChipsType>('ALL');
 
-  // 날짜 선택 필터링
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const fetchReviewsAndScores = async (
+    type: GetReviewListParams['type'] | undefined,
+  ) => {
+    const [newData, newScore] = await Promise.all([
+      getReviewList({ type: type }),
+      getReviewScore({ type: type }),
+    ]);
 
-  // 정렬 필터링
-  const [sortOption, setSortOption] = useState<string | undefined>();
+    setFilteredData(newData);
+    setFilteredSortData(newScore);
+  };
 
   // 모임 종류 탭 클릭 이벤트 핸들러
   const handleTabClick = async (type: GatheringTabsType) => {
     setActiveTab(type);
     setSelectedChip('ALL'); // 탭 변경 시 하위 종류 탭 초기화
 
-    if (type === 'WORKATION') {
-      const newData = initialReviewsData.filter(
-        (data) => data.Gathering.type === type,
-      );
-      setFilteredData(newData);
-    } else {
-      const newData = initialReviewsData.filter(
-        (data) => data.Gathering.type !== 'WORKATION',
-      );
-      setFilteredData(newData);
-    }
-
-    // 기존 데이터를 필터링
+    fetchReviewsAndScores(type);
   };
 
   // 달램핏 세부 종류 탭 클릭 이벤트 핸들러
   const handleChipClick = async (label: GatheringChipsType) => {
     setSelectedChip(label);
 
-    if (label === 'ALL') {
-      const newData = initialReviewsData.filter(
-        (data) => data.Gathering.type !== 'WORKATION',
-      );
-      setFilteredData(newData);
-    } else {
-      const newData = initialReviewsData.filter(
-        (data) => data.Gathering.type === label,
-      );
-      setFilteredData(newData);
+    const type = label === 'ALL' ? activeTab : label;
+
+    fetchReviewsAndScores(type);
+  };
+
+  const initialFilteringOptions: FilteringOptionsType = {
+    location: undefined,
+    date: null,
+    sortOption: undefined,
+  };
+
+  const [filteringOptions, setFilteringOptions] =
+    useState<FilteringOptionsType>(initialFilteringOptions);
+
+  // 필터 옵션을 업데이트하는 함수들
+  const handleLocationChange = (location: string | undefined) => {
+    setFilteringOptions((prev) => ({ ...prev, location }));
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setFilteringOptions((prev) => ({ ...prev, date }));
+  };
+
+  const handleSortChange = (option: string | undefined) => {
+    setFilteringOptions((prev) => ({ ...prev, sortOption: option }));
+  };
+
+  // 공통된 필터링 로직을 별도 함수로 분리
+  const buildParams = (
+    type: 'OFFICE_STRETCHING' | 'MINDFULNESS' | GatheringTabsType,
+    options: FilteringOptionsType,
+  ): GetReviewListParams => {
+    const params: GetReviewListParams = { type };
+
+    if (options.location) {
+      params.location = options.location;
     }
+    if (options.date) {
+      params.date = formatCalendarDate(options.date);
+    }
+    if (options.sortOption) {
+      params.sortBy = sortOptionsMap[options.sortOption];
+      params.sortOrder = 'desc';
+    }
+
+    return params;
   };
 
-  // 지역 선택 필터링 이벤트 핸들러
-  const handleLocationChange = async (location: string | undefined) => {
-    setSelectedLocation(location);
+  // filteringOptions가 업데이트될 때 필터링 처리
+  useEffect(() => {
+    const handleFiltering = async () => {
+      const type = selectedChip === 'ALL' ? activeTab : selectedChip;
+      const params = buildParams(type, filteringOptions);
+      const newData = await getReviewList(params);
+      setFilteredData(newData);
+    };
 
-    //TODO : 선택되어 있는 탭을 고려한 지역 필터링
-  };
+    handleFiltering();
+  }, [filteringOptions]);
 
-  const handleDateChange = async (date: Date | null) => {
-    setSelectedDate(date);
-    //TODO : 선택되어 있는 탭을 고려한 날짜 필터링
-  };
+  // 무한 스크롤
+  const [offset, setOffset] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
-  const handleSortChange = async (option: string | undefined) => {
-    setSortOption(option);
+  // 로드 모어
+  const loadMore = async () => {
+    if (isLoading || !hasMore) return;
 
-    // TODO : 선택되어 있는 탭을 고려한 정렬 필터링
+    setIsLoading(true);
+
+    const newOffset = offset + LIMIT_PER_REQUEST;
+
+    const type = selectedChip === 'ALL' ? activeTab : selectedChip;
+    const params = buildParams(type, filteringOptions);
+    params.offset = newOffset;
+
+    try {
+      const moreData = await getReviewList(params);
+      if (moreData.length < LIMIT_PER_REQUEST) {
+        setHasMore(false);
+      }
+      setFilteredData((prevData) => [...prevData, ...moreData]);
+      setOffset(newOffset);
+    } catch (error) {
+      console.error('데이터를 불러오는 데 에러가 발생했습니다.', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
     filteredData,
+    filteredSortData,
     activeTab,
     selectedChip,
-    selectedLocation,
-    selectedDate,
-    sortOption,
     handleTabClick,
     handleChipClick,
     handleLocationChange,
     handleDateChange,
     handleSortChange,
+    loadMore,
+    isLoading,
+    hasMore,
   };
 };
 

@@ -1,6 +1,3 @@
-// TODO : 무한 스크롤로 추가 데이터 Fetching
-// TODO : 필터 옵션에 따른 데이터 필터링
-
 'use client';
 
 import ReviewList from './ReviewList';
@@ -9,7 +6,8 @@ import { ReviewScoreType, ReviewsType } from '@/types/data.type';
 import useReviews from '@/hooks/useReveiws';
 import Tabs from '@/app/components/Tabs/Tabs';
 import Chips from './Chips';
-import Filters from '../../gatherings/_component/Filters';
+import Filters from './Filters';
+import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 
 interface ClientSideReviewsProps {
@@ -21,8 +19,11 @@ const ClientSideReviews = ({
   reviewListData,
   reviewScoreData,
 }: ClientSideReviewsProps) => {
+  const { ref, inView } = useInView({ threshold: 1.0 });
+
   const {
     filteredData,
+    filteredSortData,
     activeTab,
     selectedChip,
     handleTabClick,
@@ -30,12 +31,18 @@ const ClientSideReviews = ({
     handleLocationChange,
     handleDateChange,
     handleSortChange,
-  } = useReviews(reviewListData);
+    loadMore,
+    isLoading,
+    hasMore,
+  } = useReviews(reviewListData, reviewScoreData);
 
-  // 최초 렌더링 시 handleTabClick 실행하여 달램핏으로 데이터 필터링
   useEffect(() => {
-    handleTabClick('DALLAEMFIT');
-  }, []);
+    if (inView && hasMore) {
+      loadMore();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView, hasMore]);
 
   return (
     <section className='mt-24 flex grow flex-col md:mt-32'>
@@ -49,7 +56,7 @@ const ClientSideReviews = ({
       <div className='mb-16 w-full border-y border-var-gray-200' />
 
       {/* 별점칸 */}
-      <ReviewScore initialScore={reviewScoreData} />
+      <ReviewScore initialScore={filteredSortData} />
 
       <div className='mt-24 flex grow flex-col border-t-2 border-t-var-gray-900 bg-white p-24 pt-8'>
         <Filters
@@ -59,7 +66,13 @@ const ClientSideReviews = ({
         />
 
         {filteredData.length > 0 ? (
-          <ReviewList reviewList={filteredData} />
+          <>
+            <ReviewList reviewList={filteredData} />
+
+            {isLoading && <p>로딩...</p>}
+
+            {hasMore && <div ref={ref} className='h-20' />}
+          </>
         ) : (
           <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
             아직 리뷰가 없어요
