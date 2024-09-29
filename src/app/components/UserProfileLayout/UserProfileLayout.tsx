@@ -1,7 +1,6 @@
 'use client';
 
 import { Profile } from '@/public/images';
-import { useUser } from '@/app/(auth)/context/UserContext';
 import ProfileEditModal from '../Modal/ProfileEditModal';
 import { useState } from 'react';
 import onChangeProfileImage from './onChangeProfileImage';
@@ -10,9 +9,13 @@ import { useProfileState } from './useProfileState';
 import Image from 'next/image';
 import UserProfileHeader from './UserProfileHeader';
 import UserInfo from './UserInfo';
+import { UserData } from '@/types/client.type';
 
-const UserProfileLayout = () => {
-  const { user, setUser } = useUser();
+interface MyGatheringListProps {
+  user: UserData | null;
+}
+const UserProfileLayout = ({ user }: MyGatheringListProps) => {
+  const [userData, setUserData] = useState<UserData | null>(user);
   const {
     profileInput,
     setProfileInput,
@@ -39,7 +42,7 @@ const UserProfileLayout = () => {
 
     const updatedUser = await putProfileData(formData);
 
-    setUser((prevUser) =>
+    setUserData((prevUser) =>
       prevUser
         ? { ...prevUser, companyName: profileInput, image: imagePreview }
         : prevUser,
@@ -47,9 +50,9 @@ const UserProfileLayout = () => {
 
     if (!updatedUser) {
       alert('프로필 업데이트에 실패했습니다.');
-      setUser(previousUserData);
+      setUserData(previousUserData);
     } else {
-      setUser((prevUser) =>
+      setUserData((prevUser) =>
         prevUser ? { ...prevUser, ...updatedUser } : prevUser,
       );
     }
@@ -72,10 +75,10 @@ const UserProfileLayout = () => {
       <div className='rounded-b-[24px] bg-var-white px-92 py-16'>
         {/* 프로필 이미지 */}
         <div className='absolute left-24 top-56 size-56'>
-          {user?.image ? (
+          {userData?.image ? (
             <Image
               fill
-              src={user.image}
+              src={userData.image}
               alt='Profile'
               className='overflow-hidden rounded-full'
             />
@@ -83,11 +86,12 @@ const UserProfileLayout = () => {
             <Profile />
           )}
         </div>
-        <UserInfo user={user} />
+        <UserInfo user={userData} />
       </div>
       {isModalOpen && (
         <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
           <ProfileEditModal
+            user={userData}
             onCloseClick={toggleModal}
             onUploadProfileImage={onChangeProfileImage({
               setProfileImage,

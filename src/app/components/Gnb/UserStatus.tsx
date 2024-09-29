@@ -1,15 +1,18 @@
 'use client';
 
 import { deleteCookie, getCookie } from '@/actions/auth/cookie/cookie';
-import { useUser } from '@/app/(auth)/context/UserContext';
 import { Profile } from '@/public/images';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { UserData } from '@/types/client.type';
 
-const UserStatus = () => {
-  const { user, setUser } = useUser();
+interface UserStatusProps {
+  user: UserData | null;
+}
+
+const UserStatus = ({ user }: UserStatusProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -32,8 +35,8 @@ const UserStatus = () => {
 
   const handleLogout = async () => {
     deleteCookie('token');
-    setUser(null);
     setIsOpen(false);
+    alert('로그아웃 되었습니다.');
     router.push('/gatherings');
   };
 
