@@ -81,47 +81,49 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     <ModalFrame>
       <form
         onSubmit={handleSubmit}
-        className='flex h-full w-full flex-col gap-24 overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:w-532 md:rounded-xl'
+        className='flex h-full w-full overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:max-h-[90lvh] md:w-532 md:overflow-y-hidden md:rounded-xl md:pr-0'
       >
-        {/* 헤더 */}
-        <Header onClose={onClose} />
+        <div className='scrollbar-hide flex w-full flex-col gap-24 overflow-auto p-4 md:pr-24'>
+          {/* 헤더 */}
+          <Header onClose={onClose} />
 
-        {/* 장소 */}
-        <PlaceDropdown
-          options={LOCATION_OPTIONS}
-          selectedOption={location}
-          setSelectedOption={setLocation}
-        >
-          장소를 선택해주세요
-        </PlaceDropdown>
+          {/* 장소 */}
+          <PlaceDropdown
+            options={LOCATION_OPTIONS}
+            selectedOption={location}
+            setSelectedOption={setLocation}
+          >
+            장소를 선택해주세요
+          </PlaceDropdown>
 
-        {/* 이미지 업로더 */}
-        <ImageUploader setImage={setImage} />
+          {/* 이미지 업로더 */}
+          <ImageUploader setImage={setImage} />
 
-        {/* 선택 서비스 */}
-        <BoxSelectGroup
-          gatheringType={gatheringType}
-          setGatheringType={setGatheringType}
-        />
+          {/* 선택 서비스 */}
+          <BoxSelectGroup
+            gatheringType={gatheringType}
+            setGatheringType={setGatheringType}
+          />
 
-        {/* 날짜 */}
-        <Calendar dateTime={dateTime} setDateTime={setDateTime} />
+          {/* 날짜 */}
+          <Calendar dateTime={dateTime} setDateTime={setDateTime} />
 
-        {/* 시간 */}
-        <SelectTimeChip
-          selectedTime={selectedTime}
-          setSelectedTime={setSelectedTime}
-        />
+          {/* 시간 */}
+          <SelectTimeChip
+            selectedTime={selectedTime}
+            setSelectedTime={setSelectedTime}
+          />
 
-        {/* 모집 정원 */}
-        <RecruitmentNumber setCapacity={setCapacity} />
+          {/* 모집 정원 */}
+          <RecruitmentNumber setCapacity={setCapacity} />
 
-        {/* 확인 버튼 */}
-        <Button
-          name='확인'
-          type='submit'
-          variant={isFormValid() ? 'default' : 'gray'}
-        />
+          {/* 확인 버튼 */}
+          <Button
+            name='확인'
+            type='submit'
+            variant={isFormValid() ? 'default' : 'gray'}
+          />
+        </div>
       </form>
     </ModalFrame>
   );
