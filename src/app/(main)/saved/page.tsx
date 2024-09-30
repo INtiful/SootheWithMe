@@ -57,6 +57,9 @@ const SavedPage = () => {
 
     if (savedGatherings.length > 0) {
       getSavedGatherings();
+    } else {
+      setIinitialGatherings([]);
+      setFilteredData([]);
     }
   }, [savedGatherings, activeTab]);
 
