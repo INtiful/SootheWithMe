@@ -42,18 +42,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     return Object.values(gatheringType).every((value) => value === false);
   };
 
-  // // 오늘이면서 현재 시간보다 이전인 시간을 필터링
-  const isPastTime = (time: string) => {
-    const today = new Date();
-    const todayDate = today.getDate();
-    const selectedDate = dateTime?.getDate();
-
-    const todayHour = today.getHours();
-    const selectedHour = Number(time?.split(':')[0]);
-
-    return todayDate === selectedDate ? todayHour + 1 > selectedHour : false;
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -102,7 +90,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <SelectTimeChip
           selectedTime={selectedTime}
           setSelectedTime={setSelectedTime}
-          isPastTime={isPastTime}
         />
         {/* 모집 정원 */}
         <RecruitmentNumber setCapacity={setCapacity} />
