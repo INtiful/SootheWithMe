@@ -11,22 +11,28 @@ interface GetReviewListParams {
   sortBy?: string; //createdAt, score, participantCount
   sortOrder?: 'asc' | 'desc';
   gatheringId?: number;
+  userId?: number;
 }
 
 const getReviewList = async (
   params: GetReviewListParams = {},
 ): Promise<ReviewsType[]> => {
   try {
-    const { limit = 10, offset = 0, gatheringId, ...rest } = params;
+    const { limit = 10, offset = 0, gatheringId, userId, ...rest } = params;
 
+    // TODO : 쿼리스트링 라이브러리 사용하여 리팩토링 (ex. qs, query-string)
     const queryParams = new URLSearchParams({
       limit: String(limit),
       offset: String(offset),
       ...rest,
     });
 
+    // 값이 있을 경우에만 추가
     if (gatheringId) {
       queryParams.append('gatheringId', String(gatheringId));
+    }
+    if (userId) {
+      queryParams.append('userId', String(userId));
     }
 
     const queryString = queryParams.toString();
