@@ -15,6 +15,11 @@ const ImageUploader = ({ image, setImage }: ImageUploaderProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      if (file.size > 1024 * 1024) {
+        // 1MB 제한
+        alert('이미지 크기는 1MB를 초과할 수 없습니다.');
+        return;
+      }
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result as string);
