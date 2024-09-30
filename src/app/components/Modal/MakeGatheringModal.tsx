@@ -2,7 +2,7 @@
 
 import postGatherings from '@/app/api/actions/gatherings/postGatherings';
 import { LOCATION_OPTIONS } from '@/constants/common';
-import { MouseEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Button from '../Button/Button';
 import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
 import Calendar from './MakeGatheringModal/Calendar';
@@ -22,7 +22,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [image, setImage] = useState<string | null>(null);
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
     OFFICE_STRETCHING: false,
-    MINDFULLNESS: false,
+    MINDFULNESS: false,
     WORKATION: false,
   });
   const [dateTime, setDateTime] = useState<Date | null>(null);
@@ -54,9 +54,10 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     return todayDate === selectedDate ? todayHour + 1 > selectedHour : false;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!location || !dateTime || !image) {
-      // Handle the error appropriately, e.g., show a message to the user
       return;
     }
 
@@ -72,9 +73,9 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   };
 
   return (
-    <ModalFrame onClose={onClose}>
-      <div
-        onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+    <ModalFrame>
+      <form
+        onSubmit={handleSubmit}
         className='flex h-full w-full flex-col gap-24 overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:w-532 md:rounded-xl'
       >
         {/* 헤더 */}
@@ -107,6 +108,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         {/* 확인 버튼 */}
         <Button
           name='확인'
+          type='submit'
           variant={
             location &&
             image &&
@@ -117,9 +119,8 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
               ? 'default'
               : 'gray'
           }
-          onClick={handleSubmit}
         />
-      </div>
+      </form>
     </ModalFrame>
   );
 };
