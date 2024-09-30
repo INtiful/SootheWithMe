@@ -85,6 +85,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       >
         {/* 헤더 */}
         <Header onClose={onClose} />
+
         {/* 장소 */}
         <PlaceDropdown
           options={LOCATION_OPTIONS}
@@ -93,22 +94,28 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         >
           장소를 선택해주세요
         </PlaceDropdown>
+
         {/* 이미지 업로더 */}
         <ImageUploader setImage={setImage} />
+
         {/* 선택 서비스 */}
         <BoxSelectGroup
           gatheringType={gatheringType}
           setGatheringType={setGatheringType}
         />
+
         {/* 날짜 */}
         <Calendar dateTime={dateTime} setDateTime={setDateTime} />
+
         {/* 시간 */}
         <SelectTimeChip
           selectedTime={selectedTime}
           setSelectedTime={setSelectedTime}
         />
+
         {/* 모집 정원 */}
         <RecruitmentNumber setCapacity={setCapacity} />
+
         {/* 확인 버튼 */}
         <Button
           name='확인'
