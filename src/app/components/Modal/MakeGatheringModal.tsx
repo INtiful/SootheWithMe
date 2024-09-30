@@ -19,7 +19,7 @@ interface MakeGatheringModalProps {
 
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [location, setLocation] = useState<string | null>(null);
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
     OFFICE_STRETCHING: false,
     MINDFULNESS: false,
@@ -90,7 +90,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           장소를 선택해주세요
         </PlaceDropdown>
         {/* 이미지 업로더 */}
-        <ImageUploader image={image} setImage={setImage} />
+        <ImageUploader setImage={setImage} />
         {/* 선택 서비스 */}
         <BoxSelectGroup
           gatheringType={gatheringType}
