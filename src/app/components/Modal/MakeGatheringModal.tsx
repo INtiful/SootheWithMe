@@ -42,19 +42,27 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     return Object.values(gatheringType).every((value) => value === false);
   };
 
+  const isFormValid = () =>
+    location &&
+    image &&
+    !isAllGatheringTypeFalse() &&
+    dateTime &&
+    selectedTime &&
+    capacity >= 5;
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!location || !dateTime || !image) {
+    if (!isFormValid()) {
       return;
     }
 
     const res = await postGatherings({
-      location,
+      location: location as string,
       type: getSelectedGatheringType(),
-      dateTime: dateTime.toISOString(),
+      dateTime: (dateTime as Date).toISOString(),
       capacity,
-      image,
+      image: image as File,
     });
     onClose();
     alert('모임이 생성되었습니다.');
@@ -97,16 +105,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <Button
           name='확인'
           type='submit'
-          variant={
-            location &&
-            image &&
-            !isAllGatheringTypeFalse() &&
-            dateTime &&
-            selectedTime &&
-            capacity >= 5
-              ? 'default'
-              : 'gray'
-          }
+          variant={isFormValid() ? 'default' : 'gray'}
         />
       </form>
     </ModalFrame>
