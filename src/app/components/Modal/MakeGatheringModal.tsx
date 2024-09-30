@@ -42,12 +42,21 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     return Object.values(gatheringType).every((value) => value === false);
   };
 
+  // 캘린더의 날짜와 타임칩의 시간을 결합
+  let combinedDateTime: Date | null = null;
+  if (dateTime && selectedTime) {
+    const [hours, minutes] = selectedTime.split(':').map(Number);
+    combinedDateTime = new Date(dateTime);
+    combinedDateTime.setHours(hours, minutes);
+  }
+
   const isFormValid = () =>
     location &&
     image &&
     !isAllGatheringTypeFalse() &&
     dateTime &&
     selectedTime &&
+    combinedDateTime &&
     capacity >= 5;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -60,13 +69,12 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     const res = await postGatherings({
       location: location as string,
       type: getSelectedGatheringType(),
-      dateTime: (dateTime as Date).toISOString(),
+      dateTime: (combinedDateTime as Date).toISOString(),
       capacity,
       image: image as File,
     });
     onClose();
     alert('모임이 생성되었습니다.');
-    console.log(res);
   };
 
   return (
