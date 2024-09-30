@@ -14,10 +14,12 @@
  * 이 훅은 필터 및 탭이 변경될 때마다 `getGatherings` API를 호출하여 필터링된 모임 데이터를 업데이트합니다.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { formatCalendarDate } from '@/utils/formatDate';
+import { GatheringFilters } from '@/types/client.type';
 import { GatheringsListData } from '@/types/data.type';
 import { LIMIT_PER_REQUEST } from '@/constants/common';
 
@@ -29,11 +31,14 @@ export const sortOptionsMap: { [key: string]: string } = {
 };
 
 const useGatherings = (initialGatherings: GatheringsListData[]) => {
+  const router = useRouter();
+
+  const [filteredData, setFilteredData] =
+    useState<GatheringsListData[]>(initialGatherings);
+
   const [activeTab, setActiveTab] = useState<'WORKATION' | 'DALLAEMFIT'>(
     'DALLAEMFIT',
   );
-  const [filteredData, setFilteredData] =
-    useState<GatheringsListData[]>(initialGatherings);
   const [selectedLocation, setSelectedLocation] = useState<string | undefined>(
     undefined,
   );
@@ -46,16 +51,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
 
-  const fetchFilteredGatherings = async (
-    overrides: Partial<{
-      type: 'WORKATION' | 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
-      location: string | undefined;
-      date: Date | null;
-      sortBy: string | undefined;
-      sortOrder: 'asc' | 'desc';
-      offset: number;
-    }> = {},
-  ) => {
+  const fetchFilteredGatherings = async (overrides: GatheringFilters = {}) => {
     const type =
       overrides.type ||
       (selectedChip === 'ALL' || !selectedChip ? activeTab : selectedChip);
@@ -80,17 +76,31 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     return newData || [];
   };
 
-  const resetFiltersAndFetchData = async (
-    filters: Partial<{
-      type: 'WORKATION' | 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
-      location: string | undefined;
-      date: Date | null;
-      sortBy: string | undefined;
-    }>,
-  ) => {
+  const updateQueryParams = (params: { [key: string]: string | undefined }) => {
+    const searchParams = new URLSearchParams(window.location.search);
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) {
+        searchParams.set(key, value);
+      } else {
+        searchParams.delete(key);
+      }
+    });
+    router.push(`?${searchParams.toString()}`);
+  };
+
+  const resetFilters = (filters: GatheringFilters) => {
     setOffset(0);
     setHasMore(true);
 
+    updateQueryParams({
+      type: filters.type,
+      location: filters.location,
+      date: filters.date ? formatCalendarDate(filters.date) : undefined,
+      sortBy: filters.sortBy,
+    });
+  };
+
+  const fetchData = async (filters: GatheringFilters) => {
     const newData = await fetchFilteredGatherings({ ...filters, offset: 0 });
     setFilteredData(newData);
   };
@@ -98,7 +108,8 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
   const handleTabClick = (type: 'WORKATION' | 'DALLAEMFIT') => {
     setActiveTab(type);
     setSelectedChip(null);
-    resetFiltersAndFetchData({ type });
+    resetFilters({ type });
+    fetchData({ type });
   };
 
   const handleChipClick = (
@@ -106,17 +117,20 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
   ) => {
     setSelectedChip(label);
     const type = label === 'ALL' ? 'DALLAEMFIT' : label;
-    resetFiltersAndFetchData({ type });
+    resetFilters({ type });
+    fetchData({ type });
   };
 
   const handleLocationChange = (location: string | undefined) => {
     setSelectedLocation(location);
-    resetFiltersAndFetchData({ location });
+    resetFilters({ location });
+    fetchData({ location });
   };
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
-    resetFiltersAndFetchData({ date });
+    resetFilters({ date });
+    fetchData({ date });
   };
 
   const handleSortChange = (option: string | undefined) => {
@@ -124,7 +138,8 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
       ? sortOptionsMap[option]
       : undefined;
     setSortOption(sortBy);
-    resetFiltersAndFetchData({ sortBy });
+    resetFilters({ sortBy });
+    fetchData({ sortBy });
   };
 
   const loadMore = async () => {
@@ -149,6 +164,21 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    resetFilters({
+      type: activeTab,
+      location: selectedLocation,
+      date: selectedDate,
+      sortBy: sortOption,
+    });
+    fetchData({
+      type: activeTab,
+      location: selectedLocation,
+      date: selectedDate,
+      sortBy: sortOption,
+    });
+  }, [activeTab, selectedLocation, selectedDate, sortOption]);
 
   return {
     filteredData,
