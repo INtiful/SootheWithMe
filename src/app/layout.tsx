@@ -4,7 +4,7 @@ import '@/styles/reset.css';
 import '@/styles/style.css';
 import Gnb from './components/Gnb/Gnb';
 import Providers from './providers';
-import { getUserData } from './api/actions/mypage/getUserData';
+import { getUserData } from './api/actions/user/getUserData';
 
 export const metadata: Metadata = {
   title: 'Soothe With Me',

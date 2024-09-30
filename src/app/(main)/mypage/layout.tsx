@@ -1,7 +1,7 @@
 import UserProfileLayout from '@/app/components/UserProfileLayout/UserProfileLayout';
 import { ReactNode } from 'react';
 import Tab from './_component/Tab';
-import { getUserData } from '@/app/api/actions/mypage/getUserData';
+import { getUserData } from '@/app/api/actions/user/getUserData';
 
 const Layout = async ({
   children,
