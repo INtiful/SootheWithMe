@@ -15,7 +15,6 @@ interface MyGatheringListProps {
   user: UserData | null;
 }
 const UserProfileLayout = ({ user }: MyGatheringListProps) => {
-  const [userData, setUserData] = useState<UserData | null>(user);
   const {
     profileInput,
     setProfileInput,
@@ -38,23 +37,10 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
     formData.append('companyName', profileInput); // 프로필 이름 추가
     formData.append('image', profileImage); // 프로필 이미지 추가
 
-    const previousUserData = user;
-
     const updatedUser = await putProfileData(formData);
-
-    setUserData((prevUser) =>
-      prevUser
-        ? { ...prevUser, companyName: profileInput, image: imagePreview }
-        : prevUser,
-    );
 
     if (!updatedUser) {
       alert('프로필 업데이트에 실패했습니다.');
-      setUserData(previousUserData);
-    } else {
-      setUserData((prevUser) =>
-        prevUser ? { ...prevUser, ...updatedUser } : prevUser,
-      );
     }
 
     setIsModalOpen(false);
@@ -75,10 +61,10 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
       <div className='rounded-b-[24px] bg-var-white px-92 py-16'>
         {/* 프로필 이미지 */}
         <div className='absolute left-24 top-56 size-56'>
-          {userData?.image ? (
+          {user?.image ? (
             <Image
               fill
-              src={userData.image}
+              src={user.image}
               alt='Profile'
               className='overflow-hidden rounded-full'
             />
@@ -86,12 +72,12 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
             <Profile />
           )}
         </div>
-        <UserInfo user={userData} />
+        <UserInfo user={user} />
       </div>
       {isModalOpen && (
         <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
           <ProfileEditModal
-            user={userData}
+            user={user}
             onCloseClick={toggleModal}
             onUploadProfileImage={onChangeProfileImage({
               setProfileImage,
