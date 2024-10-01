@@ -44,7 +44,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
   };
 
   return (
-    <ModalFrame>
+    <ModalFrame onClose={onClose}>
       <div
         onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
         className='flex max-h-408 w-344 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'
