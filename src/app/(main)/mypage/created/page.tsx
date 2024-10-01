@@ -16,12 +16,10 @@ const CreatedPage = async () => {
   return (
     <>
       {gatherings.length > 0 ? (
-        <>
-          <ClientSideGatherings
-            createdBy={String(userData.id)}
-            gatherings={gatherings}
-          />
-        </>
+        <ClientSideGatherings
+          createdBy={String(userData.id)}
+          gatherings={gatherings}
+        />
       ) : (
         <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
           아직 만든 모임이 없어요
