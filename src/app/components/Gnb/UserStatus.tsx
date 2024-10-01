@@ -41,7 +41,7 @@ const UserStatus = ({ user }: UserStatusProps) => {
     deleteCookie('token');
     setIsOpen(false);
     router.push('/');
-    revalidate('/auths/user');
+    revalidate('/');
   };
 
   return (

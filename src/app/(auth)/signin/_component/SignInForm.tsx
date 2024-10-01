@@ -31,7 +31,7 @@ const SignInForm = () => {
     try {
       const result = await submitSignInData(data);
 
-      revalidate('/auths/user');
+      revalidate('/');
       router.push('/');
     } catch (error) {
       if (error instanceof Error) {
