@@ -13,7 +13,7 @@ import { UserData } from '@/types/client.type';
 const navList = [
   {
     name: '모임 찾기',
-    link: '/gatherings', // @todo link 변경 시 수정
+    link: '/',
   },
   {
     name: '찜한 모임',

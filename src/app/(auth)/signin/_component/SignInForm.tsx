@@ -32,7 +32,7 @@ const SignInForm = () => {
       const result = await submitSignInData(data);
 
       revalidate('/auths/user');
-      router.push('/gatherings');
+      router.push('/');
     } catch (error) {
       if (error instanceof Error) {
         // 로그인 오류 처리

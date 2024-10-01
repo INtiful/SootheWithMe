@@ -40,7 +40,7 @@ const UserStatus = ({ user }: UserStatusProps) => {
     console.log(result);
     deleteCookie('token');
     setIsOpen(false);
-    router.push('/gatherings');
+    router.push('/');
     revalidate('/auths/user');
   };
 
