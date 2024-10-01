@@ -5,13 +5,7 @@ import {
   GatheringFilters,
   GatheringTabsType,
 } from '@/types/client.type';
-
-// sorting 시 한글 옵션을 영어로 변환해주는 기능
-export const sortOptionsMap: { [key: string]: string } = {
-  최신순: 'dateTime',
-  '마감 임박': 'registrationEnd',
-  '참여 인원 순': 'participantCount',
-};
+import { SORT_OPTIONS_MAP } from '@/constants/common';
 
 const useHandlers = (
   setActiveTab: (tab: GatheringTabsType) => void,
@@ -62,7 +56,7 @@ const useHandlers = (
 
   const handleSortChange = useCallback(
     (option: string | undefined) => {
-      const sortBy = option ? sortOptionsMap[option] : undefined;
+      const sortBy = option ? SORT_OPTIONS_MAP[option] : undefined;
       setSortOption(sortBy);
       resetFilters({ sortBy });
       updateFilteredData({ sortBy });
