@@ -16,7 +16,7 @@ const CalendarModal = ({
   const [dateTime, setDateTime] = useState<Date | null>(initialSelectedData);
 
   return (
-    <div className='flex h-328 w-336 flex-col items-center justify-center gap-12 rounded-xl bg-var-white px-44 py-24'>
+    <div className='flex h-376 w-336 flex-col items-center justify-center gap-12 rounded-xl bg-var-white px-44 py-24'>
       {/* 캘린더 */}
       <Calendar
         dateTime={dateTime}
