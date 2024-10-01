@@ -21,7 +21,6 @@ const CalendarModal = ({
       <Calendar
         dateTime={dateTime}
         setDateTime={setDateTime}
-        locale={'ko'}
         dateFormat={'yyyy-MM-dd'}
         changeStartDays={-365} // 1년 전부터 선택 가능
         inline={true}

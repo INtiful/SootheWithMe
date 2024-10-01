@@ -10,7 +10,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 interface CalendarProps {
   dateTime: Date | null;
   setDateTime: (date: Date | null) => void;
-  locale?: 'ko' | 'en';
   dateFormat: 'yyyy-MM-dd' | 'yyyy-MM-dd HH:mm';
   changeStartDays?: number;
   changeEndDays?: number;
@@ -19,7 +18,6 @@ interface CalendarProps {
 const Calendar = ({
   dateTime,
   setDateTime,
-  locale = 'ko',
   dateFormat = 'yyyy-MM-dd',
   changeStartDays = 0, // 이전 날짜 설정 (음수를 넣어주세요)
   changeEndDays = MAKING_GATHERING_DATE_DEADLINE, // 이후 날짜 설정 (양수를 넣어주세요)
@@ -37,7 +35,6 @@ const Calendar = ({
   return (
     <DatePicker
       id='datepicker'
-      locale={locale}
       ref={datepickerRef}
       shouldCloseOnSelect
       dateFormat={dateFormat}
