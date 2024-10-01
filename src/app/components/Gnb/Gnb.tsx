@@ -52,7 +52,13 @@ const Gnb = ({ user }: GnbProps) => {
             {navList.map((nav, index) => (
               <li key={index} className='flex items-center gap-[5px]'>
                 <Link href={nav.link}>
-                  <TopTab isActive={pathname.includes(nav.link)}>
+                  <TopTab
+                    isActive={
+                      nav.link === '/'
+                        ? pathname === '/'
+                        : pathname.startsWith(nav.link)
+                    }
+                  >
                     {nav.name}
                   </TopTab>
                 </Link>
