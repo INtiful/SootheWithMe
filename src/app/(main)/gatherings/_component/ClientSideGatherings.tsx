@@ -13,6 +13,9 @@ import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
 
 import { useInView } from 'react-intersection-observer';
+import { useUser } from '@/app/(auth)/context/UserContext';
+import { UserData } from '@/types/client.type';
+import { useRouter } from 'next/navigation';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -21,6 +24,17 @@ interface ClientSideGatheringsProps {
 const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { ref, inView } = useInView({ threshold: 1.0 });
+  const { user } = useUser();
+  const router = useRouter();
+
+  const isUserNull = (user: UserData | null) => {
+    return user === null;
+  };
+
+  const handleModalButtonClick = () => {
+    // console.log(isUserNull(user));
+    isUserNull(user) ? router.push('/signin') : setIsModalOpen(true);
+  };
 
   const {
     filteredData,
@@ -50,7 +64,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
         <div className='mt-32'>
           <div className='flex justify-between'>
             <Tabs activeTab={activeTab} onTabClick={handleTabClick} />
-            <CreateGatheringButton onClick={() => setIsModalOpen(true)} />
+            <CreateGatheringButton onClick={handleModalButtonClick} />
           </div>
           <Chips activeTab={activeTab} onChipClick={handleChipClick} />
         </div>
