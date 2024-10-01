@@ -2,6 +2,7 @@
 // 커스텀 원하시면 styles/style.css 코드를 참고하시면 됩니다.
 'use client';
 
+import { MAKING_GATHERING_DATE_DEADLINE } from '@/constants/common';
 import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -21,7 +22,7 @@ const Calendar = ({
   locale = 'ko',
   dateFormat = 'yyyy-MM-dd',
   changeStartDays = 0, // 이전 날짜 설정 (음수를 넣어주세요)
-  changeEndDays = 0, // 이후 날짜 설정 (양수를 넣어주세요)
+  changeEndDays = MAKING_GATHERING_DATE_DEADLINE, // 이후 날짜 설정 (양수를 넣어주세요)
   inline = false,
 }: CalendarProps) => {
   const datepickerRef = useRef(null);
