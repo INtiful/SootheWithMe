@@ -10,7 +10,7 @@ interface TokenExpirationHandlerProps {
   user: UserData | null;
 }
 
-const TokenExpirationHandler = ({ user }: TokenExpirationHandlerProps) => {
+const TokenExpirationTimer = ({ user }: TokenExpirationHandlerProps) => {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<number>(3600); // 남은 시간 초기값
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // 로그인 상태 관리
@@ -81,4 +81,4 @@ const TokenExpirationHandler = ({ user }: TokenExpirationHandlerProps) => {
   ) : null;
 };
 
-export default TokenExpirationHandler;
+export default TokenExpirationTimer;

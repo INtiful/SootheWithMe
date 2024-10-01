@@ -9,7 +9,7 @@ import Badge from '../Badge/Badge';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { useEffect, useState } from 'react';
 import { UserData } from '@/types/client.type';
-import TokenExpirationHandler from '@/utils/TokenExpirationHandler';
+import TokenExpirationTimer from './TokenExpirationHandler';
 
 const navList = [
   {
@@ -74,7 +74,7 @@ const Gnb = ({ user }: GnbProps) => {
           </ul>
         </nav>
         <div className='flex items-center gap-12'>
-          {user && <TokenExpirationHandler user={user} />}
+          {user && <TokenExpirationTimer user={user} />}
           <UserStatus user={user} />
         </div>
       </div>
