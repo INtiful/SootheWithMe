@@ -11,7 +11,8 @@ interface CalendarProps {
   setDateTime: (date: Date | null) => void;
   locale?: 'ko' | 'en';
   dateFormat: 'yyyy-MM-dd' | 'yyyy-MM-dd HH:mm';
-  pastDays?: number;
+  changeStartDays?: number;
+  changeEndDays?: number;
   inline?: boolean;
 }
 const Calendar = ({
@@ -19,15 +20,16 @@ const Calendar = ({
   setDateTime,
   locale = 'ko',
   dateFormat = 'yyyy-MM-dd',
-  pastDays = 0,
+  changeStartDays = 0, // 이전 날짜 설정 (음수를 넣어주세요)
+  changeEndDays = 0, // 이후 날짜 설정 (양수를 넣어주세요)
   inline = false,
 }: CalendarProps) => {
   const datepickerRef = useRef(null);
 
-  // 지난 날 어디까지 선택 가능한지 설정
-  const subDays = (date: Date, days: number): Date => {
+  // 이전 날짜 및 이후 날짜 설정
+  const adjustDays = (date: Date, days: number): Date => {
     const result = new Date(date);
-    result.setDate(result.getDate() - days);
+    result.setDate(result.getDate() + days);
     return result;
   };
 
@@ -40,7 +42,8 @@ const Calendar = ({
       dateFormat={dateFormat}
       selected={dateTime}
       onChange={(date) => setDateTime(date as Date)}
-      minDate={subDays(new Date(), pastDays)}
+      minDate={adjustDays(new Date(), changeStartDays)}
+      maxDate={adjustDays(new Date(), changeEndDays)}
       inline={inline}
     />
   );
