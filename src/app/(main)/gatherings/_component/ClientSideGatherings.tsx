@@ -2,19 +2,20 @@
 
 import { useEffect, useState } from 'react';
 
-import Filters from './Filters';
-import GatheringCardList from './GatheringCardList';
-import Tabs from '@/app/components/Tabs/Tabs';
 import Chips from '@/app/components/Chips/Chips';
-import CreateGatheringButton from './CreateGatheringButton';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
+import Tabs from '@/app/components/Tabs/Tabs';
 import useGatherings from '@/hooks/useGatherings';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
+import CreateGatheringButton from './CreateGatheringButton';
+import Filters from './Filters';
+import GatheringCardList from './GatheringCardList';
 
-import { useInView } from 'react-intersection-observer';
+import Popup from '@/app/components/Popup/Popup';
 import { UserData } from '@/types/client.type';
 import { useRouter } from 'next/navigation';
+import { useInView } from 'react-intersection-observer';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -26,6 +27,7 @@ const ClientSideGatherings = ({
   user,
 }: ClientSideGatheringsProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
   const { ref, inView } = useInView({ threshold: 1.0 });
   const router = useRouter();
 
@@ -34,7 +36,13 @@ const ClientSideGatherings = ({
   };
 
   const handleModalButtonClick = () => {
-    isUserNull(user) ? router.push('/signin') : setIsModalOpen(true);
+    if (!isUserNull(user)) {
+      return setIsModalOpen(true);
+    }
+
+    if (isUserNull(user)) {
+      setIsShowPopup(true);
+    }
   };
 
   const {
@@ -84,6 +92,18 @@ const ClientSideGatherings = ({
 
       {isModalOpen && (
         <MakeGatheringModal onClose={() => setIsModalOpen(false)} />
+      )}
+
+      {isShowPopup && ( // 팝업 렌더링
+        <Popup
+          type='login'
+          hasCancelButton={true}
+          onClickClose={() => setIsShowPopup(false)}
+          onClickConfirm={() => {
+            setIsShowPopup(false);
+            router.push('/signin');
+          }}
+        />
       )}
     </>
   );
