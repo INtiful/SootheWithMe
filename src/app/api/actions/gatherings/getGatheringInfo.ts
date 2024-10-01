@@ -16,11 +16,15 @@ const getGatheringInfo = async (
       },
     );
 
+    if (!res.ok) {
+      throw new Error('모임을 찾을 수 없습니다.');
+    }
+
     const data: GatheringInfoType = await res.json();
 
     return data;
   } catch (error) {
-    throw new Error('모임을 불러오지 못했습니다.');
+    throw new Error('모임을 찾을 수 없습니다.');
   }
 };
 
