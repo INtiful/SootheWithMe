@@ -17,11 +17,19 @@ const getGatheringParticipants = async (
       },
     );
 
+    if (!res.ok) {
+      throw new Error('참가자들을 불러오지 못했습니다.');
+    }
+
     const data: GatheringParticipantsType[] = await res.json();
 
     return data;
   } catch (error) {
-    throw new Error('참가자들을 불러오지 못했습니다.');
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : '참가자들을 불러오지 못했습니다.',
+    );
   }
 };
 

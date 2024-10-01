@@ -26,6 +26,10 @@ const putGatheringToCancelled = async (
       },
     );
 
+    if (!res.ok) {
+      throw new Error('모임을 취소하지 못했습니다.');
+    }
+
     const data: GatheringInfoType = await res.json();
 
     revalidatePath('/');
@@ -33,7 +37,9 @@ const putGatheringToCancelled = async (
 
     return data;
   } catch (error) {
-    throw new Error('모임을 취소하지 못했습니다.');
+    throw new Error(
+      error instanceof Error ? error.message : '모임을 취소하지 못했습니다.',
+    );
   }
 };
 

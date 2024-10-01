@@ -23,6 +23,10 @@ const postGatheringToJoin = async (gatheringId: number) => {
       },
     );
 
+    if (!res.ok) {
+      throw new Error('모임에 참여하지 못했습니다.');
+    }
+
     const data = await res.json();
 
     revalidatePath('/');
@@ -30,7 +34,9 @@ const postGatheringToJoin = async (gatheringId: number) => {
 
     return data;
   } catch (error) {
-    throw new Error('모임에 참여하지 못했습니다.');
+    throw new Error(
+      error instanceof Error ? error.message : '모임에 참여하지 못했습니다.',
+    );
   }
 };
 

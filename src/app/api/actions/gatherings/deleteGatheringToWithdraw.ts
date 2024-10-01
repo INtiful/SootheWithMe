@@ -23,6 +23,10 @@ const deleteGatheringToWithdraw = async (gatheringId: number) => {
       },
     );
 
+    if (!res.ok) {
+      throw new Error('모임 참여를 취소하지 못했습니다.');
+    }
+
     const data = await res.json();
 
     revalidatePath('/');
@@ -30,7 +34,11 @@ const deleteGatheringToWithdraw = async (gatheringId: number) => {
 
     return data;
   } catch (error) {
-    throw new Error('모임 참여를 취소하지 못했습니다.');
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : '모임 참여를 취소하지 못했습니다.',
+    );
   }
 };
 
