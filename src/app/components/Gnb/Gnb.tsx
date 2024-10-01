@@ -9,7 +9,7 @@ import Badge from '../Badge/Badge';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { useEffect, useState } from 'react';
 import { UserData } from '@/types/client.type';
-import TokenExpirationTimer from './TokenExpirationHandler';
+import TokenExpirationTimer from './TokenExpirationTimer';
 
 const navList = [
   {
