@@ -11,6 +11,7 @@ import postGatheringToJoin from '@/app/api/actions/gatherings/postGatheringToJoi
 import deleteGatheringToWithdraw from '@/app/api/actions/gatherings/deleteGatheringToWithdraw';
 import { GatheringParticipantsType } from '@/types/data.type';
 import Popup from '../Popup/Popup';
+import toast from 'react-hot-toast';
 
 interface ParticipationButtonProps {
   isHost: boolean;
@@ -69,8 +70,16 @@ const ParticipationButton = ({
     }
 
     if (!hasParticipated) {
-      await postGatheringToJoin(Number(params.id));
-      setHasParticipated(true);
+      try {
+        await postGatheringToJoin(Number(params.id));
+        setHasParticipated(true);
+      } catch (error) {
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : '모임에 참여하지 못했습니다.',
+        );
+      }
     }
   };
 

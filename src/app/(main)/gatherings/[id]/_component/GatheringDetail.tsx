@@ -11,21 +11,21 @@ import {
   GatheringParticipantsType,
   ReviewsType,
 } from '@/types/data.type';
-import { useUser } from '@/app/(auth)/context/UserContext';
+import { UserData } from '@/types/client.type';
 
 interface GatheringDetailProps {
   gatheringInfo: GatheringInfoType;
   gatheringParticipants: GatheringParticipantsType[];
   reviews: ReviewsType[];
+  user: UserData | null;
 }
 
 const GatheringDetail = ({
   gatheringInfo,
   gatheringParticipants,
   reviews,
+  user,
 }: GatheringDetailProps) => {
-  const { user } = useUser();
-
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handlePageChange = (page: number) => {

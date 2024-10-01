@@ -5,6 +5,7 @@ import '@/styles/style.css';
 import Gnb from './components/Gnb/Gnb';
 import Providers from './providers';
 import { getUserData } from './api/actions/mypage/getUserData';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Soothe With Me',
@@ -28,6 +29,7 @@ export default async function RootLayout({
           <Gnb user={userData} />
           <div className='grow pt-60'>{children}</div>
           <div id='modal-root'></div>
+          <Toaster />
         </Providers>
       </body>
     </html>
