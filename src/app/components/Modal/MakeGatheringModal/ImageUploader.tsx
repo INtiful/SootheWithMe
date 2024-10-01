@@ -14,7 +14,6 @@ const ImageUploader = ({ setImage }: ImageUploaderProps) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
 
     if (file) {
       if (file.size > MAX_IMAGE_SIZE_BYTES) {

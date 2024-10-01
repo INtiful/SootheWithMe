@@ -1,7 +1,7 @@
 'use client';
 
 import postGatherings from '@/app/api/actions/gatherings/postGatherings';
-import { LOCATION_OPTIONS } from '@/constants/common';
+import { LOCATION_OPTIONS, MIN_PARTICIPANTS } from '@/constants/common';
 import { FormEvent, useState } from 'react';
 import Button from '../Button/Button';
 import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
@@ -57,7 +57,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     dateTime &&
     selectedTime &&
     combinedDateTime &&
-    capacity >= 5;
+    capacity >= MIN_PARTICIPANTS;
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,7 +78,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   };
 
   return (
-    <ModalFrame>
+    <ModalFrame onClose={onClose}>
       <form
         onSubmit={handleSubmit}
         className='flex h-full w-full overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:max-h-[90lvh] md:w-532 md:overflow-y-hidden md:rounded-xl md:pr-0'
