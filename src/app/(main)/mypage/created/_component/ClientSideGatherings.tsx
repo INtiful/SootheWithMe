@@ -32,6 +32,7 @@ const ClientSideGatherings = ({
   return (
     <>
       <GatheringList dataList={gatheringsList} />
+      {/* TODO : 로딩 상태에 대해 논의 후 디자인 통일 */}
       {isLoading && <p>로딩 스피너</p>}
 
       {hasMore && <div ref={ref} className='h-20' />}
