@@ -13,18 +13,20 @@ import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
 
 import { useInView } from 'react-intersection-observer';
-import { useUser } from '@/app/(auth)/context/UserContext';
 import { UserData } from '@/types/client.type';
 import { useRouter } from 'next/navigation';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
+  user: UserData | null;
 }
 
-const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
+const ClientSideGatherings = ({
+  gatherings,
+  user,
+}: ClientSideGatheringsProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { ref, inView } = useInView({ threshold: 1.0 });
-  const { user } = useUser();
   const router = useRouter();
 
   const isUserNull = (user: UserData | null) => {
@@ -32,7 +34,6 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   };
 
   const handleModalButtonClick = () => {
-    // console.log(isUserNull(user));
     isUserNull(user) ? router.push('/signin') : setIsModalOpen(true);
   };
 
