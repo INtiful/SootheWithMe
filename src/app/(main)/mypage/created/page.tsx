@@ -1,19 +1,27 @@
-'use client';
+import { getUserData } from '@/app/api/actions/mypage/getUserData';
+import ClientSideGatherings from './_component/ClientSideGatherings';
+import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 
-import { useUserCreated } from '@/hooks/useUserCreated';
-import GatheringList from './_component/GatheringList';
+const CreatedPage = async () => {
+  const userData = await getUserData();
 
-const CreatedPage = () => {
-  const { gatheringsList, isLoading } = useUserCreated();
+  if (!userData) {
+    // TODO : userData가 없을 때 에러 처리 혹은 로그인 페이지로 이동
+    return null;
+  }
+  const gatherings = await getGatherings({
+    createdBy: String(userData.id),
+  });
 
   return (
     <>
-      {isLoading ? (
-        <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
-          모임 정보를 불러오고 있어요...
-        </div>
-      ) : gatheringsList.length > 0 ? (
-        <GatheringList dataList={gatheringsList} />
+      {gatherings.length > 0 ? (
+        <>
+          <ClientSideGatherings
+            createdBy={String(userData.id)}
+            gatherings={gatherings}
+          />
+        </>
       ) : (
         <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
           아직 만든 모임이 없어요
