@@ -40,7 +40,7 @@ const GatheringDetail = ({
           <div className='flex flex-col items-center gap-y-16 md:flex md:flex-row md:gap-x-[14px] md:gap-y-0 lg:gap-x-24'>
             <GatheringImage image={gatheringInfo.image} />
             <GatheringInfo
-              name='테스트'
+              name={gatheringInfo.name || ''}
               location={gatheringInfo.location}
               dateTime={gatheringInfo.dateTime}
               participantCount={gatheringInfo.participantCount}

@@ -13,6 +13,7 @@ import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
 
 import { useInView } from 'react-intersection-observer';
+import { PulseLoader } from 'react-spinners';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -62,8 +63,11 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
       </div>
       <GatheringCardList gatherings={filteredData} />
 
-      {/* TODO: Spinner 넣기 */}
-      {isLoading && <p>로딩 스피너</p>}
+      {isLoading && (
+        <div className='flex justify-center'>
+          <PulseLoader color='#EA580C' />
+        </div>
+      )}
 
       {hasMore && <div ref={ref} className='h-20' />}
 

@@ -2,6 +2,8 @@ import Link from 'next/link';
 
 import CardList from '@/app/components/CardList/CardList';
 import { GatheringsListData } from '@/types/data.type';
+import { Suspense } from 'react';
+import Loading from '../loading';
 
 interface GatheringCardListProps {
   gatherings: GatheringsListData[];
@@ -23,7 +25,9 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         gatherings.map((gathering) => (
           <div key={gathering.id}>
             <Link href={`/gatherings/${gathering.id}`}>
-              <CardList data={gathering} />
+              <Suspense fallback={<Loading />}>
+                <CardList data={gathering} />
+              </Suspense>
             </Link>
           </div>
         ))
