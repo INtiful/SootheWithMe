@@ -1,14 +1,15 @@
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
 import ClientSideGatherings from './_component/ClientSideGatherings';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
+import { redirect } from 'next/navigation';
 
 const CreatedPage = async () => {
   const userData = await getUserData();
 
   if (!userData) {
-    // TODO : userData가 없을 때 에러 처리 혹은 로그인 페이지로 이동
-    return null;
+    redirect('/signin');
   }
+
   const gatherings = await getGatherings({
     createdBy: String(userData.id),
   });
