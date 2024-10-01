@@ -24,7 +24,8 @@ const postGatheringToJoin = async (gatheringId: number) => {
     );
 
     if (!res.ok) {
-      throw new Error('모임에 참여하지 못했습니다.');
+      const { message } = await res.json();
+      throw new Error(message);
     }
 
     const data = await res.json();

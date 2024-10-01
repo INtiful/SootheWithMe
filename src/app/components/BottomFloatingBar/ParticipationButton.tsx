@@ -78,6 +78,9 @@ const ParticipationButton = ({
           error instanceof Error
             ? error.message
             : '모임에 참여하지 못했습니다.',
+          {
+            className: 'text-14 font-bold',
+          },
         );
       }
     }
@@ -85,8 +88,19 @@ const ParticipationButton = ({
 
   const handleWithdrawClick = async () => {
     if (hasParticipated) {
-      await deleteGatheringToWithdraw(Number(params.id));
-      setHasParticipated(false);
+      try {
+        await deleteGatheringToWithdraw(Number(params.id));
+        setHasParticipated(false);
+      } catch (error) {
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : '모임을 취소하지 못했습니다.',
+          {
+            className: 'text-14 font-bold',
+          },
+        );
+      }
     }
   };
 

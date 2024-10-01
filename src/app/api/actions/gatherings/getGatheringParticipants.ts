@@ -18,7 +18,8 @@ const getGatheringParticipants = async (
     );
 
     if (!res.ok) {
-      throw new Error('참가자들을 불러오지 못했습니다.');
+      const { message } = await res.json();
+      throw new Error(message);
     }
 
     const data: GatheringParticipantsType[] = await res.json();

@@ -27,7 +27,8 @@ const putGatheringToCancelled = async (
     );
 
     if (!res.ok) {
-      throw new Error('모임을 취소하지 못했습니다.');
+      const { message } = await res.json();
+      throw new Error(message);
     }
 
     const data: GatheringInfoType = await res.json();

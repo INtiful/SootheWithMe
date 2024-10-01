@@ -42,4 +42,6 @@ const GatheringsDetailPage = async ({
   );
 };
 
+export const fetchCache = 'force-no-store';
+
 export default GatheringsDetailPage;
