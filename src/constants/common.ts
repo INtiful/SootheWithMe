@@ -34,3 +34,5 @@ export const SORT_OPTIONS_MAP: { [key: string]: string } = {
   '마감 임박': 'registrationEnd',
   '참여 인원 순': 'participantCount',
 };
+
+export const MAX_IMAGE_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
