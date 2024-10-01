@@ -36,8 +36,8 @@ const UserStatus = ({ user }: UserStatusProps) => {
   }, []);
 
   const handleLogout = async () => {
-    const result = await postUserLogoutData();
-    console.log(result);
+    await postUserLogoutData();
+    localStorage.removeItem('timeLeft');
     deleteCookie('token');
     setIsOpen(false);
     router.push('/');
