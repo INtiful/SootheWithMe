@@ -1,7 +1,7 @@
 'use client';
 
 import { EXPIRY_TIME } from '@/constants/common';
-import { revalidate } from '@/lib/revalidate';
+import { clientRevalidate } from '@/lib/clientRevalidate';
 import { UserData } from '@/types/client.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -65,7 +65,7 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
 
   const logout = () => {
     alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
-    revalidate('/');
+    clientRevalidate('/');
     router.push('/');
   };
 
