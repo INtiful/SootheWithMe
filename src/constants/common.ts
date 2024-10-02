@@ -29,11 +29,23 @@ export const DEFAULT_LIMIT = 5;
 
 export const LIMIT_PER_REQUEST = 10;
 
-export const SORT_OPTIONS_MAP: { [key: string]: string } = {
+export const SORT_OPTIONS_MAP: Record<string, string> = {
   최신순: 'dateTime',
   '마감 임박': 'registrationEnd',
   '참여 인원 순': 'participantCount',
 };
 
+export const REVIEW_SORT_OPTIONS_MAP: Record<string, string> = {
+  최신순: 'createdAt',
+  '평점 높은 순': 'score',
+  '참여 인원 순': 'participantCount',
+};
+
 // 업로드할 이미지 최대 크기
 export const MAX_IMAGE_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
+
+// 토큰 만료시간
+export const EXPIRY_TIME = 3600 * 1000; //1시간
+
+// 모임 만들기 내 모임 날짜 기한
+export const MAKING_GATHERING_DATE_DEADLINE = 365;
