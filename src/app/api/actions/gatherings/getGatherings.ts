@@ -1,12 +1,13 @@
 'use server';
 
+import { GatheringsType } from '@/types/client.type';
 import { GatheringsListData } from '@/types/data.type';
 
 interface GetGatheringsParams {
   id?: string;
   limit?: number;
   offset?: number;
-  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
+  type?: GatheringsType;
   location?: string;
   date?: string;
   createdBy?: string;
@@ -23,6 +24,7 @@ const getGatherings = async (
       offset = 0,
       sortBy = 'dateTime',
       sortOrder = 'desc',
+      type,
       ...rest
     } = params;
 
@@ -31,6 +33,7 @@ const getGatherings = async (
       offset: String(offset),
       sortBy: String(sortBy),
       sortOrder: String(sortOrder),
+      ...(type && { type: String(type) }),
       ...rest,
     }).toString();
 
