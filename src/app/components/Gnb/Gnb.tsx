@@ -37,9 +37,7 @@ const Gnb = ({ user }: GnbProps) => {
   const [savedCount, setSavedCount] = useState<number>(0);
 
   useEffect(() => {
-    if (savedGatherings.length > 0) {
-      setSavedCount(savedGatherings.length);
-    }
+    setSavedCount(savedGatherings.length);
   }, [savedGatherings]);
 
   return (

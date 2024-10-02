@@ -1,7 +1,9 @@
-import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import '@/styles/reset.css';
 import '@/styles/style.css';
+import type { Metadata } from 'next';
+import { ReactNode } from 'react';
+import { getUserData } from './api/actions/mypage/getUserData';
 import Gnb from './components/Gnb/Gnb';
 import Providers from './providers';
 import { getUserData } from './api/actions/user/getUserData';
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   const userData = await getUserData();
   return (
