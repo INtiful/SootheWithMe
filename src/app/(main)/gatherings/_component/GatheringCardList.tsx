@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import CardList from '@/app/components/CardList/CardList';
 import { GatheringsListData } from '@/types/data.type';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 
-import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 interface GatheringCardListProps {
