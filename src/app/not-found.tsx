@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import Button from './components/Button/Button';
 
 const NotFound = () => {
   return (
-    <div className='flex min-h-screen flex-col items-center justify-center text-14 font-medium text-var-gray-500'>
+    <div className='flex h-full flex-col items-center justify-center text-14 font-medium text-var-gray-500'>
       <h2 className='drop-shadow-text mb-16 text-center text-[100px] font-bold leading-normal text-var-orange-600'>
         404
       </h2>
