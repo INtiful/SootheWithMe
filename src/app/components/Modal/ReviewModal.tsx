@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 import InputText from '../Input/InputText';
 import ModalFrame from './ModalFrame';
 import postReviews from '@/app/api/actions/reviews/postReviews';
+import toast from 'react-hot-toast';
 
 interface ReviewModalProps {
   gatheringId: number;
@@ -39,8 +40,9 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
 
   const handleSubmit = async () => {
     await postReviews({ gatheringId, score, comment });
+
     onClose();
-    alert('리뷰가 등록되었습니다.');
+    toast.success('리뷰가 등록되었습니다.');
   };
 
   return (

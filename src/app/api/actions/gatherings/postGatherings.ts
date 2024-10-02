@@ -1,5 +1,6 @@
 import { GatheringInfoType } from '@/types/data.type';
 import { getCookie } from '@/actions/auth/cookie/cookie';
+import toast from 'react-hot-toast';
 
 interface PostGatheringsParams {
   location: string;
@@ -18,6 +19,7 @@ const postGatherings = async (
     const token = await getCookie('token');
 
     if (!token) {
+      toast.error('로그인이 필요합니다.');
       throw new Error('토큰이 없습니다.');
     }
 
@@ -39,14 +41,11 @@ const postGatherings = async (
       },
     );
 
-    if (!res.ok) {
-      throw new Error('모임 생성이 실패하였습니다.');
-    }
-
     const data: GatheringInfoType = await res.json();
 
     return data;
   } catch (error) {
+    toast.error('모임 생성이 실패하였습니다.');
     throw new Error('모임 생성이 실패하였습니다.');
   }
 };
