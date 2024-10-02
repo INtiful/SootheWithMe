@@ -3,6 +3,7 @@
 'use client';
 
 import { MAKING_GATHERING_DATE_DEADLINE } from '@/constants/common';
+import { adjustDate } from '@/utils/formatDate';
 import { useRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -25,13 +26,6 @@ const Calendar = ({
 }: CalendarProps) => {
   const datepickerRef = useRef(null);
 
-  // 이전 날짜 및 이후 날짜 설정
-  const adjustDays = (date: Date, days: number): Date => {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  };
-
   return (
     <DatePicker
       id='datepicker'
@@ -40,8 +34,8 @@ const Calendar = ({
       dateFormat={dateFormat}
       selected={dateTime}
       onChange={(date) => setDateTime(date as Date)}
-      minDate={adjustDays(new Date(), changeStartDays)}
-      maxDate={adjustDays(new Date(), changeEndDays)}
+      minDate={adjustDate(new Date(), changeStartDays)}
+      maxDate={adjustDate(new Date(), changeEndDays)}
       inline={inline}
     />
   );
