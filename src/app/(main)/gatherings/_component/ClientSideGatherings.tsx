@@ -39,10 +39,7 @@ const ClientSideGatherings = ({
     if (!isUserNull(user)) {
       return setIsModalOpen(true);
     }
-
-    if (isUserNull(user)) {
-      setIsShowPopup(true);
-    }
+    setIsShowPopup(true);
   };
 
   const {
