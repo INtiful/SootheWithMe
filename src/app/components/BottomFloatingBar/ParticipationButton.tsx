@@ -39,8 +39,8 @@ const ParticipationButton = ({
   const {
     hasParticipated,
     setHasParticipated,
-    showPopup,
-    setShowPopup,
+    isShowPopup,
+    setIsShowPopup,
     handleJoinClick,
     handleWithdrawClick,
   } = useParticipation(user);
@@ -104,13 +104,13 @@ const ParticipationButton = ({
         hasParticipated ? handleWithdrawClick : handleJoinClick,
         isParticipationDisabled, // disable 여부
       )}
-      {showPopup && ( // 팝업 렌더링
+      {isShowPopup && ( // 팝업 렌더링
         <Popup
           type='login'
           hasCancelButton={true}
-          onClickClose={() => setShowPopup(false)}
+          onClickClose={() => setIsShowPopup(false)}
           onClickConfirm={() => {
-            setShowPopup(false);
+            setIsShowPopup(false);
             router.push('/signin');
           }}
         />

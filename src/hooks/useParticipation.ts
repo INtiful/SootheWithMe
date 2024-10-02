@@ -11,11 +11,11 @@ export default function useParticipation(user: UserData | null) {
   const params = useParams();
 
   const [hasParticipated, setHasParticipated] = useState<boolean>(false);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
 
   const handleJoinClick = async () => {
     if (!user) {
-      setShowPopup(true);
+      setIsShowPopup(true);
       return;
     }
 
@@ -51,8 +51,8 @@ export default function useParticipation(user: UserData | null) {
   return {
     hasParticipated,
     setHasParticipated,
-    showPopup,
-    setShowPopup,
+    isShowPopup,
+    setIsShowPopup,
     handleJoinClick,
     handleWithdrawClick,
   };
