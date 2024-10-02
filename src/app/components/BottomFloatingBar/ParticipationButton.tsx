@@ -70,37 +70,44 @@ const ParticipationButton = ({
     }
 
     if (!hasParticipated) {
-      try {
-        await postGatheringToJoin(Number(params.id));
-        setHasParticipated(true);
-      } catch (error) {
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : '모임에 참여하지 못했습니다.',
-          {
-            className: 'text-14 font-bold',
-          },
-        );
+      const { success, message } = await postGatheringToJoin(Number(params.id));
+
+      // 성공하지 못한 경우
+      if (!success) {
+        toast.error(message, {
+          className: 'text-14 font-bold',
+        });
+
+        return;
       }
+
+      toast.success(message, {
+        className: 'text-14 font-bold',
+      });
+
+      setHasParticipated(true);
     }
   };
 
   const handleWithdrawClick = async () => {
     if (hasParticipated) {
-      try {
-        await deleteGatheringToWithdraw(Number(params.id));
-        setHasParticipated(false);
-      } catch (error) {
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : '모임을 취소하지 못했습니다.',
-          {
-            className: 'text-14 font-bold',
-          },
-        );
+      const { success, message } = await deleteGatheringToWithdraw(
+        Number(params.id),
+      );
+
+      if (!success) {
+        toast.error(message, {
+          className: 'text-14 font-bold',
+        });
+
+        return;
       }
+
+      toast.success(message, {
+        className: 'text-14 font-bold',
+      });
+
+      setHasParticipated(false);
     }
   };
 
