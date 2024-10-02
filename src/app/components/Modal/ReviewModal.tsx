@@ -4,9 +4,9 @@ import postReviews from '@/app/api/actions/reviews/postReviews';
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import Button from '../Button/Button';
-import InputText from '../Input/InputText';
 import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
+import CommentReview from './ReviewModal/CommentReview';
 import HeartReview from './ReviewModal/HeartReview';
 
 interface ReviewModalProps {
@@ -14,7 +14,6 @@ interface ReviewModalProps {
   onClose: () => void;
 }
 
-// TODO (송민혁): 나중에 개별 컴포넌트로 분리
 const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
   const [comment, setComment] = useState<string>('');
   const [score, setScore] = useState<number>(0);
@@ -43,15 +42,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
         <HeartReview score={score} setScore={setScore} />
 
         {/* 리뷰 코멘트 */}
-        <div className='flex flex-col gap-12'>
-          <h2 className='text-16 font-semibold'>경험에 대해 남겨주세요.</h2>
-          <InputText
-            value={comment}
-            onChange={handleChangeReviewComment}
-            className='min-h-120 bg-var-gray-50 text-16 font-medium text-var-gray-900 placeholder-var-gray-400 placeholder:text-balance'
-            placeholder='남겨주신 리뷰는 프로그램 운영 및 다른 회원 분들께 큰 도움이 됩니다.'
-          />
-        </div>
+        <CommentReview comment={comment} onChange={handleChangeReviewComment} />
 
         {/* 버튼 그룹 */}
         <div className='flex items-center gap-16'>
