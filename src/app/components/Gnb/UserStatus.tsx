@@ -38,7 +38,7 @@ const UserStatus = ({ user }: UserStatusProps) => {
     await postUserLogoutData();
     localStorage.removeItem('timeLeft');
     deleteCookie('token');
-    router.push('/');
+    router.push('/gatherings');
     setIsOpen(false);
   };
 

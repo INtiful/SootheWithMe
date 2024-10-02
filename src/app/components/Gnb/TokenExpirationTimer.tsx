@@ -61,7 +61,7 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
   const logout = async () => {
     alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
     await postUserLogoutData();
-    router.push('/');
+    router.push('/gatherings');
   };
 
   // 로그인 상태가 아닐 때는 타이머를 표시하지 않음
