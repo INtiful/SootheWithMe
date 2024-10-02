@@ -1,16 +1,16 @@
 'use client';
 
-import { IconX } from '@/public/icons';
 import { BtnEditProfile } from '@/public/images';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
-import { ChangeEvent } from 'react';
 import { UserData } from '@/types/client.type';
 import Image from 'next/image';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
+import ModalHeader from './ModalHeader';
 
 /**
  * Profile Edit Modal
- * @param onCloseClick - 모달을 닫는 함수
+ * @param onClose - 모달을 닫는 함수
  * @param onUploadProfileImage - 프로필 이미지를 업로드하는 함수
  * @param onSubmit - 프로필 수정하는 함수
  * @param imagePreview - 프로필 이미지보기 url
@@ -18,17 +18,17 @@ import Image from 'next/image';
 
 interface ProfileEditModalProps {
   user: UserData | null;
-  onCloseClick?: () => void;
+  onClose: () => void;
   onUploadProfileImage?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
   imagePreview?: string;
   profileInput: string;
-  setProfileInput: React.Dispatch<React.SetStateAction<string>>;
+  setProfileInput: Dispatch<SetStateAction<string>>;
 }
 
 const ProfileEditModal = ({
   user,
-  onCloseClick,
+  onClose,
   onUploadProfileImage,
   onSubmit,
   imagePreview,
@@ -43,14 +43,10 @@ const ProfileEditModal = ({
 
   return (
     <div className='w-342 flex max-h-328 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-18 font-semibold text-var-gray-900'>
-          프로필 수정하기
-        </h1>
-        <button onClick={onCloseClick}>
-          <IconX className='h-24 w-24' />
-        </button>
-      </div>
+      {/* 헤더 */}
+      <ModalHeader title={'프로필 수정하기'} onClose={onClose} />
+
+      {/* 프로필 이미지 변경 */}
       <label htmlFor='profileImage' className='h-56 w-56 cursor-pointer'>
         <div className='relative h-full w-full'>
           {imagePreview ? (
@@ -72,6 +68,7 @@ const ProfileEditModal = ({
           className='hidden'
         />
       </label>
+
       {/* 프로필 이름 변경 */}
       <div className='flex flex-col gap-12'>
         <h2 className='text-16 font-semibold'>회사</h2>
@@ -81,9 +78,10 @@ const ProfileEditModal = ({
           onChange={onChangeProfileInput}
         />
       </div>
+
       {/* 버튼 그룹 */}
       <div className='flex items-center gap-16'>
-        <Button name='취소' onClick={onCloseClick} variant='white' />
+        <Button name='취소' onClick={onClose} variant='white' />
         <Button
           name='수정하기'
           onClick={onSubmit}

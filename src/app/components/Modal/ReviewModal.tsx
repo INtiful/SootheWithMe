@@ -1,12 +1,13 @@
 'use client';
 
-import { IconHeart, IconX } from '@/public/icons';
+import postReviews from '@/app/api/actions/reviews/postReviews';
+import { IconHeart } from '@/public/icons';
 import { ChangeEvent, MouseEvent, useState } from 'react';
+import toast from 'react-hot-toast';
 import Button from '../Button/Button';
 import InputText from '../Input/InputText';
 import ModalFrame from './ModalFrame';
-import postReviews from '@/app/api/actions/reviews/postReviews';
-import toast from 'react-hot-toast';
+import ModalHeader from './ModalHeader';
 
 interface ReviewModalProps {
   gatheringId: number;
@@ -52,12 +53,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
         className='flex max-h-408 w-344 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'
       >
         {/* 헤더 */}
-        <div className='flex items-center justify-between'>
-          <h1 className='text-18 font-semibold text-var-gray-900'>리뷰 쓰기</h1>
-          <button onClick={onClose}>
-            <IconX className='h-24 w-24' />
-          </button>
-        </div>
+        <ModalHeader title={'리뷰 쓰기'} onClose={onClose} />
 
         {/* 하트 리뷰 */}
         <div className='flex flex-col gap-12'>
@@ -81,6 +77,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
           <Button name='취소' variant='white' onClick={onClose} />
           <Button
             name='리뷰 등록'
+            type='button'
             variant={score !== 0 && comment ? 'default' : 'gray'}
             onClick={handleSubmit}
           />

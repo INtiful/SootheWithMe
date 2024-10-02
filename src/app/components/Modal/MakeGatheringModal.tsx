@@ -3,16 +3,16 @@
 import postGatherings from '@/app/api/actions/gatherings/postGatherings';
 import { LOCATION_OPTIONS, MIN_PARTICIPANTS } from '@/constants/common';
 import { FormEvent, useState } from 'react';
+import toast from 'react-hot-toast';
 import Button from '../Button/Button';
 import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
 import CalendarSelect from './MakeGatheringModal/CalendarSelect';
-import Header from './MakeGatheringModal/Header';
 import ImageUploader from './MakeGatheringModal/ImageUploader';
 import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
 import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
-import toast from 'react-hot-toast';
+import ModalHeader from './ModalHeader';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -87,7 +87,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       >
         <div className='scrollbar-hide flex w-full flex-col gap-24 overflow-auto p-4 md:pr-24'>
           {/* 헤더 */}
-          <Header onClose={onClose} />
+          <ModalHeader title={'모임 만들기'} onClose={onClose} />
 
           {/* 장소 */}
           <PlaceDropdown
