@@ -11,13 +11,9 @@ const useCopyUrlToClipboard = () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
       setIsCopied(true);
-      toast.success('링크가 복사되었습니다!', {
-        className: 'text-14 font-bold',
-      });
+      toast.success('링크가 복사되었습니다.');
     } catch (error) {
-      toast.error('링크 복사에 실패했습니다!', {
-        className: 'text-14 font-bold',
-      });
+      toast.error('링크 복사에 실패했습니다.');
     }
   };
 

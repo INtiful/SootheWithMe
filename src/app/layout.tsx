@@ -5,6 +5,8 @@ import '@/styles/style.css';
 import Gnb from './components/Gnb/Gnb';
 import Providers from './providers';
 import { getUserData } from './api/actions/mypage/getUserData';
+import { toastOptions } from '@/constants/toast.config';
+
 import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
@@ -29,7 +31,7 @@ export default async function RootLayout({
           <Gnb user={userData} />
           <div className='grow pt-60'>{children}</div>
           <div id='modal-root'></div>
-          <Toaster />
+          <Toaster toastOptions={toastOptions} />
         </Providers>
       </body>
     </html>

@@ -23,15 +23,11 @@ export default function useParticipation(user: UserData | null) {
       const { success, message } = await postGatheringToJoin(Number(params.id));
 
       if (!success) {
-        toast.error(message, {
-          className: 'text-14 font-bold',
-        });
+        toast.error(message);
         return;
       }
 
-      toast.success(message, {
-        className: 'text-14 font-bold',
-      });
+      toast.success(message);
       setHasParticipated(true);
     }
   };
@@ -43,15 +39,11 @@ export default function useParticipation(user: UserData | null) {
       );
 
       if (!success) {
-        toast.error(message, {
-          className: 'text-14 font-bold',
-        });
+        toast.error(message);
         return;
       }
 
-      toast.success(message, {
-        className: 'text-14 font-bold',
-      });
+      toast.success(message);
       setHasParticipated(false);
     }
   };

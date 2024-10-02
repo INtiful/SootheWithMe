@@ -11,16 +11,12 @@ const useCancelGathering = (gatheringId: number) => {
     const { success, message } = await putGatheringToCancelled(gatheringId);
 
     if (!success) {
-      toast.error(message, {
-        className: 'text-14 font-bold',
-      });
+      toast.error(message);
 
       return;
     }
 
-    toast.success(message, {
-      className: 'text-14 font-bold',
-    });
+    toast.success(message);
 
     router.push('/gatherings');
   };
