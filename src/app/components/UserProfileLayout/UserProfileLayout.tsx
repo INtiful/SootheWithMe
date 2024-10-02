@@ -78,7 +78,7 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
         <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
           <ProfileEditModal
             user={user}
-            onCloseClick={toggleModal}
+            onClose={toggleModal}
             onUploadProfileImage={onChangeProfileImage({
               setProfileImage,
               setImagePreview,
