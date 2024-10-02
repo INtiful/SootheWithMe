@@ -34,10 +34,6 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
         localStorage.setItem('timeLeft', remainingTime.toString()); // 남은 시간 저장
       }
 
-      const logoutTimer = setTimeout(() => {
-        logout();
-      }, timeLeft * 1000);
-
       // 남은 시간을 설정하는 인터벌
       const interval = setInterval(() => {
         setTimeLeft((prev) => {
@@ -55,7 +51,6 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
 
       // 컴포넌트가 언마운트될 때 타이머와 인터벌을 정리
       return () => {
-        clearTimeout(logoutTimer);
         clearInterval(interval);
         localStorage.removeItem('timeLeft');
       };
