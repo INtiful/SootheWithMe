@@ -6,11 +6,11 @@ import { UserData } from '@/types/client.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface TokenExpirationHandlerProps {
+interface TokenExpirationTimerProps {
   user: UserData | null;
 }
 
-const TokenExpirationTimer = ({ user }: TokenExpirationHandlerProps) => {
+const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<number>(3600); // 남은 시간 초기값
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // 로그인 상태 관리
@@ -56,16 +56,16 @@ const TokenExpirationTimer = ({ user }: TokenExpirationHandlerProps) => {
       return () => {
         clearTimeout(logoutTimer);
         clearInterval(interval);
+        localStorage.removeItem('timeLeft');
       };
     } else {
-      setIsLoggedIn(false); // 토큰이 없으면 로그아웃 상태로 설정
-      localStorage.removeItem('timeLeft'); // 로그인하지 않은 경우 로컬 스토리지에서 시간 제거
+      setIsLoggedIn(false);
     }
   }, []);
 
-  const logout = async () => {
+  const logout = () => {
     alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
-    await revalidate('/');
+    revalidate('/');
     router.push('/');
   };
 
