@@ -5,6 +5,7 @@ import { clientRevalidate } from '@/lib/clientRevalidate';
 import { UserData } from '@/types/client.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { postUserLogoutData } from '@/app/api/actions/user/postUserLogoutData';
 
 interface TokenExpirationTimerProps {
   user: UserData | null;
@@ -63,9 +64,9 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
     }
   }, []);
 
-  const logout = () => {
+  const logout = async () => {
     alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
-    clientRevalidate('/');
+    await postUserLogoutData();
     router.push('/');
   };
 

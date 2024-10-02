@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 export const postUserLogoutData = async () => {
   try {
     const response = await fetch(
@@ -17,6 +19,8 @@ export const postUserLogoutData = async () => {
     }
 
     const result = await response.json();
+
+    revalidatePath('/');
 
     return result;
   } catch (error) {

@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
-import { revalidate } from '@/lib/clientRevalidate';
 import { postUserLogoutData } from '@/app/api/actions/user/postUserLogoutData';
 
 interface UserStatusProps {
@@ -39,9 +38,8 @@ const UserStatus = ({ user }: UserStatusProps) => {
     await postUserLogoutData();
     localStorage.removeItem('timeLeft');
     deleteCookie('token');
-    setIsOpen(false);
     router.push('/');
-    revalidate('/');
+    setIsOpen(false);
   };
 
   return (
