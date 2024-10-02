@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
-import { postUserLogoutData } from '@/app/api/actions/user/postUserLogoutData';
+import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 
 interface UserStatusProps {
   user: UserData | null;

@@ -1,11 +1,10 @@
 'use client';
 
 import { EXPIRY_TIME } from '@/constants/common';
-import { clientRevalidate } from '@/lib/clientRevalidate';
 import { UserData } from '@/types/client.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { postUserLogoutData } from '@/app/api/actions/user/postUserLogoutData';
+import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 
 interface TokenExpirationTimerProps {
   user: UserData | null;

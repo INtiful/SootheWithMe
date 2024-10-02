@@ -9,7 +9,7 @@ import Image from 'next/image';
 import UserProfileHeader from './UserProfileHeader';
 import UserInfo from './UserInfo';
 import { UserData } from '@/types/client.type';
-import { putProfileData } from '@/app/api/actions/user/putProfileData';
+import { putProfileData } from '@/app/api/actions/mypage/putProfileData';
 
 interface MyGatheringListProps {
   user: UserData | null;
