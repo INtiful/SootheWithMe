@@ -1,13 +1,13 @@
 'use client';
 
 import postReviews from '@/app/api/actions/reviews/postReviews';
-import { IconHeart } from '@/public/icons';
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 import Button from '../Button/Button';
 import InputText from '../Input/InputText';
 import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
+import HeartReview from './ReviewModal/HeartReview';
 
 interface ReviewModalProps {
   gatheringId: number;
@@ -21,22 +21,6 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
 
   const handleChangeReviewComment = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
-  };
-
-  const ratingStarHandler = (): JSX.Element[] => {
-    let result: JSX.Element[] = [];
-    for (let i: number = 0; i < 5; i++) {
-      result.push(
-        <span key={i + 1} onClick={() => setScore(i + 1)}>
-          {i + 1 <= score ? (
-            <IconHeart className='h-24 w-24 cursor-pointer text-var-orange-600 transition-all duration-100 ease-in-out' />
-          ) : (
-            <IconHeart className='h-24 w-24 cursor-pointer text-gray-200 transition-all duration-100 ease-in-out' />
-          )}
-        </span>,
-      );
-    }
-    return result;
   };
 
   const handleSubmit = async () => {
@@ -56,10 +40,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
         <ModalHeader title={'리뷰 쓰기'} onClose={onClose} />
 
         {/* 하트 리뷰 */}
-        <div className='flex flex-col gap-12'>
-          <h2 className='text-16 font-semibold'>만족스러운 경험이었나요?</h2>
-          <div className='flex gap-2'>{ratingStarHandler()}</div>
-        </div>
+        <HeartReview score={score} setScore={setScore} />
 
         {/* 리뷰 코멘트 */}
         <div className='flex flex-col gap-12'>
