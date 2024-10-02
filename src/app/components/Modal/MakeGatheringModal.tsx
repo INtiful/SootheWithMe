@@ -12,6 +12,7 @@ import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
 import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
+import toast from 'react-hot-toast';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -73,8 +74,9 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       capacity,
       image: image as File,
     });
+
     onClose();
-    alert('모임이 생성되었습니다.');
+    toast.success('모임이 생성되었습니다.');
   };
 
   return (
