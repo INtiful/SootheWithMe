@@ -28,7 +28,7 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   /* 수정된 프로필 제출 함수 */
-  const onSubmit = async () => {
+  const handleSubmit = async () => {
     if (!profileImage || !profileInput) {
       alert('프로필 이미지와 회사명을 입력해주세요.');
       return null;
@@ -74,21 +74,20 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
         </div>
         <UserInfo user={user} />
       </div>
+
       {isModalOpen && (
-        <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
-          <ProfileEditModal
-            user={user}
-            onClose={toggleModal}
-            onUploadProfileImage={onChangeProfileImage({
-              setProfileImage,
-              setImagePreview,
-            })}
-            profileInput={profileInput}
-            setProfileInput={setProfileInput}
-            imagePreview={imagePreview}
-            onSubmit={onSubmit}
-          />
-        </div>
+        <ProfileEditModal
+          user={user}
+          onClose={toggleModal}
+          onUploadProfileImage={onChangeProfileImage({
+            setProfileImage,
+            setImagePreview,
+          })}
+          profileInput={profileInput}
+          setProfileInput={setProfileInput}
+          imagePreview={imagePreview}
+          onSubmit={handleSubmit}
+        />
       )}
     </div>
   );
