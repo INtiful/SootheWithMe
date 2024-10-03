@@ -38,14 +38,18 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
   return (
     <div className='gathering-list mt-24 space-y-24'>
       {/* Top gradient */}
-      {topGradientVisible && (
-        <div className='fixed left-0 right-0 top-60 z-[30] h-16 bg-gradient-to-b from-white to-transparent p-10' />
-      )}
+      <div
+        className={`fixed left-0 right-0 top-56 z-[30] h-16 bg-gradient-to-b from-white to-transparent p-10 transition-opacity duration-500 ease-in-out md:top-60 ${
+          topGradientVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
 
       {/* Bottom gradient */}
-      {bottomGradientVisible && (
-        <div className='fixed bottom-0 left-0 right-0 z-[30] h-16 bg-gradient-to-t from-white to-transparent p-10' />
-      )}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-[30] h-16 bg-gradient-to-t from-white to-transparent p-10 transition-opacity duration-500 ease-in-out ${
+          bottomGradientVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
 
       {/* 모임이 없는 경우 */}
       {gatherings.length === 0 ? (
