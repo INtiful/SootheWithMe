@@ -9,6 +9,7 @@ import Chips from './Chips';
 import Filters from './Filters';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import Loader from '@/app/components/Loader/Loader';
 
 interface ClientSideReviewsProps {
   reviewListData: ReviewsType[];
@@ -69,8 +70,11 @@ const ClientSideReviews = ({
           <>
             <ReviewList reviewList={filteredData} />
 
-            {/* TODO : 로딩 컴포넌트 */}
-            {isLoading && <p>로딩...</p>}
+            {isLoading && (
+              <div className='flex items-center justify-center pt-24'>
+                <Loader />
+              </div>
+            )}
 
             {hasMore && <div ref={ref} className='h-20' />}
           </>
