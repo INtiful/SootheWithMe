@@ -8,6 +8,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
+import { toast } from 'react-hot-toast';
 
 interface UserStatusProps {
   user: UserData | null;
@@ -43,7 +44,7 @@ const UserStatus = ({ user }: UserStatusProps) => {
       router.push('/gatherings');
       router.refresh();
     } else {
-      alert('로그아웃에 실패했습니다. 다시 시도해 주세요.');
+      toast.error('로그아웃에 실패했습니다. 다시 시도해 주세요.');
     }
 
     setIsOpen(false);
