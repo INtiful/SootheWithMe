@@ -111,7 +111,7 @@ export interface ReviewsType {
 // GET : /{teamId}/reviews/scores
 export interface ReviewScoreType {
   teamId: number | string;
-  gatheringId: number;
+  gatheringId?: number;
   type: string;
   averageScore: number;
   oneStar: number;
