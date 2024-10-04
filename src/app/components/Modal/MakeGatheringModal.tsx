@@ -75,8 +75,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       image: image as File,
     });
 
-    console.log(success, message);
-
     if (!success) {
       toast.error(message);
       onClose();
