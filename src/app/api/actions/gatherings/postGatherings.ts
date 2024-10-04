@@ -1,5 +1,4 @@
 import { getCookie } from '@/actions/auth/cookie/cookie';
-import { revalidatePath } from 'next/cache';
 
 interface PostGatheringsParams {
   location: string;
