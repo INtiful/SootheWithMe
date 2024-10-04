@@ -1,6 +1,5 @@
-import { GatheringInfoType } from '@/types/data.type';
 import { getCookie } from '@/actions/auth/cookie/cookie';
-import toast from 'react-hot-toast';
+import { revalidatePath } from 'next/cache';
 
 interface PostGatheringsParams {
   location: string;
@@ -11,16 +10,13 @@ interface PostGatheringsParams {
   registrationEnd?: string;
 }
 
-const postGatherings = async (
-  params: PostGatheringsParams,
-): Promise<GatheringInfoType> => {
+const postGatherings = async (params: PostGatheringsParams) => {
   const { location, type, dateTime, capacity, image } = params;
   try {
     const token = await getCookie('token');
 
     if (!token) {
-      toast.error('로그인이 필요합니다.');
-      throw new Error('토큰이 없습니다.');
+      return { success: false, message: '로그인이 필요합니다.' };
     }
 
     const formData = new FormData();
@@ -41,12 +37,13 @@ const postGatherings = async (
       },
     );
 
-    const data: GatheringInfoType = await res.json();
-
-    return data;
+    const { data } = await res.json();
+    return { success: true, data, message: '모임이 생성되었습니다.' };
   } catch (error) {
-    toast.error('모임 생성이 실패하였습니다.');
-    throw new Error('모임 생성이 실패하였습니다.');
+    return {
+      success: false,
+      message: '모임 생성이 실패하였습니다.',
+    };
   }
 };
 
