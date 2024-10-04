@@ -113,6 +113,7 @@ export interface ReviewScoreType {
   teamId: number | string;
   gatheringId: number;
   type: string;
+  averageScore: number;
   oneStar: number;
   twoStars: number;
   threeStars: number;
