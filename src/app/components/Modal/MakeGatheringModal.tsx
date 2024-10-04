@@ -67,7 +67,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       return;
     }
 
-    const res = await postGatherings({
+    const { success, message } = await postGatherings({
       location: location as string,
       type: getSelectedGatheringType(),
       dateTime: (combinedDateTime as Date).toISOString(),
@@ -75,8 +75,16 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       image: image as File,
     });
 
+    console.log(success, message);
+
+    if (!success) {
+      toast.error(message);
+      onClose();
+      return;
+    }
+
+    toast.success(message);
     onClose();
-    toast.success('모임이 생성되었습니다.');
   };
 
   return (

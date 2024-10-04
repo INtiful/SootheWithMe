@@ -23,10 +23,20 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
   };
 
   const handleSubmit = async () => {
-    await postReviews({ gatheringId, score, comment });
+    const { success, message } = await postReviews({
+      gatheringId,
+      score,
+      comment,
+    });
 
+    if (!success) {
+      toast.error(message);
+      onClose();
+      return;
+    }
+
+    toast.success(message);
     onClose();
-    toast.success('리뷰가 등록되었습니다.');
   };
 
   return (
