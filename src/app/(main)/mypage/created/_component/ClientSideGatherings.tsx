@@ -39,7 +39,7 @@ const ClientSideGatherings = ({
         </div>
       )}
 
-      {hasMore && <div ref={ref} className='h-20' />}
+      {hasMore && <div ref={ref} className='h-24' />}
     </>
   );
 };
