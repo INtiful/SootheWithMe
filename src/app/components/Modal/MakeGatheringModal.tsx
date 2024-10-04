@@ -81,8 +81,8 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       return;
     }
 
-    toast.success(message);
     onClose();
+    toast.success(message);
   };
 
   return (
