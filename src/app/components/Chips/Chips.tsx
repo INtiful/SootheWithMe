@@ -3,26 +3,23 @@
 import { useState } from 'react';
 
 import Chip from '@/app/components/Chip/Chip';
+import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
 
 interface ChipsProps {
-  activeTab: 'DALLAEMFIT' | 'WORKATION';
-  onChipClick: (label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS') => void;
+  activeTab: GatheringTabsType;
+  onChipClick: (label: GatheringChipsType) => void;
 }
 
 const Chips = ({ activeTab, onChipClick }: ChipsProps) => {
-  const [activeChip, setActiveChip] = useState<
-    'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS'
-  >('ALL');
+  const [activeChip, setActiveChip] = useState<GatheringChipsType>('ALL');
 
-  const handleChipClick = (
-    label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
-  ) => {
+  const handleChipClick = (label: GatheringChipsType) => {
     setActiveChip(label);
     onChipClick(label);
   };
 
   return (
-    <div className='mt-8 space-x-8 py-16'>
+    <div className='mt-8 flex space-x-8 py-16'>
       <Chip
         state={activeChip === 'ALL' ? 'active' : 'default'}
         onClick={
@@ -32,22 +29,26 @@ const Chips = ({ activeTab, onChipClick }: ChipsProps) => {
         전체
       </Chip>
       {/* activeTab이 'WORKATION'이 아닐 때만 다른 Chip을 렌더링 */}
-      {activeTab === 'DALLAEMFIT' && (
-        <>
-          <Chip
-            state={activeChip === 'OFFICE_STRETCHING' ? 'active' : 'default'}
-            onClick={() => handleChipClick('OFFICE_STRETCHING')}
-          >
-            오피스 스트레칭
-          </Chip>
-          <Chip
-            state={activeChip === 'MINDFULNESS' ? 'active' : 'default'}
-            onClick={() => handleChipClick('MINDFULNESS')}
-          >
-            마인드풀니스
-          </Chip>
-        </>
-      )}
+      <div
+        className={`space-x-8 transition-opacity duration-300 ease-in-out ${
+          activeTab === 'DALLAEMFIT'
+            ? 'opacity-100'
+            : 'pointer-events-none opacity-0'
+        }`}
+      >
+        <Chip
+          state={activeChip === 'OFFICE_STRETCHING' ? 'active' : 'default'}
+          onClick={() => handleChipClick('OFFICE_STRETCHING')}
+        >
+          오피스 스트레칭
+        </Chip>
+        <Chip
+          state={activeChip === 'MINDFULNESS' ? 'active' : 'default'}
+          onClick={() => handleChipClick('MINDFULNESS')}
+        >
+          마인드풀니스
+        </Chip>
+      </div>
     </div>
   );
 };
