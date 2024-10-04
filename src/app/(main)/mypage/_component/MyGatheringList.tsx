@@ -4,6 +4,7 @@ import getMyGathergins from '@/app/api/gatherings/service/getMyGathergins';
 import Card from '@/app/components/Card/Card';
 import InfiniteScroll from '@/app/components/InfiniteScroll/InfiniteScroll';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const MyGatheringList = () => {
@@ -26,20 +27,22 @@ const MyGatheringList = () => {
         queryFn={getMyGathergins}
         emptyText='아직 참여한 모임이 없습니다.'
         renderItem={(item, index) => (
-          <Card
-            handleSaveDiscard={() => console.log('Save Discard')}
-            data={item}
-          >
-            <Card.Chips />
-            <Card.Info />
-            <Card.Button
-              handleButtonClick={() => {
-                item.isCompleted
-                  ? handleOpenModal(item.id)
-                  : console.log('Cancel gathering');
-              }}
-            />
-          </Card>
+          <Link href={`/gatherings/${item.id}`} key={item.id}>
+            <Card
+              handleSaveDiscard={() => console.log('Save Discard')}
+              data={item}
+            >
+              <Card.Chips />
+              <Card.Info />
+              <Card.Button
+                handleButtonClick={() => {
+                  item.isCompleted
+                    ? handleOpenModal(item.id)
+                    : console.log('Cancel gathering');
+                }}
+              />
+            </Card>
+          </Link>
         )}
       />
       {isModalOpen && (

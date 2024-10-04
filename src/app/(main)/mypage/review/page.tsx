@@ -9,6 +9,7 @@ import Review from '@/app/components/Review/Review';
 import { MYPAGE_REVIEW_TABS } from '@/constants/common';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { useQueries } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useState } from 'react';
 import ReviewFilterButtons from '../_component/ReviewFilterButtons';
 
@@ -41,6 +42,8 @@ const Page = () => {
 
   const writableReviewData = results[0].data;
   const reviewData = results[1].data;
+
+  console.log('reviewData', reviewData);
 
   const filteredData = Array.isArray(writableReviewData)
     ? writableReviewData.filter((data) => {
@@ -83,15 +86,17 @@ const Page = () => {
             case MYPAGE_REVIEW_TABS.WRITABLE:
               return filteredData?.length ? (
                 filteredData.map((data) => (
-                  <Card key={data.id} data={data}>
-                    <Card.Chips />
-                    <Card.Info />
-                    <Card.Button
-                      handleButtonClick={() =>
-                        data.isCompleted && handleOpenModal(data.id)
-                      }
-                    />
-                  </Card>
+                  <Link href={`/gatherings/${data.id}`} key={data.id}>
+                    <Card key={data.id} data={data}>
+                      <Card.Chips />
+                      <Card.Info />
+                      <Card.Button
+                        handleButtonClick={() =>
+                          data.isCompleted && handleOpenModal(data.id)
+                        }
+                      />
+                    </Card>
+                  </Link>
                 ))
               ) : (
                 <EmptyPage />
@@ -101,14 +106,19 @@ const Page = () => {
               return reviewData?.length ? (
                 <div className='my-24 flex flex-col gap-24'>
                   {reviewData.map((review) => (
-                    <Review
+                    <Link
+                      href={`/gatherings/${review.Gathering.id}`}
                       key={review.id}
-                      rating={review.score}
-                      image_source={review.Gathering.image}
-                      description={review.comment}
-                      user_name={review.User.name}
-                      date={review.createdAt}
-                    />
+                    >
+                      <Review
+                        key={review.id}
+                        rating={review.score}
+                        image_source={review.Gathering.image}
+                        description={review.comment}
+                        user_name={review.User.name}
+                        date={review.createdAt}
+                      />
+                    </Link>
                   ))}
                 </div>
               ) : (
