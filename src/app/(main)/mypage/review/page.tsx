@@ -77,9 +77,9 @@ const Page = () => {
           setFilterType={setFilterType}
         />
         {/* cards */}
-        {/* 전체 혹은 작성 가능한 리뷰 */}
         {(() => {
           switch (filterType) {
+            // 전체 혹은 작성 가능한 리뷰
             case MYPAGE_REVIEW_TABS.WRITABLE:
               return filteredData?.length ? (
                 filteredData.map((data) => (
@@ -96,6 +96,7 @@ const Page = () => {
               ) : (
                 <EmptyPage />
               );
+            // 작성한 리뷰
             case MYPAGE_REVIEW_TABS.WRITTEN:
               return reviewData?.length ? (
                 <div className='my-24 flex flex-col gap-24'>
