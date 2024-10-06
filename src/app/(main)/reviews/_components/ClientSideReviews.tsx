@@ -65,16 +65,15 @@ const ClientSideReviews = ({
         />
 
         {filteredData[0].length > 0 ? (
-          filteredData.map((page, index) => (
-            <>
-              <ReviewList reviewList={page} />
+          <>
+            {filteredData.map((page, index) => (
+              <ReviewList reviewList={page} key={index} />
+            ))}
+            {/* TODO : 로딩 컴포넌트 */}
+            {isLoading && <p>로딩...</p>}
 
-              {/* TODO : 로딩 컴포넌트 */}
-              {isLoading && <p>로딩...</p>}
-
-              {hasMore && <div ref={ref} className='h-20' />}
-            </>
-          ))
+            {hasMore && <div ref={ref} className='h-20' />}
+          </>
         ) : (
           <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
             아직 리뷰가 없어요
