@@ -1,8 +1,10 @@
 import Review from '@/app/components/Review/Review';
+import { ReviewsType } from '@/types/data.type';
 
 interface ReviewListProps {
-  reviewList: any[];
+  reviewList: ReviewsType[];
 }
+
 const ReviewList = ({ reviewList }: ReviewListProps) => {
   return (
     <div className='mt-24 space-y-12'>

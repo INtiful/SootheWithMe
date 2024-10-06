@@ -54,7 +54,9 @@ const getReviewList = async (
 
     return data;
   } catch (error) {
-    throw new Error('리뷰를 불러오지 못했습니다.');
+    throw new Error(
+      error instanceof Error ? error.message : '리뷰를 불러오지 못했습니다.',
+    );
   }
 };
 
