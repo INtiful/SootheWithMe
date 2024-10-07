@@ -5,7 +5,7 @@ import { UserData } from '@/types/client.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { deleteCookie } from '@/actions/auth/cookie/cookie';
 
 interface TokenExpirationTimerProps {

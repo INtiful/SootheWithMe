@@ -10,7 +10,7 @@ import UserProfileHeader from './UserProfileHeader';
 import UserInfo from './UserInfo';
 import { UserData } from '@/types/client.type';
 import { putProfileData } from '@/app/api/actions/mypage/putProfileData';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 interface MyGatheringListProps {
   user: UserData | null;

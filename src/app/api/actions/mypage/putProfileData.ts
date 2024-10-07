@@ -4,7 +4,7 @@ import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserData } from '@/types/client.type';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export const putProfileData = async (
   formData: FormData,

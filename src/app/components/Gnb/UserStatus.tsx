@@ -8,7 +8,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 interface UserStatusProps {
   user: UserData | null;
