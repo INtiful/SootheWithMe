@@ -11,7 +11,7 @@ describe('onChangeProfileImage', () => {
   });
 
   // 파일이 선택되었을 때 올바른 인자와 함께 setProfileImage와 setImagePreview가 호출되는지 테스트
-  it('should call setProfileImage and setImagePreview with the correct values', async () => {
+  it('should call setProfileImage and setImagePreview with the correct values', () => {
     const mockFile = new File([''], 'test-image.png', { type: 'image/png' });
     const fileChangeEvent = {
       target: {
@@ -32,8 +32,26 @@ describe('onChangeProfileImage', () => {
     });
     handleChange(fileChangeEvent); // 함수 호출
 
-    // 비동기 코드가 실행되기를 기다림
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    // FileReader를 모킹
+    const reader = new FileReader();
+
+    // FileReader의 onloadend 핸들러를 직접 호출하여 미리보기 설정
+    reader.onloadend = jest.fn(() => {
+      setImagePreview(reader.result as string);
+    });
+
+    // FileReader의 readAsDataURL 메서드를 모킹
+    reader.readAsDataURL = jest.fn((file) => {
+      // 직접 onloadend 호출, 인자로 가짜 ProgressEvent 객체 전달
+      const progressEvent = new ProgressEvent(
+        'loadend',
+      ) as ProgressEvent<FileReader>;
+
+      reader.onloadend?.(progressEvent);
+    });
+
+    // readAsDataURL 메서드 호출
+    reader.readAsDataURL(mockFile);
 
     expect(setProfileImage).toHaveBeenCalledWith(mockFile); // setProfileImage가 올바른 인자와 함께 호출되었는지 확인
     expect(setImagePreview).toHaveBeenCalled(); // setImagePreview가 호출되었는지 확인

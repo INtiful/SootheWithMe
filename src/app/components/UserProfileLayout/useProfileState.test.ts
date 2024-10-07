@@ -56,7 +56,7 @@ describe('useProfileState 훅 테스트', () => {
   it('should reset state with resetProfileState', () => {
     const { result } = renderHook(() => useProfileState(user));
 
-    // 상태를 변경합니다.
+    // 상태를 변경
     act(() => {
       result.current.setProfileInput('New Company');
       result.current.setProfileImage('new-image.jpg');
