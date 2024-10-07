@@ -43,8 +43,6 @@ const Page = () => {
   const writableReviewData = results[0].data;
   const reviewData = results[1].data;
 
-  console.log('reviewData', reviewData);
-
   const filteredData = Array.isArray(writableReviewData)
     ? writableReviewData.filter((data) => {
         switch (filterType) {
