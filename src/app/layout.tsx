@@ -9,6 +9,7 @@ import { getUserData } from './api/actions/mypage/getUserData';
 import { toastOptions } from '@/constants/toast.config';
 
 import { Toaster } from 'react-hot-toast';
+import { ThemeProvider } from './theme-provider';
 
 export const metadata: Metadata = {
   title: 'Soothe With Me',
@@ -29,10 +30,12 @@ export default async function RootLayout({
     <html lang='ko'>
       <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard'>
         <Providers>
-          <Gnb user={userData} />
-          <div className='grow pt-60'>{children}</div>
-          <div id='modal-root'></div>
-          <Toaster toastOptions={toastOptions} />
+          <ThemeProvider attribute='class' defaultTheme='system'>
+            <Gnb user={userData} />
+            <div className='grow pt-60'>{children}</div>
+            <div id='modal-root'></div>
+            <Toaster toastOptions={toastOptions} />
+          </ThemeProvider>
         </Providers>
       </body>
     </html>
