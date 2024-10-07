@@ -44,8 +44,6 @@ const getReviewList = async (
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'cache-control': 'no-cache',
-          // TODO : cache 관련 처리 협의 필요
         },
       },
     );
