@@ -14,7 +14,7 @@ interface TokenExpirationTimerProps {
 const TokenExpirationTimer = ({ token }: TokenExpirationTimerProps) => {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<number>(EXPIRY_TIME / 1000); // 남은 시간 초기값
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // 초기값을 토큰으로 설정
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // 로그인 상태 관리
 
   // 로컬 스토리지에서 남은 시간을 불러오는 함수
   const loadRemainingTime = () => {
