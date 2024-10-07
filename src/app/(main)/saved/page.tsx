@@ -1,12 +1,13 @@
 'use client';
 
 import Tabs from '@/app/components/Tabs/Tabs';
+import Filters from '@/app/components/Filters/Filters';
 import Chips from './_component/Chips';
 import Header from './_component/Header';
-import Filters from '@/app/components/Filters/Filters';
-import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import SavedList from './_component/SavedList';
 import useSavedGatherings from '@/hooks/useSavedGatherings';
+import { useSavedGatheringList } from '@/context/SavedGatheringContext';
+import { SORT_OPTIONS } from '@/constants/common';
 
 const SavedPage = () => {
   const { savedGatherings } = useSavedGatheringList();
@@ -40,6 +41,7 @@ const SavedPage = () => {
             onLocationChange={handleLocationChange}
             onDateChange={handleDateChange}
             onSortChange={handleSortChange}
+            sortOptions={SORT_OPTIONS}
           />
         </div>
 
