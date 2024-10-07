@@ -28,7 +28,7 @@ export default async function RootLayout({
   const userData = await getUserData();
   return (
     <html lang='ko'>
-      <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard'>
+      <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard dark:bg-var-gray-900'>
         <Providers>
           <ThemeProvider attribute='class' defaultTheme='system'>
             <Gnb user={userData} />
