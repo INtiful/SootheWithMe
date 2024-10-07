@@ -5,6 +5,8 @@ import { UserData } from '@/types/client.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
+import { toast } from 'react-hot-toast';
+import { deleteCookie } from '@/actions/auth/cookie/cookie';
 
 interface TokenExpirationTimerProps {
   user: UserData | null;
@@ -63,13 +65,19 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
     } else {
       setIsLoggedIn(false);
     }
-  }, []); // user가 변경될 때마다 실행
+  }, []);
 
   const logout = async () => {
-    alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
-    await postUserLogoutData();
-    router.push('/gatherings');
-    router.refresh();
+    const result = await postUserLogoutData();
+
+    if (result) {
+      toast.error('토큰이 만료되었습니다. 다시 로그인해주세요.');
+      localStorage.removeItem('timeLeft');
+      deleteCookie('token');
+      return router.push('/gatherings');
+    } else {
+      toast.error('로그아웃에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   // 로그인 상태가 아닐 때는 타이머를 표시하지 않음
