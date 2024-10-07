@@ -39,6 +39,7 @@ const UserStatus = ({ user }: UserStatusProps) => {
   const handleLogout = () => {
     postUserLogoutData().then((result) => {
       if (result) {
+        toast.success('로그아웃이 완료되었습니다.');
         localStorage.removeItem('timeLeft'); // 로컬 스토리지에서 시간 삭제
         deleteCookie('token'); // 쿠키에서 토큰 삭제
         return router.push('/gatherings');
