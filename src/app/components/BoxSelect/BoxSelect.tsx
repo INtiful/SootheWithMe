@@ -28,6 +28,7 @@ const BoxSelect = ({
 }: BoxSelectProps) => {
   return (
     <label
+      data-testid='box-select'
       className={`flex h-76 w-full items-start gap-8 rounded-lg ${isSelected ? stateClasses.active : stateClasses.default} md:h-70 lg:h-70 px-8 py-[6px] transition-colors duration-200 ease-in-out md:px-16 md:py-12`}
     >
       <input
