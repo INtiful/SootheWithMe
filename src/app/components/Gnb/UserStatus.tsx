@@ -9,12 +9,14 @@ import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 import toast from 'react-hot-toast';
+import DropdownCountdownTimer from './DropdownCountdownTimer';
 
 interface UserStatusProps {
   user: UserData | null;
+  token: string | undefined;
 }
 
-const UserStatus = ({ user }: UserStatusProps) => {
+const UserStatus = ({ user, token }: UserStatusProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -77,6 +79,9 @@ const UserStatus = ({ user }: UserStatusProps) => {
                 className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'
               >
                 로그아웃
+              </li>
+              <li className='block md:hidden'>
+                <DropdownCountdownTimer token={token} />
               </li>
             </ul>
           )}

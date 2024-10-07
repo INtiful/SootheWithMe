@@ -9,7 +9,7 @@ import Badge from '../Badge/Badge';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { useEffect, useState } from 'react';
 import { UserData } from '@/types/client.type';
-import TokenExpirationTimer from './TokenExpirationTimer';
+import GnbTokenCountdownTimer from './TokenCountdownTimer';
 
 const navList = [
   {
@@ -48,7 +48,7 @@ const Gnb = ({ user, token }: GnbProps) => {
           <Link href='/gatherings'>
             <Logo className='mr-20 h-40 w-72' />
           </Link>
-          <ul className='flex gap-24'>
+          <ul className='flex gap-12 md:gap-24'>
             {navList.map((nav, index) => (
               <li key={index} className='flex items-center gap-[5px]'>
                 <Link href={nav.link}>
@@ -67,8 +67,8 @@ const Gnb = ({ user, token }: GnbProps) => {
           </ul>
         </nav>
         <div className='flex items-center gap-12'>
-          {user && <TokenExpirationTimer token={token} />}
-          <UserStatus user={user} />
+          {user && <GnbTokenCountdownTimer token={token} />}
+          <UserStatus user={user} token={token} />
         </div>
       </div>
     </header>
