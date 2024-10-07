@@ -55,6 +55,7 @@ const ClientSideGatherings = ({
     loadMore,
     isLoading,
     hasMore,
+    selectedChip,
   } = useGatherings(gatherings);
 
   usePreventScroll(isModalOpen);
@@ -74,7 +75,11 @@ const ClientSideGatherings = ({
             <Tabs activeTab={activeTab} onTabClick={handleTabClick} />
             <CreateGatheringButton onClick={handleModalButtonClick} />
           </div>
-          <Chips activeTab={activeTab} onChipClick={handleChipClick} />
+          <Chips
+            activeTab={activeTab}
+            onChipClick={handleChipClick}
+            activeChip={selectedChip}
+          />
         </div>
         <Filters
           onLocationChange={handleLocationChange}
