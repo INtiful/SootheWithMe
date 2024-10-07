@@ -8,16 +8,16 @@ import { GatheringsListData } from '@/types/data.type';
 import Loader from '@/app/components/Loader/Loader';
 
 interface ClientSideGatheringsProps {
-  gatherings: GatheringsListData[];
+  initialGatheringList: GatheringsListData[];
   createdBy: string;
 }
 
 const ClientSideGatherings = ({
-  gatherings,
+  initialGatheringList,
   createdBy,
 }: ClientSideGatheringsProps) => {
   const { gatheringsList, isLoading, hasMore, loadMore } = useUserCreated(
-    gatherings,
+    initialGatheringList,
     createdBy,
   );
 
@@ -32,7 +32,7 @@ const ClientSideGatherings = ({
 
   return (
     <>
-      <GatheringList dataList={gatheringsList} />
+      <GatheringList dataList={gatheringsList.pages.flat()} />
       {isLoading && (
         <div className='flex items-center justify-center pt-24'>
           <Loader />
