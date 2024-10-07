@@ -1,17 +1,11 @@
-'use client';
-
-import { EXPIRY_TIME } from '@/constants/common';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 import toast from 'react-hot-toast';
 import { deleteCookie } from '@/actions/auth/cookie/cookie';
+import { EXPIRY_TIME } from '@/constants/common';
 
-interface TokenExpirationTimerProps {
-  token: string | undefined;
-}
-
-const TokenExpirationTimer = ({ token }: TokenExpirationTimerProps) => {
+export const TokenExpirationTimer = (token: string | undefined) => {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<number>(EXPIRY_TIME / 1000); // 남은 시간 초기값
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // 로그인 상태 관리
@@ -58,7 +52,7 @@ const TokenExpirationTimer = ({ token }: TokenExpirationTimerProps) => {
       setIsLoggedIn(true);
       loadRemainingTime(); // 남은 시간 불러오기
 
-      const cleanupTimer = startTimer(); // 타이머 시작
+      const cleanupTimer = startTimer();
 
       return cleanupTimer; // 클린업 함수 반환
     } else {
@@ -80,16 +74,5 @@ const TokenExpirationTimer = ({ token }: TokenExpirationTimerProps) => {
     }
   };
 
-  // 로그인 상태가 아닐 때는 타이머를 표시하지 않음
-  if (!isLoggedIn) {
-    return null;
-  }
-
-  return timeLeft > 0 ? (
-    <p className='text-14 font-semibold text-var-orange-50 md:text-16'>
-      남은 시간: {Math.floor(timeLeft / 60)}분 {timeLeft % 60}초
-    </p>
-  ) : null;
+  return { timeLeft, isLoggedIn };
 };
-
-export default TokenExpirationTimer;
