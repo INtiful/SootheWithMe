@@ -45,6 +45,11 @@ const SignInForm = () => {
             type: 'manual',
             message: '잘못된 이메일 또는 비밀번호입니다',
           });
+        } else if ('유효한 이메일 주소를 입력하세요') {
+          setError('email', {
+            type: 'manual',
+            message: '유효한 이메일 주소를 입력하세요',
+          });
         } else {
           console.error('Error:', error.message);
         }
