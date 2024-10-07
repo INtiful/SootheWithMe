@@ -3,11 +3,11 @@
 
 import { TokenExpirationTimer } from '@/utils/TokenExpirationTimer';
 
-interface TokenCountdownTimerProps {
+interface GnbTokenExpirationTimerProps {
   token: string | undefined;
 }
 
-const TokenCountdownTimer = ({ token }: TokenCountdownTimerProps) => {
+const GnbTokenExpirationTimer = ({ token }: GnbTokenExpirationTimerProps) => {
   const { timeLeft, isLoggedIn } = TokenExpirationTimer(token);
 
   if (!isLoggedIn) {
@@ -21,4 +21,4 @@ const TokenCountdownTimer = ({ token }: TokenCountdownTimerProps) => {
   ) : null;
 };
 
-export default TokenCountdownTimer;
+export default GnbTokenExpirationTimer;

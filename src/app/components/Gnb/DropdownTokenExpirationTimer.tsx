@@ -3,11 +3,13 @@
 
 import { TokenExpirationTimer } from '@/utils/TokenExpirationTimer';
 
-interface DropdownCountdownTimerProps {
+interface DropdownTokenExpirationTimerProps {
   token: string | undefined;
 }
 
-const DropdownCountdownTimer = ({ token }: DropdownCountdownTimerProps) => {
+const DropdownTokenExpirationTimer = ({
+  token,
+}: DropdownTokenExpirationTimerProps) => {
   const { timeLeft, isLoggedIn } = TokenExpirationTimer(token);
 
   if (!isLoggedIn) {
@@ -21,4 +23,4 @@ const DropdownCountdownTimer = ({ token }: DropdownCountdownTimerProps) => {
   ) : null;
 };
 
-export default DropdownCountdownTimer;
+export default DropdownTokenExpirationTimer;

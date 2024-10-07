@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 import toast from 'react-hot-toast';
-import DropdownCountdownTimer from './DropdownCountdownTimer';
+import DropdownTokenExpirationTimer from './DropdownTokenExpirationTimer';
 
 interface UserStatusProps {
   user: UserData | null;
@@ -81,7 +81,7 @@ const UserStatus = ({ user, token }: UserStatusProps) => {
                 로그아웃
               </li>
               <li className='block md:hidden'>
-                <DropdownCountdownTimer token={token} />
+                <DropdownTokenExpirationTimer token={token} />
               </li>
             </ul>
           )}
