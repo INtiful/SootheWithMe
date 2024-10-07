@@ -28,9 +28,10 @@ const navList = [
 
 interface GnbProps {
   user: UserData | null;
+  token: string | undefined;
 }
 
-const Gnb = ({ user }: GnbProps) => {
+const Gnb = ({ user, token }: GnbProps) => {
   const pathname = usePathname();
 
   const { savedGatherings } = useSavedGatheringList();
@@ -66,7 +67,7 @@ const Gnb = ({ user }: GnbProps) => {
           </ul>
         </nav>
         <div className='flex items-center gap-12'>
-          {user && <TokenExpirationTimer user={user} />}
+          {user && <TokenExpirationTimer token={token} />}
           <UserStatus user={user} />
         </div>
       </div>

@@ -6,13 +6,12 @@ import { useRouter } from 'next/navigation';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 import toast from 'react-hot-toast';
 import { deleteCookie } from '@/actions/auth/cookie/cookie';
-import { UserData } from '@/types/client.type';
 
 interface TokenExpirationTimerProps {
-  user: UserData | null;
+  token: string | undefined;
 }
 
-const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
+const TokenExpirationTimer = ({ token }: TokenExpirationTimerProps) => {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<number>(EXPIRY_TIME / 1000); // 남은 시간 초기값
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // 초기값을 토큰으로 설정
@@ -55,7 +54,7 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       setIsLoggedIn(true);
       loadRemainingTime(); // 남은 시간 불러오기
 
@@ -66,7 +65,7 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
       setIsLoggedIn(false);
       logout();
     }
-  }, [user]);
+  }, [token]);
 
   const logout = async () => {
     const result = await postUserLogoutData();
