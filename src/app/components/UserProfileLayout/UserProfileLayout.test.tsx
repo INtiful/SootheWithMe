@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 // 프로필수정 모달 모킹
 jest.mock('../Modal/ProfileEditModal', () => {
-  return function MockProfileEditModal({
+  function MockProfileEditModal({
     onClose,
     onUploadProfileImage,
     onSubmit,
@@ -34,17 +34,27 @@ jest.mock('../Modal/ProfileEditModal', () => {
         />
       </div>
     );
-  };
+  }
+
+  MockProfileEditModal.displayName = 'MockProfileEditModal';
+  return MockProfileEditModal;
 });
 
 // UserProfileHeader 모킹
 jest.mock('./UserProfileHeader', () => {
-  return ({ toggleModal }: { toggleModal: () => void }) => (
+  const MockUserProfileHeader = ({
+    toggleModal,
+  }: {
+    toggleModal: () => void;
+  }) => (
     <div>
       <div>UserProfileHeader Mock</div>
       <button onClick={toggleModal}>Edit</button>
     </div>
   );
+
+  MockUserProfileHeader.displayName = 'MockUserProfileHeader';
+  return MockUserProfileHeader;
 });
 
 const mockUser: UserData = {
