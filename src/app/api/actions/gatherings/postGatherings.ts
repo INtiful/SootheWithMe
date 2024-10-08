@@ -1,6 +1,7 @@
 import { getCookie } from '@/actions/auth/cookie/cookie';
 
 interface PostGatheringsParams {
+  name: string;
   location: string;
   type: string;
   dateTime: string;
@@ -10,7 +11,7 @@ interface PostGatheringsParams {
 }
 
 const postGatherings = async (params: PostGatheringsParams) => {
-  const { location, type, dateTime, capacity, image } = params;
+  const { name, location, type, dateTime, capacity, image } = params;
   try {
     const token = await getCookie('token');
 
@@ -19,6 +20,7 @@ const postGatherings = async (params: PostGatheringsParams) => {
     }
 
     const formData = new FormData();
+    formData.append('name', name);
     formData.append('location', location);
     formData.append('type', type);
     formData.append('dateTime', dateTime);

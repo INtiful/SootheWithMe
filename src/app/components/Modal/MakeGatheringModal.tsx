@@ -19,6 +19,7 @@ interface MakeGatheringModalProps {
 }
 
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
+  const [name, setName] = useState<string>('');
   const [location, setLocation] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
@@ -52,6 +53,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   }
 
   const isFormValid = () =>
+    name &&
     location &&
     image &&
     !isAllGatheringTypeFalse() &&
@@ -68,6 +70,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     }
 
     const { success, message } = await postGatherings({
+      name,
       location: location as string,
       type: getSelectedGatheringType(),
       dateTime: (combinedDateTime as Date).toISOString(),
@@ -95,6 +98,8 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <div className='scrollbar-hide flex w-full flex-col gap-24 overflow-auto p-4 md:pr-24'>
           {/* 헤더 */}
           <ModalHeader title={'모임 만들기'} onClose={onClose} />
+
+          {/* 모임 이름 */}
 
           {/* 장소 */}
           <PlaceDropdown
