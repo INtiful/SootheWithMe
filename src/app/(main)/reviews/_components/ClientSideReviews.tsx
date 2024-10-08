@@ -5,10 +5,11 @@ import toast from 'react-hot-toast';
 import Tabs from '@/app/components/Tabs/Tabs';
 import ReviewList from './ReviewList';
 import ReviewScore from './ReviewScore/ReviewScore';
-import Chips from './Chips';
-import Filters from './Filters';
+import Chips from '@/app/components/Chips/Chips';
+import Filters from '@/app/components/Filters/Filters';
 import { ReviewScoreType, ReviewsType } from '@/types/data.type';
 import useReviews from '@/hooks/useReviews/useReveiws';
+import { REVIEW_SORT_OPTIONS } from '@/constants/common';
 
 interface ClientSideReviewsProps {
   initialReviewList: ReviewsType[];
@@ -63,6 +64,7 @@ const ClientSideReviews = ({
           onLocationChange={handleLocationChange}
           onDateChange={handleDateChange}
           onSortChange={handleSortChange}
+          sortOptions={REVIEW_SORT_OPTIONS}
         />
 
         {filteredData[0].length > 0 ? (
