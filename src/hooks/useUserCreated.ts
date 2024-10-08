@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 import { LIMIT_PER_REQUEST, SORT_OPTIONS_MAP } from '@/constants/common';
 
 export const useUserCreated = (
-  initialGatheringList: GatheringsListData[],
+  initialGatheringList: GatheringType[],
   createdBy: string,
 ) => {
   const [gatheringsList, setGatheringsList] =
-    useState<GatheringsListData[]>(initialGatheringList);
+    useState<GatheringType[]>(initialGatheringList);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState<boolean>(
     initialGatheringList.length >= LIMIT_PER_REQUEST,

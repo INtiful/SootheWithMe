@@ -4,11 +4,11 @@ import { useUserCreated } from '@/hooks/useUserCreated';
 import GatheringList from './GatheringList';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 import Loader from '@/app/components/Loader/Loader';
 
 interface ClientSideGatheringsProps {
-  gatherings: GatheringsListData[];
+  gatherings: GatheringType[];
   createdBy: string;
 }
 
