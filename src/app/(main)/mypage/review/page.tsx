@@ -84,17 +84,15 @@ const Page = () => {
             case MYPAGE_REVIEW_TABS.WRITABLE:
               return filteredData?.length ? (
                 filteredData.map((data) => (
-                  <Link href={`/gatherings/${data.id}`} key={data.id}>
-                    <Card key={data.id} data={data}>
-                      <Card.Chips />
-                      <Card.Info />
-                      <Card.Button
-                        handleButtonClick={() =>
-                          data.isCompleted && handleOpenModal(data.id)
-                        }
-                      />
-                    </Card>
-                  </Link>
+                  <Card key={data.id} data={data}>
+                    <Card.Chips />
+                    <Card.Info />
+                    <Card.Button
+                      handleButtonClick={() =>
+                        data.isCompleted && handleOpenModal(data.id)
+                      }
+                    />
+                  </Card>
                 ))
               ) : (
                 <EmptyPage />
