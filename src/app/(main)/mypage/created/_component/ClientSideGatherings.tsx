@@ -1,5 +1,6 @@
 'use client';
 
+import toast from 'react-hot-toast';
 import { useUserCreated } from '@/hooks/useUserCreated';
 import GatheringList from './GatheringList';
 import { useInView } from 'react-intersection-observer';
@@ -16,10 +17,14 @@ const ClientSideGatherings = ({
   initialGatheringList,
   createdBy,
 }: ClientSideGatheringsProps) => {
-  const { gatheringsList, isLoading, hasMore, loadMore } = useUserCreated(
-    initialGatheringList,
-    createdBy,
-  );
+  const { gatheringsList, isLoading, hasMore, loadMore, isError, error } =
+    useUserCreated(initialGatheringList, createdBy);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error?.message || '오류가 발생했습니다.');
+    }
+  }, [isError, error]);
 
   const { ref, inView } = useInView({ threshold: 1.0 });
 
