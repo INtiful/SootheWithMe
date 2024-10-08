@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import Tabs from '@/app/components/Tabs/Tabs';
 import ReviewList from './ReviewList';
 import ReviewScore from './ReviewScore/ReviewScore';
@@ -9,13 +11,13 @@ import { ReviewScoreType, ReviewsType } from '@/types/data.type';
 import useReviews from '@/hooks/useReviews/useReveiws';
 
 interface ClientSideReviewsProps {
-  reviewListData: ReviewsType[];
-  reviewScoreData: ReviewScoreType[];
+  initialReviewList: ReviewsType[];
+  initialReviewScore: ReviewScoreType[];
 }
 
 const ClientSideReviews = ({
-  reviewListData,
-  reviewScoreData,
+  initialReviewList,
+  initialReviewScore,
 }: ClientSideReviewsProps) => {
   const {
     filteredData,
@@ -30,7 +32,15 @@ const ClientSideReviews = ({
     loadMore,
     isLoading,
     hasMore,
-  } = useReviews(reviewListData, reviewScoreData);
+    isError,
+    error,
+  } = useReviews(initialReviewList, initialReviewScore);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error?.message || '오류가 발생했습니다.');
+    }
+  }, [isError, error]);
 
   return (
     <section className='mt-24 flex grow flex-col md:mt-32'>

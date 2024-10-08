@@ -3,6 +3,7 @@ import { ReviewsType } from '@/types/data.type';
 import Loader from '@/app/components/Loader/Loader';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import Link from 'next/link';
 
 interface ReviewListProps {
   reviewList: ReviewsType[][];
@@ -29,16 +30,21 @@ const ReviewList = ({
   return (
     <div className='mt-24 space-y-12'>
       {reviewList.flat().map((item, index) => (
-        <Review
-          image_source={item.Gathering.image}
-          rating={item.score}
-          description={item.comment}
-          place={item.Gathering.name}
-          location={item.Gathering.location}
-          user_name={item.User.name}
-          date={item.createdAt}
+        <Link
+          href={`/gatherings/${item.Gathering.id}`}
           key={item.id}
-        />
+          className='block'
+        >
+          <Review
+            image_source={item.Gathering.image}
+            rating={item.score}
+            description={item.comment}
+            place={item.Gathering.name}
+            location={item.Gathering.location}
+            user_name={item.User.name}
+            date={item.createdAt}
+          />
+        </Link>
       ))}
 
       {isLoading && (

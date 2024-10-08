@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
@@ -12,8 +11,6 @@ const useReviews = (
   initialReviewsData: ReviewsType[],
   reviewScoreData: ReviewScoreType[],
 ) => {
-  const [score, setScrore] = useState(reviewScoreData);
-
   const {
     activeTab,
     selectedChip,
@@ -30,17 +27,25 @@ const useReviews = (
     return buildParams(type, filteringOptions);
   };
 
-  // 타입이 바뀔 때마다 리뷰 스코어를 다시 가져옴
-  useEffect(() => {
-    const fetchScores = async () => {
-      const type = selectedChip === 'ALL' ? activeTab : selectedChip;
-      const newScore = await getReviewScore({ type: type });
-
-      setScrore(newScore);
-    };
-
-    fetchScores();
-  }, [activeTab, selectedChip]);
+  const {
+    data: score,
+    isError: isScoreError,
+    error: scoreError,
+  } = useQuery({
+    queryKey: ['score', activeTab, selectedChip],
+    queryFn: async () => {
+      try {
+        const type = selectedChip === 'ALL' ? activeTab : selectedChip;
+        const response = await getReviewScore({ type: type });
+        return response;
+      } catch (error) {
+        throw error instanceof Error
+          ? new Error(error.message)
+          : new Error('리뷰 평점을 불러오는 중 오류가 발생했습니다.');
+      }
+    },
+    initialData: reviewScoreData,
+  });
 
   // 무한스크롤
   const {
@@ -48,8 +53,8 @@ const useReviews = (
     fetchNextPage, // loadMore
     hasNextPage, // hasMore
     isFetchingNextPage, // isLoading
-    isError,
-    error,
+    isError: isReviewsError,
+    error: reviewsError,
   } = useInfiniteQuery({
     queryKey: ['reviews', filteringOptions, activeTab, selectedChip],
     queryFn: async ({ pageParam = DEFAULT_OFFSET }) => {
@@ -60,10 +65,12 @@ const useReviews = (
           offset: pageParam,
           ...params,
         });
+
         return response;
       } catch (error) {
-        toast.error('리뷰를 불러오는 중 오류가 발생했습니다');
-        throw error;
+        throw error instanceof Error
+          ? new Error(error.message)
+          : new Error('리뷰를 불러오는 중 오류가 발생했습니다.');
       }
     },
     getNextPageParam: (lastPage, allPages) => {
@@ -73,7 +80,7 @@ const useReviews = (
     },
     initialPageParam: DEFAULT_OFFSET,
     initialData: {
-      pages: [initialReviewsData], // 서버에서 가져온 첫 페이지 데이터를 초기값으로 설정
+      pages: [initialReviewsData],
       pageParams: [DEFAULT_OFFSET],
     },
   });
@@ -91,8 +98,8 @@ const useReviews = (
     loadMore: fetchNextPage,
     isLoading: isFetchingNextPage,
     hasMore: hasNextPage,
-    isError,
-    error,
+    isError: isScoreError || isReviewsError,
+    error: scoreError || reviewsError,
   };
 };
 
