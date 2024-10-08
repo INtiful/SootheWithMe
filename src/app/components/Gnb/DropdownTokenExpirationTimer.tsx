@@ -1,4 +1,3 @@
-// components/TokenExpirationTimer.tsx
 'use client';
 
 import { TokenExpirationTimer } from '@/utils/TokenExpirationTimer';
