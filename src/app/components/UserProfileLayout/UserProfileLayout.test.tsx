@@ -1,4 +1,3 @@
-// src/app/components/UserProfileLayout/UserProfileLayout.test.tsx
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import UserProfileLayout from './UserProfileLayout';
 import { UserData } from '@/types/client.type';
