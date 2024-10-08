@@ -13,6 +13,7 @@ import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
+import NameInput from './MakeGatheringModal/NameInput';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -100,6 +101,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           <ModalHeader title={'모임 만들기'} onClose={onClose} />
 
           {/* 모임 이름 */}
+          <NameInput setName={setName} />
 
           {/* 장소 */}
           <PlaceDropdown
