@@ -29,23 +29,25 @@ const ReviewList = ({
 
   return (
     <div className='mt-24 space-y-12'>
-      {reviewList.flat().map((item, index) => (
-        <Link
-          href={`/gatherings/${item.Gathering.id}`}
-          key={item.id}
-          className='block'
-        >
-          <Review
-            image_source={item.Gathering.image}
-            rating={item.score}
-            description={item.comment}
-            place={item.Gathering.name}
-            location={item.Gathering.location}
-            user_name={item.User.name}
-            date={item.createdAt}
-          />
-        </Link>
-      ))}
+      {reviewList.flatMap((list) =>
+        list.map((item, index) => (
+          <Link
+            href={`/gatherings/${item.Gathering.id}`}
+            key={item.id}
+            className='block'
+          >
+            <Review
+              image_source={item.Gathering.image}
+              rating={item.score}
+              description={item.comment}
+              place={item.Gathering.name}
+              location={item.Gathering.location}
+              user_name={item.User.name}
+              date={item.createdAt}
+            />
+          </Link>
+        )),
+      )}
 
       {isLoading && (
         <div className='flex items-center justify-center pt-24'>
