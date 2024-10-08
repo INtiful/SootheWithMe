@@ -1,4 +1,3 @@
-// useProfileState.test.ts
 import { renderHook, act } from '@testing-library/react';
 import { useProfileState } from './useProfileState';
 import { UserData } from '@/types/client.type';
