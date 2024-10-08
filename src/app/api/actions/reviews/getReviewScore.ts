@@ -1,5 +1,6 @@
 'use server';
 
+import qs from 'qs';
 import { GatheringsType } from '@/types/client.type';
 import { ReviewScoreType } from '@/types/data.type';
 
@@ -14,33 +15,41 @@ const getReviewScore = async (
   try {
     const { gatheringId, type } = params;
 
-    const queryParams = new URLSearchParams();
-
-    if (gatheringId) {
-      queryParams.append('gatheringId', gatheringId.join(','));
-    }
-
-    if (type) {
-      queryParams.append('type', String(type));
-    }
+    const queryString = qs.stringify(
+      {
+        gatheringId: gatheringId?.join(','),
+        type,
+      },
+      {
+        skipNulls: true, // null 값을 건너뛰도록 설정
+        strictNullHandling: true, // undefined 값도 건너뛰도록 설정
+      },
+    );
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews/scores?${queryParams.toString()}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews/scores?${queryString}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'cache-control': 'no-cache',
+
           // TODO : cache 관련 처리 협의 필요
         },
       },
     );
 
+    if (!res.ok) {
+      throw new Error('리뷰를 불러오지 못했습니다.');
+    }
+
     const data: ReviewScoreType[] = await res.json();
 
     return data;
   } catch (error) {
-    throw new Error('리뷰를 불러오지 못했습니다.');
+    throw new Error(
+      error instanceof Error ? error.message : '리뷰를 불러오지 못했습니다.',
+    );
   }
 };
 
