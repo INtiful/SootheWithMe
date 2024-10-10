@@ -77,7 +77,6 @@ describe('ParticipationButton', () => {
 
   afterEach(() => {
     jest.clearAllMocks(); // 모킹된 함수 초기화
-    // isShowPopup = false; // 팝업 초기화
   });
 
   // 주최자일 때 "취소하기"와 "공유하기" 버튼이 렌더링되는지 확인
