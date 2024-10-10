@@ -9,6 +9,7 @@ import { getUserData } from './api/actions/mypage/getUserData';
 import { toastOptions } from '@/constants/toast.config';
 
 import { Toaster } from 'react-hot-toast';
+import { getCookie } from '@/actions/auth/cookie/cookie';
 import { ThemeProvider } from './theme-provider';
 
 export const metadata: Metadata = {
@@ -26,12 +27,13 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   const userData = await getUserData();
+  const token = await getCookie('token');
   return (
     <html lang='ko'>
       <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard dark:bg-var-gray-900'>
         <Providers>
           <ThemeProvider attribute='class' defaultTheme='system'>
-            <Gnb user={userData} />
+            <Gnb user={userData} token={token} />
             <div className='grow pt-60'>{children}</div>
             <div id='modal-root'></div>
             <Toaster toastOptions={toastOptions} />

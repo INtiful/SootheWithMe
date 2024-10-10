@@ -9,7 +9,7 @@ import Badge from '../Badge/Badge';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { useEffect, useState } from 'react';
 import { UserData } from '@/types/client.type';
-import TokenExpirationTimer from './TokenExpirationTimer';
+import TokenExpirationTimerLayout from './TokenExpirationTimerLayout';
 
 import { useTheme } from 'next-themes';
 
@@ -33,9 +33,10 @@ const navList = [
 
 interface GnbProps {
   user: UserData | null;
+  token: string | undefined;
 }
 
-const Gnb = ({ user }: GnbProps) => {
+const Gnb = ({ user, token }: GnbProps) => {
   const { setTheme, resolvedTheme } = useTheme();
 
   const pathname = usePathname();
@@ -60,7 +61,7 @@ const Gnb = ({ user }: GnbProps) => {
           <Link href='/gatherings'>
             <Logo className='mr-20 h-40 w-72' />
           </Link>
-          <ul className='flex gap-24'>
+          <ul className='flex gap-12 md:gap-24'>
             {navList.map((nav, index) => (
               <li key={index} className='flex items-center gap-[5px]'>
                 <Link href={nav.link}>
@@ -91,8 +92,8 @@ const Gnb = ({ user }: GnbProps) => {
               <FaMoon size={24} />
             )}
           </button>
-          {user && <TokenExpirationTimer user={user} />}
-          <UserStatus user={user} />
+          {user && <TokenExpirationTimerLayout token={token} variant='gnb' />}
+          <UserStatus user={user} token={token} />
         </div>
       </div>
     </header>
