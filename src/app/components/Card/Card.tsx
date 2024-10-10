@@ -68,9 +68,6 @@ const CardChips = (): JSX.Element => {
     return (
       <div className='mb-[6px] flex gap-8'>
         <StateChip state='done' />
-        <StateChip state='scheduled' />
-        <StateChip state='confirmed' />
-        <StateChip state='pending' />
       </div>
     );
   }
