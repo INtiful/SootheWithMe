@@ -9,12 +9,14 @@ interface CalendarModalProps {
   initialSelectedData: Date | null;
   handleClickButtons: (date?: Date) => void;
   CalendarProps?: { changeStartDays?: number; changeEndDays?: number };
+  handleCloseModal: () => void;
 }
 
 const CalendarModal = ({
   initialSelectedData,
   handleClickButtons,
   CalendarProps,
+  handleCloseModal,
 }: CalendarModalProps) => {
   const [dateTime, setDateTime] = useState<Date | null>(initialSelectedData);
 
@@ -23,10 +25,10 @@ const CalendarModal = ({
 
   return (
     <div className='flex h-376 w-336 flex-col items-center justify-center gap-12 rounded-xl bg-var-white px-44 py-24 dark:bg-neutral-800'>
-      {/* TODO : 모달 닫기 props 로 받아서 추가 */}
       <button
         data-testid='close-modal-button'
         className='absolute right-16 top-16'
+        onClick={handleCloseModal}
       >
         <IconX className='h-20 w-20 text-var-gray-900 dark:text-neutral-100' />
       </button>
@@ -51,7 +53,7 @@ const CalendarModal = ({
                 setDateTime(null);
                 handleClickButtons();
               } else {
-                // 모달 닫기를 props로 받아서 처리
+                handleCloseModal();
               }
             }}
           />
