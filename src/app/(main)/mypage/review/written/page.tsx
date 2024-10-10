@@ -5,6 +5,7 @@ import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import Review from '@/app/components/Review/Review';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
 
 const Page = () => {
@@ -23,7 +24,7 @@ const Page = () => {
   return (
     <>
       <div className='grow pt-16'>
-        {/* chips */}
+        {/* tab */}
         <ReviewFilterTab />
 
         {/* cards */}
@@ -43,7 +44,7 @@ const Page = () => {
             ))}
           </div>
         ) : (
-          <EmptyPage />
+          <EmptyReviewPage />
         )}
       </div>
     </>
@@ -51,13 +52,3 @@ const Page = () => {
 };
 
 export default Page;
-
-const EmptyPage = () => {
-  return (
-    <div className='flex h-full items-center justify-center'>
-      <p className='text-center text-14 font-medium text-var-gray-500'>
-        아직 작성한 리뷰가 없어요
-      </p>
-    </div>
-  );
-};

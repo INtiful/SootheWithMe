@@ -6,6 +6,7 @@ import ReviewModal from '@/app/components/Modal/ReviewModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
 
 const Page = () => {
@@ -52,7 +53,7 @@ const Page = () => {
             </Card>
           ))
         ) : (
-          <EmptyPage />
+          <EmptyReviewPage />
         )}
       </div>
 
@@ -64,13 +65,3 @@ const Page = () => {
 };
 
 export default Page;
-
-const EmptyPage = () => {
-  return (
-    <div className='flex h-full items-center justify-center'>
-      <p className='text-center text-14 font-medium text-var-gray-500'>
-        아직 작성한 리뷰가 없어요
-      </p>
-    </div>
-  );
-};
