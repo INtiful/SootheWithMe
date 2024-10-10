@@ -14,7 +14,7 @@ const Page = () => {
   const [cardId, setCardId] = useState<number>(0);
 
   const { data } = useQuery({
-    queryKey: ['writableReviews'],
+    queryKey: ['reviews', 'writable'],
     queryFn: () => getJoinedGatherings(),
   });
 

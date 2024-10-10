@@ -12,7 +12,7 @@ const Page = () => {
   const { user } = useUser();
 
   const { data: writtenReviews } = useQuery({
-    queryKey: ['myreviews'],
+    queryKey: ['reviews', 'written'],
     queryFn: () =>
       getReviewList({
         userId: Number(user?.id),
