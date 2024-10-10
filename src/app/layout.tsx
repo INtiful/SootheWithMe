@@ -30,7 +30,7 @@ export default async function RootLayout({
   const token = await getCookie('token');
   return (
     <html lang='ko'>
-      <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard dark:bg-var-gray-900'>
+      <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard text-var-gray-900 dark:bg-neutral-950 dark:text-neutral-50'>
         <Providers>
           <ThemeProvider attribute='class' defaultTheme='system'>
             <Gnb user={userData} token={token} />
