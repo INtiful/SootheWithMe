@@ -93,7 +93,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     router.push(`/gatherings/${data.id}`);
 
     toast.success(message);
-    // TODO : 모임 생성 후 페이지 리로드
   };
 
   return (

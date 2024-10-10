@@ -1,32 +1,48 @@
 'use client';
 
 import Chip from '@/app/components/Chip/Chip';
+import { useRouter, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-interface ReviewFilterButtonsProps {
-  filterType: string;
-  setFilterType: (type: string) => void;
-}
+type filterType = 'writable' | 'written';
 
-const ReviewFilterButtons = ({
-  filterType,
-  setFilterType,
-}: ReviewFilterButtonsProps) => {
-  const filterTypeList = ['작성 가능한 리뷰', '작성한 리뷰'] as const;
+const ReviewFilterButtons = () => {
+  const filterTypeButtons = [
+    { name: '작성 가능한 리뷰', type: 'writable' },
+    { name: '작성한 리뷰', type: 'written' },
+  ];
 
-  const handleChangeFilterType = (type: (typeof filterTypeList)[number]) => {
-    setFilterType(type);
+  const [currentFilterType, setCurrentFilterType] = useState<filterType | null>(
+    null,
+  );
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const path = pathname.replace('/mypage/review/', '') as filterType;
+      setCurrentFilterType(path);
+    }
+  }, [pathname]);
+
+  const handleChangeFilterType = (filterType: filterType) => {
+    router.push(`/mypage/review/${filterType}`);
   };
 
   return (
     <div className='flex items-center gap-8'>
-      {filterTypeList.map((type) => (
+      {filterTypeButtons.map((filterType) => (
         <button
-          key={type}
-          onClick={() => handleChangeFilterType(type)}
+          key={filterType.name}
+          onClick={() => handleChangeFilterType(filterType.type as filterType)}
           className='transition-all duration-200 ease-in-out'
-          aria-pressed={filterType === type}
         >
-          <Chip state={filterType === type ? 'active' : 'default'}>{type}</Chip>
+          <Chip
+            state={currentFilterType === filterType.type ? 'active' : 'default'}
+          >
+            {filterType.name}
+          </Chip>
         </button>
       ))}
     </div>
