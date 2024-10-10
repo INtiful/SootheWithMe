@@ -20,10 +20,8 @@ const ReviewFilterTab = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const path = pathname.replace('/mypage/review/', '') as filterType;
-      setCurrentFilterType(path);
-    }
+    const path = pathname.replace('/mypage/review/', '') as filterType;
+    setCurrentFilterType(path);
   }, [pathname]);
 
   const handleChangeFilterType = (filterType: filterType) => {
