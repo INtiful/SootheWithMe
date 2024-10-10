@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import Avatar from './Avatar';
 import { GatheringParticipantsType } from '@/types/data.type';
 
@@ -7,10 +8,12 @@ interface AvatarsProps {
   participantCount: number;
 }
 
+const MAX_VISIBLE_AVATAR = 4;
+
 const Avatars = ({ participants, participantCount }: AvatarsProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const maxVisible = 4;
+  const maxVisible = MAX_VISIBLE_AVATAR;
   const visibleAvatars = participants
     .slice(0, maxVisible)
     .map(({ User }) => (
