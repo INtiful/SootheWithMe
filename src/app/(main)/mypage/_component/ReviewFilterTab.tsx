@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 type filterType = 'writable' | 'written';
 
-const ReviewFilterButtons = () => {
+const ReviewFilterTab = () => {
   const filterTypeButtons = [
     { name: '작성 가능한 리뷰', type: 'writable' },
     { name: '작성한 리뷰', type: 'written' },
@@ -49,4 +49,4 @@ const ReviewFilterButtons = () => {
   );
 };
 
-export default ReviewFilterButtons;
+export default ReviewFilterTab;

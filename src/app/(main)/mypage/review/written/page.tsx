@@ -5,7 +5,7 @@ import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import Review from '@/app/components/Review/Review';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import ReviewFilterButtons from '../../_component/ReviewFilterButtons';
+import ReviewFilterTab from '../../_component/ReviewFilterTab';
 
 const Page = () => {
   const { user } = useUser();
@@ -24,7 +24,7 @@ const Page = () => {
     <>
       <div className='grow pt-16'>
         {/* chips */}
-        <ReviewFilterButtons />
+        <ReviewFilterTab />
 
         {/* cards */}
         {writtenReviews?.length ? (

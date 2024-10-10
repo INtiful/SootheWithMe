@@ -6,7 +6,7 @@ import ReviewModal from '@/app/components/Modal/ReviewModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import ReviewFilterButtons from '../../_component/ReviewFilterButtons';
+import ReviewFilterTab from '../../_component/ReviewFilterTab';
 
 const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -35,8 +35,8 @@ const Page = () => {
   return (
     <>
       <div className='grow pt-16'>
-        {/* chips */}
-        <ReviewFilterButtons />
+        {/* tab */}
+        <ReviewFilterTab />
 
         {/* cards */}
         {writableReviews?.length ? (
