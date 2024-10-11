@@ -1,22 +1,26 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import postGatherings from '@/app/api/actions/gatherings/postGatherings';
+import postGatheringToJoin from '@/app/api/actions/gatherings/postGatheringToJoin';
+
 import { LOCATION_OPTIONS, MIN_PARTICIPANTS } from '@/constants/common';
+import objectCheckFalseValue from '@/utils/objectCheckFalseValue';
+import objectExtractTrueValue from '@/utils/objectExtractTrueValue';
+
+import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
+
 import Button from '../Button/Button';
 import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
 import CalendarSelect from './MakeGatheringModal/CalendarSelect';
 import ImageUploader from './MakeGatheringModal/ImageUploader';
+import NameInput from './MakeGatheringModal/NameInput';
 import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
 import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
-import NameInput from './MakeGatheringModal/NameInput';
-import objectExtractTrueValue from '@/utils/objectExtractTrueValue';
-import objectCheckFalseValue from '@/utils/objectCheckFalseValue';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -79,7 +83,11 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     }
 
     onClose();
+
+    await postGatheringToJoin(data.id);
+
     router.push(`/gatherings/${data.id}`);
+
     toast.success(message);
   };
 
