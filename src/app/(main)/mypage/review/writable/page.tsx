@@ -13,13 +13,9 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
 
-  const { data } = useQuery({
+  const { data: writableReviews } = useQuery({
     queryKey: ['reviews', 'writable'],
-    queryFn: () => getJoinedGatherings(),
-  });
-
-  const writableReviews = data?.filter((data) => {
-    return data?.isCompleted && !data?.isReviewed;
+    queryFn: () => getJoinedGatherings({ completed: true, reviewed: false }),
   });
 
   const handleOpenModal = (id: number) => {
