@@ -1,24 +1,22 @@
-'use client';
-
-import { useUser } from '@/app/(auth)/context/UserContext';
+import { getUserData } from '@/app/api/actions/mypage/getUserData';
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import Review from '@/app/components/Review/Review';
-import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
 
-const Page = () => {
-  const { user } = useUser();
+const Page = async () => {
+  const user = await getUserData();
 
-  const { data: writtenReviews } = useQuery({
-    queryKey: ['reviews', 'written'],
-    queryFn: () =>
-      getReviewList({
-        userId: Number(user?.id),
-        sortBy: 'createdAt',
-        sortOrder: 'desc',
-      }),
+  if (!user) {
+    redirect('/signin');
+  }
+
+  const writtenReviews = await getReviewList({
+    userId: user?.id as number,
+    sortBy: 'createdAt',
+    sortOrder: 'desc',
   });
 
   return (
