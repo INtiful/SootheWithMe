@@ -35,6 +35,7 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
         queryKey={['myGatherings']}
         queryFn={getMyGathergins}
         emptyText='아직 참여한 모임이 없습니다.'
+        errorText='모임을 불러오지 못했습니다.'
         renderItem={(item, index) => (
           <Card data={item}>
             <Card.Chips />

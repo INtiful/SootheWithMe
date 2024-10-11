@@ -19,6 +19,7 @@ interface InfiniteScrollProps<T extends ItemWithId> {
   queryFn: (offset?: number) => Promise<InfiniteQueryResponse<T>>;
   limit?: number;
   emptyText: string;
+  errorText: string;
   renderItem: (item: T, index: number) => JSX.Element;
 }
 
@@ -28,6 +29,7 @@ const InfiniteScroll = <T extends ItemWithId>({
   queryFn,
   limit = DEFAULT_LIMIT,
   emptyText,
+  errorText,
   renderItem,
 }: InfiniteScrollProps<T>) => {
   const [topGradientVisible, setTopGradientVisible] = useState(false);
@@ -81,7 +83,7 @@ const InfiniteScroll = <T extends ItemWithId>({
   if (isError)
     return (
       <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500 dark:text-neutral-200'>
-        모임을 불러오지 못했습니다.
+        {errorText}
       </div>
     );
 
