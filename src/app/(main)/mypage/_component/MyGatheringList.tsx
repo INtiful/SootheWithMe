@@ -6,14 +6,18 @@ import InfiniteScroll from '@/app/components/InfiniteScroll/InfiniteScroll';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
 import { useState } from 'react';
 import { UserJoinedGatheringsData } from '@/types/data.type';
+import useParticipation from '@/hooks/useParticipation';
+import { UserData } from '@/types/client.type';
 
 interface MyGatheringListProps {
+  user: UserData | null;
   initData: UserJoinedGatheringsData[];
 }
 
-const MyGatheringList = ({ initData }: MyGatheringListProps) => {
+const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
+  const { handleWithdrawClickWithId } = useParticipation(user);
 
   const handleOpenModal = (id: number) => {
     setCardId(id);
@@ -42,7 +46,7 @@ const MyGatheringList = ({ initData }: MyGatheringListProps) => {
               handleButtonClick={() => {
                 item.isCompleted
                   ? handleOpenModal(item.id)
-                  : console.log('Cancel gathering');
+                  : handleWithdrawClickWithId(item.id);
               }}
             />
           </Card>

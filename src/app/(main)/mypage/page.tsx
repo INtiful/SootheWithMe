@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import MyGatheringList from './_component/MyGatheringList';
 import getMyGatherings from '@/app/api/actions/gatherings/getMyGatherings';
+import { getUserData } from '@/app/api/actions/mypage/getUserData';
 
 export const metadata: Metadata = {
   title: '나의 모임 | Soothe With Me',
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
 
 const Mygatherings = async () => {
   const myGatherings = await getMyGatherings();
-  return <MyGatheringList initData={myGatherings} />;
+  const user = await getUserData();
+  return <MyGatheringList initData={myGatherings} user={user} />;
 };
 
 export default Mygatherings;

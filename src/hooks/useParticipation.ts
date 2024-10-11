@@ -48,6 +48,18 @@ export default function useParticipation(user: UserData | null) {
     }
   };
 
+  const handleWithdrawClickWithId = async (id: number) => {
+    const { success, message } = await deleteGatheringToWithdraw(id);
+
+    if (!success) {
+      toast.error(message);
+      return;
+    }
+
+    toast.success(message);
+    setHasParticipated(false);
+  };
+
   return {
     hasParticipated,
     setHasParticipated,
@@ -55,5 +67,6 @@ export default function useParticipation(user: UserData | null) {
     setIsShowPopup,
     handleJoinClick,
     handleWithdrawClick,
+    handleWithdrawClickWithId,
   };
 }
