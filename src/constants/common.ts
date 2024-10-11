@@ -25,7 +25,7 @@ export const MIN_PARTICIPANTS = 5;
 
 // 무한스크롤 관련 데이터 패칭 상수
 export const DEFAULT_OFFSET = 0;
-export const DEFAULT_LIMIT = 5;
+export const DEFAULT_LIMIT = 10;
 
 export const LIMIT_PER_REQUEST = 10;
 

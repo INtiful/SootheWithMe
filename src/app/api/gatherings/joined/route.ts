@@ -22,10 +22,8 @@ export async function GET(req: Request) {
 
   const data = await response.json();
 
-  const paginatedData = data.slice(offset, offset + limit);
-
-  // 전체 데이터 길이와 비교하여 다음 페이지가 있는지 결정
-  const hasNextPage = paginatedData.length === limit;
+  // 데이터 길이와 비교하여 다음 페이지가 있는지 결정
+  const hasNextPage = data.length === limit;
 
   return NextResponse.json({
     data: data, // API에서 반환하는 데이터

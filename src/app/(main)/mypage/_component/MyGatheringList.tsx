@@ -27,6 +27,7 @@ const MyGatheringList = ({ initData }: MyGatheringListProps) => {
   return (
     <>
       <InfiniteScroll
+        initData={initData}
         queryKey={['myGatherings']}
         queryFn={getMyGathergins}
         emptyText='아직 참여한 모임이 없습니다.'
