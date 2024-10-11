@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/common';
@@ -30,7 +30,16 @@ const InfiniteScroll = <T extends ItemWithId>({
   emptyText,
   renderItem,
 }: InfiniteScrollProps<T>) => {
-  const { ref, inView } = useInView({});
+  const [topGradientVisible, setTopGradientVisible] = useState(false);
+  const [bottomGradientVisible, setBottomGradientVisible] = useState(false);
+
+  const { ref, inView } = useInView({ threshold: 0 });
+  const { ref: firstGatheringRef, inView: firstInView } = useInView({
+    threshold: 0,
+  });
+  const { ref: lastGatheringRef, inView: lastInView } = useInView({
+    threshold: 0,
+  });
 
   const { data, isError, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
@@ -53,10 +62,12 @@ const InfiniteScroll = <T extends ItemWithId>({
     });
 
   useEffect(() => {
+    setTopGradientVisible(!firstInView);
+    setBottomGradientVisible(!lastInView);
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, firstInView, lastInView]);
 
   // 데이터가 없거나 비어있을 때 emptyText를 표시
   if (!data || data.pages[0].data.length === 0) {
@@ -77,9 +88,34 @@ const InfiniteScroll = <T extends ItemWithId>({
   const allItems = data.pages.flatMap((page) => page.data);
   return (
     <>
+      {/* Top gradient */}
+      <div
+        className={`fixed left-0 right-0 top-56 z-[30] h-16 bg-gradient-to-b from-white to-transparent p-10 transition-opacity duration-500 ease-in-out md:top-60 ${
+          topGradientVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+
+      {/* Bottom gradient */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-[30] h-16 bg-gradient-to-t from-white to-transparent p-10 transition-opacity duration-500 ease-in-out ${
+          bottomGradientVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+
       <ul className='flex h-full flex-col'>
         {allItems.map((item, index) => (
-          <li key={item.id}>{renderItem(item, index)}</li>
+          <li
+            key={item.id}
+            ref={
+              index === 0
+                ? firstGatheringRef
+                : index === initData.length - 1
+                  ? lastGatheringRef
+                  : null
+            }
+          >
+            {renderItem(item, index)}
+          </li>
         ))}
       </ul>
       {isFetching && (
