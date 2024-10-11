@@ -16,6 +16,7 @@ import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
 import NameInput from './MakeGatheringModal/NameInput';
 import objectExtractTrueValue from '@/utils/objectExtractTrueValue';
+import objectCheckFalseValue from '@/utils/objectCheckFalseValue';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -36,11 +37,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [capacity, setCapacity] = useState<number>(0);
 
-  // 모든 gatheringType이 false인지 확인
-  const isAllGatheringTypeFalse = () => {
-    return Object.values(gatheringType).every((value) => value === false);
-  };
-
   // 캘린더의 날짜와 타임칩의 시간을 결합
   let combinedDateTime: Date | null = null;
   if (dateTime && selectedTime) {
@@ -53,7 +49,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     name &&
     location &&
     image &&
-    !isAllGatheringTypeFalse() &&
+    !objectCheckFalseValue(gatheringType) &&
     dateTime &&
     selectedTime &&
     combinedDateTime &&
@@ -83,9 +79,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     }
 
     onClose();
-
     router.push(`/gatherings/${data.id}`);
-
     toast.success(message);
   };
 
