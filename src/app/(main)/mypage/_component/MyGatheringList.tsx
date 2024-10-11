@@ -36,17 +36,14 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
         queryFn={getMyGathergins}
         emptyText='아직 참여한 모임이 없습니다.'
         renderItem={(item, index) => (
-          <Card
-            handleSaveDiscard={() => console.log('Save Discard')}
-            data={item}
-          >
+          <Card data={item}>
             <Card.Chips />
             <Card.Info />
             <Card.Button
               handleButtonClick={() => {
                 item.isCompleted
                   ? handleOpenModal(item.id)
-                  : handleWithdrawClickWithId(item.id);
+                  : handleWithdrawClickWithId(item.id, ['myGatherings']);
               }}
             />
           </Card>
