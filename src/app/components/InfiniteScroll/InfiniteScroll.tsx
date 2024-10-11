@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/common';
-import { UserJoinedGatheringsData } from '@/types/data.type';
 interface ItemWithId {
   id: number;
 }
@@ -59,7 +58,7 @@ const InfiniteScroll = <T extends ItemWithId>({
   }, [inView]);
 
   // 데이터가 없거나 비어있을 때 emptyText를 표시
-  if (!data || data.pages.length === 0) {
+  if (!data || data.pages[0].data.length === 0) {
     return (
       <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500 dark:text-neutral-200'>
         {emptyText}
