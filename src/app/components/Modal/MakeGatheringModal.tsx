@@ -15,6 +15,7 @@ import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
 import NameInput from './MakeGatheringModal/NameInput';
+import objectExtractTrueValue from '@/utils/objectExtractTrueValue';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -34,14 +35,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [dateTime, setDateTime] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [capacity, setCapacity] = useState<number>(0);
-
-  // true인 key 값만 필터링
-  const getSelectedGatheringType = () => {
-    const selectedGatheringType = String(
-      Object.keys(gatheringType).filter((key) => gatheringType[key]),
-    );
-    return selectedGatheringType;
-  };
 
   // 모든 gatheringType이 false인지 확인
   const isAllGatheringTypeFalse = () => {
@@ -76,7 +69,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('location', location!);
-    formData.append('type', getSelectedGatheringType());
+    formData.append('type', objectExtractTrueValue(gatheringType));
     formData.append('dateTime', (combinedDateTime as Date).toISOString());
     formData.append('capacity', capacity.toString());
     formData.append('image', image as File);
