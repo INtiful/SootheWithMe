@@ -74,6 +74,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     }
 
     const formData = new FormData();
+    formData.append('name', name);
     formData.append('location', location!);
     formData.append('type', getSelectedGatheringType());
     formData.append('dateTime', (combinedDateTime as Date).toISOString());
