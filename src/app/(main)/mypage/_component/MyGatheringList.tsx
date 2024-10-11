@@ -5,8 +5,13 @@ import Card from '@/app/components/Card/Card';
 import InfiniteScroll from '@/app/components/InfiniteScroll/InfiniteScroll';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
 import { useState } from 'react';
+import { UserJoinedGatheringsData } from '@/types/data.type';
 
-const MyGatheringList = () => {
+interface MyGatheringListProps {
+  initData: UserJoinedGatheringsData[];
+}
+
+const MyGatheringList = ({ initData }: MyGatheringListProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
 
