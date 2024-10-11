@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
 
-const Page = async () => {
+const WrittenReviewsPage = async () => {
   const user = await getUserData();
 
   if (!user) {
@@ -47,4 +47,4 @@ const Page = async () => {
   );
 };
 
-export default Page;
+export default WrittenReviewsPage;

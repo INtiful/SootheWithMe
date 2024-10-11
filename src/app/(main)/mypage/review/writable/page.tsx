@@ -9,7 +9,7 @@ import { useState } from 'react';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
 
-const Page = () => {
+const WritableReviewsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
 
@@ -60,4 +60,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default WritableReviewsPage;
