@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/common';
+import Loader from '../Loader/Loader';
 interface ItemWithId {
   id: number;
 }
@@ -42,8 +43,8 @@ const InfiniteScroll = <T extends ItemWithId>({
       initialData: {
         pages: [
           {
-            hasNextPage: true,
-            offset: 0,
+            hasNextPage: initData.length === DEFAULT_LIMIT,
+            offset: DEFAULT_OFFSET,
             data: initData,
           },
         ],
@@ -73,21 +74,18 @@ const InfiniteScroll = <T extends ItemWithId>({
       </div>
     );
 
+  const allItems = data.pages.flatMap((page) => page.data);
   return (
     <>
       <ul className='flex h-full flex-col'>
-        {data &&
-          data.pages.map((page) =>
-            page.data.map((item, index: number) => (
-              <li key={item.id}>{renderItem(item, index)}</li> // 사용자 정의 컴포넌트를 렌더링
-            )),
-          )}
+        {allItems.map((item, index) => (
+          <li key={item.id}>{renderItem(item, index)}</li>
+        ))}
       </ul>
       {isFetching && (
-        <div className='flex grow items-center justify-center'>
-          <div className='h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-transparent'></div>
-          <span className='ml-2 text-[14px] font-medium text-gray-500'>
-            Loading...
+        <div className='flex h-80 grow items-center justify-center'>
+          <span>
+            <Loader />
           </span>
         </div>
       )}
