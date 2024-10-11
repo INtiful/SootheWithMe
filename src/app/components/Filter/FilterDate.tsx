@@ -82,7 +82,7 @@ const FilterDate = ({
             initialSelectedData={selectedDate}
             handleClickButtons={handleClickButtons}
             CalendarProps={{ changeEndDays: 0 }}
-            handleCloseModal={() => setIsOpen(false)}
+            onCloseModal={() => setIsOpen(false)}
           />
         </div>
       )}

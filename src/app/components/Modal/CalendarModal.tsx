@@ -9,14 +9,14 @@ interface CalendarModalProps {
   initialSelectedData: Date | null;
   handleClickButtons: (date?: Date) => void;
   CalendarProps?: { changeStartDays?: number; changeEndDays?: number };
-  handleCloseModal: () => void;
+  onCloseModal: () => void;
 }
 
 const CalendarModal = ({
   initialSelectedData,
   handleClickButtons,
   CalendarProps,
-  handleCloseModal,
+  onCloseModal,
 }: CalendarModalProps) => {
   const [dateTime, setDateTime] = useState<Date | null>(initialSelectedData);
 
@@ -28,7 +28,7 @@ const CalendarModal = ({
       <button
         data-testid='close-modal-button'
         className='absolute right-16 top-16'
-        onClick={handleCloseModal}
+        onClick={onCloseModal}
       >
         <IconX className='h-20 w-20 text-var-gray-900 dark:text-neutral-100' />
       </button>
@@ -46,15 +46,11 @@ const CalendarModal = ({
       <div className='flex gap-[6px]'>
         <div className='w-124'>
           <Button
-            name={!dateTime ? '닫기' : '초기화'}
-            variant={'white'}
+            name='초기화'
+            variant={`${dateTime !== null ? 'white' : 'grayOutline'}`}
             onClick={() => {
-              if (dateTime) {
-                setDateTime(null);
-                handleClickButtons();
-              } else {
-                handleCloseModal();
-              }
+              setDateTime(null);
+              handleClickButtons();
             }}
           />
         </div>
