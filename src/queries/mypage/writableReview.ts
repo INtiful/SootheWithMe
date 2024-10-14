@@ -3,6 +3,5 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 
 export const writableReviewKeys = createQueryKeys('reviews', {
-  all: null,
-  writable: () => ({ queryKey: ['writable'] }),
+  all: () => ({ queryKey: ['writable'] }),
 });

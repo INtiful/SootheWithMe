@@ -15,7 +15,7 @@ const WritableReviewsPage = () => {
   const [cardId, setCardId] = useState<number>(0);
 
   const { data: writableReviews } = useQuery({
-    ...writableReviewKeys.writable(),
+    ...writableReviewKeys.all(),
     queryFn: () => getJoinedGatherings({ completed: true, reviewed: false }),
   });
 
