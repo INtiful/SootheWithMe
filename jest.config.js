@@ -26,7 +26,7 @@ const config = {
     '<rootDir>/src/app/components/**/*.test.tsx',
     '<rootDir>/src/app/components/**/*.test.ts',
   ],
-  testPathIgnorePatterns: ['<rootDir>/src/app/**/page.test.tsx'],
+  testPathIgnorePatterns: ['^src/app/.*/page.(test|spec).(ts|tsx)$'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
