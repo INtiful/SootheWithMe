@@ -35,7 +35,6 @@ const useReviews = (
     isError: isScoreError,
     error: scoreError,
   } = useQuery({
-    // queryKey: ['score', activeTab, selectedChip],
     ...reviewKeys.score(activeTab, selectedChip),
     queryFn: async () => {
       try {
