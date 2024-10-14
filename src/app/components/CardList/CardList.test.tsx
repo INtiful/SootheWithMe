@@ -4,9 +4,6 @@ import '@testing-library/jest-dom';
 import CardList from './CardList';
 import { GatheringType } from '@/types/data.type';
 
-const date = new Date();
-date.setDate(date.getDate() + 3);
-
 const MOCK_FIXED_DATE = '2024-10-15T15:00:00.000Z';
 
 const MOCK_DATA_BASE: GatheringType = {
@@ -84,7 +81,7 @@ describe('Tag Component Render', () => {
 
     const MOCK_DATA = {
       ...MOCK_DATA_BASE,
-      registrationEnd: date.toISOString(),
+      registrationEnd: date.toString(),
     };
 
     render(<CardList data={MOCK_DATA} />);
