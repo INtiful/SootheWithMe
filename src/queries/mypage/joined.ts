@@ -3,5 +3,5 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 
 export const joinedKeys = createQueryKeys('joined', {
-  detail: () => ({ queryKey: ['detail'] }),
+  all: null,
 });

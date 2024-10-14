@@ -33,7 +33,7 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
     <>
       <InfiniteScroll
         initData={initData}
-        queryKey={joinedKeys.detail}
+        queryKey={joinedKeys._def}
         queryFn={getMyGatherings}
         emptyText='아직 참여한 모임이 없습니다.'
         errorText='모임을 불러오지 못했습니다.'
@@ -45,7 +45,7 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
               handleButtonClick={() => {
                 item.isCompleted
                   ? handleOpenModal(item.id)
-                  : handleWithdrawClickWithId(item.id, joinedKeys.detail);
+                  : handleWithdrawClickWithId(item.id, joinedKeys._def);
               }}
             />
           </Card>
