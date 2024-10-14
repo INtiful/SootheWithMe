@@ -1,5 +1,4 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
 import useFilterState from './useFilterState';
@@ -9,6 +8,7 @@ import {
   DEFAULT_GATHERINGS_OFFSET,
   LIMIT_PER_REQUEST,
 } from '@/constants/common';
+import { reviewKeys } from '@/queries/review/review';
 
 const useReviews = (
   initialReviewsData: ReviewsType[],
@@ -35,7 +35,8 @@ const useReviews = (
     isError: isScoreError,
     error: scoreError,
   } = useQuery({
-    queryKey: ['score', activeTab, selectedChip],
+    // queryKey: ['score', activeTab, selectedChip],
+    ...reviewKeys.score(activeTab, selectedChip),
     queryFn: async () => {
       try {
         const type = selectedChip === 'ALL' ? activeTab : selectedChip;
@@ -59,7 +60,7 @@ const useReviews = (
     isError: isReviewsError,
     error: reviewsError,
   } = useInfiniteQuery({
-    queryKey: ['reviews', filteringOptions, activeTab, selectedChip],
+    ...reviewKeys.detail(activeTab, selectedChip, filteringOptions),
     queryFn: async ({ pageParam = DEFAULT_GATHERINGS_OFFSET }) => {
       try {
         const params = getParams();
