@@ -1,5 +1,4 @@
 import Input from '../../components/Input/Input';
-import PasswordInput from '../../components/Input/PasswordInput';
 import { errorMessageStyle } from './FormOptions';
 
 interface SignUpData {
