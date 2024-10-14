@@ -1,11 +1,12 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
-import { GatheringType } from '@/types/data.type';
 import {
   DEFAULT_GATHERINGS_OFFSET,
   LIMIT_PER_REQUEST,
   SORT_OPTIONS_MAP,
 } from '@/constants/common';
+import { createdKeys } from '@/queries/mypage/created';
+import { GatheringType } from '@/types/data.type';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export const useUserCreated = (
   initialGatheringList: GatheringType[],
@@ -19,7 +20,7 @@ export const useUserCreated = (
     isError,
     error,
   } = useInfiniteQuery({
-    queryKey: ['created', createdBy],
+    ...createdKeys.detail(createdBy),
     queryFn: async ({ pageParam = DEFAULT_GATHERINGS_OFFSET }) => {
       try {
         const response = await getGatherings({
