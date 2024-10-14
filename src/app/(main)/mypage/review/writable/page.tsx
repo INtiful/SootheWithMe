@@ -4,6 +4,7 @@ import getJoinedGatherings from '@/app/api/actions/gatherings/getJoinedGathering
 import Card from '@/app/components/Card/Card';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
+import { writableReviewKeys } from '@/queries/mypage/writableReview';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
@@ -14,7 +15,7 @@ const WritableReviewsPage = () => {
   const [cardId, setCardId] = useState<number>(0);
 
   const { data: writableReviews } = useQuery({
-    queryKey: ['reviews', 'writable'],
+    ...writableReviewKeys.writable(),
     queryFn: () => getJoinedGatherings({ completed: true, reviewed: false }),
   });
 
