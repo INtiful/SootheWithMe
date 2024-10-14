@@ -77,8 +77,6 @@ describe('CardList Component', () => {
 describe('Tag Component Render', () => {
   const fixedDate = new Date('2024-10-15T00:00:00.000Z');
 
-  console.log(fixedDate);
-
   beforeAll(() => {
     jest.spyOn(global, 'Date').mockImplementation(() => fixedDate);
   });
