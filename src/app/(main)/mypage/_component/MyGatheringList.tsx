@@ -5,6 +5,7 @@ import Card from '@/app/components/Card/Card';
 import InfiniteScroll from '@/app/components/InfiniteScroll/InfiniteScroll';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
 import useParticipation from '@/hooks/useParticipation';
+import { joinedKeys } from '@/queries/mypage/joined';
 import { UserData } from '@/types/client.type';
 import { UserJoinedGatheringsData } from '@/types/data.type';
 import { useState } from 'react';
@@ -32,11 +33,11 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
     <>
       <InfiniteScroll
         initData={initData}
-        queryKey={['myGatherings']}
+        queryKey={joinedKeys}
         queryFn={getMyGatherings}
         emptyText='아직 참여한 모임이 없습니다.'
         errorText='모임을 불러오지 못했습니다.'
-        renderItem={(item, index) => (
+        renderItem={(item) => (
           <Card data={item}>
             <Card.Chips />
             <Card.Info />
@@ -44,7 +45,7 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
               handleButtonClick={() => {
                 item.isCompleted
                   ? handleOpenModal(item.id)
-                  : handleWithdrawClickWithId(item.id, ['myGatherings']);
+                  : handleWithdrawClickWithId(item.id, joinedKeys);
               }}
             />
           </Card>

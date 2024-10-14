@@ -50,7 +50,7 @@ export default function useParticipation(user: UserData | null) {
     }
   };
 
-  const handleWithdrawClickWithId = async (id: number, queryKey: string[]) => {
+  const handleWithdrawClickWithId = async (id: number, queryKey: any) => {
     const { success, message } = await deleteGatheringToWithdraw(id);
 
     if (!success) {
@@ -58,7 +58,7 @@ export default function useParticipation(user: UserData | null) {
       return;
     }
     // 쿼리 무효화 함수
-    await queryClient.invalidateQueries({ queryKey }); // querykey 무효화시켜서 취소한 모임 반영하여 최신화
+    await queryClient.invalidateQueries(queryKey); // querykey 무효화시켜서 취소한 모임 반영하여 최신화
 
     toast.success(message);
     setHasParticipated(false);

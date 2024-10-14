@@ -1,3 +1,5 @@
+// 모든 리뷰 페이지
+
 import {
   FilteringOptionsType,
   GatheringChipsType,
