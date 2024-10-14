@@ -7,13 +7,15 @@ import { GatheringType } from '@/types/data.type';
 const date = new Date();
 date.setDate(date.getDate() + 3);
 
+const MOCK_FIXED_DATE = '2024-10-15T15:00:00.000Z';
+
 const MOCK_DATA_BASE: GatheringType = {
   teamId: 1,
   id: 1,
   type: 'test',
   name: '달램핏 오피스 스트레칭',
-  dateTime: date.toISOString(),
-  registrationEnd: date.toISOString(),
+  dateTime: MOCK_FIXED_DATE,
+  registrationEnd: MOCK_FIXED_DATE,
   location: 'test',
   participantCount: 10,
   capacity: 20,
@@ -45,7 +47,7 @@ jest.mock('@/public/icons', () => ({
 describe('CardList Component', () => {
   const MOCK_DATA = {
     ...MOCK_DATA_BASE,
-    dateTime: '2024-09-15T15:30:00',
+    dateTime: '2024-10-15T15:30:00',
   };
   it('should render Gatherings name', () => {
     render(<CardList data={MOCK_DATA} />);
@@ -55,7 +57,7 @@ describe('CardList Component', () => {
 
   it('should render `InfoChip` type `data`', () => {
     render(<CardList data={MOCK_DATA} />);
-    const dateChipElement = screen.getByText('9월 15일');
+    const dateChipElement = screen.getByText('10월 15일');
     expect(dateChipElement).toBeInTheDocument();
     expect(dateChipElement).toHaveClass('text-white');
   });
