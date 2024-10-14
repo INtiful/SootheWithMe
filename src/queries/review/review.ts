@@ -9,14 +9,12 @@ import { createQueryKeys } from '@lukemorales/query-key-factory';
 
 export const reviewKeys = createQueryKeys('reviews', {
   all: null,
-  score: (activeTab: GatheringTabsType, selectedChip: GatheringChipsType) => [
-    'score',
-    activeTab,
-    selectedChip,
-  ],
+  score: (activeTab: GatheringTabsType, selectedChip: GatheringChipsType) => ({
+    queryKey: ['score', activeTab, selectedChip],
+  }),
   detail: (
     activeTab: GatheringTabsType,
     selectedChip: GatheringChipsType,
     filteringOptions: FilteringOptionsType,
-  ) => ['detail', activeTab, selectedChip, filteringOptions],
+  ) => ({ queryKey: ['detail', activeTab, selectedChip, filteringOptions] }),
 });
