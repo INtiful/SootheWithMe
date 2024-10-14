@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest --passWithNoTests",
     "playwright": "npx playwright test",
-    "playwright:dev": "cross-env PLAYWRIGHT_TEST=true npm run dev"
+    "dev:test": "cross-env PLAYWRIGHT_TEST=true npm run dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
