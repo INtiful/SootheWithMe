@@ -1,11 +1,15 @@
 import { getCookie } from '@/actions/auth/cookie/cookie';
-import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/common';
+import {
+  DEFAULT_GATHERINGS_LIMIT,
+  DEFAULT_GATHERINGS_OFFSET,
+} from '@/constants/common';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const offset = Number(searchParams.get('offset')) || DEFAULT_OFFSET;
-  const limit = Number(searchParams.get('limit')) || DEFAULT_LIMIT;
+  const offset =
+    Number(searchParams.get('offset')) || DEFAULT_GATHERINGS_OFFSET;
+  const limit = Number(searchParams.get('limit')) || DEFAULT_GATHERINGS_LIMIT;
 
   const token = await getCookie('token');
 

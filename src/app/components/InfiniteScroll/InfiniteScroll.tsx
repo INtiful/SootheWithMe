@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
-import { DEFAULT_LIMIT, DEFAULT_OFFSET } from '@/constants/common';
+import {
+  DEFAULT_GATHERINGS_LIMIT,
+  DEFAULT_GATHERINGS_OFFSET,
+} from '@/constants/common';
 import Loader from '../Loader/Loader';
 interface ItemWithId {
   id: number;
@@ -27,7 +30,7 @@ const InfiniteScroll = <T extends ItemWithId>({
   initData,
   queryKey,
   queryFn,
-  limit = DEFAULT_LIMIT,
+  limit = DEFAULT_GATHERINGS_LIMIT,
   emptyText,
   errorText,
   renderItem,
@@ -46,20 +49,21 @@ const InfiniteScroll = <T extends ItemWithId>({
   const { data, isError, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
       queryKey,
-      queryFn: async ({ pageParam = DEFAULT_LIMIT }) => queryFn(pageParam),
+      queryFn: async ({ pageParam = DEFAULT_GATHERINGS_LIMIT }) =>
+        queryFn(pageParam),
       getNextPageParam: (lastPage) => {
         return lastPage.hasNextPage ? lastPage.offset + limit : undefined;
       },
-      initialPageParam: DEFAULT_OFFSET,
+      initialPageParam: DEFAULT_GATHERINGS_OFFSET,
       initialData: {
         pages: [
           {
-            hasNextPage: initData.length === DEFAULT_LIMIT,
-            offset: DEFAULT_OFFSET,
+            hasNextPage: initData.length === DEFAULT_GATHERINGS_LIMIT,
+            offset: DEFAULT_GATHERINGS_OFFSET,
             data: initData,
           },
         ],
-        pageParams: [DEFAULT_OFFSET],
+        pageParams: [DEFAULT_GATHERINGS_OFFSET],
       },
     });
 
