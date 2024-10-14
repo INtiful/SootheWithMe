@@ -26,8 +26,6 @@ const GatheringDetail = ({
   reviews,
   user,
 }: GatheringDetailProps) => {
-  console.log(gatheringInfo);
-
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handlePageChange = (page: number) => {
