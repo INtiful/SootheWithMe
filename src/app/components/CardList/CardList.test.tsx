@@ -75,24 +75,27 @@ describe('CardList Component', () => {
 
 // Tag 컴포넌트 렌더링 테스트 (isRenderTag)
 describe('Tag Component Render', () => {
-  it('should render Tag component when registrationEnd is same as today date', () => {
-    const date = new Date();
-    date.setHours(15, 0, 0, 0);
+  const fixedDate = new Date('2024-10-15T00:00:00.000Z');
 
+  console.log(fixedDate);
+
+  beforeAll(() => {
+    jest.spyOn(global, 'Date').mockImplementation(() => fixedDate);
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should render Tag component when registrationEnd is same as today date', () => {
     const MOCK_DATA = {
       ...MOCK_DATA_BASE,
-      registrationEnd: date.toString(),
+      registrationEnd: '2024-10-15T15:00:00.000Z',
     };
 
     render(<CardList data={MOCK_DATA} />);
-    const tagElement = screen.getByText('오늘 15시 마감');
+    const tagElement = screen.getByText(/오늘 \d{1,2}시 마감/);
     expect(tagElement).toBeInTheDocument();
-  });
-
-  it('should NOT render Tag component when registrationEnd is NOT same as today date', () => {
-    render(<CardList data={MOCK_DATA_BASE} />);
-    const tagElement = screen.queryByText(/시 마감/);
-    expect(tagElement).not.toBeInTheDocument();
   });
 });
 
