@@ -7,7 +7,7 @@ import {
 } from '@/types/client.type';
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 
-export const reviewKeys = createQueryKeys('reviews', {
+export const reviews = createQueryKeys('reviews', {
   all: null,
   score: (activeTab: GatheringTabsType, selectedChip: GatheringChipsType) => ({
     queryKey: [activeTab, selectedChip],

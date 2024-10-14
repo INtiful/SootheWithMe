@@ -2,6 +2,6 @@
 
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 
-export const joinedKeys = createQueryKeys('joined', {
+export const joined = createQueryKeys('joined', {
   all: null,
 });

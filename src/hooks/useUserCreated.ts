@@ -4,7 +4,7 @@ import {
   LIMIT_PER_REQUEST,
   SORT_OPTIONS_MAP,
 } from '@/constants/common';
-import { createdKeys } from '@/queries/mypage/created';
+import { queries } from '@/queries';
 import { GatheringType } from '@/types/data.type';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -20,7 +20,7 @@ export const useUserCreated = (
     isError,
     error,
   } = useInfiniteQuery({
-    ...createdKeys.detail(createdBy),
+    ...queries.created.detail(createdBy),
     queryFn: async ({ pageParam = DEFAULT_GATHERINGS_OFFSET }) => {
       try {
         const response = await getGatherings({
