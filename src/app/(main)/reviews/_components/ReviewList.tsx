@@ -4,7 +4,7 @@ import Loader from '@/app/components/Loader/Loader';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 
 interface ReviewListProps {
   reviewList: ReviewsType[][];
@@ -21,11 +21,6 @@ const ReviewList = ({
 }: ReviewListProps) => {
   const { ref, inView } = useInView({ threshold: 1.0 });
 
-  const reviewVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   useEffect(() => {
     if (inView && hasMore) {
       loadMore();
@@ -37,13 +32,7 @@ const ReviewList = ({
     <div className='mt-24 space-y-12'>
       {reviewList.flatMap((list) =>
         list.map((item, index) => (
-          <motion.div
-            key={item.id}
-            initial='hidden'
-            animate='visible'
-            transition={{ duration: 0.5, delay: index * 0.02 }}
-            variants={reviewVariants}
-          >
+          <MotionWrapper key={item.id}>
             <Link
               href={`/gatherings/${item.Gathering.id}`}
               key={item.id}
@@ -59,7 +48,7 @@ const ReviewList = ({
                 date={item.createdAt}
               />
             </Link>
-          </motion.div>
+          </MotionWrapper>
         )),
       )}
 

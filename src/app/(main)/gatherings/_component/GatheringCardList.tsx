@@ -4,9 +4,9 @@ import Link from 'next/link';
 import CardList from '@/app/components/CardList/CardList';
 import { GatheringType } from '@/types/data.type';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 
 import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
 
 interface GatheringCardListProps {
   gatherings: GatheringType[];
@@ -30,11 +30,6 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
   const { ref: lastGatheringRef, inView: lastInView } = useInView({
     threshold: 0,
   });
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
 
   useEffect(() => {
     setTopGradientVisible(!firstInView);
@@ -68,28 +63,25 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         </div>
       ) : (
         gatherings.map((gathering, index) => (
-          <motion.div
-            key={gathering.id}
-            ref={
-              index === 0
-                ? firstGatheringRef
-                : index === gatherings.length - 1
-                  ? lastGatheringRef
-                  : null
-            }
-            initial='hidden'
-            animate='visible'
-            transition={{ duration: 0.5, delay: index * 0.02 }}
-            variants={cardVariants}
-          >
-            <Link href={`/gatherings/${gathering.id}`}>
-              <CardList
-                data={gathering}
-                isSaved={isSaved(gathering.id)}
-                handleButtonClick={handleButtonClick}
-              />
-            </Link>
-          </motion.div>
+          <MotionWrapper key={gathering.id}>
+            <div
+              ref={
+                index === 0
+                  ? firstGatheringRef
+                  : index === gatherings.length - 1
+                    ? lastGatheringRef
+                    : null
+              }
+            >
+              <Link href={`/gatherings/${gathering.id}`}>
+                <CardList
+                  data={gathering}
+                  isSaved={isSaved(gathering.id)}
+                  handleButtonClick={handleButtonClick}
+                />
+              </Link>
+            </div>
+          </MotionWrapper>
         ))
       )}
     </div>

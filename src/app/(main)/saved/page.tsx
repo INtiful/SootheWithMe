@@ -9,7 +9,7 @@ import useSavedGatherings from '@/hooks/useSavedGatherings';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { SORT_OPTIONS } from '@/constants/common';
 
-import { motion } from 'framer-motion';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 
 const SavedPage = () => {
   const { savedGatherings } = useSavedGatheringList();
@@ -50,17 +50,9 @@ const SavedPage = () => {
         {/* data list */}
         <div className='mt-24 flex grow flex-col gap-24'>
           {gatheringListData.length > 0 ? (
-            <motion.div
-              initial='hidden'
-              animate='visible'
-              transition={{ duration: 0.5, delay: 0.02 }}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
+            <MotionWrapper>
               <SavedList dataList={gatheringListData} />
-            </motion.div>
+            </MotionWrapper>
           ) : (
             <div className='flex size-full grow items-center justify-center text-14 font-medium text-var-gray-500 dark:text-neutral-200'>
               아직 찜한 모임이 없어요.
