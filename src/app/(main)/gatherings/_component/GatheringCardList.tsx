@@ -32,8 +32,8 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
   });
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 }, // Start with opacity 0 and translate down
-    visible: { opacity: 1, y: 0 }, // Fade in and translate to original position
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
   };
 
   useEffect(() => {
