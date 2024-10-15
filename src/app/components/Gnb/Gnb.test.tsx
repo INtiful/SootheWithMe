@@ -80,9 +80,13 @@ jest.mock('./UserStatus', () => {
 });
 
 // ToggleTheme 컴포넌트 모킹
-jest.mock('./ToggleTheme', () => () => (
-  <button data-testid='toggle-theme'>Toggle Theme</button>
-));
+jest.mock('./ToggleTheme', () => {
+  const MockToggleTheme = () => (
+    <button data-testid='toggle-theme'>Toggle Theme</button>
+  );
+  MockToggleTheme.displayName = 'MockToggleTheme';
+  return MockToggleTheme;
+});
 
 // TokenExpirationTimerLayout 컴포넌트 모킹
 jest.mock('./TokenExpirationTimerLayout', () => {
