@@ -83,7 +83,7 @@
 <details>
   <summary><b>모임 조회하기</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
@@ -109,7 +109,7 @@
 <details>
   <summary><b>모임 만들기</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
@@ -135,7 +135,7 @@
 <details>
   <summary><b>모임 찜하기</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
@@ -161,7 +161,7 @@
 <details>
   <summary><b>모임 상세페이지</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
@@ -187,7 +187,7 @@
 <details>
   <summary><b>리뷰 작성하기</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
@@ -213,7 +213,7 @@
 <details>
   <summary><b>리뷰 조회하기</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
@@ -239,7 +239,7 @@
 <details>
   <summary><b>마이 페이지</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
@@ -265,7 +265,7 @@
 <details>
   <summary><b>로그인 / 회원가입</b></summary>
   <div markdown="1">
-  <table>
+  <table width="100%">
     <thead>
         <tr>
             <th>웹</th>
