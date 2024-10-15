@@ -1,8 +1,14 @@
 # 🧘🏻 같이 달램
 
+<img src="https://github.com/INtiful/SootheWithMe/blob/develop/public/images/README-main-image.jpg" alt="같이 달램 메인 이미지" width="100%">
+
+<br/>
+
 바쁜 일상 속 휴식을 위한 다양한 모임을 탐색하고 참여하며, 직접 모임을 개설하고 리뷰를 생성할 수 있는 서비스입니다.
 
 > **배포 링크** : https://soothe-with-me.vercel.app/
+
+<br />
 
 ## ⚙️ 기술 스택
 
@@ -69,6 +75,218 @@
 > $ npm install
 >
 > $ npm run dev
+
+<br />
+
+## 🌠 핵심 기능
+
+<details>
+  <summary><b>모임 조회하기</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
+
+<details>
+  <summary><b>모임 만들기</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
+
+<details>
+  <summary><b>모임 찜하기</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
+
+<details>
+  <summary><b>모임 상세페이지</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
+
+<details>
+  <summary><b>리뷰 작성하기</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
+
+<details>
+  <summary><b>리뷰 조회하기</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
+
+<details>
+  <summary><b>마이 페이지</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
+
+<details>
+  <summary><b>로그인 / 회원가입</b></summary>
+  <div markdown="1">
+  <table>
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            웹 녹화본
+          </td>
+          <td width="25%" align="center">
+            모바일 녹화본
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
+
+<br />
 
 ## 🧑‍🤝‍🧑 팀원 소개
 
