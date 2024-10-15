@@ -2,6 +2,7 @@
 
 import { SavedGatheringProvider } from '@/context/SavedGatheringContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ReactNode } from 'react';
 import { ThemeProvider } from './theme-provider';
 
@@ -41,11 +42,12 @@ export default function Providers({ children }: { children: ReactNode }) {
   // QueryClientProvider로 자식 컴포넌트들을 감싸서 QueryClient를 제공
   return (
     <ThemeProvider attribute='class' defaultTheme='system'>
-      <SavedGatheringProvider>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      </SavedGatheringProvider>
+        <SavedGatheringProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </SavedGatheringProvider>
     </ThemeProvider>
   );
 }
