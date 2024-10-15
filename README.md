@@ -69,3 +69,10 @@
 > $ npm install
 >
 > $ npm run dev
+
+## 🧑‍🤝‍🧑 팀원 소개
+
+|                                     고학영                                      |                                     송민혁                                     |                                     유호민                                     |                                     윤채현                                      |
+| :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
+| <img src="https://avatars.githubusercontent.com/u/159985297?v=4" width="100" /> | <img src="https://avatars.githubusercontent.com/u/98685266?v=4" width="100" /> | <img src="https://avatars.githubusercontent.com/u/67790990?v=4" width="100" /> | <img src="https://avatars.githubusercontent.com/u/122350675?v=4" width="100" /> |
+|     <a href="https://github.com/hakyoung12" target="_blank">@hakyoung12</a>     | <a href="https://github.com/BeMatthewsong" target="_blank">@Bematthewsong</a>  |         <a href="https://github.com/HMRyu" target="_blank">@HMRyu</a>          |     <a href="https://github.com/yunchaeney" target="_blank">@yunchaeney</a>     |
