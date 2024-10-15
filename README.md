@@ -2,6 +2,8 @@
 
 바쁜 일상 속 휴식을 위한 다양한 모임을 탐색하고 참여하며, 직접 모임을 개설하고 리뷰를 생성할 수 있는 서비스입니다.
 
+> **배포 링크** : https://soothe-with-me.vercel.app/
+
 ## ⚙️ 기술 스택
 
 <table>
@@ -52,6 +54,7 @@
                 <img src="https://img.shields.io/badge/Github-181717?logo=github&logoColor=ffffff">
                 <img src="https://img.shields.io/badge/Jira-0052CC?logo=jira&logoColor=ffffff">
                 <img src="https://img.shields.io/badge/Figma-F24E1E?logo=Figma&logoColor=ffffff">
+                <img src="https://img.shields.io/badge/notion-000000?logo=notion&logoColor=ffffff">
             </td>
         </tr>
     </tbody>
