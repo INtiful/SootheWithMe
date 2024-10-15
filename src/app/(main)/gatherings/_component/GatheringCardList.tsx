@@ -6,6 +6,7 @@ import { GatheringType } from '@/types/data.type';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 
 import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 
 interface GatheringCardListProps {
   gatherings: GatheringType[];
@@ -29,6 +30,11 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
   const { ref: lastGatheringRef, inView: lastInView } = useInView({
     threshold: 0,
   });
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 }, // Start with opacity 0 and translate down
+    visible: { opacity: 1, y: 0 }, // Fade in and translate to original position
+  };
 
   useEffect(() => {
     setTopGradientVisible(!firstInView);
@@ -62,7 +68,7 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         </div>
       ) : (
         gatherings.map((gathering, index) => (
-          <div
+          <motion.div
             key={gathering.id}
             ref={
               index === 0
@@ -71,6 +77,10 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
                   ? lastGatheringRef
                   : null
             }
+            initial='hidden'
+            animate='visible'
+            transition={{ duration: 0.5, delay: index * 0.02 }}
+            variants={cardVariants}
           >
             <Link href={`/gatherings/${gathering.id}`}>
               <CardList
@@ -79,7 +89,7 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
                 handleButtonClick={handleButtonClick}
               />
             </Link>
-          </div>
+          </motion.div>
         ))
       )}
     </div>
