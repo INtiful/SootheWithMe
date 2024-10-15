@@ -4,6 +4,7 @@ import Loader from '@/app/components/Loader/Loader';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 interface ReviewListProps {
   reviewList: ReviewsType[][];
@@ -20,6 +21,11 @@ const ReviewList = ({
 }: ReviewListProps) => {
   const { ref, inView } = useInView({ threshold: 1.0 });
 
+  const reviewVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   useEffect(() => {
     if (inView && hasMore) {
       loadMore();
@@ -31,21 +37,29 @@ const ReviewList = ({
     <div className='mt-24 space-y-12'>
       {reviewList.flatMap((list) =>
         list.map((item, index) => (
-          <Link
-            href={`/gatherings/${item.Gathering.id}`}
+          <motion.div
             key={item.id}
-            className='block'
+            initial='hidden'
+            animate='visible'
+            transition={{ duration: 0.5, delay: index * 0.02 }}
+            variants={reviewVariants}
           >
-            <Review
-              image_source={item.Gathering.image}
-              rating={item.score}
-              description={item.comment}
-              place={item.Gathering.name}
-              location={item.Gathering.location}
-              user_name={item.User.name}
-              date={item.createdAt}
-            />
-          </Link>
+            <Link
+              href={`/gatherings/${item.Gathering.id}`}
+              key={item.id}
+              className='block'
+            >
+              <Review
+                image_source={item.Gathering.image}
+                rating={item.score}
+                description={item.comment}
+                place={item.Gathering.name}
+                location={item.Gathering.location}
+                user_name={item.User.name}
+                date={item.createdAt}
+              />
+            </Link>
+          </motion.div>
         )),
       )}
 
