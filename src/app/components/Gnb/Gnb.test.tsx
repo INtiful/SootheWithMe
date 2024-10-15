@@ -21,9 +21,9 @@ jest.mock('@/public/images', () => ({
   Logo: () => <div data-testid='Logo' />,
 }));
 
-// toptab 모킹
+// TopTab 컴포넌트 모킹
 jest.mock('../Tab/TopTab', () => {
-  return ({
+  const MockTopTab = ({
     isActive,
     children,
   }: {
@@ -37,23 +37,28 @@ jest.mock('../Tab/TopTab', () => {
       {children}
     </div>
   );
+  MockTopTab.displayName = 'MockTopTab';
+  return MockTopTab;
 });
 
+// Badge 컴포넌트 모킹
 jest.mock('../Badge/Badge', () => {
-  return ({ children }: { children: ReactNode }) => (
+  const MockBadge = ({ children }: { children: ReactNode }) => (
     <span data-testid='badge'>{children}</span>
   );
+  MockBadge.displayName = 'MockBadge';
+  return MockBadge;
 });
 
 // UserStatus 컴포넌트 모킹
 jest.mock('./UserStatus', () => {
-  return function MockUserStatus({
+  const MockUserStatus = ({
     user,
     token,
   }: {
     user: UserData | null;
     token: string | undefined;
-  }) {
+  }) => {
     return (
       <div data-testid='user-status'>
         {user ? (
@@ -70,12 +75,23 @@ jest.mock('./UserStatus', () => {
       </div>
     );
   };
+  MockUserStatus.displayName = 'MockUserStatus';
+  return MockUserStatus;
 });
 
 // ToggleTheme 컴포넌트 모킹
 jest.mock('./ToggleTheme', () => () => (
   <button data-testid='toggle-theme'>Toggle Theme</button>
 ));
+
+// TokenExpirationTimerLayout 컴포넌트 모킹
+jest.mock('./TokenExpirationTimerLayout', () => {
+  const MockTokenExpirationTimerLayout = () => {
+    return <div>타이머</div>; // 타이머 모킹
+  };
+  MockTokenExpirationTimerLayout.displayName = 'MockTokenExpirationTimerLayout';
+  return MockTokenExpirationTimerLayout;
+});
 
 // TokenExpirationTimerLayout 컴포넌트 모킹
 jest.mock('./TokenExpirationTimerLayout', () => {
