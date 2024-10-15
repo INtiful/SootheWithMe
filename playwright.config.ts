@@ -78,4 +78,7 @@ export default defineConfig({
   },
 
   timeout: 60000, // 60 seconds
+  expect: {
+    timeout: 60000, // expect 함수의 타임아웃도 60초로 설정
+  },
 });
