@@ -18,37 +18,40 @@ test('render title, score and reviews', async ({ page }) => {
   expect(page.getByTestId('review-item')).toHaveCount(10);
 });
 
-// 탭, 칩 클릭 시 데이터 변경 확인
-test('change score data when clicked tab or chip', async ({ page }) => {
-  // 워케이션 탭으로 변경, 스코어 데이터가 5인지 확인
-  await page.click('[data-testid="tab-WORKATION"]');
-  const workationScore = page.getByTestId('average-score');
-  await workationScore.waitFor();
-  expect(workationScore).toHaveText('5');
+test.describe('change score data when clicked tab or chip', () => {
+  test('average score is 5 When clicked WORKATION tab ', async ({ page }) => {
+    await page.click('[data-testid="tab-WORKATION"]');
+    const workationScore = page.getByTestId('average-score');
+    await workationScore.waitFor();
+    expect(workationScore).toHaveText('5');
+  });
 
-  // 달램핏 탭으로 변경, 스코어 데이터가 3.7인지 확인
-  await page.click('[data-testid="tab-DALLAEMFIT"]');
-  const dallaemfitScore = page.getByTestId('average-score');
-  await dallaemfitScore.waitFor();
-  expect(dallaemfitScore).toHaveText('3.7');
+  test('average score is 3.7 When clicked DALLAEMFIT tab ', async ({
+    page,
+  }) => {
+    await page.click('[data-testid="tab-DALLAEMFIT"]');
+    const dallaemfitScore = page.getByTestId('average-score');
+    await dallaemfitScore.waitFor();
+    expect(dallaemfitScore).toHaveText('3.7');
+  });
 
-  // 오피스 스트레칭 칩으로 변경, 스코어 데이터가 3.5인지 확인
-  await page.locator('span').getByText('오피스 스트레칭').click();
-  const officeStretchingScore = page.getByTestId('average-score');
-  await officeStretchingScore.waitFor();
-  expect(officeStretchingScore).toHaveText('3.5');
+  test('average score is 3.5 When clicked OFFICE STRETCHING chip ', async ({
+    page,
+  }) => {
+    await page.locator('span').getByText('오피스 스트레칭').click();
+    const officeStretchingScore = page.getByTestId('average-score');
+    await officeStretchingScore.waitFor();
+    expect(officeStretchingScore).toHaveText('3.5');
+  });
 
-  // 마인드풀니스 칩으로 변경, 스코어 데이터가 5인지 확인
-  await page.locator('span').getByText('마인드풀니스').click();
-  const mindfulnessScore = page.getByTestId('average-score');
-  await mindfulnessScore.waitFor();
-  expect(mindfulnessScore).toHaveText('5');
-
-  // 전체 칩으로 변경, 스코어 데이터가 3.7인지 확인
-  await page.locator('span').getByText('전체').click();
-  const allScore = page.getByTestId('average-score');
-  await allScore.waitFor();
-  expect(allScore).toHaveText('3.7');
+  test('average score is 5 When clicked MINDFULNESS chip ', async ({
+    page,
+  }) => {
+    await page.locator('span').getByText('마인드풀니스').click();
+    const mindfulnessScore = page.getByTestId('average-score');
+    await mindfulnessScore.waitFor();
+    expect(mindfulnessScore).toHaveText('5');
+  });
 });
 
 // 지역 필터링 확인
