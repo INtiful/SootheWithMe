@@ -1,6 +1,6 @@
 # 🧘🏻 같이 달램
 
-<img src="https://github.com/INtiful/SootheWithMe/blob/develop/public/images/README-main-image.jpg" alt="같이 달램 메인 이미지" width="100%">
+<img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/README-main-image.png?raw=true" alt="같이 달램 메인 이미지" width="100%">
 
 <br/>
 
@@ -226,7 +226,7 @@
             <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/all_review_web.gif?raw=true" alt="모든 리뷰 페이지" />
           </td>
           <td width="25%" align="center">
-            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/all_review_mobile.gif?raw=true" alt="모든 리뷰 페이지" />
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/all_reviews_mobile.gif?raw=true" alt="모든 리뷰 페이지" />
           </td>
         </tr>
     </tbody>
