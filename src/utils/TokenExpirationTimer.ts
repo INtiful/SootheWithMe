@@ -58,7 +58,7 @@ export const TokenExpirationTimer = (token: string | undefined) => {
       return cleanupTimer; // 클린업 함수 반환
     } else {
       setIsLoggedIn(false);
-      logout();
+      localStorage.removeItem('timeLeft');
     }
   }, [token]);
 
