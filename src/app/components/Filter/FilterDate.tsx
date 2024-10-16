@@ -76,7 +76,7 @@ const FilterDate = ({
 
       <div
         className={`absolute z-dropdown mt-4 h-auto w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400 transition-opacity duration-300 ease-in-out dark:bg-neutral-800 dark:ring-neutral-700 ${
-          isOpen ? 'z-[100] opacity-100' : 'pointer-events-none opacity-0'
+          isOpen ? 'z-filter opacity-100' : 'pointer-events-none opacity-0'
         }`}
         data-testid='calendar-modal-wrapper'
       >

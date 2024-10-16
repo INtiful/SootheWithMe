@@ -133,7 +133,7 @@ const Filter = ({
 
       <div
         className={`relative transition-opacity duration-300 ease-in-out ${
-          isOpen ? 'z-[100] opacity-100' : 'pointer-events-none opacity-0'
+          isOpen ? 'z-filter opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
         <DropDown
