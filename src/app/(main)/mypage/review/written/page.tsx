@@ -3,7 +3,7 @@ import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import { redirect } from 'next/navigation';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
-import WrittenReviews from './_component/WrittenReviews';
+import ReviewsList from './_component/ReviewsList';
 
 const WrittenReviewsPage = async () => {
   const user = await getUserData();
@@ -25,7 +25,7 @@ const WrittenReviewsPage = async () => {
 
       {/* cards */}
       {writtenReviews?.length ? (
-        <WrittenReviews writtenReviews={writtenReviews} />
+        <ReviewsList writtenReviews={writtenReviews} />
       ) : (
         <EmptyReviewPage />
       )}

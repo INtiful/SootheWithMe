@@ -6,11 +6,7 @@ import Review from '@/app/components/Review/Review';
 import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 import { ReviewsType } from '@/types/data.type';
 
-const WrittenReviews = ({
-  writtenReviews,
-}: {
-  writtenReviews: ReviewsType[];
-}) => {
+const ReviewsList = ({ writtenReviews }: { writtenReviews: ReviewsType[] }) => {
   const {
     topGradientVisible,
     bottomGradientVisible,
@@ -50,4 +46,4 @@ const WrittenReviews = ({
   );
 };
 
-export default WrittenReviews;
+export default ReviewsList;
