@@ -52,6 +52,7 @@ const ReviewList = ({
                   ? lastReviewRef
                   : null
             }
+            data-testid='review-item'
           >
             <Link href={`/gatherings/${item.Gathering.id}`} className='block'>
               <Review
@@ -74,7 +75,7 @@ const ReviewList = ({
         </div>
       )}
 
-      {hasMore && <div ref={ref} className='h-24' />}
+      {hasMore && <div ref={ref} className='h-24' data-testid='hasMoreRef' />}
     </div>
   );
 };
