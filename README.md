@@ -93,10 +93,10 @@
     <tbody>
         <tr>
           <td width="75%" align="center">
-            웹 녹화본
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/list_gathering_web.gif?raw=true" alt="모임 찾기 페이지" />
           </td>
           <td width="25%" align="center">
-            모바일 녹화본
+            <img src="" alt="모임 찾기 페이지" />
           </td>
         </tr>
     </tbody>
@@ -118,11 +118,8 @@
     </thead>
     <tbody>
         <tr>
-          <td width="75%" align="center">
-            웹 녹화본
-          </td>
-          <td width="25%" align="center">
-            모바일 녹화본
+          <td  width="75%" align="center">
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/make_gathering_web.gif?raw=true" alt="모임 만들기 기능" />
           </td>
         </tr>
     </tbody>
@@ -145,10 +142,10 @@
     <tbody>
         <tr>
           <td width="75%" align="center">
-            웹 녹화본
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/like_gathering_web.gif?raw=true" alt="모임 찜하기 기능" />
           </td>
           <td width="25%" align="center">
-            모바일 녹화본
+            <img src="" alt="모임 찜하기 기능" />
           </td>
         </tr>
     </tbody>
@@ -171,10 +168,10 @@
     <tbody>
         <tr>
           <td width="75%" align="center">
-            웹 녹화본
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/gathering_detail_web.gif?raw=true" alt="모임 상세페이지" />
           </td>
           <td width="25%" align="center">
-            모바일 녹화본
+            <img src="" alt="모임 상세페이지" />
           </td>
         </tr>
     </tbody>
@@ -197,10 +194,10 @@
     <tbody>
         <tr>
           <td width="75%" align="center">
-            웹 녹화본
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/make_review_web.gif?raw=true" alt="모임 리뷰 작성하기 기능" />
           </td>
           <td width="25%" align="center">
-            모바일 녹화본
+            <img src="" alt="모임 리뷰 작성하기 기능" />
           </td>
         </tr>
     </tbody>
@@ -211,7 +208,7 @@
 <br />
 
 <details>
-  <summary><b>리뷰 조회하기</b></summary>
+  <summary><b>모든 리뷰 페이지</b></summary>
   <div markdown="1">
   <table width="100%">
     <thead>
@@ -223,10 +220,10 @@
     <tbody>
         <tr>
           <td width="75%" align="center">
-            웹 녹화본
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/all_review_web.gif?raw=true" alt="모든 리뷰 페이지" />
           </td>
           <td width="25%" align="center">
-            모바일 녹화본
+            <img src="" alt="모든 리뷰 페이지" />
           </td>
         </tr>
     </tbody>
@@ -249,10 +246,10 @@
     <tbody>
         <tr>
           <td width="75%" align="center">
-            웹 녹화본
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/mypage_web.gif?raw=true" alt="마이 페이지" />
           </td>
           <td width="25%" align="center">
-            모바일 녹화본
+            <img src="" alt="마이 페이지" />
           </td>
         </tr>
     </tbody>
@@ -275,10 +272,28 @@
     <tbody>
         <tr>
           <td width="75%" align="center">
-            웹 녹화본
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/login_web.gif?raw=true" alt="로그인 기능" />
           </td>
           <td width="25%" align="center">
-            모바일 녹화본
+            <img src="" alt="로그인 기능" />
+          </td>
+        </tr>
+    </tbody>
+</table>
+  <table width="100%">
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/signup_web.gif?raw=true" alt="회원 가입 기능" />
+          </td>
+          <td width="25%" align="center">
+            <img src="" alt="회원 가입 기능" />
           </td>
         </tr>
     </tbody>
@@ -287,6 +302,30 @@
 </details>
 
 <br />
+
+<details>
+  <summary><b>다크 모드</b></summary>
+  <div markdown="1">
+  <table width="100%">
+    <thead>
+        <tr>
+            <th>웹</th>
+            <th>모바일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td width="75%" align="center">
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/darkmode_web.gif?raw=true" alt="다크모드 기능" />
+          </td>
+          <td width="25%" align="center">
+            <img src="" alt="다크모드 기능" />
+          </td>
+        </tr>
+    </tbody>
+</table>
+  </div>
+</details>
 
 ## 🧑‍🤝‍🧑 팀원 소개
 
