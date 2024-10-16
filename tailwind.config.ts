@@ -27,6 +27,8 @@ const config: Config = {
       base: '1',
       nav: '2',
       dropdown: '10',
+      gradient: '30',
+      scrollButton: '40',
       filter: '100',
       popup: '999',
       floating: '1000',

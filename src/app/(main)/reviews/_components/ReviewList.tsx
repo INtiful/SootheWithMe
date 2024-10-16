@@ -1,9 +1,11 @@
-import Review from '@/app/components/Review/Review';
-import { ReviewsType } from '@/types/data.type';
-import Loader from '@/app/components/Loader/Loader';
 import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
+import { useInView } from 'react-intersection-observer';
+import Review from '@/app/components/Review/Review';
+import Loader from '@/app/components/Loader/Loader';
+import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
+import { ReviewsType } from '@/types/data.type';
+import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 
 interface ReviewListProps {
@@ -28,16 +30,32 @@ const ReviewList = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasMore]);
 
+  const {
+    topGradientVisible,
+    bottomGradientVisible,
+    firstItemRef: firstReviewRef,
+    lastItemRef: lastReviewRef,
+  } = useScrollGradientEffect();
+
   return (
     <div className='mt-24 space-y-12'>
+      <GradientOverlay position='top' isVisible={topGradientVisible} />
+      <GradientOverlay position='bottom' isVisible={bottomGradientVisible} />
+
       {reviewList.flatMap((list) =>
         list.map((item, index) => (
-          <MotionWrapper key={item.id}>
-            <Link
-              href={`/gatherings/${item.Gathering.id}`}
-              key={item.id}
-              className='block'
-            >
+          <div
+            key={item.id}
+            ref={
+              index === 0
+                ? firstReviewRef
+                : index === reviewList.length - 1
+                  ? lastReviewRef
+                  : null
+            }
+            data-testid='review-item'
+          >
+            <Link href={`/gatherings/${item.Gathering.id}`} className='block'>
               <Review
                 image_source={item.Gathering.image}
                 rating={item.score}
@@ -48,7 +66,7 @@ const ReviewList = ({
                 date={item.createdAt}
               />
             </Link>
-          </MotionWrapper>
+          </div>
         )),
       )}
 
@@ -58,7 +76,7 @@ const ReviewList = ({
         </div>
       )}
 
-      {hasMore && <div ref={ref} className='h-24' />}
+      {hasMore && <div ref={ref} className='h-24' data-testid='hasMoreRef' />}
     </div>
   );
 };
