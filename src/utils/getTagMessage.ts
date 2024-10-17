@@ -1,6 +1,14 @@
 import { formatTimeHours } from './formatDate';
 
-const getTagMessage = (daysLeft: number | null, endTime: string) => {
+const getTagMessage = (
+  daysLeft: number | null,
+  endTime: string,
+  isGatheringFull?: boolean,
+) => {
+  if (isGatheringFull) {
+    return '마감된 모임입니다.';
+  }
+
   if (daysLeft === null) return '';
 
   if (daysLeft < 0) {
