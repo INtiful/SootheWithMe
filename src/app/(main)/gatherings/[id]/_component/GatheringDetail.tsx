@@ -12,7 +12,7 @@ import {
   ReviewsType,
 } from '@/types/data.type';
 import { UserData } from '@/types/client.type';
-import isGatheringFull from '@/utils/isGatheringFull';
+import isGatheringFull from '@/app/(main)/gatherings/_helpers/isGatheringFull';
 
 interface GatheringDetailProps {
   gatheringInfo: GatheringInfoType;

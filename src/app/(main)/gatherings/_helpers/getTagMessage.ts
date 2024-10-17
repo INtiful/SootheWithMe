@@ -1,4 +1,4 @@
-import { formatTimeHours } from './formatDate';
+import { formatTimeHours } from '../../../../utils/formatDate';
 
 const getTagMessage = (
   daysLeft: number | null,

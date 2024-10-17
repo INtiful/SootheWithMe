@@ -10,13 +10,14 @@ import {
   IconSaveInactive,
 } from '@/public/icons';
 import { formatDate, formatTimeColon } from '@/utils/formatDate';
-import getDaysUntilRegistrationEnd from '@/utils/getDaysUntilRegistrationEnd';
+import getDaysUntilRegistrationEnd from '@/app/(main)/gatherings/_helpers/getDaysUntilRegistrationEnd';
 import { GatheringType } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
-import getTagMessage from '@/utils/getTagMessage';
-import isGatheringFull from '@/utils/isGatheringFull';
+import getTagMessage from '@/app/(main)/gatherings/_helpers/getTagMessage';
+import isGatheringFull from '@/app/(main)/gatherings/_helpers/isGatheringFull';
+import isClosingTagVisible from '@/app/(main)/gatherings/_helpers/isClosingTagVisible';
 
 // TODO : optional props를 필수로 변경
 interface CardProps {
@@ -26,20 +27,16 @@ interface CardProps {
 }
 
 const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
-  // 모임의 날짜와 현재 날짜를 비교하여 마감 여부 표시
   const isChallengeEnded =
     new Date(data.dateTime) <= new Date() ||
     isGatheringFull(data.participantCount, data.capacity);
-
   const daysRemaining = getDaysUntilRegistrationEnd(data.registrationEnd);
   const tagMessage = getTagMessage(
     daysRemaining,
     data.registrationEnd,
     isChallengeEnded,
   );
-
-  // 모임의 날짜와 현재 날짜를 비교하여 태그 렌더링
-  const isRenderTag = daysRemaining <= 7 || isChallengeEnded;
+  const isRenderTag = isClosingTagVisible(daysRemaining, isChallengeEnded);
 
   const [isSavedActive, setSavedActive] = useState<boolean>(isSaved || false);
 
