@@ -42,13 +42,25 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
           <Card data={item}>
             <Card.Chips />
             <Card.Info />
-            <Card.Button
-              handleButtonClick={() => {
-                item.isCompleted
-                  ? handleOpenModal(item.id)
-                  : handleWithdrawClickWithId(item.id, queries.joined._def);
-              }}
-            />
+            {item.createdBy !== user?.id ? (
+              // 참가자일 때 렌더링
+              <Card.Button
+                handleButtonClick={() => {
+                  item.isCompleted
+                    ? handleOpenModal(item.id)
+                    : handleWithdrawClickWithId(item.id, queries.joined._def);
+                }}
+              />
+            ) : (
+              // 주최자일 때 렌더링
+              item.isCompleted && (
+                <Card.Button
+                  handleButtonClick={() => {
+                    handleOpenModal(item.id);
+                  }}
+                />
+              )
+            )}
           </Card>
         )}
       />
