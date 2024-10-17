@@ -1,5 +1,6 @@
 'use client';
 
+import { Metadata } from 'next';
 import getJoinedGatherings from '@/app/api/actions/gatherings/getJoinedGathering';
 import Card from '@/app/components/Card/Card';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
@@ -12,6 +13,11 @@ import { queries } from '@/queries';
 import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
 import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
+
+export const metadata: Metadata = {
+  title: '나의 리뷰',
+  description: 'Soothe With Me 나의 리뷰 페이지입니다.',
+};
 
 const WritableReviewsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

@@ -4,7 +4,7 @@ import getMyGatherings from '@/app/api/actions/gatherings/getMyGatherings';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
 
 export const metadata: Metadata = {
-  title: '나의 모임 | Soothe With Me',
+  title: '나의 모임',
   description: 'Soothe With Me 나의 모임 페이지입니다.',
 };
 

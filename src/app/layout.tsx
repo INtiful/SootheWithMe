@@ -12,9 +12,12 @@ import { Toaster } from 'react-hot-toast';
 import { getCookie } from './api/actions/cookie/cookie';
 
 export const metadata: Metadata = {
-  title: 'Soothe With Me',
+  title: {
+    template: '%s | Soothe With Me',
+    default: 'Soothe With Me',
+  },
   description:
-    '유저가 바쁜 일상 속 휴식을 위한 다양한 모임을 탐색하고 참여하며, 직접 모임을 개설하고 리뷰를 생성할 수 있는 서비스입니다.',
+    '바쁜 일상 속 휴식을 위한 다양한 모임을 탐색하고 참여하며, 직접 모임을 개설하고 리뷰를 생성할 수 있는 서비스',
   icons: {
     icon: '/icons/bye.svg',
   },

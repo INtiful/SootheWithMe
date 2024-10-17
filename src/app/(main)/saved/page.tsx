@@ -1,15 +1,20 @@
 'use client';
 
+import { Metadata } from 'next';
 import Tabs from '@/app/components/Tabs/Tabs';
 import Chips from '@/app/components/Chips/Chips';
 import Filters from '@/app/components/Filters/Filters';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 import Header from './_component/Header';
 import SavedList from './_component/SavedList';
 import useSavedGatherings from '@/hooks/useSavedGatherings';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { SORT_OPTIONS } from '@/constants/common';
 
-import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
+export const metadata: Metadata = {
+  title: '찜한 모임',
+  description: 'Soothe With Me 찜한 모임 페이지입니다.',
+};
 
 const SavedPage = () => {
   const { savedGatherings } = useSavedGatheringList();
