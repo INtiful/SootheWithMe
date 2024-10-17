@@ -364,4 +364,45 @@
 | <img src="https://avatars.githubusercontent.com/u/159985297?v=4" width="100" /> | <img src="https://avatars.githubusercontent.com/u/98685266?v=4" width="100" /> | <img src="https://avatars.githubusercontent.com/u/67790990?v=4" width="100" /> | <img src="https://avatars.githubusercontent.com/u/122350675?v=4" width="100" /> |
 |     <a href="https://github.com/hakyoung12" target="_blank">@hakyoung12</a>     | <a href="https://github.com/BeMatthewsong" target="_blank">@Bematthewsong</a>  |         <a href="https://github.com/HMRyu" target="_blank">@HMRyu</a>          |     <a href="https://github.com/yunchaeney" target="_blank">@yunchaeney</a>     |
 
+<details>
+  <summary><b>역할 분담</b></summary>
+  <div markdown="1">
+  <div>
+    <h3>고학영</h3>
+    <p>
+      &bull; Zod를 활용한 회원가입 및 로그인 유효성 검사 기능 구현<br/>
+      &bull; 마이페이지 나의 모임페이지 무한 스크롤 및 초기데이터 서버사이드 렌더링 구현<br/>
+      &bull; 로그아웃 타이머 렌더링 및 자동 로그아웃 기능 구현<br/>
+    </p>
+  </div>
+  <div>
+    <h3>송민혁</h3>
+    <p>
+      &bull; CI/CD 구축(github actions)을 통한 코드 통합 과정 개선 및 배포 자동화<br/>
+      &bull; 모임 만들기 기능, 리뷰 작성하기 기능, 마이페이지 내 리뷰 페이지 구현<br/>
+      &bull; query-key-factory를 사용하여 RQ의 queryKey를 체계적으로 관리<br/>
+      &bull; 프로젝트 초기 세팅 및 프로젝트 관련 노션 관리<br/>
+    </p>
+  </div>
+  <div>
+    <h3>유호민</h3>
+    <p>
+      &bull; Jira 와 github를 연동하여 브랜치 생성 시 원격 저장소와 연결하는 시스템 구축<br/>
+      &bull; 서버 컴포넌트 및 server actions 를 이용하여 초기 데이터를 불러와 페이지 로딩 속도 최적화<br/>
+      &bull; framer motion 을 이용하여 모임을 불러올 때 부드러운 애니메이션을 주어 자연스러운 UI 구현<br/>
+    </p>
+  </div>
+  <div>
+    <h3>윤채현</h3>
+    <p>
+      &bull; 찜한 모임, 모든 리뷰, 마이페이지-내가 만든 모임 페이지 기능 구현<br/>
+      &bull; Local storage를 이용하여 모임의 찜하기 및 삭제 기능<br/>
+      &bull; React-query 의 InfiniteQuery 를 사용한 무한스크롤 기능 구현<br/>
+      &bull; 다크모드 디자인 적용<br/>
+    </p>
+  </div>
+  
+  </div>
+</details>
+
 ##### 개발 기간: 2024.08 - 2024.10
