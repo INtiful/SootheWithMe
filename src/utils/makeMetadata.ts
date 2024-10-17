@@ -66,7 +66,10 @@ import { GatheringInfoType } from '@/types/data.type';
 
 export const pageMetadata = (page: string, path: string) => {
   return {
-    title: page,
+    title: {
+      template: '%s | Soothe With Me',
+      default: page,
+    },
     description: `Soothe With Me ${page} 페이지입니다.`,
     openGraph: {
       title: page,

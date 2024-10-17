@@ -1,16 +1,9 @@
-import { Metadata } from 'next';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import { redirect } from 'next/navigation';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
 import ReviewsList from './_component/ReviewsList';
-import { pageMetadata } from '@/utils/makeMetadata';
-
-export const metadata: Metadata = pageMetadata(
-  '나의 리뷰',
-  '/mypage/review/written',
-);
 
 const WrittenReviewsPage = async () => {
   const user = await getUserData();
