@@ -5,6 +5,8 @@ const getTagMessage = (daysLeft: number | null, endTime: string) => {
 
   if (daysLeft < 0) {
     return '마감된 모임입니다.';
+  } else if (Object.is(daysLeft, -0)) {
+    return '마감된 모임입니다.';
   } else if (daysLeft === 0) {
     return `오늘 ${formatTimeHours(endTime)}시 마감`;
   } else {

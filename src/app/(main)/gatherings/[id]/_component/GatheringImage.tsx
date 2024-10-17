@@ -16,6 +16,7 @@ const GatheringImage = ({ image, endTime }: GatheringImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const daysLeft = endTime ? getDaysUntilRegistrationEnd(endTime) : null;
+
   const tagMessage = getTagMessage(daysLeft, endTime);
 
   return (
