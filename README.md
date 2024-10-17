@@ -1,7 +1,7 @@
 # 🧘🏻 같이 달램
 
 <div align="center">
-<img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/README-main-image.png?raw=true" alt="같이 달램 메인 이미지" width="50%">
+<img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/readme.png?raw=true" alt="같이 달램 메인 이미지" width="70%">
 </div>
 <br/>
 
