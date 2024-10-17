@@ -6,13 +6,14 @@ import ModalHeader from './ModalHeader';
 
 interface CancelGatheringModalProps {
   onClose: () => void;
-  onSubmit?: () => void;
+  onClick?: () => void;
 }
 
 const CancelGatheringModal = ({
   onClose,
-  onSubmit,
+  onClick,
 }: CancelGatheringModalProps) => {
+  console.log('모달');
   return (
     <ModalFrame onClose={onClose}>
       <div className='flex max-h-328 w-320 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-440 dark:border dark:border-neutral-600 dark:bg-neutral-800'>
@@ -24,18 +25,10 @@ const CancelGatheringModal = ({
           {/* 버튼 그룹 */}
           <div className={'flex w-full justify-center gap-8'}>
             <div className='w-120'>
-              <Button
-                name='취소'
-                variant='white'
-                onClick={() => console.log('모임취소')}
-              />
+              <Button name='취소' variant='white' onClick={onClose} />
             </div>
             <div className='w-120'>
-              <Button
-                name='확인'
-                variant='default'
-                onClick={() => console.log('닫기')}
-              />
+              <Button name='확인' variant='default' onClick={onClick} />
             </div>
           </div>
         </div>
