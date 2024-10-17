@@ -57,7 +57,7 @@ export const rootMetadata = {
     canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/gatherings`,
   },
   other: {
-    'google-site-verification': '3TzGNrqEDpp12jYWOwKcH92cFxvYmfrz-0lspdNdTwo',
+    'google-site-verification': 'EnQi5HcxKKMfPQq_KgrRrnkbL7g2qiHLz6KUXcBtNwo',
   },
 };
 
