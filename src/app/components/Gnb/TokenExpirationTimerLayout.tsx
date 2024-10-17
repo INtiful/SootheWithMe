@@ -1,6 +1,7 @@
 'use client';
 
 import { TokenExpirationTimer } from '@/utils/TokenExpirationTimer';
+import { useEffect, useState } from 'react';
 
 const TimerStyle = {
   gnb: 'hidden text-14 font-semibold text-var-orange-50 md:block md:text-16 w-140',
@@ -17,11 +18,7 @@ const TokenExpirationTimerLayout = ({
   token,
   variant,
 }: TokenExpirationTimerLayoutProps) => {
-  const { timeLeft, isLoggedIn } = TokenExpirationTimer(token);
-
-  if (!isLoggedIn) {
-    return null;
-  }
+  const { timeLeft } = TokenExpirationTimer(token);
 
   return timeLeft > 0 ? (
     <p className={TimerStyle[variant]}>

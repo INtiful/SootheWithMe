@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 import toast from 'react-hot-toast';
@@ -6,8 +6,8 @@ import { deleteCookie } from '@/app/api/actions/cookie/cookie';
 
 export const TokenExpirationTimer = (token: string | undefined) => {
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState<number>(0);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const timeLeftRef = useRef<number>(0); // 남은 시간을 저장
+  const [timeLeft, setTimeLeft] = useState<number>(0); // 재렌더링을 위한 스테이트 저장
 
   // JWT 디코드하여 만료 시간을 가져오는 함수
   const getTokenExpirationTime = (token: string) => {
@@ -17,29 +17,20 @@ export const TokenExpirationTimer = (token: string | undefined) => {
 
   useEffect(() => {
     if (token) {
-      setIsLoggedIn(true);
-      const expirationTime = getTokenExpirationTime(token); // 만료시간
-      const currentTime = Date.now(); // 현재시간
+      const expirationTime = getTokenExpirationTime(token); // 만료 시간
+      const currentTime = Date.now(); // 현재 시간
       const remainingTime = Math.max(0, expirationTime - currentTime); // 남은 시간 계산
-      setTimeLeft(Math.floor(remainingTime / 1000)); // 초 단위로 변환
+      timeLeftRef.current = Math.floor(remainingTime / 1000); // 초 단위로 변환
 
       // 타이머 설정
       const interval = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            clearInterval(interval);
-            logout();
-            return 0;
-          }
-          return prev - 1;
-        });
+        timeLeftRef.current -= 1; // 남은 시간 감소
+        setTimeLeft(timeLeftRef.current);
+        if (timeLeftRef.current <= 0) {
+          logout();
+        }
       }, 1000);
-
-      return () => {
-        clearInterval(interval);
-      };
-    } else {
-      setIsLoggedIn(false);
+      return () => clearInterval(interval);
     }
   }, [token]);
 
@@ -55,5 +46,5 @@ export const TokenExpirationTimer = (token: string | undefined) => {
     }
   };
 
-  return { timeLeft, isLoggedIn };
+  return { timeLeft };
 };
