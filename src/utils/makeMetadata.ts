@@ -56,6 +56,9 @@ export const rootMetadata = {
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/gatherings`,
   },
+  other: {
+    'google-site-verification': '3TzGNrqEDpp12jYWOwKcH92cFxvYmfrz-0lspdNdTwo',
+  },
 };
 
 import getGatheringInfo from '@/app/api/actions/gatherings/getGatheringInfo';
