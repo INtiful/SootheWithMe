@@ -18,7 +18,6 @@ const GatheringsDetailPage = async ({
   };
 }) => {
   const gatheringInfo: GatheringInfoType = await getGatheringInfo(params.id);
-
   const gatheringParticipants: GatheringParticipantsType[] =
     gatheringInfo.participantCount >= 1
       ? await getGatheringParticipants(
@@ -29,7 +28,6 @@ const GatheringsDetailPage = async ({
   const reviews: ReviewsType[] = await getReviewList({
     gatheringId: params.id,
   });
-
   const userData: UserData | null = await getUserData();
 
   return (
