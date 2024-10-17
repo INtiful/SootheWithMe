@@ -10,14 +10,15 @@ import { useState } from 'react';
 interface GatheringImageProps {
   image: string;
   endTime: string;
+  isFull: boolean;
 }
 
-const GatheringImage = ({ image, endTime }: GatheringImageProps) => {
+const GatheringImage = ({ image, endTime, isFull }: GatheringImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const daysLeft = endTime ? getDaysUntilRegistrationEnd(endTime) : null;
 
-  const tagMessage = getTagMessage(daysLeft, endTime);
+  const tagMessage = getTagMessage(daysLeft, endTime, isFull);
 
   return (
     <div className='relative h-[270px] w-full md:w-[50vw] lg:max-w-[486px]'>
@@ -35,12 +36,13 @@ const GatheringImage = ({ image, endTime }: GatheringImageProps) => {
         onLoadingComplete={() => setIsLoading(false)}
       />
 
-      {daysLeft !== null && daysLeft <= 7 && (
-        <div className='absolute right-0 top-0 flex items-center gap-4 rounded-bl-[12px] rounded-tr-[20px] bg-orange-600 py-2 pl-4 pr-6 text-xs font-medium text-var-white'>
-          <IconAlarm width='24' height='24' />
-          <span className='text-12 font-semibold'>{tagMessage}</span>
-        </div>
-      )}
+      {(daysLeft !== null && daysLeft <= 7) ||
+        (isFull && (
+          <div className='absolute right-0 top-0 flex items-center gap-4 rounded-bl-[12px] rounded-tr-[20px] bg-orange-600 py-2 pl-4 pr-6 text-xs font-medium text-var-white'>
+            <IconAlarm width='24' height='24' />
+            <span className='text-12 font-semibold'>{tagMessage}</span>
+          </div>
+        ))}
     </div>
   );
 };
