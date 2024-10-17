@@ -1,7 +1,8 @@
 # 🧘🏻 같이 달램
 
-<img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/README-main-image.png?raw=true" alt="같이 달램 메인 이미지" width="100%">
-
+<div align="center">
+<img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/README-main-image.png?raw=true" alt="같이 달램 메인 이미지" width="50%">
+</div>
 <br/>
 
 바쁜 일상 속 휴식을 위한 다양한 모임을 탐색하고 참여하며, 직접 모임을 개설하고 리뷰를 생성할 수 있는 서비스입니다.
@@ -200,7 +201,7 @@
             <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/make_review_web.gif?raw=true" alt="모임 리뷰 작성하기 기능" />
           </td>
           <td width="25%" align="center">
-            <img src="" alt="모임 리뷰 작성하기 기능" />
+            <img src="https://github.com/BeMatthewsong/image-or-video-repository/blob/main/Soothe-WIth-Me/make_review_mobille.gif?raw=true" alt="모임 리뷰 작성하기 기능" />
           </td>
         </tr>
     </tbody>
