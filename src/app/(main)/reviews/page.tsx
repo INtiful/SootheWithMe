@@ -3,11 +3,9 @@ import Header from './_components/Hearder';
 import ClientSideReviews from './_components/ClientSideReviews';
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
+import { pageMetadata } from '@/utils/makeMetadata';
 
-export const metadata: Metadata = {
-  title: '모든 리뷰',
-  description: 'Soothe With Me 모든 리뷰 페이지입니다.',
-};
+export const metadata: Metadata = pageMetadata('모든 리뷰', '/reviews');
 
 const ReviewsPage = async () => {
   const reviewList = await getReviewList({ type: 'DALLAEMFIT' });

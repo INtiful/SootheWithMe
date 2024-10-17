@@ -3,11 +3,9 @@ import Header from './_component/Header';
 import ClientSideGatherings from './_component/ClientSideGatherings';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
+import { pageMetadata } from '@/utils/makeMetadata';
 
-export const metadata: Metadata = {
-  title: '모임 찾기',
-  description: 'Soothe With Me 모임 찾기 페이지입니다.',
-};
+export const metadata: Metadata = pageMetadata('모임찾기', '/gatherings');
 
 const GatheringsPage = async () => {
   const gatherings = await getGatherings({

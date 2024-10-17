@@ -13,11 +13,12 @@ import { queries } from '@/queries';
 import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
 import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
+import { pageMetadata } from '@/utils/makeMetadata';
 
-export const metadata: Metadata = {
-  title: '나의 리뷰',
-  description: 'Soothe With Me 나의 리뷰 페이지입니다.',
-};
+export const metadata: Metadata = pageMetadata(
+  '나의 리뷰',
+  '/mypage/review/writable',
+);
 
 const WritableReviewsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

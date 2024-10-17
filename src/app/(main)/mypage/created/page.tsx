@@ -4,11 +4,12 @@ import ClientSideGatherings from './_component/ClientSideGatherings';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { SORT_OPTIONS_MAP } from '@/constants/common';
+import { pageMetadata } from '@/utils/makeMetadata';
 
-export const metadata: Metadata = {
-  title: '내가 만든 모임',
-  description: 'Soothe With Me 내가 만든 모임 페이지입니다.',
-};
+export const metadata: Metadata = pageMetadata(
+  '내가 만든 모임',
+  '/mypage/created',
+);
 
 const CreatedPage = async () => {
   const userData = await getUserData();

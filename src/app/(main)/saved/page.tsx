@@ -10,11 +10,9 @@ import SavedList from './_component/SavedList';
 import useSavedGatherings from '@/hooks/useSavedGatherings';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { SORT_OPTIONS } from '@/constants/common';
+import { pageMetadata } from '@/utils/makeMetadata';
 
-export const metadata: Metadata = {
-  title: '찜한 모임',
-  description: 'Soothe With Me 찜한 모임 페이지입니다.',
-};
+export const metadata: Metadata = pageMetadata('찜한 모임', '/saved');
 
 const SavedPage = () => {
   const { savedGatherings } = useSavedGatheringList();
