@@ -53,7 +53,7 @@ const FilterSort = ({
     data-testid='filter-component'
   >
     <IconSort className='${iconClass} h-24 w-24' />
-    <span className='hidden md:mr-8 md:inline'>{text}</span>
+    <span className='hidden whitespace-nowrap md:mr-8 md:inline'>{text}</span>
   </div>
 );
 
@@ -131,14 +131,18 @@ const Filter = ({
         />
       )}
 
-      {isOpen && (
+      <div
+        className={`relative transition-opacity duration-300 ease-in-out ${
+          isOpen ? 'z-filter opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+      >
         <DropDown
           options={[children, ...options]}
           onSelect={handleOptionSelect}
           onClose={() => setIsOpen(false)}
           classnames={type === 'sort' ? 'min-w-max right-0' : ''}
         />
-      )}
+      </div>
     </div>
   );
 };
