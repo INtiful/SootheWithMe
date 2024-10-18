@@ -6,7 +6,6 @@ import { deleteCookie } from '@/app/api/actions/cookie/cookie';
 
 export const TokenExpirationTimer = (token: string | undefined) => {
   const router = useRouter();
-  const timeLeftRef = useRef<number>(0); // 남은 시간을 저장
   const [timeLeft, setTimeLeft] = useState<number>(0); // 재렌더링을 위한 스테이트 저장
 
   // JWT 디코드하여 만료 시간을 가져오는 함수
@@ -18,18 +17,19 @@ export const TokenExpirationTimer = (token: string | undefined) => {
   useEffect(() => {
     if (token) {
       const expirationTime = getTokenExpirationTime(token); // 만료 시간
-      const currentTime = Date.now(); // 현재 시간
-      const remainingTime = Math.max(0, expirationTime - currentTime); // 남은 시간 계산
-      timeLeftRef.current = Math.floor(remainingTime / 1000); // 초 단위로 변환
+      const updateRemainingTime = () => {
+        const currentTime = Date.now(); // 현재 시간
+        const remainingTime = Math.max(0, expirationTime - currentTime); // 남은 시간 계산
+        setTimeLeft(Math.floor(remainingTime / 1000)); // 초 단위로 상태 업데이트
 
-      // 타이머 설정
-      const interval = setInterval(() => {
-        timeLeftRef.current -= 1; // 남은 시간 감소
-        setTimeLeft(timeLeftRef.current);
-        if (timeLeftRef.current <= 0) {
-          logout();
+        if (remainingTime <= 0) {
+          logout(); // 시간이 다되면 로그아웃
         }
-      }, 1000);
+      };
+
+      updateRemainingTime(); // 초기 업데이트
+      const interval = setInterval(updateRemainingTime, 1000); // 1초마다 업데이트
+
       return () => clearInterval(interval);
     }
   }, [token]);
