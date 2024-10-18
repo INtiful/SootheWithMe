@@ -39,7 +39,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
     }
 
     onClose();
-    router.push(`/gatherings/${data?.gatheringId}`);
+    router.push(`/mypage/review/written`);
     toast.success(message);
   };
 
