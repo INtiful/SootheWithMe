@@ -20,7 +20,7 @@ const TokenExpirationTimerLayout = ({
 }: TokenExpirationTimerLayoutProps) => {
   const { timeLeft } = TokenExpirationTimer(token);
 
-  return timeLeft > 0 ? (
+  return token ? (
     <p className={TimerStyle[variant]}>
       {variant === 'gnb' ? (
         <>
