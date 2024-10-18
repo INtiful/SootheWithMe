@@ -13,7 +13,6 @@ const CancelGatheringModal = ({
   onClose,
   onClick,
 }: CancelGatheringModalProps) => {
-  console.log('모달');
   return (
     <ModalFrame onClose={onClose}>
       <div className='flex max-h-328 w-320 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-440 dark:border dark:border-neutral-600 dark:bg-neutral-800'>
