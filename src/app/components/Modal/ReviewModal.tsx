@@ -26,7 +26,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
   };
 
   const handleSubmit = async () => {
-    const { success, data, message } = await postReviews({
+    const { success, message } = await postReviews({
       gatheringId,
       score,
       comment,
