@@ -41,7 +41,6 @@ const UserStatus = ({ user, token }: UserStatusProps) => {
     if (result) {
       toast.success('로그아웃이 완료되었습니다.');
       deleteCookie('token');
-      // router.push('/gatherings');
     } else {
       toast.error('로그아웃에 실패했습니다. 다시 시도해 주세요.');
     }
